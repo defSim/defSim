@@ -45,42 +45,83 @@
 
     
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
-      <div class="wy-side-scroll">
-        <div class="wy-side-nav-search"  style="background-color: #343131">
+      <div class="wy-side-scroll"  style="background-color: #252625">
+        <div class="wy-side-nav-search"  style="background-color: #252625">
           
 
-          <a href="https://www.lsst.org">
+          <a href="index.html">
             <img src="_static/lsst-logo-dark.svg" class="logo" />
-
-            <span class="project-title">defSim</span>
+            
+            <!-- <span class="project-title">defSim</span> MK-->
           </a>
 
-          <ul class="edition-switcher">
+          <!-- <ul class="edition-switcher">
             <li>Edition: </li>
             <li><a href="../v">Switch editions</a></li>
             
-          </ul>
+          </ul> MK-->
 
           
 
           
         </div>
 
-        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation" style="background-color: #252625">
           
             
             
                 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="quickintro.html">Quick start guide</a></li>
-<li class="toctree-l1"><a class="reference internal" href="defSim.html">defSim</a></li>
-<li class="toctree-l1"><a class="reference internal" href="defSim.network_init.html">Networks</a></li>
-<li class="toctree-l1"><a class="reference internal" href="defSim.agents_init.html">Agent features</a></li>
-<li class="toctree-l1"><a class="reference internal" href="defSim.focal_agent_sim.html">Focal agent selection</a></li>
-<li class="toctree-l1"><a class="reference internal" href="defSim.neighbor_selector_sim.html">Neighbor selector</a></li>
-<li class="toctree-l1"><a class="reference internal" href="defSim.influence_sim.html">Influence</a></li>
-<li class="toctree-l1"><a class="reference internal" href="defSim.network_evolution_sim.html">Network evolution</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Dissimilarity updaters</a></li>
-<li class="toctree-l1"><a class="reference internal" href="defSim.tools.html">Tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="defSim.html">defSim</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="defSim.html#module-defSim.Experiment">Experiment module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="defSim.html#module-defSim.Simulation">Simulation module</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="defSim.network_init.html">Networks</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="defSim.network_init.html#module-defSim.network_init.network_init">network_init module</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="defSim.agents_init.html">Agent features</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="defSim.agents_init.html#module-defSim.agents_init.agents_init">agents_init module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="defSim.agents_init.html#module-defSim.agents_init.RandomCategoricalInitializer">RandomCategoricalInitializer module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="defSim.agents_init.html#module-defSim.agents_init.RandomContinuousInitializer">RandomContinuousInitializer module</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="defSim.focal_agent_sim.html">Focal agent selection</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="defSim.focal_agent_sim.html#module-defSim.focal_agent_sim.focal_agent_sim">focal_agent_sim module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="defSim.focal_agent_sim.html#module-defSim.focal_agent_sim.RandomSelector">RandomSelector module</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="defSim.neighbor_selector_sim.html">Neighbor selector</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="defSim.neighbor_selector_sim.html#module-defSim.neighbor_selector_sim.neighbor_selector_sim">neighbor_selector_sim module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="defSim.neighbor_selector_sim.html#module-defSim.neighbor_selector_sim.RandomNeighborSelector">RandomneighborSelector module</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="defSim.influence_sim.html">Influence</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="defSim.influence_sim.html#module-defSim.influence_sim.influence_sim">influence_sim module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="defSim.influence_sim.html#module-defSim.influence_sim.Axelrod">Axelrod</a></li>
+<li class="toctree-l2"><a class="reference internal" href="defSim.influence_sim.html#module-defSim.influence_sim.BoundedConfidence">BoundedConfidence</a></li>
+<li class="toctree-l2"><a class="reference internal" href="defSim.influence_sim.html#module-defSim.influence_sim.Persuasion">Persuasion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="defSim.influence_sim.html#module-defSim.influence_sim.WeightedLinear">WeightedLinear</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="defSim.network_evolution_sim.html">Network evolution</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="defSim.network_evolution_sim.html#module-defSim.network_evolution_sim.network_evolution_sim">network_evolution_sim module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="defSim.network_evolution_sim.html#module-defSim.network_evolution_sim.NetworkHomophily">NetworkHomophily module</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Dissimilarity updaters</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#module-defSim.dissimilarity_component.dissimilarity_calculator">DissimilarityCalculator module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-defSim.dissimilarity_component.EuclideanDistance">EuclideanDistance module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-defSim.dissimilarity_component.HammingDistance">HammingDistance module</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="defSim.tools.html">Tools</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="defSim.tools.html#module-defSim.tools.NetworkDistanceUpdater">NetworkDistanceUpdater module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="defSim.tools.html#module-defSim.tools.OutputMeasures">OutputMeasures module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="defSim.tools.html#module-defSim.tools.ClusterExecutionScript">ClusterExecutionScript module</a></li>
+</ul>
+</li>
 </ul>
 
             

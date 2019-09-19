@@ -48,20 +48,15 @@ exclude_patterns = []
 # a list of builtin themes.
 #
 
-
-
-#html_theme = 'nature'
-#autodoc_member_order = 'bysource'
-#html_sidebars = {
-#   '**': ['globaltoc.html', 'searchbox.html'],
-#   'using/windows': ['windowssidebar.html', 'searchbox.html'],
-#}
-
-
-
 html_theme = 'lsst_dd_rtd_theme'
 import lsst_dd_rtd_theme
 html_theme_path = [lsst_dd_rtd_theme.get_html_theme_path()]
+
+html_sidebars = {
+   '**': ['globaltoc.html', 'searchbox.html'],
+   'using/windows': ['windowssidebar.html', 'searchbox.html'],
+}
+
 
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,

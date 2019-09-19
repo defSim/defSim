@@ -4428,7 +4428,7 @@ div[class^='highlight'] pre {
   display: block;
   margin: 0 auto;
   height: auto;
-  width: auto;
+  width: 180px;
   border-radius: 0;
   max-width: 100%;
   background: transparent;
@@ -4501,7 +4501,7 @@ div[class^='highlight'] pre {
   overflow-x: hidden;
   overflow-y: hidden;
   min-height: 100%;
-  background: #343131;
+  background: #252625;
   z-index: 200;
 }
 
@@ -4689,7 +4689,7 @@ footer span.commit code, footer span.commit .rst-content tt, .rst-content footer
   width: 300px;
   color: #fcfcfc;
   background: #1f1d1d;
-  border-top: solid 10px #343131;
+  border-top: solid 10px #252625;
   font-family: "Lato", "proxima-nova", "Helvetica Neue", Arial, sans-serif;
   z-index: 400;
 }
