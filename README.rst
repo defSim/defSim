@@ -13,9 +13,11 @@ How to install defSim
 To install the package, clone the repository to a folder of your choice and execute the following command in that folder:
 
 .. code-block:: console
+
    pip --install .
 
 if you change the package or pull changes:
 
 .. code-block:: console
+
    pip --install upgrade .
