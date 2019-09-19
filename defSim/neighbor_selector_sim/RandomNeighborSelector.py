@@ -1,0 +1,41 @@
+import random
+from typing import Iterable
+
+import networkx as nx
+
+from .neighbor_selector_sim import NeighborSelector
+
+
+class RandomNeighborSelector(NeighborSelector):
+    """
+    Implements the neighborSelector in such a way that either all neighbors are selected in the case of
+    one-to-many and many-to-one communication, or a random neighbor in the case of one-to-one communication.
+    """
+
+    @staticmethod
+    def select_neighbors(network: nx.Graph, agentID: int, regime: str, **kwargs) -> Iterable[int]:
+        """
+        Selects a random agent from the direct neighborhood of the focal agent in the case of one-to-one communication,
+        and all direct neighbors otherwise.
+
+
+
+        :param network: The network from which the agent shall be selected.
+        :param agentID: The index of the focal agent, who is either the source or target of influence.
+        :param regime: Whether the focal agent interacts with only one or many agents from his or her
+            neighborhood. If "one-to-one": One neighbor to which the focal agent has an outgoing tie is selected.
+            If "one-to-many": All neighbors to which the focal agent has an outgoing tie are selected.
+            If "many-to-one": All neighbors from which the focal agent has an incoming tie are selected.
+        :param kwargs: Additional parameters specific to the implementation of the InfluenceOperator.
+        :raises: ValueError if not one of the possible options for the communication_regime is chosen.
+        :returns: A list of the indices of the relevant other agents.
+        """
+        if regime == "one-to-one":
+            return [(random.choice([neighbor for neighbor in network[agentID]]))]
+        elif regime == "one-to-many":
+            return [neighbor for neighbor in network[agentID]] #todo: implement directed graphs
+        elif regime == "many-to-one":
+            return [neighbor for neighbor in network[agentID]]
+        else:
+            raise ValueError("You can only select from the options ['one-to-one', 'one-to-many', 'many-to-one']")
+

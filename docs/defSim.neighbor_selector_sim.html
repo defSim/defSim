@@ -1,0 +1,282 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>defSim</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="genindex.html"/>
+        <link rel="search" title="Search" href="search.html"/>
+    <link rel="top" title="defSim alpha documentation" href="index.html"/>
+        <link rel="next" title="Influence (simulation component)" href="defSim.influence_sim.html"/>
+        <link rel="prev" title="Focal agent (simulation component)" href="defSim.focal_agent_sim.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background-color: #343131">
+          
+
+          <a href="https://www.lsst.org">
+            <img src="_static/lsst-logo-dark.svg" class="logo" />
+
+            <span class="project-title">defSim</span>
+          </a>
+
+          <ul class="edition-switcher">
+            <li>Edition: </li>
+            <li><a href="../v">Switch editions</a></li>
+            
+          </ul>
+
+          
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="quickintro.html">Quick start guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="defSim.html">defSim</a></li>
+<li class="toctree-l1"><a class="reference internal" href="defSim.network_init.html">Networks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="defSim.agents_init.html">Agent features</a></li>
+<li class="toctree-l1"><a class="reference internal" href="defSim.focal_agent_sim.html">Focal agent selection</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Neighbor selector</a></li>
+<li class="toctree-l1"><a class="reference internal" href="defSim.influence_sim.html">Influence</a></li>
+<li class="toctree-l1"><a class="reference internal" href="defSim.network_evolution_sim.html">Network evolution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="defSim.dissimilarity_component.html">Dissimilarity updaters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="defSim.tools.html">Tools</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="index.html">defSim</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="dd-masthead">
+  <h1 class="dd-title">defSim</h1>
+  <ul class="dd-authors">
+    
+  </ul>
+  <p>Latest Revision: <a href="#change-record"></a></p>
+</div>
+           <div itemprop="articleBody">
+            
+  <div class="section" id="neighbor-selector-simulation-component">
+<h1>Neighbor selector (simulation component)<a class="headerlink" href="#neighbor-selector-simulation-component" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="module-defSim.neighbor_selector_sim.neighbor_selector_sim">
+<span id="neighbor-selector-sim-module"></span><h2>neighbor_selector_sim module<a class="headerlink" href="#module-defSim.neighbor_selector_sim.neighbor_selector_sim" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="defSim.neighbor_selector_sim.neighbor_selector_sim.NeighborSelector">
+<em class="property">class </em><code class="sig-prename descclassname">defSim.neighbor_selector_sim.neighbor_selector_sim.</code><code class="sig-name descname">NeighborSelector</code><a class="headerlink" href="#defSim.neighbor_selector_sim.neighbor_selector_sim.NeighborSelector" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">abc.ABC</span></code></p>
+<p>The NeighborSelector is responsible for picking certain agents from the environment of the focal agent.
+These agents are then either the source or the target in the following influence step.
+Possible ways to select neighbors is either by picking all other agents, i.e. global influence (simulation influence
+from news and polls), all neighbors in the immediate neighborhood, or only single neighbors.</p>
+<dl class="method">
+<dt id="defSim.neighbor_selector_sim.neighbor_selector_sim.NeighborSelector.select_neighbors">
+<em class="property">abstract static </em><code class="sig-name descname">select_neighbors</code><span class="sig-paren">(</span><em class="sig-param">network: networkx.classes.graph.Graph</em>, <em class="sig-param">agentID: int</em>, <em class="sig-param">regime: str</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span> &#x2192; Iterable[int]<a class="headerlink" href="#defSim.neighbor_selector_sim.neighbor_selector_sim.NeighborSelector.select_neighbors" title="Permalink to this definition">¶</a></dt>
+<dd><p>This method selects a subset of agents from the network that are in some way relevant for the
+influence process regarding the focal agent.
+This subset could be e.g. a single agent from the direct neighborhood, the whole neighborhood, or all
+agents, excluding the focal agent.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>network</strong> – the network from which the agent shall be selected.</p></li>
+<li><p><strong>agentID</strong> – the index of the focal agent, who is either the source or target of influence.</p></li>
+<li><p><strong>regime</strong> – Whether the focal agent interacts with only one or many agents from his or her
+neighborhood. If “one-to-one”: One neighbor to which the focal agent has an outgoing tie is selected.
+If “one-to-many”: All neighbors to which the focal agent has an outgoing tie are selected.
+If “many-to-one”: All neighbors from which the focal agent has an incoming tie are selected.</p></li>
+<li><p><strong>kwargs</strong> – Additional parameters specific to the implementation of the neighborSelector.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>a list of the indices of the relevant other agents.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="defSim.neighbor_selector_sim.neighbor_selector_sim.select_neighbors">
+<code class="sig-prename descclassname">defSim.neighbor_selector_sim.neighbor_selector_sim.</code><code class="sig-name descname">select_neighbors</code><span class="sig-paren">(</span><em class="sig-param">network: networkx.classes.graph.Graph</em>, <em class="sig-param">realization: str</em>, <em class="sig-param">agentID: int</em>, <em class="sig-param">regime: str</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span> &#x2192; Iterable[int]<a class="headerlink" href="#defSim.neighbor_selector_sim.neighbor_selector_sim.select_neighbors" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function works as a factory method for the neighborSelector component.
+It calls the select_neighbors function of the specific neighborSelector and passes to it the index of the
+focal agent and the communication regime.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>network</strong> – The network from which the agents are selected.</p></li>
+<li><p><strong>realization</strong> – The specific implementation of the neighborSelector. Options are “random”, …</p></li>
+<li><p><strong>agentID</strong> – An integer that represents the index of the focal agent in the network.</p></li>
+<li><p><strong>regime</strong> – Either “many_to_one”, “one_to_many” or “one_to_one”.</p></li>
+<li><p><strong>kwargs</strong> – Additional parameters specific to the implementation of the neighborSelector.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A list with the indices of the selected other agents.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="module-defSim.neighbor_selector_sim.RandomNeighborSelector">
+<span id="randomneighborselector-module"></span><h2>RandomneighborSelector module<a class="headerlink" href="#module-defSim.neighbor_selector_sim.RandomNeighborSelector" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="defSim.neighbor_selector_sim.RandomNeighborSelector.RandomNeighborSelector">
+<em class="property">class </em><code class="sig-prename descclassname">defSim.neighbor_selector_sim.RandomNeighborSelector.</code><code class="sig-name descname">RandomNeighborSelector</code><a class="headerlink" href="#defSim.neighbor_selector_sim.RandomNeighborSelector.RandomNeighborSelector" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#defSim.neighbor_selector_sim.neighbor_selector_sim.NeighborSelector" title="defSim.neighbor_selector_sim.neighbor_selector_sim.NeighborSelector"><code class="xref py py-class docutils literal notranslate"><span class="pre">defSim.neighbor_selector_sim.neighbor_selector_sim.NeighborSelector</span></code></a></p>
+<p>Implements the neighborSelector in such a way that either all neighbors are selected in the case of
+one-to-many and many-to-one communication, or a random neighbor in the case of one-to-one communication.</p>
+<dl class="method">
+<dt id="defSim.neighbor_selector_sim.RandomNeighborSelector.RandomNeighborSelector.select_neighbors">
+<em class="property">static </em><code class="sig-name descname">select_neighbors</code><span class="sig-paren">(</span><em class="sig-param">network: networkx.classes.graph.Graph</em>, <em class="sig-param">agentID: int</em>, <em class="sig-param">regime: str</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span> &#x2192; Iterable[int]<a class="headerlink" href="#defSim.neighbor_selector_sim.RandomNeighborSelector.RandomNeighborSelector.select_neighbors" title="Permalink to this definition">¶</a></dt>
+<dd><p>Selects a random agent from the direct neighborhood of the focal agent in the case of one-to-one communication,
+and all direct neighbors otherwise.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>network</strong> – The network from which the agent shall be selected.</p></li>
+<li><p><strong>agentID</strong> – The index of the focal agent, who is either the source or target of influence.</p></li>
+<li><p><strong>regime</strong> – Whether the focal agent interacts with only one or many agents from his or her
+neighborhood. If “one-to-one”: One neighbor to which the focal agent has an outgoing tie is selected.
+If “one-to-many”: All neighbors to which the focal agent has an outgoing tie are selected.
+If “many-to-one”: All neighbors from which the focal agent has an incoming tie are selected.</p></li>
+<li><p><strong>kwargs</strong> – Additional parameters specific to the implementation of the InfluenceOperator.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><p>ValueError if not one of the possible options for the communication_regime is chosen.</p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>A list of the indices of the relevant other agents.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="defSim.influence_sim.html" class="btn btn-neutral float-right" title="Influence (simulation component)" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="defSim.focal_agent_sim.html" class="btn btn-neutral" title="Focal agent (simulation component)" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, Laukemper &amp; Keijzer.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'alpha',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+      <script type="text/javascript" src="_static/language_data.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+   <script type="text/javascript" src="_static/js/theme.js"></script>
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

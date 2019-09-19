@@ -1,0 +1,245 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>defSim</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="genindex.html"/>
+        <link rel="search" title="Search" href="search.html"/>
+    <link rel="top" title="defSim alpha documentation" href="index.html"/>
+        <link rel="next" title="Dissimilarity component" href="defSim.dissimilarity_component.html"/>
+        <link rel="prev" title="Influence (simulation component)" href="defSim.influence_sim.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background-color: #343131">
+          
+
+          <a href="https://www.lsst.org">
+            <img src="_static/lsst-logo-dark.svg" class="logo" />
+
+            <span class="project-title">defSim</span>
+          </a>
+
+          <ul class="edition-switcher">
+            <li>Edition: </li>
+            <li><a href="../v">Switch editions</a></li>
+            
+          </ul>
+
+          
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="quickintro.html">Quick start guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="defSim.html">defSim</a></li>
+<li class="toctree-l1"><a class="reference internal" href="defSim.network_init.html">Networks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="defSim.agents_init.html">Agent features</a></li>
+<li class="toctree-l1"><a class="reference internal" href="defSim.focal_agent_sim.html">Focal agent selection</a></li>
+<li class="toctree-l1"><a class="reference internal" href="defSim.neighbor_selector_sim.html">Neighbor selector</a></li>
+<li class="toctree-l1"><a class="reference internal" href="defSim.influence_sim.html">Influence</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Network evolution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="defSim.dissimilarity_component.html">Dissimilarity updaters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="defSim.tools.html">Tools</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="index.html">defSim</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="dd-masthead">
+  <h1 class="dd-title">defSim</h1>
+  <ul class="dd-authors">
+    
+  </ul>
+  <p>Latest Revision: <a href="#change-record"></a></p>
+</div>
+           <div itemprop="articleBody">
+            
+  <div class="section" id="network-evolution-simulation-component">
+<h1>Network evolution (simulation component)<a class="headerlink" href="#network-evolution-simulation-component" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="module-defSim.network_evolution_sim.network_evolution_sim">
+<span id="network-evolution-sim-module"></span><h2>network_evolution_sim module<a class="headerlink" href="#module-defSim.network_evolution_sim.network_evolution_sim" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="defSim.network_evolution_sim.network_evolution_sim.NetworkModifier">
+<em class="property">class </em><code class="sig-prename descclassname">defSim.network_evolution_sim.network_evolution_sim.</code><code class="sig-name descname">NetworkModifier</code><a class="headerlink" href="#defSim.network_evolution_sim.network_evolution_sim.NetworkModifier" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">abc.ABC</span></code></p>
+<p>The NetworkModifier changes the structure of the network. It can build or remove edges based on how agents are
+connected and what attributes they have.</p>
+<dl class="method">
+<dt id="defSim.network_evolution_sim.network_evolution_sim.NetworkModifier.rewire_network">
+<em class="property">abstract static </em><code class="sig-name descname">rewire_network</code><span class="sig-paren">(</span><em class="sig-param">network: networkx.classes.graph.Graph</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#defSim.network_evolution_sim.network_evolution_sim.NetworkModifier.rewire_network" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates new connections or deletes existing ones. Can be used to implement coevolution of networks and model
+selection processes.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>network</strong> – The network that will be modified.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="defSim.network_evolution_sim.network_evolution_sim.rewire_network">
+<code class="sig-prename descclassname">defSim.network_evolution_sim.network_evolution_sim.</code><code class="sig-name descname">rewire_network</code><span class="sig-paren">(</span><em class="sig-param">network: networkx.classes.graph.Graph</em>, <em class="sig-param">realization: str</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#defSim.network_evolution_sim.network_evolution_sim.rewire_network" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function works as a factory method for the NetworkModifier component.
+It calls the rewire_network method of a specific implementation of the AttributesInitializer and passes to it
+the kwargs dictionary.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>network</strong> – The network that will be modified.</p></li>
+<li><p><strong>realization</strong> – The specific NetworkModifier that shall be used to initialize the attributes. Options are “maslov_sneppen”, ..</p></li>
+<li><p><strong>kwargs</strong> – The parameter dictionary with all optional parameters.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="module-defSim.network_evolution_sim.NetworkHomophily">
+<span id="networkhomophily-module"></span><h2>NetworkHomophily module<a class="headerlink" href="#module-defSim.network_evolution_sim.NetworkHomophily" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="defSim.network_evolution_sim.NetworkHomophily.MaslovSneppen">
+<em class="property">class </em><code class="sig-prename descclassname">defSim.network_evolution_sim.NetworkHomophily.</code><code class="sig-name descname">MaslovSneppen</code><a class="headerlink" href="#defSim.network_evolution_sim.NetworkHomophily.MaslovSneppen" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#defSim.network_evolution_sim.network_evolution_sim.NetworkModifier" title="defSim.network_evolution_sim.network_evolution_sim.NetworkModifier"><code class="xref py py-class docutils literal notranslate"><span class="pre">defSim.network_evolution_sim.network_evolution_sim.NetworkModifier</span></code></a></p>
+<dl class="method">
+<dt id="defSim.network_evolution_sim.NetworkHomophily.MaslovSneppen.rewire_network">
+<em class="property">static </em><code class="sig-name descname">rewire_network</code><span class="sig-paren">(</span><em class="sig-param">network: networkx.classes.graph.Graph</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#defSim.network_evolution_sim.NetworkHomophily.MaslovSneppen.rewire_network" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function picks random agents from the network and connects them to each other.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>network</strong> – The network that is modified.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="defSim.dissimilarity_component.html" class="btn btn-neutral float-right" title="Dissimilarity component" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="defSim.influence_sim.html" class="btn btn-neutral" title="Influence (simulation component)" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, Laukemper &amp; Keijzer.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'alpha',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+      <script type="text/javascript" src="_static/language_data.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+   <script type="text/javascript" src="_static/js/theme.js"></script>
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

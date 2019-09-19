@@ -1,0 +1,318 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>defSim</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="genindex.html"/>
+        <link rel="search" title="Search" href="search.html"/>
+    <link rel="top" title="defSim alpha documentation" href="index.html"/>
+        <link rel="next" title="Focal agent (simulation component)" href="defSim.focal_agent_sim.html"/>
+        <link rel="prev" title="Network (initialization component)" href="defSim.network_init.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background-color: #343131">
+          
+
+          <a href="https://www.lsst.org">
+            <img src="_static/lsst-logo-dark.svg" class="logo" />
+
+            <span class="project-title">defSim</span>
+          </a>
+
+          <ul class="edition-switcher">
+            <li>Edition: </li>
+            <li><a href="../v">Switch editions</a></li>
+            
+          </ul>
+
+          
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="quickintro.html">Quick start guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="defSim.html">defSim</a></li>
+<li class="toctree-l1"><a class="reference internal" href="defSim.network_init.html">Networks</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Agent features</a></li>
+<li class="toctree-l1"><a class="reference internal" href="defSim.focal_agent_sim.html">Focal agent selection</a></li>
+<li class="toctree-l1"><a class="reference internal" href="defSim.neighbor_selector_sim.html">Neighbor selector</a></li>
+<li class="toctree-l1"><a class="reference internal" href="defSim.influence_sim.html">Influence</a></li>
+<li class="toctree-l1"><a class="reference internal" href="defSim.network_evolution_sim.html">Network evolution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="defSim.dissimilarity_component.html">Dissimilarity updaters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="defSim.tools.html">Tools</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="index.html">defSim</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="dd-masthead">
+  <h1 class="dd-title">defSim</h1>
+  <ul class="dd-authors">
+    
+  </ul>
+  <p>Latest Revision: <a href="#change-record"></a></p>
+</div>
+           <div itemprop="articleBody">
+            
+  <div class="section" id="agents-initialization-component">
+<h1>Agents (initialization component)<a class="headerlink" href="#agents-initialization-component" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="module-defSim.agents_init.agents_init">
+<span id="agents-init-module"></span><h2>agents_init module<a class="headerlink" href="#module-defSim.agents_init.agents_init" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="defSim.agents_init.agents_init.AttributesInitializer">
+<em class="property">class </em><code class="sig-prename descclassname">defSim.agents_init.agents_init.</code><code class="sig-name descname">AttributesInitializer</code><a class="headerlink" href="#defSim.agents_init.agents_init.AttributesInitializer" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">abc.ABC</span></code></p>
+<p>Initializes and changes attributes of nodes in the network.</p>
+<dl class="method">
+<dt id="defSim.agents_init.agents_init.AttributesInitializer.initialize_attributes">
+<em class="property">abstract static </em><code class="sig-name descname">initialize_attributes</code><span class="sig-paren">(</span><em class="sig-param">network: networkx.classes.graph.Graph</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#defSim.agents_init.agents_init.AttributesInitializer.initialize_attributes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gives initial values to the nodes in the network. Values could e.g. be based on their position in the network.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>network</strong> – The network that will be modified.</p></li>
+<li><p><strong>kwargs</strong> – This dictionary contains all the implementation-specific parameters.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="defSim.agents_init.agents_init.initialize_attributes">
+<code class="sig-prename descclassname">defSim.agents_init.agents_init.</code><code class="sig-name descname">initialize_attributes</code><span class="sig-paren">(</span><em class="sig-param">network: networkx.classes.graph.Graph</em>, <em class="sig-param">realization: str</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#defSim.agents_init.agents_init.initialize_attributes" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function works as a factory method for the AttributesInitializer component.
+It calls the initialize_attributes function of a specific implementation of the AttributesInitializer and passes to it
+the kwargs dictionary.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>network</strong> – The network that will be modified.</p></li>
+<li><p><strong>realization</strong> – The specific AttributesInitializer that shall be used to initialize the attributes. Options are “random”, ..</p></li>
+<li><p><strong>kwargs</strong> – The parameter dictionary with all optional parameters.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="defSim.agents_init.agents_init.set_categorical_attribute">
+<code class="sig-prename descclassname">defSim.agents_init.agents_init.</code><code class="sig-name descname">set_categorical_attribute</code><span class="sig-paren">(</span><em class="sig-param">network: networkx.classes.graph.Graph</em>, <em class="sig-param">name: str</em>, <em class="sig-param">values: list</em>, <em class="sig-param">distribution: str = 'uniform'</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#defSim.agents_init.agents_init.set_categorical_attribute" title="Permalink to this definition">¶</a></dt>
+<dd><p>Adds a categorical attribute to all nodes in a network. The values for that attribute are drawn from a list
+of possible values provided by the user.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>network</strong> – The graph object whose nodes’ attributes are modified.</p></li>
+<li><p><strong>name</strong> – the name of the attribute. This is used as a key to call the attribute value in other functions.</p></li>
+<li><p><strong>values</strong> – A list that contains all possible values for that attribute.</p></li>
+<li><p><strong>distribution</strong> – ‘gaussian’, ‘uniform’, or ‘custom’ are possible values.</p></li>
+<li><p><strong>kwargs</strong> – <p>a dictionary containing the parameter name and value for each distribution, these are:</p>
+<p>for gaussian: loc and scale. loc would be the index of the most common value in the values list</p>
+<p>for custom distribution: c. an array-like containing the probabilities for each entry in the values list.</p>
+</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="defSim.agents_init.agents_init.set_continuous_attribute">
+<code class="sig-prename descclassname">defSim.agents_init.agents_init.</code><code class="sig-name descname">set_continuous_attribute</code><span class="sig-paren">(</span><em class="sig-param">network: networkx.classes.graph.Graph</em>, <em class="sig-param">name: str</em>, <em class="sig-param">shape: tuple = 1</em>, <em class="sig-param">distribution: str = 'uniform'</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#defSim.agents_init.agents_init.set_continuous_attribute" title="Permalink to this definition">¶</a></dt>
+<dd><p>adds a possibly multidimensional attribute to all nodes in a network.
+The values of the attribute are drawn from a distribution that is set by the user.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>network</strong> – The graph object whose nodes’ attributes are modified.</p></li>
+<li><p><strong>shape</strong> – sets the output shape of the attribute value. Allows e.g. for multidimensional opinion vectors</p></li>
+<li><p><strong>name</strong> – the name of the attribute. This is used as a key to call the attribute value in other functions</p></li>
+<li><p><strong>distribution</strong> – “gaussian”, “exponential”, “beta” are possible distributions to choose from</p></li>
+<li><p><strong>kwargs</strong> – <p>a dictionary containing the parameter name and value for each distribution, these are:</p>
+<p>loc, scale for gaussian</p>
+<p>scale for exponential</p>
+<p>a, b for the beta distribution</p>
+</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="module-defSim.agents_init.RandomCategoricalInitializer">
+<span id="randomcategoricalinitializer-module"></span><h2>RandomCategoricalInitializer module<a class="headerlink" href="#module-defSim.agents_init.RandomCategoricalInitializer" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="defSim.agents_init.RandomCategoricalInitializer.RandomCategoricalInitializer">
+<em class="property">class </em><code class="sig-prename descclassname">defSim.agents_init.RandomCategoricalInitializer.</code><code class="sig-name descname">RandomCategoricalInitializer</code><a class="headerlink" href="#defSim.agents_init.RandomCategoricalInitializer.RandomCategoricalInitializer" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#defSim.agents_init.agents_init.AttributesInitializer" title="defSim.agents_init.agents_init.AttributesInitializer"><code class="xref py py-class docutils literal notranslate"><span class="pre">defSim.agents_init.agents_init.AttributesInitializer</span></code></a></p>
+<p>Implements the AttributesInitializer as a random initialization of arbitrary discrete features.</p>
+<dl class="method">
+<dt id="defSim.agents_init.RandomCategoricalInitializer.RandomCategoricalInitializer.initialize_attributes">
+<em class="property">static </em><code class="sig-name descname">initialize_attributes</code><span class="sig-paren">(</span><em class="sig-param">network: networkx.classes.graph.Graph</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#defSim.agents_init.RandomCategoricalInitializer.RandomCategoricalInitializer.initialize_attributes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Randomly initializes a number of discrete features for each node.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>network</strong> – The graph object whose nodes’ attributes are modified.</p></li>
+<li><p><strong>num_features</strong> (<em>int=5</em>) – How many different attributes each node has.</p></li>
+<li><p><strong>num_traits</strong> (<em>int=3</em>) – The range of values each attribute can take. 3 means that an attribute can be either 0, 1 or 2</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-defSim.agents_init.RandomContinuousInitializer">
+<span id="randomcontinuousinitializer-module"></span><h2>RandomContinuousInitializer module<a class="headerlink" href="#module-defSim.agents_init.RandomContinuousInitializer" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="defSim.agents_init.RandomContinuousInitializer.RandomContinuousInitializer">
+<em class="property">class </em><code class="sig-prename descclassname">defSim.agents_init.RandomContinuousInitializer.</code><code class="sig-name descname">RandomContinuousInitializer</code><a class="headerlink" href="#defSim.agents_init.RandomContinuousInitializer.RandomContinuousInitializer" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#defSim.agents_init.agents_init.AttributesInitializer" title="defSim.agents_init.agents_init.AttributesInitializer"><code class="xref py py-class docutils literal notranslate"><span class="pre">defSim.agents_init.agents_init.AttributesInitializer</span></code></a></p>
+<p>Implements the AttributesInitializer as a random initialization of arbitrary continuous features.</p>
+<dl class="method">
+<dt id="defSim.agents_init.RandomContinuousInitializer.RandomContinuousInitializer.initialize_attributes">
+<em class="property">static </em><code class="sig-name descname">initialize_attributes</code><span class="sig-paren">(</span><em class="sig-param">network: networkx.classes.graph.Graph</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#defSim.agents_init.RandomContinuousInitializer.RandomContinuousInitializer.initialize_attributes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Randomly initializes a number of continuous features between 0 and 1 for each node.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>network</strong> – The graph object whose nodes’ attributes are modified.</p></li>
+<li><p><strong>num_features</strong> (<em>int=1</em>) – How many different attributes each node has.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="defSim.focal_agent_sim.html" class="btn btn-neutral float-right" title="Focal agent (simulation component)" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="defSim.network_init.html" class="btn btn-neutral" title="Network (initialization component)" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, Laukemper &amp; Keijzer.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'alpha',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+      <script type="text/javascript" src="_static/language_data.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+   <script type="text/javascript" src="_static/js/theme.js"></script>
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

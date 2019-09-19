@@ -1,0 +1,322 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>defSim</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="genindex.html"/>
+        <link rel="search" title="Search" href="search.html"/>
+    <link rel="top" title="defSim alpha documentation" href="index.html"/>
+        <link rel="next" title="Tools" href="defSim.tools.html"/>
+        <link rel="prev" title="Network evolution (simulation component)" href="defSim.network_evolution_sim.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background-color: #343131">
+          
+
+          <a href="https://www.lsst.org">
+            <img src="_static/lsst-logo-dark.svg" class="logo" />
+
+            <span class="project-title">defSim</span>
+          </a>
+
+          <ul class="edition-switcher">
+            <li>Edition: </li>
+            <li><a href="../v">Switch editions</a></li>
+            
+          </ul>
+
+          
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="quickintro.html">Quick start guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="defSim.html">defSim</a></li>
+<li class="toctree-l1"><a class="reference internal" href="defSim.network_init.html">Networks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="defSim.agents_init.html">Agent features</a></li>
+<li class="toctree-l1"><a class="reference internal" href="defSim.focal_agent_sim.html">Focal agent selection</a></li>
+<li class="toctree-l1"><a class="reference internal" href="defSim.neighbor_selector_sim.html">Neighbor selector</a></li>
+<li class="toctree-l1"><a class="reference internal" href="defSim.influence_sim.html">Influence</a></li>
+<li class="toctree-l1"><a class="reference internal" href="defSim.network_evolution_sim.html">Network evolution</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Dissimilarity updaters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="defSim.tools.html">Tools</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="index.html">defSim</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="dd-masthead">
+  <h1 class="dd-title">defSim</h1>
+  <ul class="dd-authors">
+    
+  </ul>
+  <p>Latest Revision: <a href="#change-record"></a></p>
+</div>
+           <div itemprop="articleBody">
+            
+  <div class="section" id="dissimilarity-component">
+<h1>Dissimilarity component<a class="headerlink" href="#dissimilarity-component" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="module-defSim.dissimilarity_component.dissimilarity_calculator">
+<span id="dissimilaritycalculator-module"></span><h2>DissimilarityCalculator module<a class="headerlink" href="#module-defSim.dissimilarity_component.dissimilarity_calculator" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="defSim.dissimilarity_component.dissimilarity_calculator.DissimilarityCalculator">
+<em class="property">class </em><code class="sig-prename descclassname">defSim.dissimilarity_component.dissimilarity_calculator.</code><code class="sig-name descname">DissimilarityCalculator</code><a class="headerlink" href="#defSim.dissimilarity_component.dissimilarity_calculator.DissimilarityCalculator" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">abc.ABC</span></code></p>
+<p>This class is responsible for determining the distance between nodes, either from one node to another,
+or for every agent in the network to another. The distance could be based on their attributes or actual geodesic
+distance.</p>
+<dl class="method">
+<dt id="defSim.dissimilarity_component.dissimilarity_calculator.DissimilarityCalculator.calculate_dissimilarity">
+<em class="property">abstract static </em><code class="sig-name descname">calculate_dissimilarity</code><span class="sig-paren">(</span><em class="sig-param">network: networkx.classes.graph.Graph</em>, <em class="sig-param">agent1_id: int</em>, <em class="sig-param">agent2_id: int</em><span class="sig-paren">)</span> &#x2192; float<a class="headerlink" href="#defSim.dissimilarity_component.dissimilarity_calculator.DissimilarityCalculator.calculate_dissimilarity" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function calculates how dissimilar two agents are based on their attributes and/or their distance in
+the network.
+Can for example be used to determine whether a neighbor is selected for the influence process.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>network</strong> – The network in which the agents exist.</p></li>
+<li><p><strong>agent1_id</strong> – The index of the first agent.</p></li>
+<li><p><strong>agent2_id</strong> – The index of the agent to compare with.</p></li>
+</ul>
+</dd>
+</dl>
+<p>:returns a float value, representing the distance between the two agents</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="defSim.dissimilarity_component.dissimilarity_calculator.DissimilarityCalculator.calculate_dissimilarity_networkwide">
+<em class="property">abstract static </em><code class="sig-name descname">calculate_dissimilarity_networkwide</code><span class="sig-paren">(</span><em class="sig-param">network: networkx.classes.graph.Graph</em><span class="sig-paren">)</span><a class="headerlink" href="#defSim.dissimilarity_component.dissimilarity_calculator.DissimilarityCalculator.calculate_dissimilarity_networkwide" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates the distance from each agent to each other and sets that distance as an attribute on the edge
+between them.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>network</strong> – The network that is modified.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="defSim.dissimilarity_component.dissimilarity_calculator.select_calculator">
+<code class="sig-prename descclassname">defSim.dissimilarity_component.dissimilarity_calculator.</code><code class="sig-name descname">select_calculator</code><span class="sig-paren">(</span><em class="sig-param">realization: str</em><span class="sig-paren">)</span> &#x2192; defSim.dissimilarity_component.dissimilarity_calculator.DissimilarityCalculator<a class="headerlink" href="#defSim.dissimilarity_component.dissimilarity_calculator.select_calculator" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function works as a factory method for the dissimilarity_component.
+It returns an instance of the Calculator that is asked for.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>realization</strong> – The type of DissimilarityCalculator. Possible options are [“hamming”, “euclidean”]</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>An instance of a DissimilarityCalculator</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="module-defSim.dissimilarity_component.EuclideanDistance">
+<span id="euclideandistance-module"></span><h2>EuclideanDistance module<a class="headerlink" href="#module-defSim.dissimilarity_component.EuclideanDistance" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="defSim.dissimilarity_component.EuclideanDistance.EuclideanDistance">
+<em class="property">class </em><code class="sig-prename descclassname">defSim.dissimilarity_component.EuclideanDistance.</code><code class="sig-name descname">EuclideanDistance</code><a class="headerlink" href="#defSim.dissimilarity_component.EuclideanDistance.EuclideanDistance" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#defSim.dissimilarity_component.dissimilarity_calculator.DissimilarityCalculator" title="defSim.dissimilarity_component.dissimilarity_calculator.DissimilarityCalculator"><code class="xref py py-class docutils literal notranslate"><span class="pre">defSim.dissimilarity_component.dissimilarity_calculator.DissimilarityCalculator</span></code></a></p>
+<p>Implements the DissimilarityCalculator as a calculator of the euclidean distance</p>
+<dl class="method">
+<dt id="defSim.dissimilarity_component.EuclideanDistance.EuclideanDistance.calculate_dissimilarity">
+<em class="property">static </em><code class="sig-name descname">calculate_dissimilarity</code><span class="sig-paren">(</span><em class="sig-param">network: networkx.classes.graph.Graph</em>, <em class="sig-param">agent1_id: int</em>, <em class="sig-param">agent2_id: int</em><span class="sig-paren">)</span> &#x2192; float<a class="headerlink" href="#defSim.dissimilarity_component.EuclideanDistance.EuclideanDistance.calculate_dissimilarity" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates euclidean distance of the agents’ feature vectors.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>network</strong> – The network in which the agents exist.</p></li>
+<li><p><strong>agent1_id</strong> – The index of the first agent.</p></li>
+<li><p><strong>agent2_id</strong> – The index of the agent to compare with.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A float value, representing the distance between the two agents.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="defSim.dissimilarity_component.EuclideanDistance.EuclideanDistance.calculate_dissimilarity_networkwide">
+<em class="property">static </em><code class="sig-name descname">calculate_dissimilarity_networkwide</code><span class="sig-paren">(</span><em class="sig-param">network: networkx.classes.graph.Graph</em><span class="sig-paren">)</span><a class="headerlink" href="#defSim.dissimilarity_component.EuclideanDistance.EuclideanDistance.calculate_dissimilarity_networkwide" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates the distance from each agent to each other and sets that distance as an attribute on the edge
+between them.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>network</strong> – The network that is modified.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-defSim.dissimilarity_component.HammingDistance">
+<span id="hammingdistance-module"></span><h2>HammingDistance module<a class="headerlink" href="#module-defSim.dissimilarity_component.HammingDistance" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="defSim.dissimilarity_component.HammingDistance.HammingDistance">
+<em class="property">class </em><code class="sig-prename descclassname">defSim.dissimilarity_component.HammingDistance.</code><code class="sig-name descname">HammingDistance</code><a class="headerlink" href="#defSim.dissimilarity_component.HammingDistance.HammingDistance" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#defSim.dissimilarity_component.dissimilarity_calculator.DissimilarityCalculator" title="defSim.dissimilarity_component.dissimilarity_calculator.DissimilarityCalculator"><code class="xref py py-class docutils literal notranslate"><span class="pre">defSim.dissimilarity_component.dissimilarity_calculator.DissimilarityCalculator</span></code></a></p>
+<p>Implements the DissimilarityCalculator as a calculator of the Hamming distance</p>
+<dl class="method">
+<dt id="defSim.dissimilarity_component.HammingDistance.HammingDistance.calculate_dissimilarity">
+<em class="property">static </em><code class="sig-name descname">calculate_dissimilarity</code><span class="sig-paren">(</span><em class="sig-param">network: networkx.classes.graph.Graph</em>, <em class="sig-param">agent1_id: int</em>, <em class="sig-param">agent2_id: int</em><span class="sig-paren">)</span> &#x2192; float<a class="headerlink" href="#defSim.dissimilarity_component.HammingDistance.HammingDistance.calculate_dissimilarity" title="Permalink to this definition">¶</a></dt>
+<dd><p>Computes the Hamming Distance between two Agents, i.e. returns the proportion of features that
+the two agents have not in common. 1 means therefore total dissimilarity, and 0 is total overlap.
+Only works with categorical attributes.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>network</strong> – The network in which the agents exist.</p></li>
+<li><p><strong>agent1_id</strong> – The index of the first agent.</p></li>
+<li><p><strong>agent2_id</strong> – The index of the agent to compare with.</p></li>
+</ul>
+</dd>
+</dl>
+<p>:returns a float value, representing the distance between the two agents</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="defSim.dissimilarity_component.HammingDistance.HammingDistance.calculate_dissimilarity_networkwide">
+<em class="property">static </em><code class="sig-name descname">calculate_dissimilarity_networkwide</code><span class="sig-paren">(</span><em class="sig-param">network: networkx.classes.graph.Graph</em><span class="sig-paren">)</span><a class="headerlink" href="#defSim.dissimilarity_component.HammingDistance.HammingDistance.calculate_dissimilarity_networkwide" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates the distance from each agent to each other and sets that distance as an attribute on the edge
+between them.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>network</strong> – The network that is modified.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="defSim.tools.html" class="btn btn-neutral float-right" title="Tools" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="defSim.network_evolution_sim.html" class="btn btn-neutral" title="Network evolution (simulation component)" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, Laukemper &amp; Keijzer.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'alpha',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+      <script type="text/javascript" src="_static/language_data.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+   <script type="text/javascript" src="_static/js/theme.js"></script>
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>
