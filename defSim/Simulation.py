@@ -75,6 +75,28 @@ class Simulation:
         self.time_steps = 0
         self.influence_steps = 0  # counts the successful influence steps
 
+    def return_values(self):
+        """
+        This method returns the values stored in the Simulation object. Both default, and user-specified values are
+        returned to the console to make the Simulation object more transparent.
+
+        :return: True
+        """
+        print("\nParameter values used in the simulation object:\n")
+
+        for i in self.__dict__.keys():
+            if type(self.__dict__[i]) == dict:
+                print("  " + i + " [dict]")
+                for key, val in self.__dict__[i].items():
+                    print("    " + str(key))
+                    print("      " + str(val))
+            else:
+                print("  " + i)
+                print("    " + str(self.__dict__[i]))
+
+        return True
+
+
     def run_simulation(self) -> pd.DataFrame:
         """
         This method initializes the network if none is given, initializes the attributes of the agents, and also
