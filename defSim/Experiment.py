@@ -128,6 +128,28 @@ class Experiment:
         assumed_time_per_simulation = 8
         return num_simulations * assumed_time_per_simulation
 
+    def return_values(self):
+        """
+        This method returns the values stored in the Experiment object. Both default, and user-specified values are
+        returned to the console to make the Experiment object more transparent.
+
+        :return: True
+        """
+        print("\nParameter values used in the experiment object:\n")
+
+        for i in self.__dict__.keys():
+            if type(self.__dict__[i]) == dict:
+                print(i + " (dict) {")
+                for key, val in self.__dict__[i].items():
+                    print("  " + str(key))
+                    print("  =  " + str(val))
+                print("}")
+            else:
+                print(i)
+                print("=  " + str(self.__dict__[i]))
+
+        return True
+
     def run(self, parallel: bool = False, num_cores=mp.cpu_count()) -> pd.DataFrame:
         """
         Starts the experiment by first creating the parameter_dict_list if that hasn't happened already and then

@@ -86,13 +86,14 @@ class Simulation:
 
         for i in self.__dict__.keys():
             if type(self.__dict__[i]) == dict:
-                print("  " + i + " [dict]")
+                print(i + " (dict) {")
                 for key, val in self.__dict__[i].items():
-                    print("    " + str(key))
-                    print("      " + str(val))
+                    print("  " + str(key))
+                    print("  =  " + str(val))
+                print("}")
             else:
-                print("  " + i)
-                print("    " + str(self.__dict__[i]))
+                print(i)
+                print("=  " + str(self.__dict__[i]))
 
         return True
 
