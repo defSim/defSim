@@ -28,9 +28,12 @@ def isol(network):
     return len(list(nx.isolates(Gsub)))
 
 
-def clustercount(network):  # returns
+def zonescount(network):  # returns
     """
-    Counts how many clusters exist in the network. #todo: reference on what a cluster is
+    Counts the number of *cultural clusters* present in the graph. Following Axelrod (1997), cultural clusters are
+    defined as a set of connected nodes with an some remaining overlap. In the model for the dissemination of culture,
+    that uses homophily to dictate interaction probabilities, this means that interaction is still possible within the
+    cultural zone.
 
     :param network: The network to be measured.
     :returns: The number of clusters in the network.

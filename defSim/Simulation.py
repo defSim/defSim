@@ -211,7 +211,7 @@ class Simulation:
         results = results.join(
             pd.DataFrame({"Number of Clusters": OutputMeasures.regionscount(self.network)}, index=[0]))
         results = results.join(
-            pd.DataFrame({"Cluster Sizes": str(OutputMeasures.clustercount(self.network))}, index=[0]))
+            pd.DataFrame({"Cluster Sizes": str(OutputMeasures.zonescount(self.network))}, index=[0]))
         results = results.join(pd.DataFrame({"Number of Isolates": OutputMeasures.isol(self.network)}, index=[0]))
         results = results.join(pd.DataFrame({"Homogeneity": OutputMeasures.homogeneity(self.network)}, index=[0]))
 
