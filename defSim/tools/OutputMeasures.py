@@ -28,23 +28,26 @@ def isol(network):
     return len(list(nx.isolates(Gsub)))
 
 
-def zonescount(network):  # returns
+def zonescount(network, zones_threshold: float = 1):  # returns
     """
-    Counts the number of *cultural clusters* present in the graph. Following Axelrod (1997), cultural clusters are
-    defined as a set of connected nodes with an some remaining overlap. In the model for the dissemination of culture,
+    Counts the number of *cultural zones* present in the graph. Following Axelrod (1997), cultural zones are
+    defined as a set of connected nodes with an some remaining overlap.t In the model for the dissemination of culture,
     that uses homophily to dictate interaction probabilities, this means that interaction is still possible within the
     cultural zone.
 
     :param network: The network to be measured.
+    :param float=1 zones_threshold: Threshold :math:`\in [0,1]` that defines the maximal allowed dissimilarity between
+    two agents to belong to the same zone.
     :returns: The number of clusters in the network.
     """
-    Gsub = network.copy()
-    remove = [pair for pair, dissimilarity in nx.get_edge_attributes(Gsub, 'dist').items() if dissimilarity != 0]
-    Gsub.remove_edges_from(remove)
-    # todo: ask marijn what this means exactly
-    # changed the return for single run analysis!!!!
-    return ([len(c) for c in sorted(nx.connected_components(Gsub), key=len, reverse=True)])
-    # return(len([len(c) for c in sorted(nx.connected_components(Gsub), key=len, reverse=True)]))
+    networkcopy = network.copy()
+    remove = [pair for pair, dissimilarity in nx.get_edge_attributes(networkcopy, 'dist').items()
+              if dissimilarity > zones_threshold]
+    networkcopy.remove_edges_from(remove)
+
+    return len([len(c) for c in sorted(nx.connected_components(networkcopy), key=len, reverse=True)])
+
+    #return [len(c) for c in sorted(nx.connected_components(networkcopy), key=len, reverse=True)]
 
 
 def regionscount(network, regions_threshold: float = 0):
