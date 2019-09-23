@@ -128,7 +128,7 @@ class Simulation:
         computes and sets the distances between each neighbor.
         """
         if self.seed is None:
-            self.seed = time.time()
+            self.seed = random.randint(10000,99999)
         random.seed(self.seed)
         if self.network is None:
             self.network = network_init.generate_network(self.topology, **self.parameter_dict)
@@ -185,20 +185,23 @@ class Simulation:
 
     def create_output_table(self) -> pd.DataFrame:
         """
-        This method measures multiple characteristics of the network in its current state and writes them to a dataframe.
-        It currently contains the following columns: \n
-        Seed: The random seed that was used. \n
-        Network Topology: Which network topology was used. \n
-        Simulation Steps: For how many iterations the simulation ran (so far). \n
-        Successful Influences: How often an agent was successfully influenced by another agent.\n
-        Number of Clusters: The total number of clusters in the network #todo reference to what a cluster is\n
-        Cluster Sizes: A list containing the sizes of each cluster in descending order.\n
-        Number of Isolates: How many isolates the network contains. #todo here also want a reference to what an isolate is\n
-        Homogeneity: A number between 0 and 1 representing the ratio of the size of the biggest cluster to the
-        number of agents in the network. #todo and again a reference would be nice\n
+        This method measures multiple characteristics of the network in its current state and writes them to a Pandas
+        DataFrame. It contains the following columns: \n
+        seed: The random seed that was used. \n
+        topology: Which network topology was used. \n
+        ticks: For how many iterations the simulation ran (so far). \n
+        influence_success: How often an agent was successfully influenced by another agent.\n
+        clusters: A list containing the sizes of each cluster in descending order.\n
+        regions: The total number of regions in the network, i.e. sets of connected nodes with an identical
+            attribute profile\n
+        zones: The total number of zones in the network, i.e. sets of connected nodes that have some overlap in
+            their attribute profile\n
+        isolates: The number of nodes in the network that with a strictly dissimilar attribute profile to all of their
+            connected nodes\n
+        homogeneity: A number between 0 and 1 representing the ratio of the size of the biggest region to the
+            number of agents in the network.\n
 
-
-        :return: A pandas Dataframe with one row.
+        :returns: A Pandas DataFrame with one row.
         """
         results = pd.DataFrame({"seed": self.seed}, index=[0])
         if self.network_provided:
@@ -208,14 +211,13 @@ class Simulation:
         results = results.join(pd.DataFrame.from_records(self.parameter_dict, index=[0]))
         results = results.join(pd.DataFrame({"ticks": self.time_steps}, index=[0]))
         results = results.join(pd.DataFrame({"influence_success": self.influence_steps}, index=[0]))
-        results = results.join(
-            pd.DataFrame({"regions": len(OutputMeasures.find_clusters(self.network))}, index=[0]))
+        clusterlist = OutputMeasures.find_clusters(self.network)
+        results = results.join(pd.DataFrame({"clusters": str(clusterlist)}, index=[0]))
+        results = results.join(pd.DataFrame({"regions": len(clusterlist)}, index=[0]))
         results = results.join(
             pd.DataFrame({"zones": len(OutputMeasures.find_clusters(self.network, strict_zones=True))},
                          index=[0]))
-        results = results.join(
-            pd.DataFrame({"clusters": str(OutputMeasures.find_clusters(self.network))}, index=[0]))
-        results = results.join(pd.DataFrame({"isolates": OutputMeasures.find_clusters(self.network).count(1)},
+        results = results.join(pd.DataFrame({"isolates": clusterlist.count(1)},
                                             index=[0]))
         results = results.join(pd.DataFrame({"homogeneity":
             OutputMeasures.find_clusters(self.network)[0] / len(self.network.nodes())}, index=[0]))

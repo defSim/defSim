@@ -186,14 +186,10 @@ class Experiment:
                 time.sleep(2)
             pool.join()
             return pd.concat(results.get())
-
-
-
-
-        else:
+        else:   # if NOT parallel
             result_list = [self._create_and_run_simulation(parameter_dict) for parameter_dict in
                            self.parameter_dict_list]
-            return pd.concat(result_list)
+            return pd.concat(result_list).reset_index()
 
     def run_on_cluster(self,
                        chunk_size: int = 2400,
