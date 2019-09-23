@@ -200,23 +200,24 @@ class Simulation:
 
         :return: A pandas Dataframe with one row.
         """
-        results = pd.DataFrame({"Seed": self.seed}, index=[0])
+        results = pd.DataFrame({"seed": self.seed}, index=[0])
         if self.network_provided:
-            results = results.join(pd.DataFrame({"Network Topology": "pre-loaded"}, index=[0]))
+            results = results.join(pd.DataFrame({"topology": "pre-loaded"}, index=[0]))
         else:
-            results = results.join(pd.DataFrame({"Network Topology": self.topology}, index=[0]))
+            results = results.join(pd.DataFrame({"topology": self.topology}, index=[0]))
         results = results.join(pd.DataFrame.from_records(self.parameter_dict, index=[0]))
-        results = results.join(pd.DataFrame({"Simulation Steps": self.time_steps}, index=[0]))
-        results = results.join(pd.DataFrame({"Successful Influences": self.influence_steps}, index=[0]))
+        results = results.join(pd.DataFrame({"ticks": self.time_steps}, index=[0]))
+        results = results.join(pd.DataFrame({"influence_success": self.influence_steps}, index=[0]))
         results = results.join(
-            pd.DataFrame({"Number of Regions": len(OutputMeasures.find_clusters(self.network))}, index=[0]))
+            pd.DataFrame({"regions": len(OutputMeasures.find_clusters(self.network))}, index=[0]))
         results = results.join(
-            pd.DataFrame({"Number of Zones": len(OutputMeasures.find_clusters(self.network, strict_zones=True))},
+            pd.DataFrame({"zones": len(OutputMeasures.find_clusters(self.network, strict_zones=True))},
                          index=[0]))
         results = results.join(
-            pd.DataFrame({"Cluster Sizes": str(OutputMeasures.find_clusters(self.network))}, index=[0]))
-        results = results.join(pd.DataFrame({"Number of Isolates": OutputMeasures.isol(self.network)}, index=[0]))
-        results = results.join(pd.DataFrame({"Homogeneity": OutputMeasures.homogeneity(self.network)}, index=[0]))
+            pd.DataFrame({"clusters": str(OutputMeasures.find_clusters(self.network))}, index=[0]))
+        results = results.join(pd.DataFrame({"isolates": OutputMeasures.isol(self.network)}, index=[0]))
+        results = results.join(pd.DataFrame({"homogeneity":
+            OutputMeasures.find_clusters(self.network)[0] / len(self.network.nodes())}, index=[0]))
 
         return results
 

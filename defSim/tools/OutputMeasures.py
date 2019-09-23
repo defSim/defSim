@@ -1,19 +1,6 @@
 import networkx as nx
 
 
-def homogeneity(network):  # returns
-    """
-    A measure of how much consensus exists in the network.
-
-    :param network: A NetworkX object
-    :returns: The homogeneity measure 'S_max / N'
-    """
-    Gsub = network.copy()
-    remove = [pair for pair, dissimilarity in nx.get_edge_attributes(Gsub, 'dist').items() if dissimilarity != 0]
-    Gsub.remove_edges_from(remove)
-    return (len(sorted(nx.connected_components(Gsub), key=len, reverse=True)[0]) / nx.number_of_nodes(Gsub))
-
-
 def isol(network):
     """
     Counts how many agents belong to no cluster.
