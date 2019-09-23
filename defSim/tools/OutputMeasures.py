@@ -12,13 +12,13 @@ def find_clusters(network, cluster_dissimilarity_threshold: float = 0, strict_zo
     dissimilarity between two agents for them to be considered to belong to the same cluster. A value of 0 returns the
     strict number of regions
     :param strict_zones: If true, cluster_dissimilarity_threshold is neglected and strict zones are returned (only the
-    links with dissimilarity != 1 are preserved
+    links with dissimilarity != 1 are preserved)
     :returns A list with sizes of the retrieved clusters
     """
     networkcopy = network.copy()
     if strict_zones:
         remove = [pair for pair, dissimilarity in nx.get_edge_attributes(networkcopy, 'dist').items()
-                  if dissimilarity != 1]
+                  if dissimilarity == 1]
     else:
         remove = [pair for pair, dissimilarity in nx.get_edge_attributes(networkcopy, 'dist').items()
                   if dissimilarity > cluster_dissimilarity_threshold]
