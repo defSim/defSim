@@ -196,29 +196,30 @@ class Simulation:
             connected nodes\n
         homogeneity: A number between 0 and 1 representing the ratio of the size of the biggest region to the
             number of agents in the network.\n
+        average_dissimilarity: The mean dissimilarity of all edges.\n
 
         :returns: A Pandas DataFrame with one row.
         """
-        results = pd.DataFrame({"seed": self.seed}, index=[0])
+        results = dict()
+        results["seed"] = self.seed
         if self.network_provided:
-            results = results.join(pd.DataFrame({"topology": "pre-loaded"}, index=[0]))
+            results["topology"] = "pre-loaded"
         else:
-            results = results.join(pd.DataFrame({"topology": self.topology}, index=[0]))
-        results = results.join(pd.DataFrame.from_records(self.parameter_dict, index=[0]))
-        results = results.join(pd.DataFrame({"ticks": self.time_steps}, index=[0]))
-        results = results.join(pd.DataFrame({"influence_success": self.influence_steps}, index=[0]))
+            results["topology"] = self.topology
+        results = {**results, **self.parameter_dict}
+        results["ticks"] = self.time_steps
+        results["influence_success"] = self.influence_steps
         clusterlist = OutputMeasures.find_clusters(self.network)
-        results = results.join(pd.DataFrame({"clusters": str(clusterlist)}, index=[0]))
-        results = results.join(pd.DataFrame({"regions": len(clusterlist)}, index=[0]))
-        results = results.join(
-            pd.DataFrame({"zones": len(OutputMeasures.find_clusters(self.network, strict_zones=True))},
-                         index=[0]))
-        results = results.join(pd.DataFrame({"isolates": clusterlist.count(1)},
-                                            index=[0]))
-        results = results.join(pd.DataFrame({"homogeneity":
-            OutputMeasures.find_clusters(self.network)[0] / len(self.network.nodes())}, index=[0]))
+        results["clusters"] = str(clusterlist)
+        results["regions"] = len(clusterlist)
+        results["zones"] = len(OutputMeasures.find_clusters(self.network, strict_zones=True))
+        results["isolates"] = clusterlist.count(1)
+        results["homogeneity"] = clusterlist[0] / len(self.network.nodes())
+
+        results = pd.DataFrame.from_dict({k:[results[k]] for k in results.keys()})
 
         return results
+
 
     def _run_until_pragmatic_convergence(self):
         """
