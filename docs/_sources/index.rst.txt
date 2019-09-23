@@ -6,9 +6,9 @@
 Welcome to defSim's documentation!
 ==================================
 
-Here you can find the API documentation for the world's first package on social influence simulations.
+Here you can find the API documentation for the *discrete event framework for social influence models*. The package is freely `available on GitHub <https://github.com/marijnkeijzer/defSim>`_.
 
-defSim is a package that aims to be the modular standard for social influence models. With defSim you can run a single :class:`~defSim.Simulation`, execute a larger Simulation :class:`~defSim.Experiment`, or use any number of pre-programmed modules for your own idea or variation of a traditional social influence model. By using defSim you save a lot of time programming functions that you will need in any social influence research project, but furthermore you make sure that your model remains strictly comparable with traditional models and other models in the defSim-realm.
+defSim is a package that aims to be the modular standard for social influence models. With defSim you can run a single :class:`~defSim.Simulation`, execute a larger Simulation :class:`~defSim.Experiment`, or use any number of pre-programmed modules for your own idea or variation of a traditional social influence model. By using defSim you save a lot of time programming functions that you will need in any social influence research project, but furthermore you make sure that your model remains strictly comparable with traditional models, and other models in the defSim-realm, while working completely **open source by default**.
 
 The flow of a single simulation run implemented by defSim looks like this:  
 

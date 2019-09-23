@@ -2,7 +2,7 @@ Tools
 =======================
 
 
-NetworkDistanceUpdater module
+NetworkDistanceUpdater
 ---------------------------------------------
 
 .. automodule:: defSim.tools.NetworkDistanceUpdater
@@ -10,7 +10,7 @@ NetworkDistanceUpdater module
     :undoc-members:
     :show-inheritance:
 
-OutputMeasures module
+OutputMeasures
 -------------------------------------
 
 .. automodule:: defSim.tools.OutputMeasures
@@ -18,7 +18,7 @@ OutputMeasures module
     :undoc-members:
     :show-inheritance:
 
-ClusterExecutionScript module
+ClusterExecutionScript
 ---------------------------------------------
 
 .. automodule:: defSim.tools.ClusterExecutionScript

@@ -115,9 +115,9 @@
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="defSim.tools.html">Tools</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="defSim.tools.html#module-defSim.tools.NetworkDistanceUpdater">NetworkDistanceUpdater module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="defSim.tools.html#module-defSim.tools.OutputMeasures">OutputMeasures module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="defSim.tools.html#module-defSim.tools.ClusterExecutionScript">ClusterExecutionScript module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="defSim.tools.html#module-defSim.tools.NetworkDistanceUpdater">NetworkDistanceUpdater</a></li>
+<li class="toctree-l2"><a class="reference internal" href="defSim.tools.html#module-defSim.tools.OutputMeasures">OutputMeasures</a></li>
+<li class="toctree-l2"><a class="reference internal" href="defSim.tools.html#module-defSim.tools.ClusterExecutionScript">ClusterExecutionScript</a></li>
 </ul>
 </li>
 </ul>
@@ -152,8 +152,8 @@
             
   <div class="section" id="welcome-to-defsim-s-documentation">
 <h1>Welcome to defSim’s documentation!<a class="headerlink" href="#welcome-to-defsim-s-documentation" title="Permalink to this headline">¶</a></h1>
-<p>Here you can find the API documentation for the world’s first package on social influence simulations.</p>
-<p>defSim is a package that aims to be the modular standard for social influence models. With defSim you can run a single <a class="reference internal" href="defSim.html#module-defSim.Simulation" title="defSim.Simulation"><code class="xref py py-class docutils literal notranslate"><span class="pre">Simulation</span></code></a>, execute a larger Simulation <a class="reference internal" href="defSim.html#module-defSim.Experiment" title="defSim.Experiment"><code class="xref py py-class docutils literal notranslate"><span class="pre">Experiment</span></code></a>, or use any number of pre-programmed modules for your own idea or variation of a traditional social influence model. By using defSim you save a lot of time programming functions that you will need in any social influence research project, but furthermore you make sure that your model remains strictly comparable with traditional models and other models in the defSim-realm.</p>
+<p>Here you can find the API documentation for the <em>discrete event framework for social influence models</em>. The package is freely <a class="reference external" href="https://github.com/marijnkeijzer/defSim">available on GitHub</a>.</p>
+<p>defSim is a package that aims to be the modular standard for social influence models. With defSim you can run a single <a class="reference internal" href="defSim.html#module-defSim.Simulation" title="defSim.Simulation"><code class="xref py py-class docutils literal notranslate"><span class="pre">Simulation</span></code></a>, execute a larger Simulation <a class="reference internal" href="defSim.html#module-defSim.Experiment" title="defSim.Experiment"><code class="xref py py-class docutils literal notranslate"><span class="pre">Experiment</span></code></a>, or use any number of pre-programmed modules for your own idea or variation of a traditional social influence model. By using defSim you save a lot of time programming functions that you will need in any social influence research project, but furthermore you make sure that your model remains strictly comparable with traditional models, and other models in the defSim-realm, while working completely <strong>open source by default</strong>.</p>
 <p>The flow of a single simulation run implemented by defSim looks like this:</p>
 <a class="reference internal image-reference" href="_images/defSim-flow.png"><img alt="defSim workflow" src="_images/defSim-flow.png" style="width: 400px;" /></a>
 <p>All elements on the left represent the separate modules.</p>
@@ -214,7 +214,7 @@
     <span class="n">neighbors</span> <span class="o">=</span> <span class="n">defSim</span><span class="o">.</span><span class="n">neighbor_selector_sim</span><span class="o">.</span><span class="n">select_neighbors</span><span class="p">(</span><span class="n">network</span><span class="p">,</span> <span class="s2">&quot;random&quot;</span><span class="p">,</span> <span class="n">focal_agent</span><span class="p">,</span> <span class="s2">&quot;one-to-one&quot;</span><span class="p">)</span>
     <span class="n">Axelrod</span><span class="o">.</span><span class="n">spread_influence</span><span class="p">(</span><span class="n">network</span><span class="p">,</span> <span class="n">focal_agent</span><span class="p">,</span> <span class="n">neighbors</span><span class="p">,</span> <span class="n">regime</span><span class="o">=</span><span class="s2">&quot;one-to-one&quot;</span><span class="p">,</span> <span class="n">dissimilarity_measure</span><span class="o">=</span><span class="n">defSim</span><span class="o">.</span><span class="n">HammingDistance</span><span class="p">())</span>
 
-<span class="n">results</span> <span class="o">=</span> <span class="n">defSim</span><span class="o">.</span><span class="n">OutputMeasures</span><span class="o">.</span><span class="n">clustercount</span><span class="p">(</span><span class="n">network</span><span class="p">)</span>
+<span class="n">results</span> <span class="o">=</span> <span class="n">defSim</span><span class="o">.</span><span class="n">OutputMeasures</span><span class="o">.</span><span class="n">find_clusters</span><span class="p">(</span><span class="n">network</span><span class="p">,</span> <span class="o">.</span><span class="mi">99</span><span class="p">)</span>
 <span class="k">print</span><span class="p">(</span><span class="n">results</span><span class="p">)</span>
 
 <span class="c1"># using the building blocks manually with your own influence function</span>
@@ -229,7 +229,7 @@
     <span class="n">my_influence_function</span><span class="o">.</span><span class="n">spread_influence</span><span class="p">(</span><span class="n">network</span><span class="p">,</span> <span class="n">focal_agent</span><span class="p">,</span> <span class="n">neighbors</span><span class="p">,</span> <span class="n">regime</span><span class="o">=</span><span class="s2">&quot;one-to-one&quot;</span><span class="p">,</span>
                                            <span class="n">dissimilarity_measure</span><span class="o">=</span><span class="n">defSim</span><span class="o">.</span><span class="n">HammingDistance</span><span class="p">())</span>
 
-<span class="n">results</span> <span class="o">=</span> <span class="n">defSim</span><span class="o">.</span><span class="n">OutputMeasures</span><span class="o">.</span><span class="n">clustercount</span><span class="p">(</span><span class="n">network</span><span class="p">)</span>
+<span class="n">results</span> <span class="o">=</span> <span class="n">defSim</span><span class="o">.</span><span class="n">OutputMeasures</span><span class="o">.</span><span class="n">find_clusters</span><span class="p">(</span><span class="n">network</span><span class="p">,</span> <span class="o">.</span><span class="mi">99</span><span class="p">)</span>
 <span class="k">print</span><span class="p">(</span><span class="n">results</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -283,9 +283,9 @@
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="defSim.tools.html">Tools</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="defSim.tools.html#module-defSim.tools.NetworkDistanceUpdater">NetworkDistanceUpdater module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="defSim.tools.html#module-defSim.tools.OutputMeasures">OutputMeasures module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="defSim.tools.html#module-defSim.tools.ClusterExecutionScript">ClusterExecutionScript module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="defSim.tools.html#module-defSim.tools.NetworkDistanceUpdater">NetworkDistanceUpdater</a></li>
+<li class="toctree-l2"><a class="reference internal" href="defSim.tools.html#module-defSim.tools.OutputMeasures">OutputMeasures</a></li>
+<li class="toctree-l2"><a class="reference internal" href="defSim.tools.html#module-defSim.tools.ClusterExecutionScript">ClusterExecutionScript</a></li>
 </ul>
 </li>
 </ul>

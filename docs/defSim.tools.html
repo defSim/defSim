@@ -115,9 +115,9 @@
 </ul>
 </li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Tools</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#module-defSim.tools.NetworkDistanceUpdater">NetworkDistanceUpdater module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#module-defSim.tools.OutputMeasures">OutputMeasures module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#module-defSim.tools.ClusterExecutionScript">ClusterExecutionScript module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-defSim.tools.NetworkDistanceUpdater">NetworkDistanceUpdater</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-defSim.tools.OutputMeasures">OutputMeasures</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-defSim.tools.ClusterExecutionScript">ClusterExecutionScript</a></li>
 </ul>
 </li>
 </ul>
@@ -153,7 +153,7 @@
   <div class="section" id="tools">
 <h1>Tools<a class="headerlink" href="#tools" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="module-defSim.tools.NetworkDistanceUpdater">
-<span id="networkdistanceupdater-module"></span><h2>NetworkDistanceUpdater module<a class="headerlink" href="#module-defSim.tools.NetworkDistanceUpdater" title="Permalink to this headline">¶</a></h2>
+<span id="networkdistanceupdater"></span><h2>NetworkDistanceUpdater<a class="headerlink" href="#module-defSim.tools.NetworkDistanceUpdater" title="Permalink to this headline">¶</a></h2>
 <dl class="function">
 <dt id="defSim.tools.NetworkDistanceUpdater.check_dissimilarity">
 <code class="sig-prename descclassname">defSim.tools.NetworkDistanceUpdater.</code><code class="sig-name descname">check_dissimilarity</code><span class="sig-paren">(</span><em class="sig-param">network: networkx.classes.graph.Graph</em>, <em class="sig-param">threshold: float</em><span class="sig-paren">)</span><a class="headerlink" href="#defSim.tools.NetworkDistanceUpdater.check_dissimilarity" title="Permalink to this definition">¶</a></dt>
@@ -191,66 +191,31 @@ the edges between them respectively.</p>
 
 </div>
 <div class="section" id="module-defSim.tools.OutputMeasures">
-<span id="outputmeasures-module"></span><h2>OutputMeasures module<a class="headerlink" href="#module-defSim.tools.OutputMeasures" title="Permalink to this headline">¶</a></h2>
-<dl class="function">
-<dt id="defSim.tools.OutputMeasures.clustercount">
-<code class="sig-prename descclassname">defSim.tools.OutputMeasures.</code><code class="sig-name descname">clustercount</code><span class="sig-paren">(</span><em class="sig-param">network</em><span class="sig-paren">)</span><a class="headerlink" href="#defSim.tools.OutputMeasures.clustercount" title="Permalink to this definition">¶</a></dt>
-<dd><p>Counts how many clusters exist in the network. #todo: reference on what a cluster is</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>network</strong> – The network to be measured.</p>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>The number of clusters in the network.</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="function">
-<dt id="defSim.tools.OutputMeasures.homogeneity">
-<code class="sig-prename descclassname">defSim.tools.OutputMeasures.</code><code class="sig-name descname">homogeneity</code><span class="sig-paren">(</span><em class="sig-param">network</em><span class="sig-paren">)</span><a class="headerlink" href="#defSim.tools.OutputMeasures.homogeneity" title="Permalink to this definition">¶</a></dt>
-<dd><p>A measure of how much consensus exists in the network.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>network</strong> – The network to be measured.</p>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>The homogeneity measure ‘S_max / N’</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="function">
-<dt id="defSim.tools.OutputMeasures.isol">
-<code class="sig-prename descclassname">defSim.tools.OutputMeasures.</code><code class="sig-name descname">isol</code><span class="sig-paren">(</span><em class="sig-param">network</em><span class="sig-paren">)</span><a class="headerlink" href="#defSim.tools.OutputMeasures.isol" title="Permalink to this definition">¶</a></dt>
-<dd><p>Counts how many agents belong to no cluster.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>network</strong> – The network to be measured.</p>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>The count of isolates in the graph.</p>
-</dd>
-</dl>
-</dd></dl>
-
+<span id="outputmeasures"></span><h2>OutputMeasures<a class="headerlink" href="#module-defSim.tools.OutputMeasures" title="Permalink to this headline">¶</a></h2>
 <dl class="function">
 <dt id="defSim.tools.OutputMeasures.find_clusters">
-<code class="sig-prename descclassname">defSim.tools.OutputMeasures.</code><code class="sig-name descname">find_clusters</code><span class="sig-paren">(</span><em class="sig-param">network</em><span class="sig-paren">)</span><a class="headerlink" href="#defSim.tools.OutputMeasures.find_clusters" title="Permalink to this definition">¶</a></dt>
-<dd><p>Counts how many agents belong to each cluster in the network and returns a list of these numbers.</p>
+<code class="sig-prename descclassname">defSim.tools.OutputMeasures.</code><code class="sig-name descname">find_clusters</code><span class="sig-paren">(</span><em class="sig-param">network</em>, <em class="sig-param">cluster_dissimilarity_threshold: float = 0</em>, <em class="sig-param">strict_zones: bool = False</em><span class="sig-paren">)</span><a class="headerlink" href="#defSim.tools.OutputMeasures.find_clusters" title="Permalink to this definition">¶</a></dt>
+<dd><p>Finds the size and number of cultural regions, zones, or clusters present in the graph. Following Axelrod (1997),
+<em>regions</em> are defined as a set of connected nodes with an identical attribute profile.
+<em>Zones</em> are sets of connected nodes that have some attribute overlap, such that change is still possible.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>network</strong> – The network to be measured.</p>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>A list with the size of all the clusters in the graph.</p>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>network</strong> – A NetworkX object</p></li>
+<li><p><strong>cluster_dissimilarity_threshold</strong> (<em>float=0</em>) – Threshold <span class="math notranslate nohighlight">\(\in [0,1]\)</span> that defines the maximal allowed</p></li>
+</ul>
 </dd>
 </dl>
+<p>dissimilarity between two agents for them to be considered to belong to the same cluster. A value of 0 returns the
+strict number of regions
+:param strict_zones: If true, cluster_dissimilarity_threshold is neglected and strict zones are returned (only the
+links with dissimilarity != 1 are preserved)
+:returns A list with sizes of the retrieved clusters</p>
 </dd></dl>
 
 </div>
 <div class="section" id="module-defSim.tools.ClusterExecutionScript">
-<span id="clusterexecutionscript-module"></span><h2>ClusterExecutionScript module<a class="headerlink" href="#module-defSim.tools.ClusterExecutionScript" title="Permalink to this headline">¶</a></h2>
+<span id="clusterexecutionscript"></span><h2>ClusterExecutionScript<a class="headerlink" href="#module-defSim.tools.ClusterExecutionScript" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
 <dt id="defSim.tools.ClusterExecutionScript.parallelSimulation">
 <em class="property">class </em><code class="sig-prename descclassname">defSim.tools.ClusterExecutionScript.</code><code class="sig-name descname">parallelSimulation</code><a class="headerlink" href="#defSim.tools.ClusterExecutionScript.parallelSimulation" title="Permalink to this definition">¶</a></dt>

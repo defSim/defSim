@@ -116,9 +116,9 @@
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="defSim.tools.html">Tools</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="defSim.tools.html#module-defSim.tools.NetworkDistanceUpdater">NetworkDistanceUpdater module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="defSim.tools.html#module-defSim.tools.OutputMeasures">OutputMeasures module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="defSim.tools.html#module-defSim.tools.ClusterExecutionScript">ClusterExecutionScript module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="defSim.tools.html#module-defSim.tools.NetworkDistanceUpdater">NetworkDistanceUpdater</a></li>
+<li class="toctree-l2"><a class="reference internal" href="defSim.tools.html#module-defSim.tools.OutputMeasures">OutputMeasures</a></li>
+<li class="toctree-l2"><a class="reference internal" href="defSim.tools.html#module-defSim.tools.ClusterExecutionScript">ClusterExecutionScript</a></li>
 </ul>
 </li>
 </ul>
@@ -207,6 +207,18 @@ length the runtime of the whole experiment.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
 <dd class="field-odd"><p>estimated time of simulation in seconds</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="defSim.Experiment.Experiment.return_values">
+<code class="sig-name descname">return_values</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#defSim.Experiment.Experiment.return_values" title="Permalink to this definition">¶</a></dt>
+<dd><p>This method returns the values stored in the Experiment object. Both default, and user-specified values are
+returned to the console to make the Experiment object more transparent.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>True</p>
 </dd>
 </dl>
 </dd></dl>
@@ -318,20 +330,27 @@ step to save time.</p></li>
 <dl class="method">
 <dt id="defSim.Simulation.Simulation.create_output_table">
 <code class="sig-name descname">create_output_table</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; pandas.core.frame.DataFrame<a class="headerlink" href="#defSim.Simulation.Simulation.create_output_table" title="Permalink to this definition">¶</a></dt>
-<dd><p>This method measures multiple characteristics of the network in its current state and writes them to a dataframe.
-It currently contains the following columns:</p>
-<p>Seed: The random seed that was used.</p>
-<p>Network Topology: Which network topology was used.</p>
-<p>Simulation Steps: For how many iterations the simulation ran (so far).</p>
-<p>Successful Influences: How often an agent was successfully influenced by another agent.</p>
-<p>Number of Clusters: The total number of clusters in the network #todo reference to what a cluster is</p>
-<p>Cluster Sizes: A list containing the sizes of each cluster in descending order.</p>
-<p>Number of Isolates: How many isolates the network contains. #todo here also want a reference to what an isolate is</p>
-<p>Homogeneity: A number between 0 and 1 representing the ratio of the size of the biggest cluster to the
-number of agents in the network. #todo and again a reference would be nice</p>
+<dd><p>This method measures multiple characteristics of the network in its current state and writes them to a Pandas
+DataFrame. It contains the following columns:</p>
+<p>seed: The random seed that was used.</p>
+<p>topology: Which network topology was used.</p>
+<p>ticks: For how many iterations the simulation ran (so far).</p>
+<p>influence_success: How often an agent was successfully influenced by another agent.</p>
+<p>clusters: A list containing the sizes of each cluster in descending order.</p>
+<dl class="simple">
+<dt>regions: The total number of regions in the network, i.e. sets of connected nodes with an identical</dt><dd><p>attribute profile</p>
+</dd>
+<dt>zones: The total number of zones in the network, i.e. sets of connected nodes that have some overlap in</dt><dd><p>their attribute profile</p>
+</dd>
+<dt>isolates: The number of nodes in the network that with a strictly dissimilar attribute profile to all of their</dt><dd><p>connected nodes</p>
+</dd>
+<dt>homogeneity: A number between 0 and 1 representing the ratio of the size of the biggest region to the</dt><dd><p>number of agents in the network.</p>
+</dd>
+</dl>
+<p>average_dissimilarity: The mean dissimilarity of all edges.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>A pandas Dataframe with one row.</p>
+<dd class="field-odd"><p>A Pandas DataFrame with one row.</p>
 </dd>
 </dl>
 </dd></dl>
@@ -341,6 +360,18 @@ number of agents in the network. #todo and again a reference would be nice</p>
 <code class="sig-name descname">initialize_simulation</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#defSim.Simulation.Simulation.initialize_simulation" title="Permalink to this definition">¶</a></dt>
 <dd><p>This method initializes the network if none is given, initializes the attributes of the agents, and also
 computes and sets the distances between each neighbor.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="defSim.Simulation.Simulation.return_values">
+<code class="sig-name descname">return_values</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; pandas.core.frame.DataFrame<a class="headerlink" href="#defSim.Simulation.Simulation.return_values" title="Permalink to this definition">¶</a></dt>
+<dd><p>This method returns the values stored in the Simulation object. Both default, and user-specified values are
+returned to the console to make the Simulation object more transparent.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>A Pandas DataFrame with the parameter settings</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="method">
