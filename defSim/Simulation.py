@@ -116,7 +116,7 @@ class Simulation:
         else:
             raise ValueError("Can only select from the options ['Convergence', 'Alternative1', 'Alternative2']")
 
-        return self.network #self.create_output_table()
+        return self.create_output_table()
 
     def initialize_simulation(self):
         """
