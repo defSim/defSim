@@ -215,6 +215,8 @@ class Simulation:
         results["zones"] = len(OutputMeasures.find_clusters(self.network, strict_zones=True))
         results["isolates"] = clusterlist.count(1)
         results["homogeneity"] = clusterlist[0] / len(self.network.nodes())
+        results["average_dissimilarity"] = \
+            sum(nx.get_edge_attributes(self.network, 'dist').values()) / len(self.network.edges())
 
         results = pd.DataFrame.from_dict({k:[results[k]] for k in results.keys()})
 
