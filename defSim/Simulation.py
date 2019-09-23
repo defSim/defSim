@@ -209,9 +209,12 @@ class Simulation:
         results = results.join(pd.DataFrame({"Simulation Steps": self.time_steps}, index=[0]))
         results = results.join(pd.DataFrame({"Successful Influences": self.influence_steps}, index=[0]))
         results = results.join(
-            pd.DataFrame({"Number of Clusters": OutputMeasures.regionscount(self.network)}, index=[0]))
+            pd.DataFrame({"Number of Regions": len(OutputMeasures.find_clusters(self.network))}, index=[0]))
         results = results.join(
-            pd.DataFrame({"Cluster Sizes": str(OutputMeasures.zonescount(self.network))}, index=[0]))
+            pd.DataFrame({"Number of Zones": len(OutputMeasures.find_clusters(self.network, strict_zones=True))},
+                         index=[0]))
+        results = results.join(
+            pd.DataFrame({"Cluster Sizes": str(OutputMeasures.find_clusters(self.network))}, index=[0]))
         results = results.join(pd.DataFrame({"Number of Isolates": OutputMeasures.isol(self.network)}, index=[0]))
         results = results.join(pd.DataFrame({"Homogeneity": OutputMeasures.homogeneity(self.network)}, index=[0]))
 

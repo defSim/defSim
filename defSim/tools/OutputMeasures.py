@@ -1,7 +1,6 @@
 import networkx as nx
 
 
-# todo: potentially rename clustercount and regionscount (maybe also isol) and add docstring
 def homogeneity(network):  # returns
     """
     A measure of how much consensus exists in the network.
@@ -28,56 +27,27 @@ def isol(network):
     return len(list(nx.isolates(Gsub)))
 
 
-def zonescount(network, zones_threshold: float = 1):  # returns
+def find_clusters(network, cluster_dissimilarity_threshold: float = 0, strict_zones: bool = False):
     """
-    Counts the number of *cultural zones* present in the graph. Following Axelrod (1997), cultural zones are
-    defined as a set of connected nodes with an some remaining overlap. In the model for the dissemination of culture,
-    that uses homophily to dictate interaction probabilities, this means that interaction is still possible within the
-    cultural zone.
+    Finds the size and number of cultural regions, zones, or clusters present in the graph. Following Axelrod (1997),
+    *regions* are defined as a set of connected nodes with an identical attribute profile.
+    *Zones* are sets of connected nodes that have some attribute overlap, such that change is still possible.
 
     :param network: A NetworkX object
-    :param float=1 zones_threshold: Threshold :math:`\in [0,1]` that defines the maximal allowed dissimilarity between
-    two agents to belong to the same zone.
-    :returns: The number of zones in the network.
+    :param float=0 cluster_dissimilarity_threshold: Threshold :math:`\in [0,1]` that defines the maximal allowed
+    dissimilarity between two agents for them to be considered to belong to the same cluster. A value of 0 returns the
+    strict number of regions
+    :param strict_zones: If true, cluster_dissimilarity_threshold is neglected and strict zones are returned (only the
+    links with dissimilarity != 1 are preserved
+    :returns A list with sizes of the retrieved clusters
     """
     networkcopy = network.copy()
-    remove = [pair for pair, dissimilarity in nx.get_edge_attributes(networkcopy, 'dist').items()
-              if dissimilarity < zones_threshold]
-    networkcopy.remove_edges_from(remove)
-
-    return len([len(c) for c in sorted(nx.connected_components(networkcopy), key=len, reverse=True)])
-
-
-def regionscount(network, regions_threshold: float = 0):
-    """
-    Counts the number of *cultural regions* present in the graph. Following Axelrod (1997), cultural regions are
-    defined as a set of connected nodes with an identical cultural profile.
-
-    :param network: A NetworkX object
-    :param float=0 regions_threshold: Threshold :math:`\in [0,1]` that defines the maximal allowed dissimilarity between
-    two agents to belong to the same region.
-    """
-    networkcopy = network.copy()
-    remove = [pair for pair, dissimilarity in nx.get_edge_attributes(networkcopy, 'dist').items()
-              if dissimilarity > regions_threshold]
-    networkcopy.remove_edges_from(remove)
-
-    return len([len(c) for c in sorted(nx.connected_components(networkcopy), key=len, reverse=True)])
-
-
-def clustercount(network, cluster_threshold: float = 1):
-    """
-    This method returns a list with the size of the cultural clusters within the graph. Whether adjacent nodes belong to
-    the same cluster is defined by a threshold that determines the maximal allowed dissimilarity
-
-    :param network: A NetworkX object
-    :param float=1 cluster_threshold:
-    :returns: A list with the size of all the clusters in the graph.
-    """
-    networkcopy = network.copy()
-    remove = [pair for pair, dissimilarity in nx.get_edge_attributes(networkcopy, 'dist').items()
-              if dissimilarity < cluster_threshold]
+    if strict_zones:
+        remove = [pair for pair, dissimilarity in nx.get_edge_attributes(networkcopy, 'dist').items()
+                  if dissimilarity != 1]
+    else:
+        remove = [pair for pair, dissimilarity in nx.get_edge_attributes(networkcopy, 'dist').items()
+                  if dissimilarity > cluster_dissimilarity_threshold]
     networkcopy.remove_edges_from(remove)
 
     return [len(c) for c in sorted(nx.connected_components(networkcopy), key=len, reverse=True)]
-
