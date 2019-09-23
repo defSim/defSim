@@ -80,22 +80,19 @@ class Simulation:
         This method returns the values stored in the Simulation object. Both default, and user-specified values are
         returned to the console to make the Simulation object more transparent.
 
-        :return: True
+        :returns: A Pandas DataFrame with the parameter settings
         """
-        print("\nParameter values used in the simulation object:\n")
+
+        parameter_df = pd.DataFrame()
 
         for i in self.__dict__.keys():
             if type(self.__dict__[i]) == dict:
-                print(i + " (dict) {")
                 for key, val in self.__dict__[i].items():
-                    print("  " + str(key))
-                    print("  =  " + str(val))
-                print("}")
+                    parameter_df[key] = [val]
             else:
-                print(i)
-                print("=  " + str(self.__dict__[i]))
+                parameter_df[i] = [self.__dict__[i]]
 
-        return True
+        return parameter_df
 
 
     def run_simulation(self) -> pd.DataFrame:
