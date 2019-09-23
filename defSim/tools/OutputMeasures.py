@@ -1,19 +1,6 @@
 import networkx as nx
 
 
-def isol(network):
-    """
-    Counts how many agents belong to no cluster.
-
-    :param network: A NetworkX object
-    :returns: The count of isolates in the graph.
-    """
-    Gsub = network.copy()
-    remove = [pair for pair, dissimilarity in nx.get_edge_attributes(Gsub, 'dist').items() if dissimilarity != 0]
-    Gsub.remove_edges_from(remove)
-    return len(list(nx.isolates(Gsub)))
-
-
 def find_clusters(network, cluster_dissimilarity_threshold: float = 0, strict_zones: bool = False):
     """
     Finds the size and number of cultural regions, zones, or clusters present in the graph. Following Axelrod (1997),

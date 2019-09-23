@@ -215,7 +215,8 @@ class Simulation:
                          index=[0]))
         results = results.join(
             pd.DataFrame({"clusters": str(OutputMeasures.find_clusters(self.network))}, index=[0]))
-        results = results.join(pd.DataFrame({"isolates": OutputMeasures.isol(self.network)}, index=[0]))
+        results = results.join(pd.DataFrame({"isolates": OutputMeasures.find_clusters(self.network).count(1)},
+                                            index=[0]))
         results = results.join(pd.DataFrame({"homogeneity":
             OutputMeasures.find_clusters(self.network)[0] / len(self.network.nodes())}, index=[0]))
 
