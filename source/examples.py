@@ -52,7 +52,7 @@ for i in range(100):
     neighbors = defSim.neighbor_selector_sim.select_neighbors(network, "random", focal_agent, "one-to-one")
     Axelrod.spread_influence(network, focal_agent, neighbors, regime="one-to-one", dissimilarity_measure=defSim.HammingDistance())
 
-results = defSim.OutputMeasures.zonescount(network)
+results = defSim.OutputMeasures.find_clusters(network, .99)
 print(results)
 
 # using the building blocks manually with your own influence function
@@ -67,5 +67,5 @@ for i in range(100):
     my_influence_function.spread_influence(network, focal_agent, neighbors, regime="one-to-one",
                                            dissimilarity_measure=defSim.HammingDistance())
 
-results = defSim.OutputMeasures.zonescount(network)
+results = defSim.OutputMeasures.find_clusters(network, .99)
 print(results)
