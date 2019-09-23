@@ -258,7 +258,11 @@ def _produce_networkx_graph(name: str,**kwargs):
         passed to the function that produces the network.
     :return: A NetworkX Graph object.
     """
-
     graph_generator = getattr(nx,name)
-    return graph_generator(**kwargs)
+
+    import inspect
+    graph_generator_arguments = inspect.getfullargspec(graph_generator)
+    intersection_dict = {k: kwargs[k] for k in kwargs if k in graph_generator_arguments.args}
+
+    return graph_generator(**intersection_dict)
 

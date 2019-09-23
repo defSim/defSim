@@ -75,7 +75,7 @@ class Simulation:
         self.time_steps = 0
         self.influence_steps = 0  # counts the successful influence steps
 
-    def return_values(self):
+    def return_values(self) -> pd.DataFrame:
         """
         This method returns the values stored in the Simulation object. Both default, and user-specified values are
         returned to the console to make the Simulation object more transparent.
@@ -84,7 +84,6 @@ class Simulation:
         """
 
         parameter_df = pd.DataFrame()
-
         for i in self.__dict__.keys():
             if type(self.__dict__[i]) == dict:
                 for key, val in self.__dict__[i].items():
@@ -117,7 +116,7 @@ class Simulation:
         else:
             raise ValueError("Can only select from the options ['Convergence', 'Alternative1', 'Alternative2']")
 
-        return self.create_output_table()
+        return self.network #self.create_output_table()
 
     def initialize_simulation(self):
         """
