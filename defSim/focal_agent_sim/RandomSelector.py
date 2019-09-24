@@ -15,7 +15,7 @@ class RandomSelector(FocalAgentSelector):
         """
         This method selects a random agent from a network for the influence process.
 
-        :param network: The network from which the agent shall be selected.
+        :param network: A NetworkX object from which the agent shall be selected.
         :param agents: A list of the indices of all agents in the network.
 
         :returns The index of the selected agent.

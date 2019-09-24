@@ -15,7 +15,7 @@ class NeighborSelector(ABC):
 
     @staticmethod
     @abstractmethod
-    def select_neighbors(network: nx.Graph, agentID: int, regime: str, **kwargs) -> Iterable[int]:
+    def select_neighbors(network: nx.Graph, focal_agent: int, regime: str, **kwargs) -> Iterable[int]:
         """
         This method selects a subset of agents from the network that are in some way relevant for the
         influence process regarding the focal agent.
@@ -25,7 +25,7 @@ class NeighborSelector(ABC):
 
 
         :param network: the network from which the agent shall be selected.
-        :param agentID: the index of the focal agent, who is either the source or target of influence.
+        :param focal_agent: the index of the focal agent, who is either the source or target of influence.
         :param regime: Whether the focal agent interacts with only one or many agents from his or her
             neighborhood. If "one-to-one": One neighbor to which the focal agent has an outgoing tie is selected.
             If "one-to-many": All neighbors to which the focal agent has an outgoing tie are selected.
@@ -36,7 +36,7 @@ class NeighborSelector(ABC):
         """
         pass
 
-def select_neighbors(network: nx.Graph, realization: str, agentID: int, regime: str, **kwargs) -> Iterable[int]:
+def select_neighbors(network: nx.Graph, realization: str, focal_agent: int, regime: str, **kwargs) -> Iterable[int]:
     """
     This function works as a factory method for the neighborSelector component.
     It calls the select_neighbors function of the specific neighborSelector and passes to it the index of the
@@ -44,7 +44,7 @@ def select_neighbors(network: nx.Graph, realization: str, agentID: int, regime: 
 
     :param network: The network from which the agents are selected.
     :param realization: The specific implementation of the neighborSelector. Options are "random", ...
-    :param agentID: An integer that represents the index of the focal agent in the network.
+    :param focal_agent: An integer that represents the index of the focal agent in the network.
     :param regime: Either "many_to_one", "one_to_many" or "one_to_one".
     :param kwargs: Additional parameters specific to the implementation of the neighborSelector.
     :returns: A list with the indices of the selected other agents.
@@ -52,7 +52,7 @@ def select_neighbors(network: nx.Graph, realization: str, agentID: int, regime: 
     from .RandomNeighborSelector import RandomNeighborSelector
 
     if realization == "random":
-        return RandomNeighborSelector.select_neighbors(network, agentID, regime, **kwargs)
+        return RandomNeighborSelector.select_neighbors(network, focal_agent, regime, **kwargs)
     else:
         raise ValueError("Can only select from the options ['random', 'Alternative1', 'Alternative2']")
 

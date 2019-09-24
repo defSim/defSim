@@ -13,7 +13,7 @@ class FocalAgentSelector(ABC):
         This method selects an agent from a network for the influence process.
         Based on the communication regime, the selected agent is either the source or the target of influence.
 
-        :param network: the network from which the agent shall be selected.
+        :param network: A NetworkX object from which the agent shall be selected.
         :param agents: A list of the indices of all agents in the network
 
         :returns The index of the selected agent.
@@ -26,7 +26,7 @@ def select_focal_agent(network: nx.Graph, realization: str, agents: List[int]=[]
     It calls the select_agent function of a specific implementation of the FocalAgentSelector and passes to it
     the kwargs dictionary.
 
-    :param network: The network from which the focal agent will be selected
+    :param network: A NetworkX object from which the focal agent will be selected
     :param realization: The specific FocalAgentSelector that shall be used to sample the focal agent. Options are "random", ...
     :param agents: A list of the indices of all agents in the network.
 

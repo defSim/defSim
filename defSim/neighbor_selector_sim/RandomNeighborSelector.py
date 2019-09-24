@@ -13,7 +13,7 @@ class RandomNeighborSelector(NeighborSelector):
     """
 
     @staticmethod
-    def select_neighbors(network: nx.Graph, agentID: int, regime: str, **kwargs) -> Iterable[int]:
+    def select_neighbors(network: nx.Graph, focal_agent: int, regime: str, **kwargs) -> Iterable[int]:
         """
         Selects a random agent from the direct neighborhood of the focal agent in the case of one-to-one communication,
         and all direct neighbors otherwise.
@@ -21,7 +21,7 @@ class RandomNeighborSelector(NeighborSelector):
 
 
         :param network: The network from which the agent shall be selected.
-        :param agentID: The index of the focal agent, who is either the source or target of influence.
+        :param focal_agent: The index of the focal agent, who is either the source or target of influence.
         :param regime: Whether the focal agent interacts with only one or many agents from his or her
             neighborhood. If "one-to-one": One neighbor to which the focal agent has an outgoing tie is selected.
             If "one-to-many": All neighbors to which the focal agent has an outgoing tie are selected.
@@ -31,11 +31,11 @@ class RandomNeighborSelector(NeighborSelector):
         :returns: A list of the indices of the relevant other agents.
         """
         if regime == "one-to-one":
-            return [(random.choice([neighbor for neighbor in network[agentID]]))]
+            return [(random.choice([neighbor for neighbor in network[focal_agent]]))]
         elif regime == "one-to-many":
-            return [neighbor for neighbor in network[agentID]] #todo: implement directed graphs
+            return [neighbor for neighbor in network[focal_agent]] #todo: implement directed graphs
         elif regime == "many-to-one":
-            return [neighbor for neighbor in network[agentID]]
+            return [neighbor for neighbor in network[focal_agent]]
         else:
             raise ValueError("You can only select from the options ['one-to-one', 'one-to-many', 'many-to-one']")
 

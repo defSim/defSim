@@ -25,7 +25,7 @@ class InfluenceOperator(ABC):
         can also be interpreted as no interaction at all. The function returns true if influence was successful.
 
 
-        :param network: The network in which the agents exist.
+        :param network: A NetworkX object in which the agents exist.
         :param agent_i: the index of the focal agent that is either the source or the target of the influence
         :param agents_j: A list of indices of the agents who can be either the source or the targets of the
                 influence. The list can have a single entry, implementing one-to-one communication.
@@ -55,7 +55,7 @@ def spread_influence(network: nx.Graph,
     It calls either the many_to_one or the one_to_many function of a specific implementation of the InfluenceOperator
     and passes to itt to the kwargs dictionary. Which function is called is based on the selected communication regime.
 
-    :param network: The network that will be modified.
+    :param network: A NetworkX object that will be modified.
     :param realization: The specific implementation of the InfluenceOperator. Options are "bounded_confidence",
         "axelrod", "weighted_linear", "persuasion".
     :param agent_i: the index of the focal agent that is either the source or the target of the influence

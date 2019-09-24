@@ -25,7 +25,7 @@ class Simulation:
     values per parameter and also all optional parameters are passed in one combined dictionary.
 
     Args:
-        network (nx.Graph=None): A Graph object that was created from empirical data.
+        network (nx.Graph=None): A NetworkX object that was created from empirical data.
         topology (String = "grid"): Options are "grid", "ring" and "spatial_random_graph".
         attributes_initializer (String = "random_categorical" or :class:`AttributesInitializer`): Either be a custom AttributesInitializer or a string that selects from the predefined choices: ["random_categorical", "random_continuous"...]
         focal_agent_selector (str = "random" or :class:`FocalAgentSelector`): Either a custom FocalAgentSelector or a string that selects from the predefined options ["random", ...]

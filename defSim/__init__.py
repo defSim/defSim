@@ -7,6 +7,7 @@ __all__ = ["agents_init",
            "network_init"]
 
 from defSim.agents_init import agents_init
+from defSim.agents_init.agents_init import initialize_attributes
 from defSim.network_evolution_sim.network_evolution_sim import NetworkModifier
 from defSim.dissimilarity_component import dissimilarity_calculator
 from defSim.dissimilarity_component.HammingDistance import HammingDistance
