@@ -19,5 +19,6 @@ from defSim.neighbor_selector_sim import neighbor_selector_sim
 from defSim.network_init.network_init import generate_network
 import defSim.tools
 from defSim.tools import OutputMeasures
+from defSim.tools.CreateOutputTable import create_output_table
 from defSim.Experiment import Experiment
 from defSim.Simulation import Simulation

@@ -13,12 +13,10 @@ class ClusterFinder(OutputTableCreator):
         :param network:
         :param cluster_dissimilarity_threshold:
         :param strict_zones:
-        :param column_name:
         :return:
         """
         cluster_dissimilarity_threshold = kwargs.get('cluster_dissimilarity_threshold',0)
         strict_zones = kwargs.get('strict_zones', False)
-        columnname = kwargs.get('columnname','clusters')
 
         networkcopy = network.copy()
         if strict_zones:
@@ -29,7 +27,7 @@ class ClusterFinder(OutputTableCreator):
                       if dissimilarity > cluster_dissimilarity_threshold]
         networkcopy.remove_edges_from(remove)
 
-        return columnname, [len(c) for c in sorted(nx.connected_components(networkcopy), key=len, reverse=True)]
+        return [len(c) for c in sorted(nx.connected_components(networkcopy), key=len, reverse=True)]
 
 
 
