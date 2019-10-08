@@ -14,21 +14,36 @@ class OutputTableCreator(ABC):
 
         :param network: A NetworkX graph object.
 
-        :returns #todo: a tuple?
+        :returns: #todo: a tuple?
         """
         pass
 
-def create_output_table(network: nx.Graph, realizations: List[str]=[], colnames: List[str]=[], agents: List[int]=[], **kwargs) -> int:
+def create_output_table(network: nx.Graph, realizations: List[str]=[], colnames: List[str]=[], agents: List[int]=[],
+                        settings_dict: dict={}, **kwargs) -> int:
     """
     This function works as a factory method for the OutputTableCreator component.
     It calls the create_output function of a specific implementation of the OutputTableCreator and passes to it
     the kwargs dictionary.
 
     :param network: A NetworkX object from which the focal agent will be selected
-    :param realization: The specific OutputTableCreator that will be used. Options are for example ... #todo: add options
-    :param agents: A list of the indices of all agents that will be considered by the output table.
+    :param realizations: The specific OutputTableCreator that will be used. Currently, the options are:
 
-    :returns The index of the focal agent in the network.
+        * Basic: Returns the realizations Regions, Zones, Isolates, Homogeneity
+        * ClusterFinder: Method to find clusters based on minimal allowed distance between network network neighbors as
+          defined by the user in the kwargs dictionary. Default is to return the same output as the Regions realization
+        * RegionsList:
+        * Regions:
+        * ZonesList:
+        * Zones:
+        * Isolates: Reports the number of isolates as found in the ClusterFinder method, based on minimal allowed
+          distance between network network neighbors as defined by the user in the kwargs dictionary. Default is to
+          return the same output as the Regions realization
+
+    :param agents: A list of the indices of all agents that will be considered by the output table.
+    :param settings_dict: A dictionary of column names and values that will be added to the output table. Can be used
+    to merge output with parameter setting values.
+
+    :returns: A dictionary.
     """
     if agents != []:
         removenodes = list(set(list(network.nodes())) - set(agents))
@@ -37,10 +52,30 @@ def create_output_table(network: nx.Graph, realizations: List[str]=[], colnames:
 
     from .OutputMeasures import ClusterFinder
 
-    output = dict()
+    output = settings_dict
 
+    # workaround to call the ClusterFinder method only once
+    if "ClusterFinder" or "ClusterFinderList" or "Basic" or "Isolates" or "Homogeneity" in realizations:
+        clusterlist = ClusterFinder.create_output(network, **kwargs)
+
+    if "ClusterFinderList" in realizations:
+        output['ClusterFinderList'] = clusterlist
     if "ClusterFinder" in realizations:
-        output['ClusterFinder'] = ClusterFinder.create_output(network, **kwargs)
+        output['ClusterFinder'] = len(clusterlist)
+    if "RegionsList" in realizations:
+        output['RegionsList'] = ClusterFinder.create_output(network)
+    if "Regions" or "Basic" in realizations:
+        output['Regions'] = len(ClusterFinder.create_output(network))
+    if "ZonesList" in realizations:
+        output['ZonesList'] = ClusterFinder.create_output(network, strict_zones=True)
+    if "Zones" or "Basic" in realizations:
+        output['Zones'] = len(ClusterFinder.create_output(network, strict_zones=True))
+    if "Isolates" in realizations:
+        output['Isolates'] = clusterlist.count(1)
+    if "Homogeneity" or "Basic" in realizations:
+        output['Homogeneity'] = clusterlist[0] / len(network.nodes())
+    if "AverageDissimilarity" in realizations:
+        output['AverageDissimilarity'] = sum(nx.get_edge_attributes(network, 'dist').values()) / len(network.edges())
 
     if colnames != []:
         for i in colnames:

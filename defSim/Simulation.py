@@ -14,6 +14,7 @@ from defSim.tools import NetworkDistanceUpdater
 from defSim.dissimilarity_component.dissimilarity_calculator import DissimilarityCalculator
 from defSim.dissimilarity_component.dissimilarity_calculator import select_calculator
 from defSim.tools import OutputMeasures
+from defSim.tools import CreateOutputTable
 
 
 class Simulation:
@@ -182,45 +183,31 @@ class Simulation:
     def create_output_table(self) -> pd.DataFrame:
         """
         This method measures multiple characteristics of the network in its current state and writes them to a Pandas
-        DataFrame. It contains the following columns: \n
-        seed: The random seed that was used. \n
-        topology: Which network topology was used. \n
-        ticks: For how many iterations the simulation ran (so far). \n
-        influence_success: How often an agent was successfully influenced by another agent.\n
-        clusters: A list containing the sizes of each cluster in descending order.\n
-        regions: The total number of regions in the network, i.e. sets of connected nodes with an identical
-            attribute profile\n
-        zones: The total number of zones in the network, i.e. sets of connected nodes that have some overlap in
-            their attribute profile\n
-        isolates: The number of nodes in the network that with a strictly dissimilar attribute profile to all of their
-            connected nodes\n
-        homogeneity: A number between 0 and 1 representing the ratio of the size of the biggest region to the
-            number of agents in the network.\n
-        average_dissimilarity: The mean dissimilarity of all edges.\n
+        DataFrame. It contains the following columns:
+
+            * Seed: The random seed that was used.
+            * Topology: Which network topology was used.
+            * Ticks: For how many iterations the simulation ran (so far).
+            * SuccessfulInfluence: How often an agent was successfully influenced by another agent.
+            * All basic columns included in :meth:`~defSim.tools.CreateOutputTable.create_output_table`
 
         :returns: A Pandas DataFrame with one row.
         """
-        results = dict()
-        results["seed"] = self.seed
+
+        parameter_settings = {'Seed':self.seed,
+                              'Ticks':self.time_steps,
+                              'SuccessfulInfluence':self.influence_steps}
         if self.network_provided:
-            results["topology"] = "pre-loaded"
+            parameter_settings['Topology'] = "pre-loaded"
         else:
-            results["topology"] = self.topology
-        results = {**results, **self.parameter_dict}
-        results["ticks"] = self.time_steps
-        results["influence_success"] = self.influence_steps
-        clusterlist = OutputMeasures.find_clusters(self.network)
-        results["clusters"] = str(clusterlist)
-        results["regions"] = len(clusterlist)
-        results["zones"] = len(OutputMeasures.find_clusters(self.network, strict_zones=True))
-        results["isolates"] = clusterlist.count(1)
-        results["homogeneity"] = clusterlist[0] / len(self.network.nodes())
-        results["average_dissimilarity"] = \
-            sum(nx.get_edge_attributes(self.network, 'dist').values()) / len(self.network.edges())
+            parameter_settings['Topology'] = self.topology
+        parameter_settings = {**parameter_settings, **self.parameter_dict}
 
-        results = pd.DataFrame.from_dict({k:[results[k]] for k in results.keys()})
+        results = CreateOutputTable.create_output_table(network=self.network,
+                                                        realizations=["Basic"],
+                                                        settings_dict=parameter_settings)
 
-        return results
+        return pd.DataFrame.from_dict({k:[results[k]] for k in results.keys()})
 
 
     def _run_until_pragmatic_convergence(self):

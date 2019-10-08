@@ -26,6 +26,7 @@ class WeightedLinear(InfluenceOperator):
         moderated positive, and negative influence into one functional model.
 
         Three critical values for the ``homophily`` parameter:
+
         * homophily == 0: only positive influence, the agents exhibit no preference for like-minded others.
         * homophily > 0: moderated positive influence, the agents exhibit a preference for like-minded others and move
           less towards the sender as their distance increases.
