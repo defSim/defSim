@@ -116,9 +116,10 @@
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="defSim.tools.html">Tools</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="defSim.tools.html#module-defSim.tools.NetworkDistanceUpdater">NetworkDistanceUpdater module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="defSim.tools.html#module-defSim.tools.OutputMeasures">OutputMeasures module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="defSim.tools.html#module-defSim.tools.ClusterExecutionScript">ClusterExecutionScript module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="defSim.tools.html#module-defSim.tools.CreateOutputTable">CreateOutputTable</a></li>
+<li class="toctree-l2"><a class="reference internal" href="defSim.tools.html#module-defSim.tools.NetworkDistanceUpdater">NetworkDistanceUpdater</a></li>
+<li class="toctree-l2"><a class="reference internal" href="defSim.tools.html#module-defSim.tools.OutputMeasures">OutputMeasures</a></li>
+<li class="toctree-l2"><a class="reference internal" href="defSim.tools.html#module-defSim.tools.ClusterExecutionScript">ClusterExecutionScript</a></li>
 </ul>
 </li>
 </ul>
@@ -170,7 +171,7 @@ can also be interpreted as no interaction at all. The function returns true if i
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>network</strong> – The network in which the agents exist.</p></li>
+<li><p><strong>network</strong> – A NetworkX object in which the agents exist.</p></li>
 <li><p><strong>agent_i</strong> – the index of the focal agent that is either the source or the target of the influence</p></li>
 <li><p><strong>agents_j</strong> – A list of indices of the agents who can be either the source or the targets of the
 influence. The list can have a single entry, implementing one-to-one communication.</p></li>
@@ -201,7 +202,7 @@ and passes to itt to the kwargs dictionary. Which function is called is based on
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>network</strong> – The network that will be modified.</p></li>
+<li><p><strong>network</strong> – A NetworkX object that will be modified.</p></li>
 <li><p><strong>realization</strong> – The specific implementation of the InfluenceOperator. Options are “bounded_confidence”,
 “axelrod”, “weighted_linear”, “persuasion”.</p></li>
 <li><p><strong>agent_i</strong> – the index of the focal agent that is either the source or the target of the influence</p></li>
@@ -366,13 +367,11 @@ pre-interaction cultural or opinional distance between the agents involved. The 
 the steepness of the attraction/repulsion curve. The higher its value, the smaller the shift of the receiving
 agent in the direction of the sending agent will be. With this parameter, we can integrate ideas of positive,
 moderated positive, and negative influence into one functional model.</p>
-<p>Three critical values for the <code class="docutils literal notranslate"><span class="pre">homophily</span></code> parameter:
-* homophily == 0: only positive influence, the agents exhibit no preference for like-minded others.
-* homophily &gt; 0: moderated positive influence, the agents exhibit a preference for like-minded others and move</p>
-<blockquote>
-<div><p>less towards the sender as their distance increases.</p>
-</div></blockquote>
+<p>Three critical values for the <code class="docutils literal notranslate"><span class="pre">homophily</span></code> parameter:</p>
 <ul class="simple">
+<li><p>homophily == 0: only positive influence, the agents exhibit no preference for like-minded others.</p></li>
+<li><p>homophily &gt; 0: moderated positive influence, the agents exhibit a preference for like-minded others and move
+less towards the sender as their distance increases.</p></li>
 <li><p>homophily &gt; 1: moderated postive influence AND negative influence, the agents exhibit a preference for
 like-minded others and move less towards the sender as their distance increases, until distance
 <span class="math notranslate nohighlight">\(1 /    extrm{homophily}\)</span> where agents experience a push away from the sending agent.</p></li>

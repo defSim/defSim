@@ -115,8 +115,9 @@
 </ul>
 </li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Tools</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#module-defSim.tools.NetworkDistanceUpdater">NetworkDistanceUpdater</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-defSim.tools.CreateOutputTable">CreateOutputTable</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#module-defSim.tools.OutputMeasures">OutputMeasures</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-defSim.tools.NetworkDistanceUpdater">NetworkDistanceUpdater</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#module-defSim.tools.ClusterExecutionScript">ClusterExecutionScript</a></li>
 </ul>
 </li>
@@ -152,6 +153,98 @@
             
   <div class="section" id="tools">
 <h1>Tools<a class="headerlink" href="#tools" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="module-defSim.tools.CreateOutputTable">
+<span id="createoutputtable"></span><h2>CreateOutputTable<a class="headerlink" href="#module-defSim.tools.CreateOutputTable" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="defSim.tools.CreateOutputTable.OutputTableCreator">
+<em class="property">class </em><code class="sig-prename descclassname">defSim.tools.CreateOutputTable.</code><code class="sig-name descname">OutputTableCreator</code><a class="headerlink" href="#defSim.tools.CreateOutputTable.OutputTableCreator" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">abc.ABC</span></code></p>
+<p>This class is responsible for creating the output table.</p>
+<dl class="method">
+<dt id="defSim.tools.CreateOutputTable.OutputTableCreator.create_output">
+<em class="property">abstract static </em><code class="sig-name descname">create_output</code><span class="sig-paren">(</span><em class="sig-param">network: networkx.classes.graph.Graph</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span> &#x2192; int<a class="headerlink" href="#defSim.tools.CreateOutputTable.OutputTableCreator.create_output" title="Permalink to this definition">¶</a></dt>
+<dd><p>This method receives a NetworkX object, performs some calculation, and outputs a cell for the output table.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>network</strong> – A NetworkX graph object.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>#todo: a tuple?</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="defSim.tools.CreateOutputTable.create_output_table">
+<code class="sig-prename descclassname">defSim.tools.CreateOutputTable.</code><code class="sig-name descname">create_output_table</code><span class="sig-paren">(</span><em class="sig-param">network: networkx.classes.graph.Graph</em>, <em class="sig-param">realizations: List[str] = []</em>, <em class="sig-param">colnames: List[str] = []</em>, <em class="sig-param">agents: List[int] = []</em>, <em class="sig-param">settings_dict: dict = {}</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span> &#x2192; int<a class="headerlink" href="#defSim.tools.CreateOutputTable.create_output_table" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function works as a factory method for the OutputTableCreator component.
+It calls the create_output function of a specific implementation of the OutputTableCreator and passes to it
+the kwargs dictionary.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>network</strong> – A NetworkX object from which the focal agent will be selected</p></li>
+<li><p><strong>realizations</strong> – <p>The specific OutputTableCreator that will be used. Currently, the options are:</p>
+<ul>
+<li><p>Basic: Returns the realizations Regions, Zones, Isolates, Homogeneity</p></li>
+<li><p>ClusterFinder: Method to find clusters based on minimal allowed distance between network network neighbors as
+defined by the user in the kwargs dictionary. Default is to return the same output as the Regions realization</p></li>
+<li><p>RegionsList:</p></li>
+<li><p>Regions:</p></li>
+<li><p>ZonesList:</p></li>
+<li><p>Zones:</p></li>
+<li><p>Isolates: Reports the number of isolates as found in the ClusterFinder method, based on minimal allowed
+distance between network network neighbors as defined by the user in the kwargs dictionary. Default is to
+return the same output as the Regions realization</p></li>
+</ul>
+</p></li>
+<li><p><strong>agents</strong> – A list of the indices of all agents that will be considered by the output table.</p></li>
+<li><p><strong>settings_dict</strong> – A dictionary of column names and values that will be added to the output table. Can be used</p></li>
+</ul>
+</dd>
+</dl>
+<p>to merge output with parameter setting values.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>A dictionary.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="module-defSim.tools.OutputMeasures">
+<span id="outputmeasures"></span><h2>OutputMeasures<a class="headerlink" href="#module-defSim.tools.OutputMeasures" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="defSim.tools.OutputMeasures.ClusterFinder">
+<em class="property">class </em><code class="sig-prename descclassname">defSim.tools.OutputMeasures.</code><code class="sig-name descname">ClusterFinder</code><a class="headerlink" href="#defSim.tools.OutputMeasures.ClusterFinder" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#defSim.tools.CreateOutputTable.OutputTableCreator" title="defSim.tools.CreateOutputTable.OutputTableCreator"><code class="xref py py-class docutils literal notranslate"><span class="pre">defSim.tools.CreateOutputTable.OutputTableCreator</span></code></a></p>
+<dl class="method">
+<dt id="defSim.tools.OutputMeasures.ClusterFinder.create_output">
+<em class="property">static </em><code class="sig-name descname">create_output</code><span class="sig-paren">(</span><em class="sig-param">network: networkx.classes.graph.Graph</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#defSim.tools.OutputMeasures.ClusterFinder.create_output" title="Permalink to this definition">¶</a></dt>
+<dd><p>Finds the size and number of cultural regions, zones, or clusters present in the graph. Following Axelrod (1997)
+<em>regions</em> are defined as a set of connected nodes with an identical attribute profile.
+<em>Zones</em> are sets of connected nodes that have some attribute overlap, such that change is still possible.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>network</strong> – A NetworkX object</p></li>
+<li><p><strong>cluster_dissimilarity_threshold</strong> (<em>float=0</em>) – Threshold <span class="math notranslate nohighlight">\(\in [0,1]\)</span> that defines the maximal allowed</p></li>
+</ul>
+</dd>
+</dl>
+<p>dissimilarity between two agents for them to be considered to belong to the same cluster. A value of 0 returns the
+strict number of regions
+:param strict_zones: If true, cluster_dissimilarity_threshold is neglected and strict zones are returned (only the
+links with dissimilarity != 1 are preserved)
+:returns: A list with sizes of the retrieved clusters</p>
+<p>[Axelrod1997] The reference</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
 <div class="section" id="module-defSim.tools.NetworkDistanceUpdater">
 <span id="networkdistanceupdater"></span><h2>NetworkDistanceUpdater<a class="headerlink" href="#module-defSim.tools.NetworkDistanceUpdater" title="Permalink to this headline">¶</a></h2>
 <dl class="function">
@@ -187,30 +280,6 @@ the edges between them respectively.</p>
 </ul>
 </dd>
 </dl>
-</dd></dl>
-
-</div>
-<div class="section" id="module-defSim.tools.OutputMeasures">
-<span id="outputmeasures"></span><h2>OutputMeasures<a class="headerlink" href="#module-defSim.tools.OutputMeasures" title="Permalink to this headline">¶</a></h2>
-<dl class="function">
-<dt id="defSim.tools.OutputMeasures.find_clusters">
-<code class="sig-prename descclassname">defSim.tools.OutputMeasures.</code><code class="sig-name descname">find_clusters</code><span class="sig-paren">(</span><em class="sig-param">network</em>, <em class="sig-param">cluster_dissimilarity_threshold: float = 0</em>, <em class="sig-param">strict_zones: bool = False</em><span class="sig-paren">)</span><a class="headerlink" href="#defSim.tools.OutputMeasures.find_clusters" title="Permalink to this definition">¶</a></dt>
-<dd><p>Finds the size and number of cultural regions, zones, or clusters present in the graph. Following Axelrod (1997),
-<em>regions</em> are defined as a set of connected nodes with an identical attribute profile.
-<em>Zones</em> are sets of connected nodes that have some attribute overlap, such that change is still possible.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>network</strong> – A NetworkX object</p></li>
-<li><p><strong>cluster_dissimilarity_threshold</strong> (<em>float=0</em>) – Threshold <span class="math notranslate nohighlight">\(\in [0,1]\)</span> that defines the maximal allowed</p></li>
-</ul>
-</dd>
-</dl>
-<p>dissimilarity between two agents for them to be considered to belong to the same cluster. A value of 0 returns the
-strict number of regions
-:param strict_zones: If true, cluster_dissimilarity_threshold is neglected and strict zones are returned (only the
-links with dissimilarity != 1 are preserved)
-:returns A list with sizes of the retrieved clusters</p>
 </dd></dl>
 
 </div>

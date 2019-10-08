@@ -1,6 +1,23 @@
 Tools
 =======================
 
+CreateOutputTable
+---------------------------------------------
+
+.. automodule:: defSim.tools.CreateOutputTable
+    :members:
+    :undoc-members:
+    :show-inheritance:
+    
+
+OutputMeasures
+---------------------------------------------
+
+.. automodule:: defSim.tools.OutputMeasures
+    :members:
+    :undoc-members:
+    :show-inheritance:
+    
 
 NetworkDistanceUpdater
 ---------------------------------------------
@@ -10,13 +27,6 @@ NetworkDistanceUpdater
     :undoc-members:
     :show-inheritance:
 
-OutputMeasures
--------------------------------------
-
-.. automodule:: defSim.tools.OutputMeasures
-    :members:
-    :undoc-members:
-    :show-inheritance:
 
 ClusterExecutionScript
 ---------------------------------------------

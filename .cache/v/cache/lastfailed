@@ -1,1 +1,3 @@
-{}
+{
+  "defSim/tests/test_find_clusters.py": true
+}

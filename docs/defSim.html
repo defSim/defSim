@@ -116,6 +116,7 @@
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="defSim.tools.html">Tools</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="defSim.tools.html#module-defSim.tools.CreateOutputTable">CreateOutputTable</a></li>
 <li class="toctree-l2"><a class="reference internal" href="defSim.tools.html#module-defSim.tools.NetworkDistanceUpdater">NetworkDistanceUpdater</a></li>
 <li class="toctree-l2"><a class="reference internal" href="defSim.tools.html#module-defSim.tools.OutputMeasures">OutputMeasures</a></li>
 <li class="toctree-l2"><a class="reference internal" href="defSim.tools.html#module-defSim.tools.ClusterExecutionScript">ClusterExecutionScript</a></li>
@@ -278,7 +279,7 @@ values per parameter and also all optional parameters are passed in one combined
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>network</strong> (<em>nx.Graph=None</em>) – A Graph object that was created from empirical data.</p></li>
+<li><p><strong>network</strong> (<em>nx.Graph=None</em>) – A NetworkX object that was created from empirical data.</p></li>
 <li><p><strong>topology</strong> (<em>String = &quot;grid&quot;</em>) – Options are “grid”, “ring” and “spatial_random_graph”.</p></li>
 <li><p><strong>attributes_initializer</strong> (String = “random_categorical” or <code class="xref py py-class docutils literal notranslate"><span class="pre">AttributesInitializer</span></code>) – Either be a custom AttributesInitializer or a string that selects from the predefined choices: [“random_categorical”, “random_continuous”…]</p></li>
 <li><p><strong>focal_agent_selector</strong> (str = “random” or <code class="xref py py-class docutils literal notranslate"><span class="pre">FocalAgentSelector</span></code>) – Either a custom FocalAgentSelector or a string that selects from the predefined options [“random”, …]</p></li>
@@ -332,22 +333,15 @@ step to save time.</p></li>
 <code class="sig-name descname">create_output_table</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; pandas.core.frame.DataFrame<a class="headerlink" href="#defSim.Simulation.Simulation.create_output_table" title="Permalink to this definition">¶</a></dt>
 <dd><p>This method measures multiple characteristics of the network in its current state and writes them to a Pandas
 DataFrame. It contains the following columns:</p>
-<p>seed: The random seed that was used.</p>
-<p>topology: Which network topology was used.</p>
-<p>ticks: For how many iterations the simulation ran (so far).</p>
-<p>influence_success: How often an agent was successfully influenced by another agent.</p>
-<p>clusters: A list containing the sizes of each cluster in descending order.</p>
-<dl class="simple">
-<dt>regions: The total number of regions in the network, i.e. sets of connected nodes with an identical</dt><dd><p>attribute profile</p>
-</dd>
-<dt>zones: The total number of zones in the network, i.e. sets of connected nodes that have some overlap in</dt><dd><p>their attribute profile</p>
-</dd>
-<dt>isolates: The number of nodes in the network that with a strictly dissimilar attribute profile to all of their</dt><dd><p>connected nodes</p>
-</dd>
-<dt>homogeneity: A number between 0 and 1 representing the ratio of the size of the biggest region to the</dt><dd><p>number of agents in the network.</p>
-</dd>
-</dl>
-<p>average_dissimilarity: The mean dissimilarity of all edges.</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Seed: The random seed that was used.</p></li>
+<li><p>Topology: Which network topology was used.</p></li>
+<li><p>Ticks: For how many iterations the simulation ran (so far).</p></li>
+<li><p>SuccessfulInfluence: How often an agent was successfully influenced by another agent.</p></li>
+<li><p>All basic columns included in <a class="reference internal" href="defSim.tools.html#defSim.tools.CreateOutputTable.create_output_table" title="defSim.tools.CreateOutputTable.create_output_table"><code class="xref py py-meth docutils literal notranslate"><span class="pre">create_output_table()</span></code></a></p></li>
+</ul>
+</div></blockquote>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
 <dd class="field-odd"><p>A Pandas DataFrame with one row.</p>
