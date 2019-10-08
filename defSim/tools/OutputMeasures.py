@@ -17,8 +17,6 @@ class ClusterFinder(OutputTableCreator):
         :param strict_zones: If true, cluster_dissimilarity_threshold is neglected and strict zones are returned (only the
         links with dissimilarity != 1 are preserved)
         :returns: A list with sizes of the retrieved clusters
-
-        [Axelrod1997] The reference
         """
         cluster_dissimilarity_threshold = kwargs.get('cluster_dissimilarity_threshold',0)
         strict_zones = kwargs.get('strict_zones', False)
