@@ -54,7 +54,8 @@ class Simulation:
                  max_iterations: int = 100000,
                  communication_regime: str = "one-to-one",
                  parameter_dict={},
-                 seed=None
+                 seed=None,
+                 output_realizations=[]
                  ):
         self.network = network
         self.topology = topology
@@ -75,6 +76,7 @@ class Simulation:
         self.agentIDs = []
         self.time_steps = 0
         self.influence_steps = 0  # counts the successful influence steps
+        self.output_realizations = output_realizations
 
     def return_values(self) -> pd.DataFrame:
         """
@@ -115,7 +117,7 @@ class Simulation:
         elif self.stop_condition == "max_iteration":
             self._run_until_max_iteration()
         else:
-            raise ValueError("Can only select from the options ['Convergence', 'Alternative1', 'Alternative2']")
+            raise ValueError("Can only select from the options ['pragmatic_convergence', 'strict_convergence', 'max_iteration']")
 
         return self.create_output_table()
 
@@ -203,8 +205,11 @@ class Simulation:
             parameter_settings['Topology'] = self.topology
         parameter_settings = {**parameter_settings, **self.parameter_dict}
 
+        if self.output_realizations == []:
+            self.output_realizations = ["Basic"]
+
         results = CreateOutputTable.create_output_table(network=self.network,
-                                                        realizations=["Basic"],
+                                                        realizations=self.output_realizations,
                                                         settings_dict=parameter_settings)
 
         return pd.DataFrame.from_dict({k:[results[k]] for k in results.keys()})
