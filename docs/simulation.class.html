@@ -1,0 +1,358 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>defSim</title>
+  
+
+  <link rel="shortcut icon" href="favicon.ico"/>
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="genindex.html"/>
+        <link rel="search" title="Search" href="search.html"/>
+    <link rel="top" title="defSim alpha documentation" href="index.html"/>
+        <link rel="next" title="Network (initialization component)" href="defSim.network_init.html"/>
+        <link rel="prev" title="Experiment class" href="experiment.class.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll"  style="background-color: #252625">
+        <div class="wy-side-nav-search"  style="background-color: #252625">
+          
+
+          <a href="index.html">
+            <img src="_static/lsst-logo-dark.svg" class="logo" />
+            
+            <!-- <span class="project-title">defSim</span> MK-->
+          </a>
+
+          <!-- <ul class="edition-switcher">
+            <li>Edition: </li>
+            <li><a href="../v">Switch editions</a></li>
+            
+          </ul> MK-->
+
+          
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation" style="background-color: #252625">
+          
+            
+            
+                <ul>
+<li class="toctree-l1"><a class="reference internal" href="Introduction_to_defSim.html">Introduction</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Introduction_to_defSim.html#the-comprehensive-way">1. The Comprehensive Way</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Introduction_to_defSim.html#the-modular-way">2. The Modular Way</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Introduction_to_defSim.html#some-useful-resources">Some useful resources</a></li>
+</ul>
+</li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="experiment.class.html">Experiment class</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Simulation class</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="defSim.network_init.html">Networks</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="defSim.network_init.html#module-defSim.network_init.network_init">network_init module</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="defSim.agents_init.html">Agent features</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="defSim.agents_init.html#module-defSim.agents_init.agents_init">agents_init module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="defSim.agents_init.html#module-defSim.agents_init.RandomCategoricalInitializer">RandomCategoricalInitializer module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="defSim.agents_init.html#module-defSim.agents_init.RandomContinuousInitializer">RandomContinuousInitializer module</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="defSim.focal_agent_sim.html">Focal agent selection</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="defSim.focal_agent_sim.html#module-defSim.focal_agent_sim.focal_agent_sim">focal_agent_sim module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="defSim.focal_agent_sim.html#module-defSim.focal_agent_sim.RandomSelector">RandomSelector module</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="defSim.neighbor_selector_sim.html">Neighbor selector</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="defSim.neighbor_selector_sim.html#module-defSim.neighbor_selector_sim.neighbor_selector_sim">neighbor_selector_sim module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="defSim.neighbor_selector_sim.html#module-defSim.neighbor_selector_sim.RandomNeighborSelector">RandomneighborSelector module</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="defSim.influence_sim.html">Influence</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="defSim.influence_sim.html#module-defSim.influence_sim.influence_sim">influence_sim module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="defSim.influence_sim.html#module-defSim.influence_sim.Axelrod">Axelrod</a></li>
+<li class="toctree-l2"><a class="reference internal" href="defSim.influence_sim.html#module-defSim.influence_sim.BoundedConfidence">BoundedConfidence</a></li>
+<li class="toctree-l2"><a class="reference internal" href="defSim.influence_sim.html#module-defSim.influence_sim.Persuasion">Persuasion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="defSim.influence_sim.html#module-defSim.influence_sim.WeightedLinear">WeightedLinear</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="defSim.network_evolution_sim.html">Network evolution</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="defSim.network_evolution_sim.html#module-defSim.network_evolution_sim.network_evolution_sim">network_evolution_sim module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="defSim.network_evolution_sim.html#module-defSim.network_evolution_sim.NetworkHomophily">NetworkHomophily module</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="defSim.dissimilarity_component.html">Dissimilarity updaters</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="defSim.dissimilarity_component.html#module-defSim.dissimilarity_component.dissimilarity_calculator">DissimilarityCalculator module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="defSim.dissimilarity_component.html#module-defSim.dissimilarity_component.EuclideanDistance">EuclideanDistance module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="defSim.dissimilarity_component.html#module-defSim.dissimilarity_component.HammingDistance">HammingDistance module</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="defSim.tools.html">Tools</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="defSim.tools.html#module-defSim.tools.CreateOutputTable">CreateOutputTable</a></li>
+<li class="toctree-l2"><a class="reference internal" href="defSim.tools.html#module-defSim.tools.OutputMeasures">OutputMeasures</a></li>
+<li class="toctree-l2"><a class="reference internal" href="defSim.tools.html#module-defSim.tools.NetworkDistanceUpdater">NetworkDistanceUpdater</a></li>
+<li class="toctree-l2"><a class="reference internal" href="defSim.tools.html#module-defSim.tools.ClusterExecutionScript">ClusterExecutionScript</a></li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="index.html">defSim</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="dd-masthead">
+  <h1 class="dd-title">defSim</h1>
+  <ul class="dd-authors">
+    
+  </ul>
+  <p>Latest Revision: <a href="#change-record"></a></p>
+</div>
+           <div itemprop="articleBody">
+            
+  <div class="section" id="module-defSim.Simulation">
+<span id="simulation-class"></span><h1>Simulation class<a class="headerlink" href="#module-defSim.Simulation" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="defSim.Simulation.Simulation">
+<em class="property">class </em><code class="sig-prename descclassname">defSim.Simulation.</code><code class="sig-name descname">Simulation</code><span class="sig-paren">(</span><em class="sig-param">network=None</em>, <em class="sig-param">topology: str = 'grid'</em>, <em class="sig-param">attributes_initializer: str = 'random_categorical'</em>, <em class="sig-param">focal_agent_selector: str = 'random'</em>, <em class="sig-param">neighbor_selector: str = 'random'</em>, <em class="sig-param">influence_function: str = 'axelrod'</em>, <em class="sig-param">influenceable_attributes: List = None</em>, <em class="sig-param">dissimilarity_measure: str = 'hamming'</em>, <em class="sig-param">network_modifier: str = 'random'</em>, <em class="sig-param">stop_condition: str = 'max_iteration'</em>, <em class="sig-param">max_iterations: int = 100000</em>, <em class="sig-param">communication_regime: str = 'one-to-one'</em>, <em class="sig-param">parameter_dict={}</em>, <em class="sig-param">seed=None</em>, <em class="sig-param">output_realizations=[]</em><span class="sig-paren">)</span><a class="headerlink" href="#defSim.Simulation.Simulation" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>This class is responsible for initializing and running a single experiment until the desired stop criterion is
+reached. The Simulation class contains three different stop criterion implementations as methods, but more can be
+added todo: (or passed as a function?).
+The class is initialized in a similar way as the Experiment class but it does not accept multiple parameter
+values per parameter and also all optional parameters are passed in one combined dictionary.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>network</strong> (<em>nx.Graph=None</em>) – A NetworkX object that was created from empirical data.</p></li>
+<li><p><strong>topology</strong> (<em>String = &quot;grid&quot;</em>) – Options are “grid”, “ring” and “spatial_random_graph”.</p></li>
+<li><p><strong>attributes_initializer</strong> (String = “random_categorical” or <code class="xref py py-class docutils literal notranslate"><span class="pre">AttributesInitializer</span></code>) – Either be a custom AttributesInitializer or a string that selects from the predefined choices: [“random_categorical”, “random_continuous”…]</p></li>
+<li><p><strong>focal_agent_selector</strong> (str = “random” or <code class="xref py py-class docutils literal notranslate"><span class="pre">FocalAgentSelector</span></code>) – Either a custom FocalAgentSelector or a string that selects from the predefined options [“random”, …]</p></li>
+<li><p><strong>neighbor_selector</strong> (str = “random” or <code class="xref py py-class docutils literal notranslate"><span class="pre">NeighborSelector</span></code>) – Either a custom NeighborSelector or a string that selects from the predefined options [“random”, …}</p></li>
+<li><p><strong>influence_function</strong> (str = “axelrod” or <code class="xref py py-class docutils literal notranslate"><span class="pre">InfluenceOperator</span></code>) – Either a custom influence function or a string that selects from the predefined options [“axelrod”, “bounded_confidence”, “weighted_linear”, …}</p></li>
+<li><p><strong>influenceable_attributes</strong> (<em>List = None</em>) – This is a list of the attribute names, that may be changed in the influence step</p></li>
+<li><p><strong>dissimilarity_measure</strong> (String = “hamming” or <code class="xref py py-class docutils literal notranslate"><span class="pre">DissimilarityCalculator</span></code>) – Either a custom DissimilarityCalculator or a string that selects from the predefined options [“hamming”, “euclidean”, …}</p></li>
+<li><p><strong>network_modifier</strong> – (String = “random” or <code class="xref py py-class docutils literal notranslate"><span class="pre">NetworkModifier</span></code>) Either a custom NetworkModifier or a string selecting from the predefined options [“random”, …]</p></li>
+<li><p><strong>stop_condition</strong> (<em>str = &quot;max_iteration&quot;</em>) – Determines at what point a simulation is supposed to stop. Options include “strict_convergence”, which means that it is theoretically not possible anymore for any agent to influence another, “pragmatic_convergence”, which means that it is assumed that little change is possible anymore, and “max_iteration” which just stops the simulation after a certain amount of time steps.</p></li>
+<li><p><strong>communication_regime</strong> (<em>str = &quot;one-to-one&quot;</em>) – Options are “one-to-one”, “one-to-many” and “many-to-one”.</p></li>
+<li><p><strong>parameter_dict</strong> – A dictionary with all parameters that will be passed to the specific component implementations.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="method">
+<dt id="defSim.Simulation.Simulation._run_until_max_iteration">
+<code class="sig-name descname">_run_until_max_iteration</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#defSim.Simulation.Simulation._run_until_max_iteration" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="defSim.Simulation.Simulation._run_until_pragmatic_convergence">
+<code class="sig-name descname">_run_until_pragmatic_convergence</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#defSim.Simulation.Simulation._run_until_pragmatic_convergence" title="Permalink to this definition">¶</a></dt>
+<dd><p>Pragmatic convergence means that each “step_size” time steps it is checked whether the structure of the network
+and all attributes are still the same. If thats the case, it is assumed that the simulation converged and it stops.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>step_size</strong> (<em>int=100</em>) – determines how often it should be checked for a change in the network.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="defSim.Simulation.Simulation._run_until_strict_convergence">
+<code class="sig-name descname">_run_until_strict_convergence</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#defSim.Simulation.Simulation._run_until_strict_convergence" title="Permalink to this definition">¶</a></dt>
+<dd><p>Here the convergence of the simulation is periodically checked by assessing the distance between each neighbor
+in the network. Unless there is no single pair left that can theoretically influence each other, the simulation
+continues.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>threshold</strong> (<em>float=0.0</em>) – A value between 0 and 1 that determines at what distance two agents can’t influence each other anymore.</p></li>
+<li><p><strong>check_each_step</strong> (<em>boolean=True</em>) – A boolean that determines whether convergence should be checked each step or only every hundreth
+step to save time.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="defSim.Simulation.Simulation.create_output_table">
+<code class="sig-name descname">create_output_table</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; pandas.core.frame.DataFrame<a class="headerlink" href="#defSim.Simulation.Simulation.create_output_table" title="Permalink to this definition">¶</a></dt>
+<dd><p>This method measures multiple characteristics of the network in its current state and writes them to a Pandas
+DataFrame. It contains the following columns:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Seed: The random seed that was used.</p></li>
+<li><p>Topology: Which network topology was used.</p></li>
+<li><p>Ticks: For how many iterations the simulation ran (so far).</p></li>
+<li><p>SuccessfulInfluence: How often an agent was successfully influenced by another agent.</p></li>
+<li><p>All basic columns included in <a class="reference internal" href="defSim.tools.html#defSim.tools.CreateOutputTable.create_output_table" title="defSim.tools.CreateOutputTable.create_output_table"><code class="xref py py-meth docutils literal notranslate"><span class="pre">create_output_table()</span></code></a></p></li>
+</ul>
+</div></blockquote>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>A Pandas DataFrame with one row.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="defSim.Simulation.Simulation.initialize_simulation">
+<code class="sig-name descname">initialize_simulation</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#defSim.Simulation.Simulation.initialize_simulation" title="Permalink to this definition">¶</a></dt>
+<dd><p>This method initializes the network if none is given, initializes the attributes of the agents, and also
+computes and sets the distances between each neighbor.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="defSim.Simulation.Simulation.return_values">
+<code class="sig-name descname">return_values</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; pandas.core.frame.DataFrame<a class="headerlink" href="#defSim.Simulation.Simulation.return_values" title="Permalink to this definition">¶</a></dt>
+<dd><p>This method returns the values stored in the Simulation object. Both default, and user-specified values are
+returned to the console to make the Simulation object more transparent.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>A Pandas DataFrame with the parameter settings</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="defSim.Simulation.Simulation.run_simulation">
+<code class="sig-name descname">run_simulation</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; pandas.core.frame.DataFrame<a class="headerlink" href="#defSim.Simulation.Simulation.run_simulation" title="Permalink to this definition">¶</a></dt>
+<dd><p>This method initializes the network if none is given, initializes the attributes of the agents, and also
+computes and sets the distances between each neighbor.
+It then calls different functions that execute the simulation based on which stop criterion was selected.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>A pandas Dataframe that contains one row of data. To see what output the output contains see
+<a class="reference internal" href="#defSim.Simulation.Simulation.create_output_table" title="defSim.Simulation.Simulation.create_output_table"><code class="xref py py-func docutils literal notranslate"><span class="pre">create_output_table()</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="defSim.Simulation.Simulation.run_simulation_step">
+<code class="sig-name descname">run_simulation_step</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#defSim.Simulation.Simulation.run_simulation_step" title="Permalink to this definition">¶</a></dt>
+<dd><p>Executes one iteration of the simulation step which includes the selection of a focal agent, the selection
+of the neighbors and the influence step.
+If the user passed their own implementations of those components, they will be called to execute these steps,
+otherwise the respective factory functions will be called.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="defSim.network_init.html" class="btn btn-neutral float-right" title="Network (initialization component)" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="experiment.class.html" class="btn btn-neutral" title="Experiment class" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, Laukemper &amp; Keijzer.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'alpha',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+      <script type="text/javascript" src="_static/language_data.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+   <script type="text/javascript" src="_static/js/theme.js"></script>
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

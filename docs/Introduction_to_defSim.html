@@ -1,0 +1,1502 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>defSim</title>
+  
+
+  <link rel="shortcut icon" href="favicon.ico"/>
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="genindex.html"/>
+        <link rel="search" title="Search" href="search.html"/>
+    <link rel="top" title="defSim alpha documentation" href="index.html"/>
+        <link rel="next" title="Experiment class" href="experiment.class.html"/>
+        <link rel="prev" title="Welcome to defSim’s documentation!" href="index.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll"  style="background-color: #252625">
+        <div class="wy-side-nav-search"  style="background-color: #252625">
+          
+
+          <a href="index.html">
+            <img src="_static/lsst-logo-dark.svg" class="logo" />
+            
+            <!-- <span class="project-title">defSim</span> MK-->
+          </a>
+
+          <!-- <ul class="edition-switcher">
+            <li>Edition: </li>
+            <li><a href="../v">Switch editions</a></li>
+            
+          </ul> MK-->
+
+          
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation" style="background-color: #252625">
+          
+            
+            
+                <ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Introduction</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#the-comprehensive-way">1. The Comprehensive Way</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#the-modular-way">2. The Modular Way</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#some-useful-resources">Some useful resources</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="experiment.class.html">Experiment class</a></li>
+<li class="toctree-l1"><a class="reference internal" href="simulation.class.html">Simulation class</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="defSim.network_init.html">Networks</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="defSim.network_init.html#module-defSim.network_init.network_init">network_init module</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="defSim.agents_init.html">Agent features</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="defSim.agents_init.html#module-defSim.agents_init.agents_init">agents_init module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="defSim.agents_init.html#module-defSim.agents_init.RandomCategoricalInitializer">RandomCategoricalInitializer module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="defSim.agents_init.html#module-defSim.agents_init.RandomContinuousInitializer">RandomContinuousInitializer module</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="defSim.focal_agent_sim.html">Focal agent selection</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="defSim.focal_agent_sim.html#module-defSim.focal_agent_sim.focal_agent_sim">focal_agent_sim module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="defSim.focal_agent_sim.html#module-defSim.focal_agent_sim.RandomSelector">RandomSelector module</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="defSim.neighbor_selector_sim.html">Neighbor selector</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="defSim.neighbor_selector_sim.html#module-defSim.neighbor_selector_sim.neighbor_selector_sim">neighbor_selector_sim module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="defSim.neighbor_selector_sim.html#module-defSim.neighbor_selector_sim.RandomNeighborSelector">RandomneighborSelector module</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="defSim.influence_sim.html">Influence</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="defSim.influence_sim.html#module-defSim.influence_sim.influence_sim">influence_sim module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="defSim.influence_sim.html#module-defSim.influence_sim.Axelrod">Axelrod</a></li>
+<li class="toctree-l2"><a class="reference internal" href="defSim.influence_sim.html#module-defSim.influence_sim.BoundedConfidence">BoundedConfidence</a></li>
+<li class="toctree-l2"><a class="reference internal" href="defSim.influence_sim.html#module-defSim.influence_sim.Persuasion">Persuasion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="defSim.influence_sim.html#module-defSim.influence_sim.WeightedLinear">WeightedLinear</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="defSim.network_evolution_sim.html">Network evolution</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="defSim.network_evolution_sim.html#module-defSim.network_evolution_sim.network_evolution_sim">network_evolution_sim module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="defSim.network_evolution_sim.html#module-defSim.network_evolution_sim.NetworkHomophily">NetworkHomophily module</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="defSim.dissimilarity_component.html">Dissimilarity updaters</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="defSim.dissimilarity_component.html#module-defSim.dissimilarity_component.dissimilarity_calculator">DissimilarityCalculator module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="defSim.dissimilarity_component.html#module-defSim.dissimilarity_component.EuclideanDistance">EuclideanDistance module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="defSim.dissimilarity_component.html#module-defSim.dissimilarity_component.HammingDistance">HammingDistance module</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="defSim.tools.html">Tools</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="defSim.tools.html#module-defSim.tools.CreateOutputTable">CreateOutputTable</a></li>
+<li class="toctree-l2"><a class="reference internal" href="defSim.tools.html#module-defSim.tools.OutputMeasures">OutputMeasures</a></li>
+<li class="toctree-l2"><a class="reference internal" href="defSim.tools.html#module-defSim.tools.NetworkDistanceUpdater">NetworkDistanceUpdater</a></li>
+<li class="toctree-l2"><a class="reference internal" href="defSim.tools.html#module-defSim.tools.ClusterExecutionScript">ClusterExecutionScript</a></li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="index.html">defSim</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="dd-masthead">
+  <h1 class="dd-title">defSim</h1>
+  <ul class="dd-authors">
+    
+  </ul>
+  <p>Latest Revision: <a href="#change-record"></a></p>
+</div>
+           <div itemprop="articleBody">
+            
+  <p><a class="reference external" href="https://www.marijnkeijzer.nl">M. A. Keijzer</a> // October 2019 (last
+updated: October 9th, 2019)</p>
+<div class="section" id="introduction-to-defsim">
+<h1>Introduction to <code class="docutils literal notranslate"><span class="pre">defSim</span></code><a class="headerlink" href="#introduction-to-defsim" title="Permalink to this headline">¶</a></h1>
+<p>This short tutorial explains the two ways in which defSim can be used:</p>
+<ol class="arabic simple">
+<li><p><a class="reference external" href="#1.-The-Comprehensive-Way">The Comprehensive Way</a></p></li>
+<li><p><a class="reference external" href="#2.-The-Modular-Way">The Modular Way</a></p></li>
+</ol>
+<hr class="docutils" />
+<div class="section" id="the-comprehensive-way">
+<h2>1. The Comprehensive Way<a class="headerlink" href="#the-comprehensive-way" title="Permalink to this headline">¶</a></h2>
+<p>Using <code class="docutils literal notranslate"><span class="pre">defSim</span></code> the comprehensive way is the go-to use for quick
+replications, to illustrate well-know model dynamics, and for teaching
+purposes. All modules of defSim are called automatically, using
+reasonable default values or user specified parameters. There are two
+comprehensive classes available for using defSim in this way: the
+<code class="docutils literal notranslate"><span class="pre">`Simulation</span></code> &lt;<a class="reference external" href="https://marijnkeijzer.github.io/defSim/defSim.html#module-defSim.Simulation">https://marijnkeijzer.github.io/defSim/defSim.html#module-defSim.Simulation</a>&gt;`__
+class and the
+<code class="docutils literal notranslate"><span class="pre">`Experiment</span></code> &lt;<a class="reference external" href="https://marijnkeijzer.github.io/defSim/defSim.html#module-defSim.Experiment">https://marijnkeijzer.github.io/defSim/defSim.html#module-defSim.Experiment</a>&gt;`__
+class. The Simulation class is used to specify a single simulation run,
+whereas the Experiment takes lists of parameter values to create a
+simulation experiment with a user-specified number of replications per
+parameter combination.</p>
+<p>First, we import defSim and a couple other useful packages.</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">defSim</span> <span class="k">as</span> <span class="nn">ds</span>
+
+<span class="kn">import</span> <span class="nn">networkx</span> <span class="k">as</span> <span class="nn">nx</span>              <span class="c1"># used to handle the networkX object</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>    <span class="c1"># for plotting</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>                 <span class="c1"># includes some useful math tools</span>
+<span class="kn">import</span> <span class="nn">random</span>                      <span class="c1"># used to set seeds for random but replicable drawing</span>
+</pre></div>
+</div>
+<p>Then, we define a single simulation run, using the Simulation class</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">simrun</span> <span class="o">=</span> <span class="n">ds</span><span class="o">.</span><span class="n">Simulation</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>The simulation object will run, even without specifying any arguments.
+It uses a long list of default values, which can be viewed using the
+class specific method <code class="docutils literal notranslate"><span class="pre">return_values</span></code>.</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">simrun</span><span class="o">.</span><span class="n">return_values</span><span class="p">()</span>
+</pre></div>
+</div>
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>network</th>
+      <th>topology</th>
+      <th>attributes_initializer</th>
+      <th>focal_agent_selector</th>
+      <th>neighbor_selector</th>
+      <th>influence_function</th>
+      <th>influenceable_attributes</th>
+      <th>communication_regime</th>
+      <th>dissimilarity_calculator</th>
+      <th>stop_condition</th>
+      <th>max_iterations</th>
+      <th>seed</th>
+      <th>network_provided</th>
+      <th>agentIDs</th>
+      <th>time_steps</th>
+      <th>influence_steps</th>
+      <th>output_realizations</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>None</td>
+      <td>grid</td>
+      <td>random_categorical</td>
+      <td>random</td>
+      <td>random</td>
+      <td>axelrod</td>
+      <td>None</td>
+      <td>one-to-one</td>
+      <td>&lt;defSim.dissimilarity_component.HammingDistanc...</td>
+      <td>max_iteration</td>
+      <td>100000</td>
+      <td>None</td>
+      <td>False</td>
+      <td>[]</td>
+      <td>0</td>
+      <td>0</td>
+      <td>[]</td>
+    </tr>
+  </tbody>
+</table>
+</div><p>Let’s modify the object a little, to deviate from the default
+simulation, and run a simple bounded confidence model using a
+one-dimensional initially randomly distributed continuous opinion, on a
+complete graph network.</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">simrun</span> <span class="o">=</span> <span class="n">ds</span><span class="o">.</span><span class="n">Simulation</span><span class="p">(</span><span class="n">seed</span><span class="o">=</span><span class="mi">953</span><span class="p">,</span>
+                       <span class="n">attributes_initializer</span><span class="o">=</span><span class="s2">&quot;random_continuous&quot;</span><span class="p">,</span>
+                       <span class="n">dissimilarity_measure</span><span class="o">=</span><span class="s2">&quot;euclidean&quot;</span><span class="p">,</span>
+                       <span class="n">topology</span><span class="o">=</span><span class="s2">&quot;complete_graph&quot;</span><span class="p">,</span>
+                       <span class="n">influence_function</span><span class="o">=</span><span class="s2">&quot;bounded_confidence&quot;</span><span class="p">,</span>
+                       <span class="n">max_iterations</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span>
+                       <span class="n">parameter_dict</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;n&#39;</span><span class="p">:</span><span class="mi">20</span><span class="p">,</span>
+                       <span class="s1">&#39;confidence_level&#39;</span><span class="p">:</span><span class="o">.</span><span class="mi">8</span><span class="p">})</span>
+<span class="n">simrun</span><span class="o">.</span><span class="n">run_simulation</span><span class="p">()</span>
+</pre></div>
+</div>
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>AverageDistance</th>
+      <th>Homogeneity</th>
+      <th>Regions</th>
+      <th>Seed</th>
+      <th>SuccessfulInfluence</th>
+      <th>Ticks</th>
+      <th>Topology</th>
+      <th>Zones</th>
+      <th>confidence_level</th>
+      <th>n</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>6.266672e-08</td>
+      <td>0.05</td>
+      <td>20</td>
+      <td>953</td>
+      <td>1000</td>
+      <td>1000</td>
+      <td>complete_graph</td>
+      <td>1</td>
+      <td>0.8</td>
+      <td>20</td>
+    </tr>
+  </tbody>
+</table>
+</div><p>Now, we may ask a simple question: what is the effect of increasing the
+confidence level in the bounded confidence model? The confidence level
+is the proportion of dissimilarity that a receiving agent accepts from a
+sending agent in order for him to be influenced by the sending agent.</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">experiment</span> <span class="o">=</span> <span class="n">ds</span><span class="o">.</span><span class="n">Experiment</span><span class="p">(</span><span class="n">attributes_initializer</span><span class="o">=</span><span class="s2">&quot;random_continuous&quot;</span><span class="p">,</span>
+                           <span class="n">dissimilarity_measure</span><span class="o">=</span><span class="s2">&quot;euclidean&quot;</span><span class="p">,</span>
+                           <span class="n">topology</span><span class="o">=</span><span class="s2">&quot;complete_graph&quot;</span><span class="p">,</span>
+                           <span class="n">influence_function</span><span class="o">=</span><span class="s2">&quot;bounded_confidence&quot;</span><span class="p">,</span>
+                           <span class="n">max_iterations</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span>
+                           <span class="n">network_parameters</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;n&#39;</span><span class="p">:</span><span class="mi">20</span><span class="p">},</span>
+                           <span class="n">influence_parameters</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;confidence_level&#39;</span><span class="p">:[</span><span class="n">x</span><span class="o">/</span><span class="mi">10</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">)]},</span>
+                           <span class="n">repetitions</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">experiment</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mi">100</span> <span class="n">different</span> <span class="n">parameter</span> <span class="n">combinations</span>
+</pre></div>
+</div>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span>
+</pre></div>
+</div>
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>index</th>
+      <th>AverageDistance</th>
+      <th>Homogeneity</th>
+      <th>Regions</th>
+      <th>Seed</th>
+      <th>SuccessfulInfluence</th>
+      <th>Ticks</th>
+      <th>Topology</th>
+      <th>Zones</th>
+      <th>communication_regime</th>
+      <th>confidence_level</th>
+      <th>n</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0</td>
+      <td>3.489535e-01</td>
+      <td>0.05</td>
+      <td>20</td>
+      <td>41415</td>
+      <td>0</td>
+      <td>1000</td>
+      <td>complete_graph</td>
+      <td>1</td>
+      <td>one-to-one</td>
+      <td>0.0</td>
+      <td>20</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>0</td>
+      <td>3.270678e-01</td>
+      <td>0.05</td>
+      <td>20</td>
+      <td>39697</td>
+      <td>0</td>
+      <td>1000</td>
+      <td>complete_graph</td>
+      <td>1</td>
+      <td>one-to-one</td>
+      <td>0.0</td>
+      <td>20</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>0</td>
+      <td>3.119188e-01</td>
+      <td>0.05</td>
+      <td>20</td>
+      <td>33195</td>
+      <td>0</td>
+      <td>1000</td>
+      <td>complete_graph</td>
+      <td>1</td>
+      <td>one-to-one</td>
+      <td>0.0</td>
+      <td>20</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>0</td>
+      <td>3.101983e-01</td>
+      <td>0.05</td>
+      <td>20</td>
+      <td>62135</td>
+      <td>0</td>
+      <td>1000</td>
+      <td>complete_graph</td>
+      <td>1</td>
+      <td>one-to-one</td>
+      <td>0.0</td>
+      <td>20</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>0</td>
+      <td>3.482682e-01</td>
+      <td>0.05</td>
+      <td>20</td>
+      <td>42129</td>
+      <td>0</td>
+      <td>1000</td>
+      <td>complete_graph</td>
+      <td>1</td>
+      <td>one-to-one</td>
+      <td>0.0</td>
+      <td>20</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>0</td>
+      <td>3.074546e-01</td>
+      <td>0.05</td>
+      <td>20</td>
+      <td>80692</td>
+      <td>0</td>
+      <td>1000</td>
+      <td>complete_graph</td>
+      <td>1</td>
+      <td>one-to-one</td>
+      <td>0.0</td>
+      <td>20</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>0</td>
+      <td>3.986280e-01</td>
+      <td>0.05</td>
+      <td>20</td>
+      <td>76742</td>
+      <td>0</td>
+      <td>1000</td>
+      <td>complete_graph</td>
+      <td>1</td>
+      <td>one-to-one</td>
+      <td>0.0</td>
+      <td>20</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>0</td>
+      <td>3.698225e-01</td>
+      <td>0.05</td>
+      <td>20</td>
+      <td>44251</td>
+      <td>0</td>
+      <td>1000</td>
+      <td>complete_graph</td>
+      <td>1</td>
+      <td>one-to-one</td>
+      <td>0.0</td>
+      <td>20</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>0</td>
+      <td>3.847573e-01</td>
+      <td>0.05</td>
+      <td>20</td>
+      <td>15954</td>
+      <td>0</td>
+      <td>1000</td>
+      <td>complete_graph</td>
+      <td>1</td>
+      <td>one-to-one</td>
+      <td>0.0</td>
+      <td>20</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>0</td>
+      <td>3.236729e-01</td>
+      <td>0.05</td>
+      <td>20</td>
+      <td>87972</td>
+      <td>0</td>
+      <td>1000</td>
+      <td>complete_graph</td>
+      <td>1</td>
+      <td>one-to-one</td>
+      <td>0.0</td>
+      <td>20</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>0</td>
+      <td>2.936979e-01</td>
+      <td>0.05</td>
+      <td>20</td>
+      <td>14282</td>
+      <td>236</td>
+      <td>1000</td>
+      <td>complete_graph</td>
+      <td>1</td>
+      <td>one-to-one</td>
+      <td>0.1</td>
+      <td>20</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>0</td>
+      <td>2.812846e-01</td>
+      <td>0.05</td>
+      <td>20</td>
+      <td>29194</td>
+      <td>221</td>
+      <td>1000</td>
+      <td>complete_graph</td>
+      <td>1</td>
+      <td>one-to-one</td>
+      <td>0.1</td>
+      <td>20</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>0</td>
+      <td>2.688736e-01</td>
+      <td>0.05</td>
+      <td>20</td>
+      <td>89726</td>
+      <td>246</td>
+      <td>1000</td>
+      <td>complete_graph</td>
+      <td>1</td>
+      <td>one-to-one</td>
+      <td>0.1</td>
+      <td>20</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>0</td>
+      <td>2.582384e-01</td>
+      <td>0.05</td>
+      <td>20</td>
+      <td>30741</td>
+      <td>271</td>
+      <td>1000</td>
+      <td>complete_graph</td>
+      <td>1</td>
+      <td>one-to-one</td>
+      <td>0.1</td>
+      <td>20</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>0</td>
+      <td>2.685984e-01</td>
+      <td>0.05</td>
+      <td>20</td>
+      <td>30757</td>
+      <td>249</td>
+      <td>1000</td>
+      <td>complete_graph</td>
+      <td>1</td>
+      <td>one-to-one</td>
+      <td>0.1</td>
+      <td>20</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>0</td>
+      <td>2.967415e-01</td>
+      <td>0.05</td>
+      <td>20</td>
+      <td>27921</td>
+      <td>165</td>
+      <td>1000</td>
+      <td>complete_graph</td>
+      <td>1</td>
+      <td>one-to-one</td>
+      <td>0.1</td>
+      <td>20</td>
+    </tr>
+    <tr>
+      <th>16</th>
+      <td>0</td>
+      <td>3.220314e-01</td>
+      <td>0.05</td>
+      <td>20</td>
+      <td>15337</td>
+      <td>223</td>
+      <td>1000</td>
+      <td>complete_graph</td>
+      <td>1</td>
+      <td>one-to-one</td>
+      <td>0.1</td>
+      <td>20</td>
+    </tr>
+    <tr>
+      <th>17</th>
+      <td>0</td>
+      <td>3.434223e-01</td>
+      <td>0.05</td>
+      <td>20</td>
+      <td>18257</td>
+      <td>298</td>
+      <td>1000</td>
+      <td>complete_graph</td>
+      <td>1</td>
+      <td>one-to-one</td>
+      <td>0.1</td>
+      <td>20</td>
+    </tr>
+    <tr>
+      <th>18</th>
+      <td>0</td>
+      <td>3.580273e-01</td>
+      <td>0.05</td>
+      <td>20</td>
+      <td>93839</td>
+      <td>170</td>
+      <td>1000</td>
+      <td>complete_graph</td>
+      <td>1</td>
+      <td>one-to-one</td>
+      <td>0.1</td>
+      <td>20</td>
+    </tr>
+    <tr>
+      <th>19</th>
+      <td>0</td>
+      <td>2.790864e-01</td>
+      <td>0.05</td>
+      <td>20</td>
+      <td>72793</td>
+      <td>240</td>
+      <td>1000</td>
+      <td>complete_graph</td>
+      <td>1</td>
+      <td>one-to-one</td>
+      <td>0.1</td>
+      <td>20</td>
+    </tr>
+    <tr>
+      <th>20</th>
+      <td>0</td>
+      <td>3.504874e-01</td>
+      <td>0.05</td>
+      <td>20</td>
+      <td>23106</td>
+      <td>332</td>
+      <td>1000</td>
+      <td>complete_graph</td>
+      <td>1</td>
+      <td>one-to-one</td>
+      <td>0.2</td>
+      <td>20</td>
+    </tr>
+    <tr>
+      <th>21</th>
+      <td>0</td>
+      <td>2.855730e-01</td>
+      <td>0.05</td>
+      <td>20</td>
+      <td>33388</td>
+      <td>404</td>
+      <td>1000</td>
+      <td>complete_graph</td>
+      <td>1</td>
+      <td>one-to-one</td>
+      <td>0.2</td>
+      <td>20</td>
+    </tr>
+    <tr>
+      <th>22</th>
+      <td>0</td>
+      <td>2.575323e-01</td>
+      <td>0.05</td>
+      <td>20</td>
+      <td>64345</td>
+      <td>411</td>
+      <td>1000</td>
+      <td>complete_graph</td>
+      <td>1</td>
+      <td>one-to-one</td>
+      <td>0.2</td>
+      <td>20</td>
+    </tr>
+    <tr>
+      <th>23</th>
+      <td>0</td>
+      <td>3.129383e-01</td>
+      <td>0.05</td>
+      <td>20</td>
+      <td>19396</td>
+      <td>453</td>
+      <td>1000</td>
+      <td>complete_graph</td>
+      <td>1</td>
+      <td>one-to-one</td>
+      <td>0.2</td>
+      <td>20</td>
+    </tr>
+    <tr>
+      <th>24</th>
+      <td>0</td>
+      <td>3.298730e-01</td>
+      <td>0.05</td>
+      <td>20</td>
+      <td>24840</td>
+      <td>323</td>
+      <td>1000</td>
+      <td>complete_graph</td>
+      <td>1</td>
+      <td>one-to-one</td>
+      <td>0.2</td>
+      <td>20</td>
+    </tr>
+    <tr>
+      <th>25</th>
+      <td>0</td>
+      <td>2.581044e-01</td>
+      <td>0.05</td>
+      <td>20</td>
+      <td>94303</td>
+      <td>441</td>
+      <td>1000</td>
+      <td>complete_graph</td>
+      <td>1</td>
+      <td>one-to-one</td>
+      <td>0.2</td>
+      <td>20</td>
+    </tr>
+    <tr>
+      <th>26</th>
+      <td>0</td>
+      <td>2.598087e-01</td>
+      <td>0.05</td>
+      <td>20</td>
+      <td>45003</td>
+      <td>486</td>
+      <td>1000</td>
+      <td>complete_graph</td>
+      <td>1</td>
+      <td>one-to-one</td>
+      <td>0.2</td>
+      <td>20</td>
+    </tr>
+    <tr>
+      <th>27</th>
+      <td>0</td>
+      <td>2.493016e-01</td>
+      <td>0.05</td>
+      <td>20</td>
+      <td>66020</td>
+      <td>428</td>
+      <td>1000</td>
+      <td>complete_graph</td>
+      <td>1</td>
+      <td>one-to-one</td>
+      <td>0.2</td>
+      <td>20</td>
+    </tr>
+    <tr>
+      <th>28</th>
+      <td>0</td>
+      <td>1.774479e-01</td>
+      <td>0.05</td>
+      <td>20</td>
+      <td>73924</td>
+      <td>422</td>
+      <td>1000</td>
+      <td>complete_graph</td>
+      <td>1</td>
+      <td>one-to-one</td>
+      <td>0.2</td>
+      <td>20</td>
+    </tr>
+    <tr>
+      <th>29</th>
+      <td>0</td>
+      <td>2.631062e-01</td>
+      <td>0.05</td>
+      <td>20</td>
+      <td>83796</td>
+      <td>395</td>
+      <td>1000</td>
+      <td>complete_graph</td>
+      <td>1</td>
+      <td>one-to-one</td>
+      <td>0.2</td>
+      <td>20</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>70</th>
+      <td>0</td>
+      <td>9.196960e-09</td>
+      <td>0.05</td>
+      <td>20</td>
+      <td>12839</td>
+      <td>999</td>
+      <td>1000</td>
+      <td>complete_graph</td>
+      <td>1</td>
+      <td>one-to-one</td>
+      <td>0.7</td>
+      <td>20</td>
+    </tr>
+    <tr>
+      <th>71</th>
+      <td>0</td>
+      <td>8.588463e-09</td>
+      <td>0.05</td>
+      <td>20</td>
+      <td>72299</td>
+      <td>999</td>
+      <td>1000</td>
+      <td>complete_graph</td>
+      <td>1</td>
+      <td>one-to-one</td>
+      <td>0.7</td>
+      <td>20</td>
+    </tr>
+    <tr>
+      <th>72</th>
+      <td>0</td>
+      <td>1.444674e-08</td>
+      <td>0.05</td>
+      <td>20</td>
+      <td>11092</td>
+      <td>996</td>
+      <td>1000</td>
+      <td>complete_graph</td>
+      <td>1</td>
+      <td>one-to-one</td>
+      <td>0.7</td>
+      <td>20</td>
+    </tr>
+    <tr>
+      <th>73</th>
+      <td>0</td>
+      <td>1.396119e-07</td>
+      <td>0.05</td>
+      <td>20</td>
+      <td>66833</td>
+      <td>992</td>
+      <td>1000</td>
+      <td>complete_graph</td>
+      <td>1</td>
+      <td>one-to-one</td>
+      <td>0.7</td>
+      <td>20</td>
+    </tr>
+    <tr>
+      <th>74</th>
+      <td>0</td>
+      <td>1.021432e-07</td>
+      <td>0.05</td>
+      <td>20</td>
+      <td>26943</td>
+      <td>999</td>
+      <td>1000</td>
+      <td>complete_graph</td>
+      <td>1</td>
+      <td>one-to-one</td>
+      <td>0.7</td>
+      <td>20</td>
+    </tr>
+    <tr>
+      <th>75</th>
+      <td>0</td>
+      <td>2.363223e-08</td>
+      <td>0.05</td>
+      <td>20</td>
+      <td>44643</td>
+      <td>995</td>
+      <td>1000</td>
+      <td>complete_graph</td>
+      <td>1</td>
+      <td>one-to-one</td>
+      <td>0.7</td>
+      <td>20</td>
+    </tr>
+    <tr>
+      <th>76</th>
+      <td>0</td>
+      <td>4.270953e-08</td>
+      <td>0.05</td>
+      <td>20</td>
+      <td>72333</td>
+      <td>1000</td>
+      <td>1000</td>
+      <td>complete_graph</td>
+      <td>1</td>
+      <td>one-to-one</td>
+      <td>0.7</td>
+      <td>20</td>
+    </tr>
+    <tr>
+      <th>77</th>
+      <td>0</td>
+      <td>2.093550e-08</td>
+      <td>0.05</td>
+      <td>20</td>
+      <td>88490</td>
+      <td>998</td>
+      <td>1000</td>
+      <td>complete_graph</td>
+      <td>1</td>
+      <td>one-to-one</td>
+      <td>0.7</td>
+      <td>20</td>
+    </tr>
+    <tr>
+      <th>78</th>
+      <td>0</td>
+      <td>2.035458e-07</td>
+      <td>0.05</td>
+      <td>20</td>
+      <td>91585</td>
+      <td>999</td>
+      <td>1000</td>
+      <td>complete_graph</td>
+      <td>1</td>
+      <td>one-to-one</td>
+      <td>0.7</td>
+      <td>20</td>
+    </tr>
+    <tr>
+      <th>79</th>
+      <td>0</td>
+      <td>4.756630e-08</td>
+      <td>0.05</td>
+      <td>20</td>
+      <td>64637</td>
+      <td>999</td>
+      <td>1000</td>
+      <td>complete_graph</td>
+      <td>1</td>
+      <td>one-to-one</td>
+      <td>0.7</td>
+      <td>20</td>
+    </tr>
+    <tr>
+      <th>80</th>
+      <td>0</td>
+      <td>5.529440e-08</td>
+      <td>0.05</td>
+      <td>20</td>
+      <td>37007</td>
+      <td>1000</td>
+      <td>1000</td>
+      <td>complete_graph</td>
+      <td>1</td>
+      <td>one-to-one</td>
+      <td>0.8</td>
+      <td>20</td>
+    </tr>
+    <tr>
+      <th>81</th>
+      <td>0</td>
+      <td>4.126743e-08</td>
+      <td>0.05</td>
+      <td>20</td>
+      <td>30673</td>
+      <td>999</td>
+      <td>1000</td>
+      <td>complete_graph</td>
+      <td>1</td>
+      <td>one-to-one</td>
+      <td>0.8</td>
+      <td>20</td>
+    </tr>
+    <tr>
+      <th>82</th>
+      <td>0</td>
+      <td>1.025899e-07</td>
+      <td>0.05</td>
+      <td>20</td>
+      <td>66042</td>
+      <td>999</td>
+      <td>1000</td>
+      <td>complete_graph</td>
+      <td>1</td>
+      <td>one-to-one</td>
+      <td>0.8</td>
+      <td>20</td>
+    </tr>
+    <tr>
+      <th>83</th>
+      <td>0</td>
+      <td>2.811357e-07</td>
+      <td>0.05</td>
+      <td>20</td>
+      <td>83033</td>
+      <td>996</td>
+      <td>1000</td>
+      <td>complete_graph</td>
+      <td>1</td>
+      <td>one-to-one</td>
+      <td>0.8</td>
+      <td>20</td>
+    </tr>
+    <tr>
+      <th>84</th>
+      <td>0</td>
+      <td>3.772031e-09</td>
+      <td>0.05</td>
+      <td>20</td>
+      <td>40217</td>
+      <td>1000</td>
+      <td>1000</td>
+      <td>complete_graph</td>
+      <td>1</td>
+      <td>one-to-one</td>
+      <td>0.8</td>
+      <td>20</td>
+    </tr>
+    <tr>
+      <th>85</th>
+      <td>0</td>
+      <td>6.494458e-08</td>
+      <td>0.05</td>
+      <td>20</td>
+      <td>11939</td>
+      <td>1000</td>
+      <td>1000</td>
+      <td>complete_graph</td>
+      <td>1</td>
+      <td>one-to-one</td>
+      <td>0.8</td>
+      <td>20</td>
+    </tr>
+    <tr>
+      <th>86</th>
+      <td>0</td>
+      <td>1.859897e-07</td>
+      <td>0.05</td>
+      <td>20</td>
+      <td>88558</td>
+      <td>998</td>
+      <td>1000</td>
+      <td>complete_graph</td>
+      <td>1</td>
+      <td>one-to-one</td>
+      <td>0.8</td>
+      <td>20</td>
+    </tr>
+    <tr>
+      <th>87</th>
+      <td>0</td>
+      <td>3.622646e-08</td>
+      <td>0.05</td>
+      <td>20</td>
+      <td>69644</td>
+      <td>1000</td>
+      <td>1000</td>
+      <td>complete_graph</td>
+      <td>1</td>
+      <td>one-to-one</td>
+      <td>0.8</td>
+      <td>20</td>
+    </tr>
+    <tr>
+      <th>88</th>
+      <td>0</td>
+      <td>6.992132e-08</td>
+      <td>0.05</td>
+      <td>20</td>
+      <td>72887</td>
+      <td>1000</td>
+      <td>1000</td>
+      <td>complete_graph</td>
+      <td>1</td>
+      <td>one-to-one</td>
+      <td>0.8</td>
+      <td>20</td>
+    </tr>
+    <tr>
+      <th>89</th>
+      <td>0</td>
+      <td>5.360244e-09</td>
+      <td>0.05</td>
+      <td>20</td>
+      <td>12938</td>
+      <td>998</td>
+      <td>1000</td>
+      <td>complete_graph</td>
+      <td>1</td>
+      <td>one-to-one</td>
+      <td>0.8</td>
+      <td>20</td>
+    </tr>
+    <tr>
+      <th>90</th>
+      <td>0</td>
+      <td>1.678180e-08</td>
+      <td>0.05</td>
+      <td>20</td>
+      <td>91118</td>
+      <td>1000</td>
+      <td>1000</td>
+      <td>complete_graph</td>
+      <td>1</td>
+      <td>one-to-one</td>
+      <td>0.9</td>
+      <td>20</td>
+    </tr>
+    <tr>
+      <th>91</th>
+      <td>0</td>
+      <td>3.168359e-08</td>
+      <td>0.05</td>
+      <td>20</td>
+      <td>46413</td>
+      <td>1000</td>
+      <td>1000</td>
+      <td>complete_graph</td>
+      <td>1</td>
+      <td>one-to-one</td>
+      <td>0.9</td>
+      <td>20</td>
+    </tr>
+    <tr>
+      <th>92</th>
+      <td>0</td>
+      <td>2.790113e-07</td>
+      <td>0.05</td>
+      <td>20</td>
+      <td>78927</td>
+      <td>1000</td>
+      <td>1000</td>
+      <td>complete_graph</td>
+      <td>1</td>
+      <td>one-to-one</td>
+      <td>0.9</td>
+      <td>20</td>
+    </tr>
+    <tr>
+      <th>93</th>
+      <td>0</td>
+      <td>2.659886e-09</td>
+      <td>0.05</td>
+      <td>20</td>
+      <td>87213</td>
+      <td>1000</td>
+      <td>1000</td>
+      <td>complete_graph</td>
+      <td>1</td>
+      <td>one-to-one</td>
+      <td>0.9</td>
+      <td>20</td>
+    </tr>
+    <tr>
+      <th>94</th>
+      <td>0</td>
+      <td>1.505474e-08</td>
+      <td>0.05</td>
+      <td>20</td>
+      <td>37243</td>
+      <td>1000</td>
+      <td>1000</td>
+      <td>complete_graph</td>
+      <td>1</td>
+      <td>one-to-one</td>
+      <td>0.9</td>
+      <td>20</td>
+    </tr>
+    <tr>
+      <th>95</th>
+      <td>0</td>
+      <td>1.208641e-08</td>
+      <td>0.05</td>
+      <td>20</td>
+      <td>59243</td>
+      <td>999</td>
+      <td>1000</td>
+      <td>complete_graph</td>
+      <td>1</td>
+      <td>one-to-one</td>
+      <td>0.9</td>
+      <td>20</td>
+    </tr>
+    <tr>
+      <th>96</th>
+      <td>0</td>
+      <td>2.074447e-07</td>
+      <td>0.05</td>
+      <td>20</td>
+      <td>89789</td>
+      <td>1000</td>
+      <td>1000</td>
+      <td>complete_graph</td>
+      <td>1</td>
+      <td>one-to-one</td>
+      <td>0.9</td>
+      <td>20</td>
+    </tr>
+    <tr>
+      <th>97</th>
+      <td>0</td>
+      <td>3.033305e-08</td>
+      <td>0.05</td>
+      <td>20</td>
+      <td>21911</td>
+      <td>1000</td>
+      <td>1000</td>
+      <td>complete_graph</td>
+      <td>1</td>
+      <td>one-to-one</td>
+      <td>0.9</td>
+      <td>20</td>
+    </tr>
+    <tr>
+      <th>98</th>
+      <td>0</td>
+      <td>3.673180e-07</td>
+      <td>0.05</td>
+      <td>20</td>
+      <td>46435</td>
+      <td>999</td>
+      <td>1000</td>
+      <td>complete_graph</td>
+      <td>1</td>
+      <td>one-to-one</td>
+      <td>0.9</td>
+      <td>20</td>
+    </tr>
+    <tr>
+      <th>99</th>
+      <td>0</td>
+      <td>1.110851e-07</td>
+      <td>0.05</td>
+      <td>20</td>
+      <td>55563</td>
+      <td>1000</td>
+      <td>1000</td>
+      <td>complete_graph</td>
+      <td>1</td>
+      <td>one-to-one</td>
+      <td>0.9</td>
+      <td>20</td>
+    </tr>
+  </tbody>
+</table>
+<p>100 rows × 12 columns</p>
+</div><div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">4</span><span class="p">))</span>
+<span class="n">df</span><span class="o">.</span><span class="n">boxplot</span><span class="p">(</span><span class="s1">&#39;AverageDistance&#39;</span><span class="p">,</span><span class="s1">&#39;confidence_level&#39;</span><span class="p">,</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<img alt="_images/output_11_0.png" src="_images/output_11_0.png" />
+</div>
+<hr class="docutils" />
+<div class="section" id="the-modular-way">
+<h2>2. The Modular Way<a class="headerlink" href="#the-modular-way" title="Permalink to this headline">¶</a></h2>
+<p>defSim consists of six different modules. Some modules take care of
+model initialization (<code class="docutils literal notranslate"><span class="pre">network_init</span></code> &amp; <code class="docutils literal notranslate"><span class="pre">agents_init</span></code>), while other
+modules are called sequentially in a loop (<code class="docutils literal notranslate"><span class="pre">focal_agent_sim</span></code>,
+<code class="docutils literal notranslate"><span class="pre">neighbor_selector_sim</span></code> &amp; <code class="docutils literal notranslate"><span class="pre">influence_sim</span></code>), until some convergence
+criterium is satisfied. The process is visualized in the flow chart
+right of this text.</p>
+<p>The comprehensive way calls all of these modules in the background, but
+defSim is designed in such a way that a <em>modular</em> use of the package is
+easy and user-friendly. All modules take a networkx object as in- and
+output. Writing an extension is easy, since we can just use this
+networkx object to manipulate outside of one of the modules.
+Alternatively, it is also possible to write an extension within the
+defSim framework. Adding your own (published) extension to the defSim
+package is a great way to transparently share your code and attract
+attention to your work.</p>
+<p>Now, let’s turn to two of these examples. One in which we manipulate the
+networkx object, and one in which we write our own module-method.</p>
+<div class="section" id="example-biased-media-influence">
+<h3>Example | Biased media influence<a class="headerlink" href="#example-biased-media-influence" title="Permalink to this headline">¶</a></h3>
+<p>In this example we introduce a biased media platform that will randomly
+influence half the population one every ten rounds. Agents follow a
+weighted linear influence function, which means that they are influenced
+proportionally to their opinion similarity to the sending agent. Once
+opinion distance becomes too large, influence becomes negative and
+agents experience a push away from the source.</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># the INITIALIZATION stage</span>
+
+<span class="c1"># we set a random seed to be able to replicate the run</span>
+<span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">14</span><span class="p">)</span>
+
+<span class="c1"># initialization of the network</span>
+<span class="n">ABM</span> <span class="o">=</span> <span class="n">ds</span><span class="o">.</span><span class="n">generate_network</span><span class="p">(</span><span class="s2">&quot;grid&quot;</span><span class="p">,</span><span class="n">num_agents</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+<span class="n">ds</span><span class="o">.</span><span class="n">initialize_attributes</span><span class="p">(</span><span class="n">ABM</span><span class="p">,</span> <span class="n">realization</span><span class="o">=</span><span class="s2">&quot;random_continuous&quot;</span><span class="p">,</span> <span class="n">num_features</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="c1"># here we introduce the biased media agent. An agent connected to all others, with a biased opinion.</span>
+<span class="n">agents</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">ABM</span><span class="o">.</span><span class="n">nodes</span><span class="p">())</span> <span class="c1"># store the original agentset to pass to the agent selectors</span>
+<span class="n">ABM</span><span class="o">.</span><span class="n">add_node</span><span class="p">(</span><span class="s1">&#39;biased_media&#39;</span><span class="p">)</span> <span class="c1"># create new node</span>
+<span class="n">ABM</span><span class="o">.</span><span class="n">node</span><span class="p">[</span><span class="s1">&#39;biased_media&#39;</span><span class="p">][</span><span class="s1">&#39;f01&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.23</span> <span class="c1"># fix the opinion</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">agents</span><span class="p">:</span> <span class="c1"># add an edge between media source and all other agents</span>
+    <span class="n">ABM</span><span class="o">.</span><span class="n">add_edge</span><span class="p">(</span><span class="s1">&#39;biased_media&#39;</span><span class="p">,</span><span class="n">i</span><span class="p">)</span>
+
+<span class="c1"># initialize the dissimilarity calculator (= euclidean in the continuous opinion world)</span>
+<span class="n">calculator</span> <span class="o">=</span> <span class="n">ds</span><span class="o">.</span><span class="n">dissimilarity_calculator</span><span class="o">.</span><span class="n">select_calculator</span><span class="p">(</span><span class="s2">&quot;euclidean&quot;</span><span class="p">)</span>
+<span class="n">calculator</span><span class="o">.</span><span class="n">calculate_dissimilarity_networkwide</span><span class="p">(</span><span class="n">ABM</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>    <span class="c1"># the SIMULATION stage</span>
+
+<span class="c1"># set an iterator and an empty opinions list, where we record the opinions at each iteration</span>
+<span class="n">iterator</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">opinions_tickwise</span> <span class="o">=</span> <span class="p">[]</span>
+</pre></div>
+</div>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># start of the simulation loop. Now we choose a simple stopping rule: we stop after 500 ticks</span>
+<span class="k">while</span> <span class="n">iterator</span> <span class="o">&lt;</span> <span class="mi">500</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">iterator</span> <span class="ow">in</span> <span class="p">[</span><span class="n">x</span><span class="o">*</span><span class="mi">10</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1000</span><span class="p">)]:</span> <span class="c1"># once every 10 rounds we exert media influence</span>
+        <span class="n">ds</span><span class="o">.</span><span class="n">influence_sim</span><span class="o">.</span><span class="n">spread_influence</span><span class="p">(</span><span class="n">ABM</span><span class="p">,</span><span class="s2">&quot;weighted_linear&quot;</span><span class="p">,</span><span class="s1">&#39;biased_media&#39;</span><span class="p">,</span><span class="n">agents</span><span class="p">,</span><span class="s2">&quot;one-to-one&quot;</span><span class="p">,</span>
+                                          <span class="n">calculator</span><span class="p">,</span><span class="n">homophily</span><span class="o">=</span><span class="mf">1.5</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span> <span class="c1"># in the other rounds, we exert normal influence</span>
+        <span class="n">agent_i</span> <span class="o">=</span> <span class="n">ds</span><span class="o">.</span><span class="n">focal_agent_sim</span><span class="o">.</span><span class="n">select_focal_agent</span><span class="p">(</span><span class="n">ABM</span><span class="p">,</span><span class="s2">&quot;random&quot;</span><span class="p">,</span><span class="n">agents</span><span class="o">=</span><span class="n">agents</span><span class="p">)</span>
+        <span class="n">agent_j</span> <span class="o">=</span> <span class="n">ds</span><span class="o">.</span><span class="n">neighbor_selector_sim</span><span class="o">.</span><span class="n">select_neighbors</span><span class="p">(</span><span class="n">ABM</span><span class="p">,</span><span class="s2">&quot;random&quot;</span><span class="p">,</span><span class="n">agent_i</span><span class="p">,</span><span class="s2">&quot;one-to-one&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">agent_j</span> <span class="o">==</span> <span class="p">[</span><span class="s1">&#39;biased_media&#39;</span><span class="p">]:</span> <span class="c1"># workaround for when the agent wants to influence the media source</span>
+            <span class="k">while</span> <span class="n">agent_j</span> <span class="o">==</span> <span class="p">[</span><span class="s1">&#39;biased_media&#39;</span><span class="p">]:</span>
+                <span class="n">agent_j</span> <span class="o">=</span> <span class="n">ds</span><span class="o">.</span><span class="n">neighbor_selector_sim</span><span class="o">.</span><span class="n">select_neighbors</span><span class="p">(</span><span class="n">ABM</span><span class="p">,</span><span class="s2">&quot;random&quot;</span><span class="p">,</span><span class="n">agent_i</span><span class="p">,</span><span class="s2">&quot;one-to-one&quot;</span><span class="p">)</span>
+        <span class="n">ds</span><span class="o">.</span><span class="n">influence_sim</span><span class="o">.</span><span class="n">spread_influence</span><span class="p">(</span><span class="n">ABM</span><span class="p">,</span><span class="s2">&quot;weighted_linear&quot;</span><span class="p">,</span><span class="n">agent_i</span><span class="p">,</span><span class="n">agent_j</span><span class="p">,</span><span class="s2">&quot;one-to-one&quot;</span><span class="p">,</span>
+                                          <span class="n">calculator</span><span class="p">,</span><span class="n">homophily</span><span class="o">=</span><span class="mf">1.5</span><span class="p">)</span>
+    <span class="n">opinions_tickwise</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">nx</span><span class="o">.</span><span class="n">get_node_attributes</span><span class="p">(</span><span class="n">ABM</span><span class="p">,</span><span class="s1">&#39;f01&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">values</span><span class="p">()))</span>
+    <span class="n">iterator</span> <span class="o">+=</span> <span class="mi">1</span>
+</pre></div>
+</div>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># let&#39;s plot the opinion trajectories</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">[</span><span class="mi">16</span><span class="p">,</span><span class="mi">6</span><span class="p">])</span>
+<span class="n">colormap</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">get_cmap</span><span class="p">(</span><span class="s1">&#39;hsv&#39;</span><span class="p">)</span>
+<span class="n">a</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">opinions_tickwise</span><span class="p">)</span><span class="o">.</span><span class="n">transpose</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">ABM</span><span class="p">)):</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="n">color</span><span class="o">=</span><span class="n">colormap</span><span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">]))</span>
+</pre></div>
+</div>
+<img alt="_images/output_16_0.png" src="_images/output_16_0.png" />
+<p>There are a few things to note from these opinion trajectories. As one
+might expect, a large number of the agents (90%) converge on the opinion
+position of the biased media source. However, in the process, two agents
+rejected the stance of the medium and extremized into the other
+direction. Occassional meeting with the other agents furthermore create
+temporary extremization by others, which is again corrected by the media
+source. To compare, let’s look at a single run of the same model without
+the media source.</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>    <span class="c1"># the INITIALIZATION stage</span>
+<span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">14</span><span class="p">)</span>
+<span class="n">ABM</span> <span class="o">=</span> <span class="n">ds</span><span class="o">.</span><span class="n">generate_network</span><span class="p">(</span><span class="s2">&quot;grid&quot;</span><span class="p">,</span><span class="n">num_agents</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+<span class="n">ds</span><span class="o">.</span><span class="n">agents_init</span><span class="o">.</span><span class="n">initialize_attributes</span><span class="p">(</span><span class="n">ABM</span><span class="p">,</span> <span class="n">realization</span><span class="o">=</span><span class="s2">&quot;random_continuous&quot;</span><span class="p">,</span> <span class="n">num_features</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">calculator</span> <span class="o">=</span> <span class="n">ds</span><span class="o">.</span><span class="n">dissimilarity_calculator</span><span class="o">.</span><span class="n">select_calculator</span><span class="p">(</span><span class="s2">&quot;euclidean&quot;</span><span class="p">)</span>
+<span class="n">calculator</span><span class="o">.</span><span class="n">calculate_dissimilarity_networkwide</span><span class="p">(</span><span class="n">ABM</span><span class="p">)</span>
+    <span class="c1"># the SIMULATION stage</span>
+<span class="n">iterator</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">opinions_tickwise</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">while</span> <span class="n">iterator</span> <span class="o">&lt;</span> <span class="mi">500</span><span class="p">:</span>
+        <span class="n">agent_i</span> <span class="o">=</span> <span class="n">ds</span><span class="o">.</span><span class="n">focal_agent_sim</span><span class="o">.</span><span class="n">select_focal_agent</span><span class="p">(</span><span class="n">ABM</span><span class="p">,</span><span class="s2">&quot;random&quot;</span><span class="p">)</span>
+        <span class="n">agent_j</span> <span class="o">=</span> <span class="n">ds</span><span class="o">.</span><span class="n">neighbor_selector_sim</span><span class="o">.</span><span class="n">select_neighbors</span><span class="p">(</span><span class="n">ABM</span><span class="p">,</span><span class="s2">&quot;random&quot;</span><span class="p">,</span><span class="n">agent_i</span><span class="p">,</span><span class="s2">&quot;one-to-one&quot;</span><span class="p">)</span>
+        <span class="n">ds</span><span class="o">.</span><span class="n">influence_sim</span><span class="o">.</span><span class="n">spread_influence</span><span class="p">(</span><span class="n">ABM</span><span class="p">,</span><span class="s2">&quot;weighted_linear&quot;</span><span class="p">,</span><span class="n">agent_i</span><span class="p">,</span><span class="n">agent_j</span><span class="p">,</span><span class="s2">&quot;one-to-one&quot;</span><span class="p">,</span>
+                                          <span class="n">calculator</span><span class="p">,</span><span class="n">homophily</span><span class="o">=</span><span class="mf">1.5</span><span class="p">)</span>
+        <span class="n">opinions_tickwise</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">nx</span><span class="o">.</span><span class="n">get_node_attributes</span><span class="p">(</span><span class="n">ABM</span><span class="p">,</span><span class="s1">&#39;f01&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">values</span><span class="p">()))</span>
+        <span class="n">iterator</span> <span class="o">+=</span> <span class="mi">1</span>
+</pre></div>
+</div>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">[</span><span class="mi">16</span><span class="p">,</span><span class="mi">6</span><span class="p">])</span>
+<span class="n">colormap</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">get_cmap</span><span class="p">(</span><span class="s1">&#39;hsv&#39;</span><span class="p">)</span>
+<span class="n">a</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">opinions_tickwise</span><span class="p">)</span><span class="o">.</span><span class="n">transpose</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">ABM</span><span class="p">)):</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="n">color</span><span class="o">=</span><span class="n">colormap</span><span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">]))</span>
+</pre></div>
+</div>
+<img alt="_images/output_19_0.png" src="_images/output_19_0.png" />
+</div>
+</div>
+<hr class="docutils" />
+<div class="section" id="some-useful-resources">
+<h2>Some useful resources<a class="headerlink" href="#some-useful-resources" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p><a class="reference external" href="https://github.com/marijnkeijzer/defSim">defSim on GitHub</a></p></li>
+<li><p><a class="reference external" href="https://marijnkeijzer.github.io/defSim">defSim documentation</a></p></li>
+</ul>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="experiment.class.html" class="btn btn-neutral float-right" title="Experiment class" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="index.html" class="btn btn-neutral" title="Welcome to defSim’s documentation!" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, Laukemper &amp; Keijzer.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'alpha',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+      <script type="text/javascript" src="_static/language_data.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+   <script type="text/javascript" src="_static/js/theme.js"></script>
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>
