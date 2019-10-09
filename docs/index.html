@@ -30,7 +30,7 @@
               href="genindex.html"/>
         <link rel="search" title="Search" href="search.html"/>
     <link rel="top" title="defSim alpha documentation" href="#"/>
-        <link rel="next" title="Learn defSim in 5 minutes" href="quickintro.html"/> 
+        <link rel="next" title="Introduction to defSim" href="Introduction_to_defSim.html"/> 
 
   
   <script src="_static/js/modernizr.min.js"></script>
@@ -69,12 +69,18 @@
             
             
                 <ul>
-<li class="toctree-l1"><a class="reference internal" href="quickintro.html">Quick start guide</a></li>
-<li class="toctree-l1"><a class="reference internal" href="defSim.html">defSim</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="defSim.html#module-defSim.Experiment">Experiment module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="defSim.html#module-defSim.Simulation">Simulation module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Introduction_to_defSim.html">Introduction</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Introduction_to_defSim.html#the-comprehensive-way">1. The Comprehensive Way</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Introduction_to_defSim.html#the-modular-way">2. The Modular Way</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Introduction_to_defSim.html#some-useful-resources">Some useful resources</a></li>
 </ul>
 </li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="experiment.class.html">Experiment class</a></li>
+<li class="toctree-l1"><a class="reference internal" href="simulation.class.html">Simulation class</a></li>
+</ul>
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="defSim.network_init.html">Networks</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="defSim.network_init.html#module-defSim.network_init.network_init">network_init module</a></li>
 </ul>
@@ -154,96 +160,42 @@
   <div class="section" id="welcome-to-defsim-s-documentation">
 <h1>Welcome to defSim’s documentation!<a class="headerlink" href="#welcome-to-defsim-s-documentation" title="Permalink to this headline">¶</a></h1>
 <p>Here you can find the API documentation for the <em>discrete event framework for social influence models</em>. The package is freely <a class="reference external" href="https://github.com/marijnkeijzer/defSim">available on GitHub</a>.</p>
-<p>defSim is a package that aims to be the modular standard for social influence models. With defSim you can run a single <a class="reference internal" href="defSim.html#module-defSim.Simulation" title="defSim.Simulation"><code class="xref py py-class docutils literal notranslate"><span class="pre">Simulation</span></code></a>, execute a larger Simulation <a class="reference internal" href="defSim.html#module-defSim.Experiment" title="defSim.Experiment"><code class="xref py py-class docutils literal notranslate"><span class="pre">Experiment</span></code></a>, or use any number of pre-programmed modules for your own idea or variation of a traditional social influence model. By using defSim you save a lot of time programming functions that you will need in any social influence research project, but furthermore you make sure that your model remains strictly comparable with traditional models, and other models in the defSim-realm, while working completely <strong>open source by default</strong>.</p>
+<p>defSim is a package that aims to be the modular standard for social influence models. With defSim you can run a single <a class="reference internal" href="simulation.class.html#module-defSim.Simulation" title="defSim.Simulation"><code class="xref py py-class docutils literal notranslate"><span class="pre">Simulation</span></code></a>, execute a larger Simulation <a class="reference internal" href="experiment.class.html#module-defSim.Experiment" title="defSim.Experiment"><code class="xref py py-class docutils literal notranslate"><span class="pre">Experiment</span></code></a>, or use any number of pre-programmed modules for your own idea or variation of a traditional social influence model. By using defSim you save a lot of time programming functions that you will need in any social influence research project, but furthermore you make sure that your model remains strictly comparable with traditional models, and other models in the defSim-realm, while working completely <strong>open source by default</strong>.</p>
 <p>The flow of a single simulation run implemented by defSim looks like this:</p>
 <a class="reference internal image-reference" href="_images/defSim-flow.png"><img alt="defSim workflow" src="_images/defSim-flow.png" style="width: 400px;" /></a>
 <p>All elements on the left represent the separate modules.</p>
-<p>..add explanation on modules and typical workflow</p>
-<p>I recommend to start with the <a class="reference internal" href="defSim.html#module-defSim.Simulation" title="defSim.Simulation"><code class="xref py py-class docutils literal notranslate"><span class="pre">Simulation</span></code></a> class and the <a class="reference internal" href="defSim.html#module-defSim.Experiment" title="defSim.Experiment"><code class="xref py py-class docutils literal notranslate"><span class="pre">Experiment</span></code></a> class to understand how to create your own multi-agent system experiment.</p>
-<p>Here are some examples of how to create experiments:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># creating an Experiment with the default values, which recreates the classic axelrod experiment conditions</span>
-<span class="c1"># in this example we want to try all kinds of communication regimes 1000 times</span>
-
-<span class="c1"># Alternative way to import the experiment:</span>
-<span class="c1"># from defSim import Experiment</span>
-<span class="c1"># experiment = Experiment()</span>
-
-<span class="kn">import</span> <span class="nn">defSim</span>
-
-<span class="kn">import</span> <span class="nn">networkx</span> <span class="kn">as</span> <span class="nn">nx</span>
-<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span>
-<span class="kn">from</span> <span class="nn">defSim</span> <span class="kn">import</span> <span class="n">dissimilarity_calculator</span>
-
-<span class="n">experiment</span> <span class="o">=</span> <span class="n">defSim</span><span class="o">.</span><span class="n">Experiment</span><span class="p">(</span><span class="n">communication_regime</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;one-to-one&quot;</span><span class="p">,</span> <span class="s2">&quot;one-to-many&quot;</span><span class="p">,</span> <span class="s2">&quot;many-to-one&quot;</span><span class="p">],</span> <span class="n">repetitions</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
-<span class="n">results</span> <span class="o">=</span> <span class="n">experiment</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
-<span class="k">print</span><span class="p">(</span><span class="n">results</span><span class="p">)</span>
-
-<span class="c1">#creating a Simulation</span>
-<span class="n">simulation</span> <span class="o">=</span> <span class="n">defSim</span><span class="o">.</span><span class="n">Simulation</span><span class="p">()</span>
-<span class="n">results</span> <span class="o">=</span> <span class="n">simulation</span><span class="o">.</span><span class="n">run_simulation</span><span class="p">()</span>
-<span class="k">print</span><span class="p">(</span><span class="n">results</span><span class="p">)</span>
-
-<span class="c1"># creating a Simulation with your own influence function and running it step by step</span>
-<span class="k">class</span> <span class="nc">my_influence_function</span><span class="p">(</span><span class="n">defSim</span><span class="o">.</span><span class="n">InfluenceOperator</span><span class="p">):</span>
-
-    <span class="nd">@staticmethod</span>
-    <span class="k">def</span> <span class="nf">spread_influence</span><span class="p">(</span><span class="n">network</span><span class="p">:</span> <span class="n">nx</span><span class="o">.</span><span class="n">Graph</span><span class="p">,</span> <span class="n">agent_i</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">agents_j</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="ow">or</span> <span class="nb">int</span><span class="p">,</span> <span class="n">regime</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
-                         <span class="n">dissimilarity_measure</span><span class="p">:</span> <span class="n">dissimilarity_calculator</span><span class="p">,</span> <span class="n">attributes</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
-        <span class="c1"># print(&quot;enter your implementation here&quot;)</span>
-        <span class="k">pass</span>
-
-<span class="n">simulation</span> <span class="o">=</span> <span class="n">defSim</span><span class="o">.</span><span class="n">Simulation</span><span class="p">(</span><span class="n">influence_function</span><span class="o">=</span><span class="n">my_influence_function</span><span class="p">())</span>
-<span class="n">simulation</span><span class="o">.</span><span class="n">initialize_simulation</span><span class="p">()</span>
-<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">100</span><span class="p">):</span>
-    <span class="n">simulation</span><span class="o">.</span><span class="n">run_simulation_step</span><span class="p">()</span>
-<span class="n">results</span> <span class="o">=</span> <span class="n">simulation</span><span class="o">.</span><span class="n">create_output_table</span><span class="p">()</span>
-
-<span class="c1"># using the building blocks manually with the respective factory methods</span>
-<span class="c1"># only the influence function is here used directly (just as an example to show how to import it, you could also use:</span>
-<span class="c1"># defSim.InfluenceOperator.spread_influence(network, &quot;axelrod&quot;, focal_agent,neighbors, &quot;one-to-one&quot;, defSim.HammingDistance())</span>
-<span class="c1"># instead of using the factory method you can alway import the classes directly from the respective module</span>
-
-<span class="kn">from</span> <span class="nn">defSim.influence_sim.Axelrod</span> <span class="kn">import</span> <span class="n">Axelrod</span> <span class="c1"># import the axelrod infuence function</span>
-
-<span class="n">network</span> <span class="o">=</span> <span class="n">defSim</span><span class="o">.</span><span class="n">generate_network</span><span class="p">(</span><span class="s2">&quot;ring&quot;</span><span class="p">)</span>
-<span class="n">defSim</span><span class="o">.</span><span class="n">agents_init</span><span class="o">.</span><span class="n">initialize_attributes</span><span class="p">(</span><span class="n">network</span><span class="p">,</span> <span class="n">realization</span><span class="o">=</span><span class="s2">&quot;random_categorical&quot;</span><span class="p">)</span>
-<span class="n">calculator</span> <span class="o">=</span> <span class="n">defSim</span><span class="o">.</span><span class="n">dissimilarity_calculator</span><span class="o">.</span><span class="n">select_calculator</span><span class="p">(</span><span class="s2">&quot;euclidean&quot;</span><span class="p">)</span>
-<span class="n">calculator</span><span class="o">.</span><span class="n">calculate_dissimilarity_networkwide</span><span class="p">(</span><span class="n">network</span><span class="p">)</span>
-
-<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">100</span><span class="p">):</span>
-    <span class="n">focal_agent</span> <span class="o">=</span> <span class="n">defSim</span><span class="o">.</span><span class="n">focal_agent_sim</span><span class="o">.</span><span class="n">select_focal_agent</span><span class="p">(</span><span class="n">network</span><span class="p">,</span> <span class="s2">&quot;random&quot;</span><span class="p">)</span>
-    <span class="n">neighbors</span> <span class="o">=</span> <span class="n">defSim</span><span class="o">.</span><span class="n">neighbor_selector_sim</span><span class="o">.</span><span class="n">select_neighbors</span><span class="p">(</span><span class="n">network</span><span class="p">,</span> <span class="s2">&quot;random&quot;</span><span class="p">,</span> <span class="n">focal_agent</span><span class="p">,</span> <span class="s2">&quot;one-to-one&quot;</span><span class="p">)</span>
-    <span class="n">Axelrod</span><span class="o">.</span><span class="n">spread_influence</span><span class="p">(</span><span class="n">network</span><span class="p">,</span> <span class="n">focal_agent</span><span class="p">,</span> <span class="n">neighbors</span><span class="p">,</span> <span class="n">regime</span><span class="o">=</span><span class="s2">&quot;one-to-one&quot;</span><span class="p">,</span> <span class="n">dissimilarity_measure</span><span class="o">=</span><span class="n">defSim</span><span class="o">.</span><span class="n">HammingDistance</span><span class="p">())</span>
-
-<span class="n">results</span> <span class="o">=</span> <span class="n">defSim</span><span class="o">.</span><span class="n">OutputMeasures</span><span class="o">.</span><span class="n">ClusterFinder</span><span class="o">.</span><span class="n">create_output</span><span class="p">(</span><span class="n">network</span><span class="p">,</span> <span class="n">cluster_dissimilarity_threshold</span><span class="o">=.</span><span class="mi">99</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="n">results</span><span class="p">)</span>
-
-<span class="c1"># using the building blocks manually with your own influence function</span>
-<span class="n">network</span> <span class="o">=</span> <span class="n">defSim</span><span class="o">.</span><span class="n">generate_network</span><span class="p">(</span><span class="s2">&quot;ring&quot;</span><span class="p">)</span>
-<span class="n">defSim</span><span class="o">.</span><span class="n">agents_init</span><span class="o">.</span><span class="n">initialize_attributes</span><span class="p">(</span><span class="n">network</span><span class="p">,</span> <span class="n">realization</span><span class="o">=</span><span class="s2">&quot;random_categorical&quot;</span><span class="p">)</span>
-<span class="n">calculator</span> <span class="o">=</span> <span class="n">defSim</span><span class="o">.</span><span class="n">dissimilarity_calculator</span><span class="o">.</span><span class="n">select_calculator</span><span class="p">(</span><span class="s2">&quot;euclidean&quot;</span><span class="p">)</span>
-<span class="n">calculator</span><span class="o">.</span><span class="n">calculate_dissimilarity_networkwide</span><span class="p">(</span><span class="n">network</span><span class="p">)</span>
-
-<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">100</span><span class="p">):</span>
-    <span class="n">focal_agent</span> <span class="o">=</span> <span class="n">defSim</span><span class="o">.</span><span class="n">focal_agent_sim</span><span class="o">.</span><span class="n">select_focal_agent</span><span class="p">(</span><span class="n">network</span><span class="p">,</span> <span class="s2">&quot;random&quot;</span><span class="p">)</span>
-    <span class="n">neighbors</span> <span class="o">=</span> <span class="n">defSim</span><span class="o">.</span><span class="n">neighbor_selector_sim</span><span class="o">.</span><span class="n">select_neighbors</span><span class="p">(</span><span class="n">network</span><span class="p">,</span> <span class="s2">&quot;random&quot;</span><span class="p">,</span> <span class="n">focal_agent</span><span class="p">,</span> <span class="s2">&quot;one-to-one&quot;</span><span class="p">)</span>
-    <span class="n">my_influence_function</span><span class="o">.</span><span class="n">spread_influence</span><span class="p">(</span><span class="n">network</span><span class="p">,</span> <span class="n">focal_agent</span><span class="p">,</span> <span class="n">neighbors</span><span class="p">,</span> <span class="n">regime</span><span class="o">=</span><span class="s2">&quot;one-to-one&quot;</span><span class="p">,</span>
-                                           <span class="n">dissimilarity_measure</span><span class="o">=</span><span class="n">defSim</span><span class="o">.</span><span class="n">HammingDistance</span><span class="p">())</span>
-
-<span class="n">results</span> <span class="o">=</span> <span class="n">defSim</span><span class="o">.</span><span class="n">OutputMeasures</span><span class="o">.</span><span class="n">ClusterFinder</span><span class="o">.</span><span class="n">create_output</span><span class="p">(</span><span class="n">network</span><span class="p">,</span> <span class="n">cluster_dissimilarity_threshold</span><span class="o">=.</span><span class="mi">99</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="n">results</span><span class="p">)</span>
-</pre></div>
+<p>The <a class="reference internal" href="simulation.class.html#module-defSim.Simulation" title="defSim.Simulation"><code class="xref py py-class docutils literal notranslate"><span class="pre">Simulation</span></code></a> class handles the execution of all modules as depicted in the flow chart, and returns a single row of results as a Pandas dataframe. The <a class="reference internal" href="experiment.class.html#module-defSim.Experiment" title="defSim.Experiment"><code class="xref py py-class docutils literal notranslate"><span class="pre">Experiment</span></code></a> class handles multiple executions of the simulation class, calling the simulation class effectively a number of times (repetitions) for every user-given parameter combination. Running these two classes is what we call using defSim <em>the comprehensive way</em>. Alternatively, you might want to use just one of a couple of the pre-programmed modules, and use your own code to create a variation on the traditional social influence models. This is what we call using defSim <em>the modular way</em>.</p>
+<p><a class="reference internal" href="Introduction_to_defSim.html"><span class="doc">Learn the basics of defSim on our introduction page</span></a></p>
 </div>
-<div class="section" id="the-package-consists-of-the-following-components">
-<h2>The package consists of the following components:<a class="headerlink" href="#the-package-consists-of-the-following-components" title="Permalink to this headline">¶</a></h2>
+<hr class="docutils" />
+<div class="section" id="contents-of-the-documentation">
+<h1>Contents of the documentation<a class="headerlink" href="#contents-of-the-documentation" title="Permalink to this headline">¶</a></h1>
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="quickintro.html">Quick start guide</a></li>
-<li class="toctree-l1"><a class="reference internal" href="defSim.html">defSim</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="defSim.html#module-defSim.Experiment">Experiment module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="defSim.html#module-defSim.Simulation">Simulation module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Introduction_to_defSim.html">Introduction</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Introduction_to_defSim.html#the-comprehensive-way">1. The Comprehensive Way</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Introduction_to_defSim.html#the-modular-way">2. The Modular Way</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Introduction_to_defSim.html#example-biased-media-influence">Example | Biased media influence</a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="Introduction_to_defSim.html#some-useful-resources">Some useful resources</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="comprehensive-use">
+<h2>Comprehensive use<a class="headerlink" href="#comprehensive-use" title="Permalink to this headline">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="experiment.class.html">Experiment class</a></li>
+<li class="toctree-l1"><a class="reference internal" href="simulation.class.html">Simulation class</a></li>
+</ul>
+</div>
+</div>
+<div class="section" id="modular-use">
+<h2>Modular use<a class="headerlink" href="#modular-use" title="Permalink to this headline">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="defSim.network_init.html">Networks</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="defSim.network_init.html#module-defSim.network_init.network_init">network_init module</a></li>
 </ul>
@@ -294,6 +246,7 @@
 </div>
 </div>
 </div>
+<hr class="docutils" />
 <div class="section" id="indices-and-tables">
 <h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this headline">¶</a></h1>
 <ul class="simple">
@@ -310,7 +263,7 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="quickintro.html" class="btn btn-neutral float-right" title="Learn defSim in 5 minutes" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="Introduction_to_defSim.html" class="btn btn-neutral float-right" title="Introduction to defSim" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
     </div>

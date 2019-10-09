@@ -18,23 +18,33 @@ The flow of a single simulation run implemented by defSim looks like this:
 
 All elements on the left represent the separate modules.
 
-..add explanation on modules and typical workflow
+The :class:`~defSim.Simulation` class handles the execution of all modules as depicted in the flow chart, and returns a single row of results as a Pandas dataframe. The :class:`~defSim.Experiment` class handles multiple executions of the simulation class, calling the simulation class effectively a number of times (repetitions) for every user-given parameter combination. Running these two classes is what we call using defSim *the comprehensive way*. Alternatively, you might want to use just one of a couple of the pre-programmed modules, and use your own code to create a variation on the traditional social influence models. This is what we call using defSim *the modular way*. 
 
-I recommend to start with the :class:`~defSim.Simulation` class and the :class:`~defSim.Experiment` class to understand how to create your own multi-agent system experiment.
+:doc:`Learn the basics of defSim on our introduction page <Introduction_to_defSim>`
 
-Here are some examples of how to create experiments:
+................................................................................
 
-.. literalinclude:: examples.py
-    :language: python
-
-
-The package consists of the following components:
--------------------------------------------------
+Contents of the documentation
+=============================
 
 .. toctree::
    
-   Quick start guide <quickintro>
-   defSim <defSim>
+   Introduction <Introduction_to_defSim>
+   
+
+Comprehensive use
+-----------------
+
+.. toctree::
+   
+   Experiment class <experiment.class>
+   Simulation class <simulation.class>
+   
+Modular use
+-----------
+
+.. toctree::
+   
    Networks <defSim.network_init>
    Agent features <defSim.agents_init>
    Focal agent selection <defSim.focal_agent_sim>
@@ -42,8 +52,9 @@ The package consists of the following components:
    Influence <defSim.influence_sim>
    Network evolution <defSim.network_evolution_sim>
    Dissimilarity updaters <defSim.dissimilarity_component>
-   defSim.tests
    defSim.tools
+
+................................................................................
 
 Indices and tables
 ==================

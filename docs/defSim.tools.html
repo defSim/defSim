@@ -68,13 +68,19 @@
           
             
             
-                <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="quickintro.html">Quick start guide</a></li>
-<li class="toctree-l1"><a class="reference internal" href="defSim.html">defSim</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="defSim.html#module-defSim.Experiment">Experiment module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="defSim.html#module-defSim.Simulation">Simulation module</a></li>
+                <ul>
+<li class="toctree-l1"><a class="reference internal" href="Introduction_to_defSim.html">Introduction</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Introduction_to_defSim.html#the-comprehensive-way">1. The Comprehensive Way</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Introduction_to_defSim.html#the-modular-way">2. The Modular Way</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Introduction_to_defSim.html#some-useful-resources">Some useful resources</a></li>
 </ul>
 </li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="experiment.class.html">Experiment class</a></li>
+<li class="toctree-l1"><a class="reference internal" href="simulation.class.html">Simulation class</a></li>
+</ul>
+<ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="defSim.network_init.html">Networks</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="defSim.network_init.html#module-defSim.network_init.network_init">network_init module</a></li>
 </ul>
@@ -188,7 +194,7 @@ the kwargs dictionary.</p>
 <li><p><strong>network</strong> – A NetworkX object from which the focal agent will be selected</p></li>
 <li><p><strong>realizations</strong> – <p>The specific OutputTableCreator that will be used. Currently, the options are:</p>
 <ul>
-<li><p>Basic: Returns the realizations Regions, Zones, Isolates, Homogeneity</p></li>
+<li><p>Basic: Returns the realizations Regions, Zones, Isolates, Homogeneity, AverageDistance</p></li>
 <li><p>ClusterFinder: Method to find clusters based on minimal allowed distance between network network neighbors as
 defined by the user in the kwargs dictionary. Default is to return the same output as the Regions realization</p></li>
 <li><p>RegionsList:</p></li>
@@ -198,17 +204,17 @@ defined by the user in the kwargs dictionary. Default is to return the same outp
 <li><p>Isolates: Reports the number of isolates as found in the ClusterFinder method, based on minimal allowed
 distance between network network neighbors as defined by the user in the kwargs dictionary. Default is to
 return the same output as the Regions realization</p></li>
+<li><p>Homogeneity:</p></li>
+<li><p>AverageDistance:</p></li>
 </ul>
 </p></li>
 <li><p><strong>agents</strong> – A list of the indices of all agents that will be considered by the output table.</p></li>
-<li><p><strong>settings_dict</strong> – A dictionary of column names and values that will be added to the output table. Can be used</p></li>
+<li><p><strong>settings_dict</strong> – A dictionary of column names and values that will be added to the output table. Can be used
+to merge output with parameter setting values.</p></li>
 </ul>
 </dd>
-</dl>
-<p>to merge output with parameter setting values.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>A dictionary.</p>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A dictionary.</p>
 </dd>
 </dl>
 </dd></dl>
@@ -239,7 +245,6 @@ strict number of regions
 :param strict_zones: If true, cluster_dissimilarity_threshold is neglected and strict zones are returned (only the
 links with dissimilarity != 1 are preserved)
 :returns: A list with sizes of the retrieved clusters</p>
-<p>[Axelrod1997] The reference</p>
 </dd></dl>
 
 </dd></dl>
