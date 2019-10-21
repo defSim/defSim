@@ -14,6 +14,7 @@ from defSim.dissimilarity_component.HammingDistance import HammingDistance
 from defSim.dissimilarity_component.EuclideanDistance import EuclideanDistance
 from defSim.focal_agent_sim import focal_agent_sim
 from defSim.influence_sim import influence_sim
+from defSim.influence_sim.influence_sim import spread_influence
 from defSim.influence_sim.influence_sim import InfluenceOperator
 from defSim.neighbor_selector_sim import neighbor_selector_sim
 from defSim.network_init.network_init import generate_network
