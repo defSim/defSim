@@ -18,10 +18,9 @@ class RandomNeighborSelector(NeighborSelector):
         Selects a random agent from the direct neighborhood of the focal agent in the case of one-to-one communication,
         and all direct neighbors otherwise.
 
-
-
-        :param network: The network from which the agent shall be selected.
-        :param focal_agent: The index of the focal agent, who is either the source or target of influence.
+        :param network: A NetworkX object
+        :param focal_agent: The index of the focal agent, who is either the source (for "one-to-one" or "one-to-many"
+            communication) or target (for "many-to-one") of influence.
         :param regime: Whether the focal agent interacts with only one or many agents from his or her
             neighborhood. If "one-to-one": One neighbor to which the focal agent has an outgoing tie is selected.
             If "one-to-many": All neighbors to which the focal agent has an outgoing tie are selected.
