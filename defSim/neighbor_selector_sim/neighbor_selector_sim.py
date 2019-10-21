@@ -43,16 +43,19 @@ def select_neighbors(network: nx.Graph, realization: str, focal_agent: int, regi
     focal agent and the communication regime.
 
     :param network: The network from which the agents are selected.
-    :param realization: The specific implementation of the neighborSelector. Options are "random", ...
+    :param realization: The specific implementation of the neighborSelector. Options are "random", "similar"
     :param focal_agent: An integer that represents the index of the focal agent in the network.
     :param regime: Either "many_to_one", "one_to_many" or "one_to_one".
     :param kwargs: Additional parameters specific to the implementation of the neighborSelector.
     :returns: A list with the indices of the selected other agents.
     """
     from .RandomNeighborSelector import RandomNeighborSelector
+    from .SimilarNeighborSelector import SimilarNeighborSelector
 
     if realization == "random":
         return RandomNeighborSelector.select_neighbors(network, focal_agent, regime, **kwargs)
+    if realization == "similar":
+        return SimilarNeighborSelector.select_neighbors(network, focal_agent, regime, **kwargs)
     else:
-        raise ValueError("Can only select from the options ['random', 'Alternative1', 'Alternative2']")
+        raise ValueError("Can only select from the options ['random', 'similar']")
 
