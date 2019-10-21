@@ -38,7 +38,7 @@ class SimilarNeighborSelector(NeighborSelector):
         """
 
         eligible_neighbors = [neighbor for neighbor in network[focal_agent]
-                              if network.edges[0,neighbor]['dist'] <= confidence_level_neighbor_selector]
+                              if network.edges[focal_agent,neighbor]['dist'] <= confidence_level_neighbor_selector]
 
         if eligible_neighbors == []:
             return []
