@@ -47,7 +47,8 @@
       <div class="wy-side-scroll"  style="background-color: #252625">
         <div class="wy-side-nav-search"  style="background-color: #252625">
           
-
+          
+          <br> <!-- MK -->
           <a href="index.html">
             <img src="_static/lsst-logo-dark.svg" class="logo" />
             
@@ -99,7 +100,8 @@
 </li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Neighbor selector</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#module-defSim.neighbor_selector_sim.neighbor_selector_sim">neighbor_selector_sim module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#module-defSim.neighbor_selector_sim.RandomNeighborSelector">RandomneighborSelector module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-defSim.neighbor_selector_sim.RandomNeighborSelector">RandomNeighborSelector module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-defSim.neighbor_selector_sim.SimilarNeighborSelector">SimilarNeighborSelector module</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="defSim.influence_sim.html">Influence</a><ul>
@@ -149,13 +151,13 @@
       <div class="wy-nav-content">
         <div class="rst-content">
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
-            <div class="dd-masthead">
+            <!-- <div class="dd-masthead">
   <h1 class="dd-title">defSim</h1>
   <ul class="dd-authors">
     
   </ul>
   <p>Latest Revision: <a href="#change-record"></a></p>
-</div>
+</div> --> <!-- turned off on 21/10/2019 -->
            <div itemprop="articleBody">
             
   <div class="section" id="neighbor-selector-simulation-component">
@@ -207,7 +209,7 @@ focal agent and the communication regime.</p>
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>network</strong> – The network from which the agents are selected.</p></li>
-<li><p><strong>realization</strong> – The specific implementation of the neighborSelector. Options are “random”, …</p></li>
+<li><p><strong>realization</strong> – The specific implementation of the neighborSelector. Options are “random”, “similar”</p></li>
 <li><p><strong>focal_agent</strong> – An integer that represents the index of the focal agent in the network.</p></li>
 <li><p><strong>regime</strong> – Either “many_to_one”, “one_to_many” or “one_to_one”.</p></li>
 <li><p><strong>kwargs</strong> – Additional parameters specific to the implementation of the neighborSelector.</p></li>
@@ -221,7 +223,7 @@ focal agent and the communication regime.</p>
 
 </div>
 <div class="section" id="module-defSim.neighbor_selector_sim.RandomNeighborSelector">
-<span id="randomneighborselector-module"></span><h2>RandomneighborSelector module<a class="headerlink" href="#module-defSim.neighbor_selector_sim.RandomNeighborSelector" title="Permalink to this headline">¶</a></h2>
+<span id="randomneighborselector-module"></span><h2>RandomNeighborSelector module<a class="headerlink" href="#module-defSim.neighbor_selector_sim.RandomNeighborSelector" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
 <dt id="defSim.neighbor_selector_sim.RandomNeighborSelector.RandomNeighborSelector">
 <em class="property">class </em><code class="sig-prename descclassname">defSim.neighbor_selector_sim.RandomNeighborSelector.</code><code class="sig-name descname">RandomNeighborSelector</code><a class="headerlink" href="#defSim.neighbor_selector_sim.RandomNeighborSelector.RandomNeighborSelector" title="Permalink to this definition">¶</a></dt>
@@ -236,12 +238,57 @@ and all direct neighbors otherwise.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>network</strong> – The network from which the agent shall be selected.</p></li>
-<li><p><strong>focal_agent</strong> – The index of the focal agent, who is either the source or target of influence.</p></li>
+<li><p><strong>network</strong> – A NetworkX object</p></li>
+<li><p><strong>focal_agent</strong> – The index of the focal agent, who is either the source (for “one-to-one” or “one-to-many”
+communication) or target (for “many-to-one”) of influence.</p></li>
 <li><p><strong>regime</strong> – Whether the focal agent interacts with only one or many agents from his or her
 neighborhood. If “one-to-one”: One neighbor to which the focal agent has an outgoing tie is selected.
 If “one-to-many”: All neighbors to which the focal agent has an outgoing tie are selected.
 If “many-to-one”: All neighbors from which the focal agent has an incoming tie are selected.</p></li>
+<li><p><strong>kwargs</strong> – Additional parameters specific to the implementation of the InfluenceOperator.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><p>ValueError if not one of the possible options for the communication_regime is chosen.</p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>A list of the indices of the relevant other agents.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-defSim.neighbor_selector_sim.SimilarNeighborSelector">
+<span id="similarneighborselector-module"></span><h2>SimilarNeighborSelector module<a class="headerlink" href="#module-defSim.neighbor_selector_sim.SimilarNeighborSelector" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="defSim.neighbor_selector_sim.SimilarNeighborSelector.SimilarNeighborSelector">
+<em class="property">class </em><code class="sig-prename descclassname">defSim.neighbor_selector_sim.SimilarNeighborSelector.</code><code class="sig-name descname">SimilarNeighborSelector</code><a class="headerlink" href="#defSim.neighbor_selector_sim.SimilarNeighborSelector.SimilarNeighborSelector" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#defSim.neighbor_selector_sim.neighbor_selector_sim.NeighborSelector" title="defSim.neighbor_selector_sim.neighbor_selector_sim.NeighborSelector"><code class="xref py py-class docutils literal notranslate"><span class="pre">defSim.neighbor_selector_sim.neighbor_selector_sim.NeighborSelector</span></code></a></p>
+<p>Implements the neighborSelector such that neighbors with a similar cultural profile are selected. Either all
+neighbors are selected - in the case of one-to-many and many-to-one communication - or a random neighbor - in the
+case of one-to-one communication.</p>
+<dl class="method">
+<dt id="defSim.neighbor_selector_sim.SimilarNeighborSelector.SimilarNeighborSelector.select_neighbors">
+<em class="property">static </em><code class="sig-name descname">select_neighbors</code><span class="sig-paren">(</span><em class="sig-param">network: networkx.classes.graph.Graph</em>, <em class="sig-param">focal_agent: int</em>, <em class="sig-param">regime: str</em>, <em class="sig-param">confidence_level_neighbor_selector: float = 0.5</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span> &#x2192; Iterable[int]<a class="headerlink" href="#defSim.neighbor_selector_sim.SimilarNeighborSelector.SimilarNeighborSelector.select_neighbors" title="Permalink to this definition">¶</a></dt>
+<dd><p>Selects a random agent from the direct neighborhood of the focal agent that is within the specified cultural
+distance, as stored in the edge between the focal agent and the potential selected neighbor. If the regime is
+“one-to-many” or “many-to-one”, all neighbors within the confidence criterion are selected. When there are no
+eligible neighbors (i.e. the focal agent is too dissimilar from all his neighbors), an empty list is returned.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>network</strong> – A NetworkX object</p></li>
+<li><p><strong>focal_agent</strong> – The index of the focal agent, who is either the source (for “one-to-one” or “one-to-many”
+communication) or target (for “many-to-one”) of influence.</p></li>
+<li><p><strong>regime</strong> – Whether the focal agent interacts with only one or many agents from his or her
+neighborhood.
+If “one-to-one”: One neighbor to which the focal agent has an outgoing tie is selected.
+If “one-to-many”: All neighbors to which the focal agent has an outgoing tie are selected.
+If “many-to-one”: All neighbors from which the focal agent has an incoming tie are selected.</p></li>
+<li><p><strong>confidence_level_neighbor_selector</strong> – The confidence level, i.e. the maximal allowed cultural distance
+between two nodes as stored in their edge attribute “dist”</p></li>
 <li><p><strong>kwargs</strong> – Additional parameters specific to the implementation of the InfluenceOperator.</p></li>
 </ul>
 </dd>
