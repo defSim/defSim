@@ -6,6 +6,8 @@ __all__ = ["agents_init",
            "neighbor_selector_sim",
            "network_init"]
 
+from defSim.network_init.network_init import generate_network
+
 from defSim.agents_init import agents_init
 from defSim.agents_init.agents_init import initialize_attributes
 
@@ -19,7 +21,7 @@ from defSim.focal_agent_sim import focal_agent_sim
 from defSim.focal_agent_sim.focal_agent_sim import select_focal_agent
 
 from defSim.neighbor_selector_sim import neighbor_selector_sim
-from defSim.network_init.network_init import generate_network
+from defSim.neighbor_selector_sim.neighbor_selector_sim import select_neighbors
 
 from defSim.influence_sim import influence_sim
 from defSim.influence_sim.influence_sim import spread_influence
