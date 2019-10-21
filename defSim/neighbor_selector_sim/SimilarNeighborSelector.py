@@ -42,16 +42,13 @@ class SimilarNeighborSelector(NeighborSelector):
 
         if eligible_neighbors == []:
             return []
-
-        if regime == "one-to-one":
-            return [(random.choice([neighbor for neighbor in network[focal_agent]
-                                    if network.edges[0,neighbor]['dist'] <= confidence_level_neighbor_selector]))]
-        elif regime == "one-to-many":
-            return [neighbor for neighbor in network[focal_agent]
-                    if network.edges[0, neighbor]['dist'] <= confidence_level_neighbor_selector] #todo: implement directed graphs
-        elif regime == "many-to-one":
-            return [neighbor for neighbor in network[focal_agent]
-                    if network.edges[0, neighbor]['dist'] <= confidence_level_neighbor_selector]
         else:
-            raise ValueError("You can only select from the options ['one-to-one', 'one-to-many', 'many-to-one']")
+            if regime == "one-to-one":
+                return [random.choice(eligible_neighbors)]
+            elif regime == "one-to-many":
+                return eligible_neighbors
+            elif regime == "many-to-one":
+                return eligible_neighbors
+            else:
+                raise ValueError("You can only select from the options ['one-to-one', 'one-to-many', 'many-to-one']")
 
