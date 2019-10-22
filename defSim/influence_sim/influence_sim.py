@@ -2,6 +2,7 @@ from abc import ABC, abstractmethod
 import networkx as nx
 from defSim.dissimilarity_component.dissimilarity_calculator import DissimilarityCalculator
 from typing import List
+import inspect
 
 
 class InfluenceOperator(ABC):
@@ -53,13 +54,14 @@ def spread_influence(network: nx.Graph,
     """
     This function works as a factory method for the influence component.
     It calls either the many_to_one or the one_to_many function of a specific implementation of the InfluenceOperator
-    and passes to itt to the kwargs dictionary. Which function is called is based on the selected communication regime.
+    and passes the arguments and the kwargs dictionary.
 
     :param network: A NetworkX object that will be modified.
     :param realization: The specific implementation of the InfluenceOperator. Options are "bounded_confidence",
         "axelrod", "weighted_linear", "persuasion".
+        Alternatively, a user-written implementation of the abstract base class can be given here.
     :param agent_i: the index of the focal agent that is either the source or the target of the influence
-    :param agents_j: A list of indices of the agents who can be either the source or the targets of the influence. The list can have a
+    :param agents_j: A list of indices of the agents who can be either the source or the targets of the influence.
     :param attributes: A list of the names of all the attributes that are subject to influence. If an agent has
         e.g. the attributes "Sex" and "Music taste", only supply ["Music taste"] as a parameter for this function.
         The influence function itself can still be a function of the "Sex" attribute.
@@ -99,12 +101,21 @@ def spread_influence(network: nx.Graph,
                                                **kwargs)
     elif realization == "persuasion":
         return Persuasion.spread_influence(network,
-                                               agent_i,
-                                               agents_j,
-                                               regime,
-                                               dissimilarity_measure,
-                                               attributes,
-                                               **kwargs)
+                                           agent_i,
+                                           agents_j,
+                                           regime,
+                                           dissimilarity_measure,
+                                           attributes,
+                                           **kwargs)
+    elif inspect.isclass(realization):
+        return realization.spread_influence(network,
+                                            agent_i,
+                                            agents_j,
+                                            regime,
+                                            dissimilarity_measure,
+                                            attributes,
+                                            **kwargs)
+
     else:
         raise ValueError("Can only select from the options ['axelrod', 'bounded_confidence', 'weighted_linear', "
-                         "'persuasion]")
+                         "'persuasion], or supply an implementation of the abstract base class")
