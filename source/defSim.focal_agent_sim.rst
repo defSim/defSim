@@ -10,7 +10,7 @@ focal_agent_sim module
     :undoc-members:
     :show-inheritance:
 
-RandomSelector module
+RandomSelector
 -------------------------------------------------------
 
 .. automodule:: defSim.focal_agent_sim.RandomSelector

@@ -9,7 +9,7 @@ neighbor_selector_sim module
     :undoc-members:
     :show-inheritance:
 
-RandomNeighborSelector module
+RandomNeighborSelector
 -------------------------------------------------------
 
 .. automodule:: defSim.neighbor_selector_sim.RandomNeighborSelector
@@ -18,7 +18,7 @@ RandomNeighborSelector module
     :show-inheritance:
 
 
-SimilarNeighborSelector module
+SimilarNeighborSelector
 -------------------------------------------------------
 
 .. automodule:: defSim.neighbor_selector_sim.SimilarNeighborSelector

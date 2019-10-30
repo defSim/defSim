@@ -1,5 +1,6 @@
 import numpy as np
 import networkx as nx
+import random
 
 
 def generate_network(name: str, **kwargs) -> nx.Graph:
@@ -15,16 +16,20 @@ def generate_network(name: str, **kwargs) -> nx.Graph:
     :returns: A NetworkX Graph object.
     """
     if name == "grid":
-        return _produce_grid_network(**kwargs)
-
+        network = _produce_grid_network(**kwargs)
     elif name == "spatial_random_graph":
-        return _produce_spatial_random_graph(**kwargs)
+        network = _produce_spatial_random_graph(**kwargs)
     elif name == "ring":
-        return _produce_ring_network(**kwargs)
+        network = _produce_ring_network(**kwargs)
     else:
-        return _produce_networkx_graph(name,**kwargs)
+        network = _produce_networkx_graph(name,**kwargs)
     #else:
     #    raise ValueError("Can only select from the options ['grid', 'spatial_random_graph', 'ring']")
+
+    if 'ms_rewiring' in kwargs:
+        network = execute_ms_rewiring(network,kwargs['ms_rewiring'])
+
+    return network
 
 
 def read_network(network_input: np.ndarray or str):
@@ -142,13 +147,10 @@ def _produce_grid_network(**kwargs) -> nx.Graph:
 
 def _produce_ring_network(**kwargs) -> nx.Graph:
     """
-    This method produces a ring network with varying number of neighbors. Furthermore it is possible to rewire the
-    network following the Maslov-Sneppen algorithm @Maslov2002.
+    This method produces a ring network with varying number of neighbors.
 
     :param int=49 num_agents: The number of agents the network should contain.
     :param int=2 num_neighbors: The number of neighbors per agent. Must be an even number.
-    :param float=0 ms_rewiring: The proportion of edges that should be rewired. Since the method executes random draws
-        with replacement, this number can exceed 1 (and should exceed 1 if you would want to approximate a random graph.
     :returns: A NetworkX Graph object.
     """
     #todo: properly cite MS
@@ -164,14 +166,9 @@ def _produce_ring_network(**kwargs) -> nx.Graph:
     except KeyError:
         # print("Number of neighbors was not specified, default value 2 is used.")
         num_neighbors = 2
-    try:
-        ms_rewiring = kwargs["ms_rewiring"]
-    except KeyError:
-        # print("Percentage of Mavlov-Sneppen rewiring was not specified, default value 0 is used.")
-        ms_rewiring = 0
 
     # todo: decide about adding seed
-    return nx.watts_strogatz_graph(num_agents, num_neighbors, ms_rewiring)
+    return nx.watts_strogatz_graph(num_agents, num_neighbors, 0)
 
 
 def _produce_spatial_random_graph(**kwargs) -> nx.Graph:
@@ -265,4 +262,32 @@ def _produce_networkx_graph(name: str,**kwargs):
     intersection_dict = {k: kwargs[k] for k in kwargs if k in graph_generator_arguments.args}
 
     return graph_generator(**intersection_dict)
+
+
+def execute_ms_rewiring(network: nx.Graph, rewiring_prop: float):
+    """
+    This method executes Maslov Sneppen rewiring (Maslov & Sneppen, 2002). Until a given proportion of the network
+    edges is rewired, the algorithm will pick two edges at random, remove them, and construct an edge between a
+    different combination of nodes that have just lost an edge. Effectively, this introduces randomization of network
+    structure, while leaving the degree distribution unchanged. Because the parameter `rewiring_prop` functions as a
+    threshold for number of rewiring iterations that need to be executed, it can exceed 1. Actually, to achieve a
+    random network starting from a network with structure, the rewiring proportion should exceed 1.
+
+    :param network: NetworkX Graph object
+    :param rewiring_prop: A threshold for the minimum proportion of edges in the graph object that need to be rewired.
+        Sampling these edges happens with replacement, so rewiring_prop may exceed 1.
+    :return: NetworkX Graph object
+    """
+    ticker = 0
+    while rewiring_prop * network.number_of_edges() > ticker:
+        agentA, agentB = random.choice(list(network.edges()))
+        agentC, agentD = random.choice(list(network.edges()))
+        if((agentA != agentC) & (agentA != agentD) & (agentB != agentC) & (agentB != agentD) &
+           (network.has_edge(agentA,agentC)==False) & (network.has_edge(agentB,agentD)==False)):
+            network.remove_edge(agentA,agentB)
+            network.remove_edge(agentC,agentD)
+            network.add_edge(agentA,agentC)
+            network.add_edge(agentB,agentD)
+            ticker += 1
+    return network
 

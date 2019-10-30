@@ -10,7 +10,7 @@ agents_init module
     :undoc-members:
     :show-inheritance:
 
-RandomCategoricalInitializer module
+RandomCategoricalInitializer
 ------------------------------------------------------------------
 
 .. automodule:: defSim.agents_init.RandomCategoricalInitializer
@@ -18,7 +18,7 @@ RandomCategoricalInitializer module
     :undoc-members:
     :show-inheritance:
 
-RandomContinuousInitializer module
+RandomContinuousInitializer
 -----------------------------------------------------------------
 
 .. automodule:: defSim.agents_init.RandomContinuousInitializer
