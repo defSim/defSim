@@ -30,7 +30,7 @@ class Simulation:
         topology (String = "grid"): Options are "grid", "ring" and "spatial_random_graph".
         attributes_initializer (String = "random_categorical" or :class:`AttributesInitializer`): Either be a custom AttributesInitializer or a string that selects from the predefined choices: ["random_categorical", "random_continuous"...]
         focal_agent_selector (str = "random" or :class:`FocalAgentSelector`): Either a custom FocalAgentSelector or a string that selects from the predefined options ["random", ...]
-        neighbor_selector (str = "random" or :class:`NeighborSelector`): Either a custom NeighborSelector or a string that selects from the predefined options ["random", ...}
+        neighbor_selector (str = "random" or :class:`NeighborSelector`): Either a custom NeighborSelector or a string that selects from the predefined options ["random", "similar" ...}
         influence_function (str = "axelrod" or :class:`InfluenceOperator`): Either a custom influence function or a string that selects from the predefined options ["axelrod", "bounded_confidence", "weighted_linear", ...}
         influenceable_attributes (List = None): This is a list of the attribute names, that may be changed in the influence step
         dissimilarity_measure (String = "hamming" or :class:`DissimilarityCalculator`): Either a custom DissimilarityCalculator or a string that selects from the predefined options ["hamming", "euclidean", ...}

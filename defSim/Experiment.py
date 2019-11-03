@@ -56,7 +56,7 @@ class Experiment:
         attribute_parameters (dict = {}): Optional dictionary that includes the name of attributes you want to set and a list of possible values for each.
         focal_agent_selector (str = "random" or :class:`FocalAgentSelector`): Either a custom FocalAgentSelector or a string that selects from the predefined options ["random", ...]
         focal_agent_parameters (dict = {}): Optional dictionary that includes the parameters for the FocalAgentSelector.
-        neighbor_selector (str = "random" or :class:`NeighborSelector`): Either a custom NeighborSelector or a string that selects from the predefined options ["random", ...}
+        neighbor_selector (str = "random" or :class:`NeighborSelector`): Either a custom NeighborSelector or a string that selects from the predefined options ["random", "similar", ...}
         neighbor_parameters (dict = {}): Optional dictionary that includes the parameters for the NeighborSelector.
         influence_function (str = "axelrod" or :class:`InfluenceOperator`): Either a custom influence function or a string that selects from the predefined options ["axelrod", "bounded_confidence", "weighted_linear", ...}
         influence_parameters (dict = {}): Optional dictionary that includes the parameters for the InfluenceFunction.
