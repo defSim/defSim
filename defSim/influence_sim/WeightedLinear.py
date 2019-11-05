@@ -82,7 +82,7 @@ class WeightedLinear(InfluenceOperator):
 
         if attributes is None:
             # if no specific attributes were given, take all of them
-            attributes = list(network.node[agent_i].keys())
+            attributes = list(network.nodes[agent_i].keys())
 
         # variable to return at the end of function
         success = False
@@ -92,20 +92,20 @@ class WeightedLinear(InfluenceOperator):
         if regime != "many-to-one": # it must be "one-to-one" or "one-to-many"
             for neighbor in agents_j:
                 # calculate 'opinion' distance on the trait that will be changed
-                feature_difference = network.node[agent_i][influenced_feature] - \
-                                     network.node[neighbor][influenced_feature]
+                feature_difference = network.nodes[agent_i][influenced_feature] - \
+                                     network.nodes[neighbor][influenced_feature]
                 # influence function
-                network.node[neighbor][influenced_feature] = network.node[neighbor][influenced_feature] + \
+                network.nodes[neighbor][influenced_feature] = network.nodes[neighbor][influenced_feature] + \
                     convergence_rate * (1 - homophily * abs(network.edges[agent_i, neighbor]["dist"])) * \
                     feature_difference
                 # bounding the opinions to the pre-supposed opinion scale [0,1]
-                if network.node[neighbor][influenced_feature] > 1: network.node[neighbor][influenced_feature] = 1
-                if network.node[neighbor][influenced_feature] < 0: network.node[neighbor][influenced_feature] = 0
+                if network.nodes[neighbor][influenced_feature] > 1: network.nodes[neighbor][influenced_feature] = 1
+                if network.nodes[neighbor][influenced_feature] < 0: network.nodes[neighbor][influenced_feature] = 0
 
                 if bi_directional == True and regime == "one-to-one":
                     # influence function applied again
                     # (note that feature_difference has not been updated after changing neighbor's feature)
-                    network.node[agent_i][influenced_feature] = network.node[agent_i][influenced_feature] - \
+                    network.nodes[agent_i][influenced_feature] = network.nodes[agent_i][influenced_feature] - \
                         convergence_rate * (1 - homophily * abs(network.edges[agent_i, neighbor]["dist"])) * \
                         feature_difference
                     update_dissimilarity(network, [agent_i, neighbor], dissimilarity_measure)
@@ -117,12 +117,12 @@ class WeightedLinear(InfluenceOperator):
             # a decision rule can be added here (...in agents_j if ...)
             if len(set_of_influencers) != 0:
                 # we now simply take as focal point the average opinion in the group
-                average_value = np.mean([network.node[neighbor][influenced_feature] for neighbor in set_of_influencers])
+                average_value = np.mean([network.nodes[neighbor][influenced_feature] for neighbor in set_of_influencers])
                 # as distance we take the mean of all distances
                 average_distance = np.mean([network.edges[agent_i, neighbor]["dist"] for neighbor in set_of_influencers])
 
-                feature_difference = average_value - network.node[agent_i][influenced_feature]
-                network.node[agent_i][influenced_feature] = network.node[agent_i][influenced_feature] + \
+                feature_difference = average_value - network.nodes[agent_i][influenced_feature]
+                network.nodes[agent_i][influenced_feature] = network.nodes[agent_i][influenced_feature] + \
                     convergence_rate * (1 - homophily * abs(average_distance)) * feature_difference
                 update_dissimilarity(network, [agent_i], dissimilarity_measure)
                 success = True

@@ -62,7 +62,7 @@ class BoundedConfidence(InfluenceOperator):
 
         if attributes is None:
             # if no specific attributes were given, take all of them
-            attributes = list(network.node[agent_i].keys())
+            attributes = list(network.nodes[agent_i].keys())
 
         # whether influence was exerted
         success = False
@@ -75,14 +75,14 @@ class BoundedConfidence(InfluenceOperator):
                 if network.edges[agent_i, neighbor]['dist'] < confidence_level:
                     success = True
                     # j - i
-                    feature_difference = network.node[neighbor][influenced_feature] - network.node[agent_i][
+                    feature_difference = network.nodes[neighbor][influenced_feature] - network.nodes[agent_i][
                         influenced_feature]
                     # j_t+1 = j - (j-i)
-                    network.node[neighbor][influenced_feature] = network.node[neighbor][
+                    network.nodes[neighbor][influenced_feature] = network.nodes[neighbor][
                                                                       influenced_feature] - convergence_rate * feature_difference
                     if bi_directional == True and regime == "one-to-one":
                         # i_t+1 = i + (j-i)
-                        network.node[agent_i][influenced_feature] = network.node[agent_i][
+                        network.nodes[agent_i][influenced_feature] = network.nodes[agent_i][
                                                                         influenced_feature] + convergence_rate * feature_difference
                         update_dissimilarity(network, [agent_i, neighbor], dissimilarity_measure)
                     else:
@@ -93,9 +93,9 @@ class BoundedConfidence(InfluenceOperator):
                                 network.edges[agent_i, neighbor]['dist'] < confidence_level]
             if len(close_neighbors) != 0:
                 success = True
-                average_value = np.mean([network.node[neighbor][influenced_feature] for neighbor in close_neighbors])
-                feature_difference = average_value - network.node[agent_i][influenced_feature]
-                network.node[agent_i][influenced_feature] = network.node[agent_i][
+                average_value = np.mean([network.nodes[neighbor][influenced_feature] for neighbor in close_neighbors])
+                feature_difference = average_value - network.nodes[agent_i][influenced_feature]
+                network.nodes[agent_i][influenced_feature] = network.nodes[agent_i][
                                                                 influenced_feature] + convergence_rate * feature_difference
                 update_dissimilarity(network, [agent_i], dissimilarity_measure)
 

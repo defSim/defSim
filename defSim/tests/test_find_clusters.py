@@ -6,10 +6,10 @@ class test_find_clusters(TestCase):
     G = ds.generate_network('complete_graph', n=4)
     ds.agents_init.initialize_attributes(G, 'random_categorical', num_features=3, num_traits=2)
     # change attribute values
-    G.node[0].update(dict(zip(['f01', 'f02', 'f03'], (1, 1, 1))))
-    G.node[1].update(dict(zip(['f01', 'f02', 'f03'], (1, 1, 1))))
-    G.node[2].update(dict(zip(['f01', 'f02', 'f03'], (1, 0, 0))))
-    G.node[3].update(dict(zip(['f01', 'f02', 'f03'], (0, 0, 0))))
+    G.nodes[0].update(dict(zip(['f01', 'f02', 'f03'], (1, 1, 1))))
+    G.nodes[1].update(dict(zip(['f01', 'f02', 'f03'], (1, 1, 1))))
+    G.nodes[2].update(dict(zip(['f01', 'f02', 'f03'], (1, 0, 0))))
+    G.nodes[3].update(dict(zip(['f01', 'f02', 'f03'], (0, 0, 0))))
     # update dissimilarity in the network
     calculator = ds.dissimilarity_calculator.select_calculator('hamming')
     calculator.calculate_dissimilarity_networkwide(G)

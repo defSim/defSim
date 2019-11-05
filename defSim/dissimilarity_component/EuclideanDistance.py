@@ -19,8 +19,8 @@ class EuclideanDistance(DissimilarityCalculator):
 
         :returns: A float value, representing the distance between the two agents.
         """
-        agent1_attributes = np.array(list(network.node[agent1_id].values()))
-        agent2_attributes = np.array(list(network.node[agent2_id].values()))
+        agent1_attributes = np.array(list(network.nodes[agent1_id].values()))
+        agent2_attributes = np.array(list(network.nodes[agent2_id].values()))
         return np.linalg.norm(agent1_attributes - agent2_attributes)
 
     @staticmethod

@@ -12,7 +12,7 @@ agents_init.initialize_attributes(network, "random")
 network_comparison = network.copy()
 HammingDistance.calculate_dissimilarity_networkwide(network)
 
-all_attributes = network.node[1].keys()
+all_attributes = network.nodes[1].keys()
 def test_isomorphic():
     for i in range(10000):
         nm = iso.categorical_node_match(all_attributes, [0 for i in range(len(all_attributes))])

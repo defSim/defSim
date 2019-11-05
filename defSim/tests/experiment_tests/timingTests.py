@@ -129,7 +129,7 @@ def timeIterationStepOneToOne49Overlap():
 def timeIterationStepOneToMany49Overlap():
     network = network_init.generate_network("grid")
     agents_init.initialize_attributes(network, "random")
-    all_attributes = network.node[1].keys()
+    all_attributes = network.nodes[1].keys()
     random.seed("random")
     for i in range(2000000):
         agentid= focal_agent_sim.select_focal_agent(network, "random")
@@ -159,7 +159,7 @@ def timeSimulationOneToMany5000():
 #network = NetworkBuilder.generate_network("grid", **{"num_agents": 5000})
 #AttributesInitializer.initialize_attributes(network, "random")
 def timeIterationStepOneToOne5000Overlap():
-    all_attributes = network.node[1].keys()
+    all_attributes = network.nodes[1].keys()
     random.seed("random")
     for i in range(20000):
         agentid= focal_agent_sim.select_focal_agent(network, "random")
@@ -167,7 +167,7 @@ def timeIterationStepOneToOne5000Overlap():
         influence_sim.spread_influence(network, "stochasticOverlap", agentid, neighborsid, list(all_attributes), "one-to-one")
 
 def timeIterationStepOneToMany5000Overlap():
-    all_attributes = network.node[1].keys()
+    all_attributes = network.nodes[1].keys()
     random.seed("random")
     for i in range(20000):
         agentid= focal_agent_sim.select_focal_agent(network, "random")
@@ -181,7 +181,7 @@ def timeIterationStepOneToMany5000Overlap():
 def timeIterationStepOneToOne9():
     network = network_init.generate_network("grid", **{"num_agents": 9})
     agents_init.initialize_attributes(network, "random")
-    all_attributes = network.node[1].keys()
+    all_attributes = network.nodes[1].keys()
     random.seed("random")
     for i in range(2000000):
         agentid= focal_agent_sim.select_focal_agent(network, "random")

@@ -33,5 +33,5 @@ class TestWeightedLinear(TestCase):
                                                        **{"convergence_rate": 0.5,
                                                           "homophily": 0,
                                                           "bi_directional": True})
-        self.assertEqual(network1.node[1]['f01'], network1.node[0]['f01'])
+        self.assertEqual(network1.nodes[1]['f01'], network1.nodes[0]['f01'])
 
