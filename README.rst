@@ -20,4 +20,4 @@ if you change the package or pull changes:
 
 .. code-block:: console
 
-   pip install upgrade .
+   pip install --upgrade .
