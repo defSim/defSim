@@ -18,8 +18,8 @@ class OutputTableCreator(ABC):
         """
         pass
 
-def create_output_table(network: nx.Graph, realizations: List[str]=[], colnames: List[str]=[], agents: List[int]=[],
-                        settings_dict: dict={}, **kwargs) -> int:
+def create_output_table(network: nx.Graph, realizations: List[str or OutputTableCreator]=[], colnames: List[str]=[],
+                        agents: List[int]=[], settings_dict: dict={}, **kwargs) -> int:
     """
     This function works as a factory method for the OutputTableCreator component.
     It calls the create_output function of a specific implementation of the OutputTableCreator and passes to it
@@ -29,7 +29,7 @@ def create_output_table(network: nx.Graph, realizations: List[str]=[], colnames:
     :param realizations: The specific OutputTableCreator that will be used. Currently, the options are:
 
         * Basic: Returns the realizations Regions, Zones, Isolates, Homogeneity, AverageDistance
-        * ClusterFinder: Method to find clusters based on minimal allowed distance between network network neighbors as
+        * ClusterFinder: Method to find clusters based on minimal allowed distance between network neighbors as
           defined by the user in the kwargs dictionary. Default is to return the same output as the Regions realization
         * RegionsList:
         * Regions:

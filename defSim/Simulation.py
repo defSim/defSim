@@ -38,6 +38,9 @@ class Simulation:
         stop_condition (str = "max_iteration"): Determines at what point a simulation is supposed to stop. Options include "strict_convergence", which means that it is theoretically not possible anymore for any agent to influence another, "pragmatic_convergence", which means that it is assumed that little change is possible anymore, and "max_iteration" which just stops the simulation after a certain amount of time steps.
         communication_regime (str = "one-to-one"): Options are "one-to-one", "one-to-many" and "many-to-one".
         parameter_dict: A dictionary with all parameters that will be passed to the specific component implementations.
+        seed: #todo
+        output: #todo
+        tickwise: #todo WILL GET A LIST OF FEATURES IT NEEDS TO OUTPUT TICKWISE
     """
 
     def __init__(self,
@@ -55,7 +58,8 @@ class Simulation:
                  communication_regime: str = "one-to-one",
                  parameter_dict={},
                  seed=None,
-                 output_realizations=[]
+                 output_realizations=[],
+                 tickwise: List[str] = []
                  ):
         self.network = network
         self.topology = topology
@@ -77,6 +81,8 @@ class Simulation:
         self.time_steps = 0
         self.influence_steps = 0  # counts the successful influence steps
         self.output_realizations = output_realizations
+        self.tickwise = tickwise
+        self.tickwise_features = {feature: [] for feature in self.tickwise}
 
     def return_values(self) -> pd.DataFrame:
         """
@@ -178,6 +184,11 @@ class Simulation:
                                                      self.dissimilarity_calculator,
                                                      self.influenceable_attributes,
                                                      **self.parameter_dict)
+
+        if self.tickwise: # list is not empty
+            for i in self.tickwise:
+                self.tickwise_features[i].append(OutputMeasures.AttributeReporter.create_output(self.network,feature=i))
+
         self.time_steps += 1
         if success:
             self.influence_steps += 1

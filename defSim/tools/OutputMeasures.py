@@ -31,3 +31,20 @@ class ClusterFinder(OutputTableCreator):
         networkcopy.remove_edges_from(remove)
 
         return [len(c) for c in sorted(nx.connected_components(networkcopy), key=len, reverse=True)]
+
+class AttributeReporter(OutputTableCreator):
+    @staticmethod
+    def create_output(network: nx.Graph, **kwargs):
+        """
+
+        THIS FUNCTION WILL OUTPUT A SINGLE ROW OF A DATAFRAME WHERE THE COLUMNS ARE USER-GIVEN AGENT-FEATURES AND COLUMN
+        VALUES CONTAIN A LIST OF ALL THE AGENTS' VALUES ON THE GIVEN FEATURE.
+
+        :param network:
+        :param feature:
+        :return:
+        """
+
+        feature = kwargs.get('feature', False)
+
+        return list(nx.get_node_attributes(network,feature).values())
