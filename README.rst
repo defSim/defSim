@@ -14,10 +14,10 @@ To install the package, clone the repository to a folder of your choice and exec
 
 .. code-block:: console
 
-   pip --install .
+   pip install .
 
 if you change the package or pull changes:
 
 .. code-block:: console
 
-   pip --install upgrade .
+   pip install --upgrade .
