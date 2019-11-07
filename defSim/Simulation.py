@@ -21,13 +21,14 @@ class Simulation:
     """
     This class is responsible for initializing and running a single experiment until the desired stop criterion is
     reached. The Simulation class contains three different stop criterion implementations as methods, but more can be
-    added todo: (or passed as a function?).
+    added.
     The class is initialized in a similar way as the Experiment class but it does not accept multiple parameter
     values per parameter and also all optional parameters are passed in one combined dictionary.
 
     Args:
         network (nx.Graph=None): A NetworkX object that was created from empirical data.
-        topology (String = "grid"): Options are "grid", "ring" and "spatial_random_graph".
+        topology (String = "grid"): Options are "grid", "ring" and "spatial_random_graph", or you could give the name of one of the generators included in the `NetworkX package <https://networkx.github.io/documentation/stable/reference/generators.html>`__..
+        ms_rewiring (float = None): A threshold for the minimum proportion of edges in the graph object that need to be rewired.
         attributes_initializer (String = "random_categorical" or :class:`AttributesInitializer`): Either be a custom AttributesInitializer or a string that selects from the predefined choices: ["random_categorical", "random_continuous"...]
         focal_agent_selector (str = "random" or :class:`FocalAgentSelector`): Either a custom FocalAgentSelector or a string that selects from the predefined options ["random", ...]
         neighbor_selector (str = "random" or :class:`NeighborSelector`): Either a custom NeighborSelector or a string that selects from the predefined options ["random", "similar" ...}
@@ -38,14 +39,18 @@ class Simulation:
         stop_condition (str = "max_iteration"): Determines at what point a simulation is supposed to stop. Options include "strict_convergence", which means that it is theoretically not possible anymore for any agent to influence another, "pragmatic_convergence", which means that it is assumed that little change is possible anymore, and "max_iteration" which just stops the simulation after a certain amount of time steps.
         communication_regime (str = "one-to-one"): Options are "one-to-one", "one-to-many" and "many-to-one".
         parameter_dict: A dictionary with all parameters that will be passed to the specific component implementations.
-        seed: #todo
-        output: #todo
-        tickwise: #todo WILL GET A LIST OF FEATURES IT NEEDS TO OUTPUT TICKWISE
+        seed (str = None): A seed for stable replication
+        output_realizations (List = [str]): A list of strings with realizations for the tools.CreateOutputTable.create_output_table class
+        tickwise (List = [str]):  A list of strings with the names of agent attributes that need to be recorded at every timestep
     """
+
+    # todo: allow stopping rules to be added as functions
+
 
     def __init__(self,
                  network=None,
                  topology: str = "grid",
+                 ms_rewiring = None,
                  attributes_initializer: str = "random_categorical" or agents_init.AttributesInitializer,
                  focal_agent_selector: str = "random" or focal_agent_sim.FocalAgentSelector,
                  neighbor_selector: str = "random" or neighbor_selector_sim.NeighborSelector,
@@ -63,6 +68,7 @@ class Simulation:
                  ):
         self.network = network
         self.topology = topology
+        self.ms_rewiring = ms_rewiring
         self.attributes_initializer = attributes_initializer
         self.focal_agent_selector = focal_agent_selector
         self.neighbor_selector = neighbor_selector
