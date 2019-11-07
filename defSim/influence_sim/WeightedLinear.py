@@ -23,7 +23,7 @@ class WeightedLinear(InfluenceOperator):
         pre-interaction cultural or opinional distance between the agents involved. The ``homophily`` parameter controls
         the steepness of the attraction/repulsion curve. Formally:
 
-        :math:`o_{i,t+1} = o_{i,t} + \\textrm{convergence_rate} \\cdot (1 - \\textrm{homophily} | o_{j} - o_{it} |)`
+        .. math:: o_{i,t+1} = o_{i,t} + \\textrm{convergence_rate} \\cdot (1 - \\textrm{homophily} | o_{j} - o_{it} |)
 
         Thereafter, opinions are bounded such that they never fall outside the range :math:`[0,1]`
 
