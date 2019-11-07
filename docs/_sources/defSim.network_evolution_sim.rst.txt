@@ -9,7 +9,7 @@ network_evolution_sim module
     :undoc-members:
     :show-inheritance:
 
-NetworkHomophily module
+NetworkHomophily
 -----------------------------------------------------
 
 .. automodule:: defSim.network_evolution_sim.NetworkHomophily

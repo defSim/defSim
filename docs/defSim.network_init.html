@@ -89,18 +89,19 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="defSim.agents_init.html">Agent features</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="defSim.agents_init.html#module-defSim.agents_init.agents_init">agents_init module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="defSim.agents_init.html#module-defSim.agents_init.RandomCategoricalInitializer">RandomCategoricalInitializer module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="defSim.agents_init.html#module-defSim.agents_init.RandomContinuousInitializer">RandomContinuousInitializer module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="defSim.agents_init.html#module-defSim.agents_init.RandomCategoricalInitializer">RandomCategoricalInitializer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="defSim.agents_init.html#module-defSim.agents_init.RandomContinuousInitializer">RandomContinuousInitializer</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="defSim.focal_agent_sim.html">Focal agent selection</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="defSim.focal_agent_sim.html#module-defSim.focal_agent_sim.focal_agent_sim">focal_agent_sim module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="defSim.focal_agent_sim.html#module-defSim.focal_agent_sim.RandomSelector">RandomSelector module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="defSim.focal_agent_sim.html#module-defSim.focal_agent_sim.RandomSelector">RandomSelector</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="defSim.neighbor_selector_sim.html">Neighbor selector</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="defSim.neighbor_selector_sim.html#module-defSim.neighbor_selector_sim.neighbor_selector_sim">neighbor_selector_sim module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="defSim.neighbor_selector_sim.html#module-defSim.neighbor_selector_sim.RandomNeighborSelector">RandomneighborSelector module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="defSim.neighbor_selector_sim.html#module-defSim.neighbor_selector_sim.RandomNeighborSelector">RandomNeighborSelector</a></li>
+<li class="toctree-l2"><a class="reference internal" href="defSim.neighbor_selector_sim.html#module-defSim.neighbor_selector_sim.SimilarNeighborSelector">SimilarNeighborSelector</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="defSim.influence_sim.html">Influence</a><ul>
@@ -113,13 +114,13 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="defSim.network_evolution_sim.html">Network evolution</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="defSim.network_evolution_sim.html#module-defSim.network_evolution_sim.network_evolution_sim">network_evolution_sim module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="defSim.network_evolution_sim.html#module-defSim.network_evolution_sim.NetworkHomophily">NetworkHomophily module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="defSim.network_evolution_sim.html#module-defSim.network_evolution_sim.NetworkHomophily">NetworkHomophily</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="defSim.dissimilarity_component.html">Dissimilarity updaters</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="defSim.dissimilarity_component.html#module-defSim.dissimilarity_component.dissimilarity_calculator">DissimilarityCalculator module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="defSim.dissimilarity_component.html#module-defSim.dissimilarity_component.EuclideanDistance">EuclideanDistance module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="defSim.dissimilarity_component.html#module-defSim.dissimilarity_component.HammingDistance">HammingDistance module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="defSim.dissimilarity_component.html#module-defSim.dissimilarity_component.EuclideanDistance">EuclideanDistance</a></li>
+<li class="toctree-l2"><a class="reference internal" href="defSim.dissimilarity_component.html#module-defSim.dissimilarity_component.HammingDistance">HammingDistance</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="defSim.tools.html">Tools</a><ul>
@@ -208,15 +209,12 @@ passed to the function that produces the network.</p></li>
 <dl class="function">
 <dt id="defSim.network_init.network_init._produce_ring_network">
 <code class="sig-prename descclassname">defSim.network_init.network_init.</code><code class="sig-name descname">_produce_ring_network</code><span class="sig-paren">(</span><em class="sig-param">**kwargs</em><span class="sig-paren">)</span> &#x2192; networkx.classes.graph.Graph<a class="headerlink" href="#defSim.network_init.network_init._produce_ring_network" title="Permalink to this definition">¶</a></dt>
-<dd><p>This method produces a ring network with varying number of neighbors. Furthermore it is possible to rewire the
-network following the Maslov-Sneppen algorithm &#64;Maslov2002.</p>
+<dd><p>This method produces a ring network with varying number of neighbors.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>num_agents</strong> (<em>int=49</em>) – The number of agents the network should contain.</p></li>
 <li><p><strong>num_neighbors</strong> (<em>int=2</em>) – The number of neighbors per agent. Must be an even number.</p></li>
-<li><p><strong>ms_rewiring</strong> (<em>float=0</em>) – The proportion of edges that should be rewired. Since the method executes random draws
-with replacement, this number can exceed 1 (and should exceed 1 if you would want to approximate a random graph.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
@@ -239,6 +237,29 @@ with replacement, this number can exceed 1 (and should exceed 1 if you would wan
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><p>A networkx Graph object.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="defSim.network_init.network_init.execute_ms_rewiring">
+<code class="sig-prename descclassname">defSim.network_init.network_init.</code><code class="sig-name descname">execute_ms_rewiring</code><span class="sig-paren">(</span><em class="sig-param">network: networkx.classes.graph.Graph</em>, <em class="sig-param">rewiring_prop: float</em><span class="sig-paren">)</span><a class="headerlink" href="#defSim.network_init.network_init.execute_ms_rewiring" title="Permalink to this definition">¶</a></dt>
+<dd><p>This method executes Maslov Sneppen rewiring (Maslov &amp; Sneppen, 2002). Until a given proportion of the network
+edges is rewired, the algorithm will pick two edges at random, remove them, and construct an edge between a
+different combination of nodes that have just lost an edge. Effectively, this introduces randomization of network
+structure, while leaving the degree distribution unchanged. Because the parameter <cite>rewiring_prop</cite> functions as a
+threshold for number of rewiring iterations that need to be executed, it can exceed 1. Actually, to achieve a
+random network starting from a network with structure, the rewiring proportion should exceed 1.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>network</strong> – NetworkX Graph object</p></li>
+<li><p><strong>rewiring_prop</strong> – A threshold for the minimum proportion of edges in the graph object that need to be rewired.
+Sampling these edges happens with replacement, so rewiring_prop may exceed 1.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>NetworkX Graph object</p>
 </dd>
 </dl>
 </dd></dl>

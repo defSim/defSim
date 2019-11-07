@@ -23,7 +23,7 @@ class WeightedLinear(InfluenceOperator):
         pre-interaction cultural or opinional distance between the agents involved. The ``homophily`` parameter controls
         the steepness of the attraction/repulsion curve. Formally:
 
-        :math:`o_{i,t+1} = o_{i,t} + \textrm{convergence_rate} \cdot (1 - \textrm{homophily} | o_{j} - o_{it} |)`
+        :math:`o_{i,t+1} = o_{i,t} + \\textrm{convergence_rate} \\cdot (1 - \\textrm{homophily} | o_{j} - o_{it} |)`
 
         Thereafter, opinions are bounded such that they never fall outside the range :math:`[0,1]`
 
@@ -38,7 +38,7 @@ class WeightedLinear(InfluenceOperator):
           less towards the sender as their distance increases.
         * homophily > 1: moderated postive influence AND negative influence, the agents exhibit a preference for
           like-minded others and move less towards the sender as their distance increases, until distance
-          :math:`1 / \textrm{homophily}` where agents experience a push away from the sending agent.
+          :math:`1 / \\textrm{homophily}` where agents experience a push away from the sending agent.
 
         :param network: The network in which the agents exist.
         :param agent_i: The index of the focal agent that is either the source or the target of the influence

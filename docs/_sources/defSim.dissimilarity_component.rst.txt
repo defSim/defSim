@@ -9,7 +9,7 @@ DissimilarityCalculator module
     :undoc-members:
     :show-inheritance:
 
-EuclideanDistance module
+EuclideanDistance
 -----------------------------------------------------------
 
 .. automodule:: defSim.dissimilarity_component.EuclideanDistance
@@ -17,7 +17,7 @@ EuclideanDistance module
     :undoc-members:
     :show-inheritance:
 
-HammingDistance module
+HammingDistance
 ---------------------------------------------------------
 
 .. automodule:: defSim.dissimilarity_component.HammingDistance

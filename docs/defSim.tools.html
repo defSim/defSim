@@ -88,18 +88,19 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="defSim.agents_init.html">Agent features</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="defSim.agents_init.html#module-defSim.agents_init.agents_init">agents_init module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="defSim.agents_init.html#module-defSim.agents_init.RandomCategoricalInitializer">RandomCategoricalInitializer module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="defSim.agents_init.html#module-defSim.agents_init.RandomContinuousInitializer">RandomContinuousInitializer module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="defSim.agents_init.html#module-defSim.agents_init.RandomCategoricalInitializer">RandomCategoricalInitializer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="defSim.agents_init.html#module-defSim.agents_init.RandomContinuousInitializer">RandomContinuousInitializer</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="defSim.focal_agent_sim.html">Focal agent selection</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="defSim.focal_agent_sim.html#module-defSim.focal_agent_sim.focal_agent_sim">focal_agent_sim module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="defSim.focal_agent_sim.html#module-defSim.focal_agent_sim.RandomSelector">RandomSelector module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="defSim.focal_agent_sim.html#module-defSim.focal_agent_sim.RandomSelector">RandomSelector</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="defSim.neighbor_selector_sim.html">Neighbor selector</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="defSim.neighbor_selector_sim.html#module-defSim.neighbor_selector_sim.neighbor_selector_sim">neighbor_selector_sim module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="defSim.neighbor_selector_sim.html#module-defSim.neighbor_selector_sim.RandomNeighborSelector">RandomneighborSelector module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="defSim.neighbor_selector_sim.html#module-defSim.neighbor_selector_sim.RandomNeighborSelector">RandomNeighborSelector</a></li>
+<li class="toctree-l2"><a class="reference internal" href="defSim.neighbor_selector_sim.html#module-defSim.neighbor_selector_sim.SimilarNeighborSelector">SimilarNeighborSelector</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="defSim.influence_sim.html">Influence</a><ul>
@@ -112,13 +113,13 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="defSim.network_evolution_sim.html">Network evolution</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="defSim.network_evolution_sim.html#module-defSim.network_evolution_sim.network_evolution_sim">network_evolution_sim module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="defSim.network_evolution_sim.html#module-defSim.network_evolution_sim.NetworkHomophily">NetworkHomophily module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="defSim.network_evolution_sim.html#module-defSim.network_evolution_sim.NetworkHomophily">NetworkHomophily</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="defSim.dissimilarity_component.html">Dissimilarity updaters</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="defSim.dissimilarity_component.html#module-defSim.dissimilarity_component.dissimilarity_calculator">DissimilarityCalculator module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="defSim.dissimilarity_component.html#module-defSim.dissimilarity_component.EuclideanDistance">EuclideanDistance module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="defSim.dissimilarity_component.html#module-defSim.dissimilarity_component.HammingDistance">HammingDistance module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="defSim.dissimilarity_component.html#module-defSim.dissimilarity_component.EuclideanDistance">EuclideanDistance</a></li>
+<li class="toctree-l2"><a class="reference internal" href="defSim.dissimilarity_component.html#module-defSim.dissimilarity_component.HammingDistance">HammingDistance</a></li>
 </ul>
 </li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Tools</a><ul>
@@ -196,7 +197,7 @@ the kwargs dictionary.</p>
 <li><p><strong>realizations</strong> – <p>The specific OutputTableCreator that will be used. Currently, the options are:</p>
 <ul>
 <li><p>Basic: Returns the realizations Regions, Zones, Isolates, Homogeneity, AverageDistance</p></li>
-<li><p>ClusterFinder: Method to find clusters based on minimal allowed distance between network network neighbors as
+<li><p>ClusterFinder: Method to find clusters based on minimal allowed distance between network neighbors as
 defined by the user in the kwargs dictionary. Default is to return the same output as the Regions realization</p></li>
 <li><p>RegionsList:</p></li>
 <li><p>Regions:</p></li>
@@ -223,6 +224,30 @@ to merge output with parameter setting values.</p></li>
 </div>
 <div class="section" id="module-defSim.tools.OutputMeasures">
 <span id="outputmeasures"></span><h2>OutputMeasures<a class="headerlink" href="#module-defSim.tools.OutputMeasures" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="defSim.tools.OutputMeasures.AttributeReporter">
+<em class="property">class </em><code class="sig-prename descclassname">defSim.tools.OutputMeasures.</code><code class="sig-name descname">AttributeReporter</code><a class="headerlink" href="#defSim.tools.OutputMeasures.AttributeReporter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#defSim.tools.CreateOutputTable.OutputTableCreator" title="defSim.tools.CreateOutputTable.OutputTableCreator"><code class="xref py py-class docutils literal notranslate"><span class="pre">defSim.tools.CreateOutputTable.OutputTableCreator</span></code></a></p>
+<dl class="method">
+<dt id="defSim.tools.OutputMeasures.AttributeReporter.create_output">
+<em class="property">static </em><code class="sig-name descname">create_output</code><span class="sig-paren">(</span><em class="sig-param">network: networkx.classes.graph.Graph</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#defSim.tools.OutputMeasures.AttributeReporter.create_output" title="Permalink to this definition">¶</a></dt>
+<dd><p>THIS FUNCTION WILL OUTPUT A SINGLE ROW OF A DATAFRAME WHERE THE COLUMNS ARE USER-GIVEN AGENT-FEATURES AND COLUMN
+VALUES CONTAIN A LIST OF ALL THE AGENTS’ VALUES ON THE GIVEN FEATURE.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>network</strong> – </p></li>
+<li><p><strong>feature</strong> – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
 <dl class="class">
 <dt id="defSim.tools.OutputMeasures.ClusterFinder">
 <em class="property">class </em><code class="sig-prename descclassname">defSim.tools.OutputMeasures.</code><code class="sig-name descname">ClusterFinder</code><a class="headerlink" href="#defSim.tools.OutputMeasures.ClusterFinder" title="Permalink to this definition">¶</a></dt>

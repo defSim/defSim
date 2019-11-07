@@ -89,18 +89,19 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="defSim.agents_init.html">Agent features</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="defSim.agents_init.html#module-defSim.agents_init.agents_init">agents_init module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="defSim.agents_init.html#module-defSim.agents_init.RandomCategoricalInitializer">RandomCategoricalInitializer module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="defSim.agents_init.html#module-defSim.agents_init.RandomContinuousInitializer">RandomContinuousInitializer module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="defSim.agents_init.html#module-defSim.agents_init.RandomCategoricalInitializer">RandomCategoricalInitializer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="defSim.agents_init.html#module-defSim.agents_init.RandomContinuousInitializer">RandomContinuousInitializer</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="defSim.focal_agent_sim.html">Focal agent selection</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="defSim.focal_agent_sim.html#module-defSim.focal_agent_sim.focal_agent_sim">focal_agent_sim module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="defSim.focal_agent_sim.html#module-defSim.focal_agent_sim.RandomSelector">RandomSelector module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="defSim.focal_agent_sim.html#module-defSim.focal_agent_sim.RandomSelector">RandomSelector</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="defSim.neighbor_selector_sim.html">Neighbor selector</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="defSim.neighbor_selector_sim.html#module-defSim.neighbor_selector_sim.neighbor_selector_sim">neighbor_selector_sim module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="defSim.neighbor_selector_sim.html#module-defSim.neighbor_selector_sim.RandomNeighborSelector">RandomneighborSelector module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="defSim.neighbor_selector_sim.html#module-defSim.neighbor_selector_sim.RandomNeighborSelector">RandomNeighborSelector</a></li>
+<li class="toctree-l2"><a class="reference internal" href="defSim.neighbor_selector_sim.html#module-defSim.neighbor_selector_sim.SimilarNeighborSelector">SimilarNeighborSelector</a></li>
 </ul>
 </li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Influence</a><ul>
@@ -113,13 +114,13 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="defSim.network_evolution_sim.html">Network evolution</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="defSim.network_evolution_sim.html#module-defSim.network_evolution_sim.network_evolution_sim">network_evolution_sim module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="defSim.network_evolution_sim.html#module-defSim.network_evolution_sim.NetworkHomophily">NetworkHomophily module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="defSim.network_evolution_sim.html#module-defSim.network_evolution_sim.NetworkHomophily">NetworkHomophily</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="defSim.dissimilarity_component.html">Dissimilarity updaters</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="defSim.dissimilarity_component.html#module-defSim.dissimilarity_component.dissimilarity_calculator">DissimilarityCalculator module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="defSim.dissimilarity_component.html#module-defSim.dissimilarity_component.EuclideanDistance">EuclideanDistance module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="defSim.dissimilarity_component.html#module-defSim.dissimilarity_component.HammingDistance">HammingDistance module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="defSim.dissimilarity_component.html#module-defSim.dissimilarity_component.EuclideanDistance">EuclideanDistance</a></li>
+<li class="toctree-l2"><a class="reference internal" href="defSim.dissimilarity_component.html#module-defSim.dissimilarity_component.HammingDistance">HammingDistance</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="defSim.tools.html">Tools</a><ul>
@@ -205,15 +206,16 @@ agents and in ‘many-to-one’ the focal agent is influenced by multiple other 
 <code class="sig-prename descclassname">defSim.influence_sim.influence_sim.</code><code class="sig-name descname">spread_influence</code><span class="sig-paren">(</span><em class="sig-param">network: networkx.classes.graph.Graph, realization: str, agent_i: int, agents_j: List[int], regime: str, dissimilarity_measure: defSim.dissimilarity_component.dissimilarity_calculator.DissimilarityCalculator, attributes: List[str] = None, **kwargs</em><span class="sig-paren">)</span> &#x2192; bool<a class="headerlink" href="#defSim.influence_sim.influence_sim.spread_influence" title="Permalink to this definition">¶</a></dt>
 <dd><p>This function works as a factory method for the influence component.
 It calls either the many_to_one or the one_to_many function of a specific implementation of the InfluenceOperator
-and passes to itt to the kwargs dictionary. Which function is called is based on the selected communication regime.</p>
+and passes the arguments and the kwargs dictionary.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>network</strong> – A NetworkX object that will be modified.</p></li>
 <li><p><strong>realization</strong> – The specific implementation of the InfluenceOperator. Options are “bounded_confidence”,
-“axelrod”, “weighted_linear”, “persuasion”.</p></li>
+“axelrod”, “weighted_linear”, “persuasion”.
+Alternatively, a user-written implementation of the abstract base class can be given here.</p></li>
 <li><p><strong>agent_i</strong> – the index of the focal agent that is either the source or the target of the influence</p></li>
-<li><p><strong>agents_j</strong> – A list of indices of the agents who can be either the source or the targets of the influence. The list can have a</p></li>
+<li><p><strong>agents_j</strong> – A list of indices of the agents who can be either the source or the targets of the influence.</p></li>
 <li><p><strong>attributes</strong> – A list of the names of all the attributes that are subject to influence. If an agent has
 e.g. the attributes “Sex” and “Music taste”, only supply [“Music taste”] as a parameter for this function.
 The influence function itself can still be a function of the “Sex” attribute.</p></li>
@@ -371,7 +373,10 @@ means no interaction. Passed as a kwargs argument.</p></li>
 <em class="property">static </em><code class="sig-name descname">spread_influence</code><span class="sig-paren">(</span><em class="sig-param">network: networkx.classes.graph.Graph, agent_i: int, agents_j: List[int], regime: str, dissimilarity_measure: defSim.dissimilarity_component.dissimilarity_calculator.DissimilarityCalculator, attributes: List[str] = None, **kwargs</em><span class="sig-paren">)</span> &#x2192; bool<a class="headerlink" href="#defSim.influence_sim.WeightedLinear.WeightedLinear.spread_influence" title="Permalink to this definition">¶</a></dt>
 <dd><p>The weighted linear influence function implements the experienced opinion shift as a function of the
 pre-interaction cultural or opinional distance between the agents involved. The <code class="docutils literal notranslate"><span class="pre">homophily</span></code> parameter controls
-the steepness of the attraction/repulsion curve. The higher its value, the smaller the shift of the receiving
+the steepness of the attraction/repulsion curve. Formally:</p>
+<p><span class="math notranslate nohighlight">\(o_{i,t+1} = o_{i,t} + \textrm{convergence_rate} \cdot (1 - \textrm{homophily} | o_{j} - o_{it} |)\)</span></p>
+<p>Thereafter, opinions are bounded such that they never fall outside the range <span class="math notranslate nohighlight">\([0,1]\)</span></p>
+<p>Crucial is the homophily parameter. The higher its value, the smaller the shift of the receiving
 agent in the direction of the sending agent will be. With this parameter, we can integrate ideas of positive,
 moderated positive, and negative influence into one functional model.</p>
 <p>Three critical values for the <code class="docutils literal notranslate"><span class="pre">homophily</span></code> parameter:</p>
@@ -381,7 +386,7 @@ moderated positive, and negative influence into one functional model.</p>
 less towards the sender as their distance increases.</p></li>
 <li><p>homophily &gt; 1: moderated postive influence AND negative influence, the agents exhibit a preference for
 like-minded others and move less towards the sender as their distance increases, until distance
-<span class="math notranslate nohighlight">\(1 /    extrm{homophily}\)</span> where agents experience a push away from the sending agent.</p></li>
+<span class="math notranslate nohighlight">\(1 / \textrm{homophily}\)</span> where agents experience a push away from the sending agent.</p></li>
 </ul>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
