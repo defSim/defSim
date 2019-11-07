@@ -21,7 +21,13 @@ class WeightedLinear(InfluenceOperator):
         """
         The weighted linear influence function implements the experienced opinion shift as a function of the
         pre-interaction cultural or opinional distance between the agents involved. The ``homophily`` parameter controls
-        the steepness of the attraction/repulsion curve. The higher its value, the smaller the shift of the receiving
+        the steepness of the attraction/repulsion curve. Formally:
+
+        :math:`o_{i,t+1} = o_{i,t} + \textrm{convergence_rate} \cdot (1 - \textrm{homophily} | o_{j} - o_{it} |)`
+
+        Thereafter, opinions are bounded such that they never fall outside the range :math:`[0,1]`
+
+        Crucial is the homophily parameter. The higher its value, the smaller the shift of the receiving
         agent in the direction of the sending agent will be. With this parameter, we can integrate ideas of positive,
         moderated positive, and negative influence into one functional model.
 
