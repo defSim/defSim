@@ -14,6 +14,7 @@ from defSim.agents_init.agents_init import initialize_attributes
 from defSim.network_evolution_sim.network_evolution_sim import NetworkModifier
 
 from defSim.dissimilarity_component import dissimilarity_calculator
+from defSim.dissimilarity_component.dissimilarity_calculator import select_calculator
 from defSim.dissimilarity_component.HammingDistance import HammingDistance
 from defSim.dissimilarity_component.EuclideanDistance import EuclideanDistance
 
@@ -29,6 +30,8 @@ from defSim.influence_sim.influence_sim import InfluenceOperator
 
 import defSim.tools
 from defSim.tools import OutputMeasures
+from defSim.tools.OutputMeasures import ClusterFinder
+from defSim.tools.OutputMeasures import AttributeReporter
 from defSim.tools.CreateOutputTable import create_output_table
 
 from defSim.Experiment import Experiment
