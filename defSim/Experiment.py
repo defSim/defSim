@@ -63,6 +63,7 @@ class Experiment:
         influenceable_attributes (list = []): With this list you select all attributes that are allowed to be changed by the influence function. If the list is empty, all attributes are affected by influence.
         network_modifier: (String = "random" or :class:`NetworkModifier`) Either a custom NetworkModifier or a string selecting from the predefined options ["random", ...]
         dissimilarity_measure (String = "hamming" or :class:`DissimilarityCalculator`): Either a custom DissimilarityCalculator or a string that selects from the predefined options ["hamming", "euclidean", ...}
+        tickwise (List = []): A list containing the names of all agent attributes that should be recorded at every timestep.
         stop_condition (String = "pragmatic_convergence"): Determines at what point a simulation is supposed to stop. Options include "strict_convergence", which means that it is theoretically not possible anymore for any agent to influence another, "pragmatic_convergence", which means that it is assumed that little change is possible anymore, and "max_iteration" which just stops the simulation after a certain amount of time steps.
         stop_condition_parameters (dict = {}): This dictionary should contain all optional parameters that influence how convergence is determined.
         max_iterations (int = 100000): The maximum number of iterations a Simulation should run.
@@ -86,6 +87,7 @@ class Experiment:
                  network_modifier: str = "random" or network_evolution_sim.NetworkModifier,
                  network_modifier_parameters: dict = {},
                  dissimilarity_measure: str = "hamming" or dissimilarity_calculator,
+                 tickwise: List = [],
                  stop_condition: str = "max_iteration",
                  stop_condition_parameters: dict = {},
                  max_iterations: int = 100000,
@@ -105,6 +107,7 @@ class Experiment:
         self.network_modifier = "random"  # todo: implement a dummy network modifier
         self.network_modifier_parameters = network_modifier_parameters
         self.dissimilarity_measure = dissimilarity_measure
+        self.tickwise = tickwise
         self.stop_condition = stop_condition
         self.stop_condition_parameters = stop_condition_parameters
         self.max_iterations = max_iterations
@@ -272,7 +275,8 @@ class Experiment:
                                 max_iterations=self.max_iterations,
                                 communication_regime=parameter_dict["communication_regime"],
                                 parameter_dict=parameter_dict,
-                                dissimilarity_measure=self.dissimilarity_measure
+                                dissimilarity_measure=self.dissimilarity_measure,
+                                tickwise=self.tickwise
                                 )
         return simulation.run_simulation()
 

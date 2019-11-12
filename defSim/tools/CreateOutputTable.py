@@ -19,7 +19,7 @@ class OutputTableCreator(ABC):
         pass
 
 def create_output_table(network: nx.Graph, realizations: List[str or OutputTableCreator]=[], colnames: List[str]=[],
-                        agents: List[int]=[], settings_dict: dict={}, **kwargs) -> int:
+                        agents: List[int]=[], settings_dict: dict={}, tickwise_output: dict={}, **kwargs) -> int:
     """
     This function works as a factory method for the OutputTableCreator component.
     It calls the create_output function of a specific implementation of the OutputTableCreator and passes to it
@@ -44,6 +44,8 @@ def create_output_table(network: nx.Graph, realizations: List[str or OutputTable
     :param agents: A list of the indices of all agents that will be considered by the output table.
     :param settings_dict: A dictionary of column names and values that will be added to the output table. Can be used
         to merge output with parameter setting values.
+    :param tickwise_output: A dictionary with a list of lists with values of agents on some given feature at each tick
+        during the simulation run. This function will create a column for each key in the dictionary.
 
     :returns: A dictionary.
     """
@@ -78,6 +80,10 @@ def create_output_table(network: nx.Graph, realizations: List[str or OutputTable
         output['Homogeneity'] = clusterlist[0] / len(network.nodes())
     if "AverageDistance" or "Basic" in realizations:
         output['AverageDistance'] = sum(nx.get_edge_attributes(network, 'dist').values()) / len(network.edges())
+
+    if tickwise_output:
+        for f in tickwise_output.keys():
+            output['Tickwise_' + str(f)] = tickwise_output[f]
 
     if colnames != []:
         for i in colnames:

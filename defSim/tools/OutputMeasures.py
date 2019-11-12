@@ -47,4 +47,4 @@ class AttributeReporter(OutputTableCreator):
 
         feature = kwargs.get('feature', False)
 
-        return list(nx.get_node_attributes(network,feature).values())
+        return list(nx.get_node_attributes(network, feature).values())

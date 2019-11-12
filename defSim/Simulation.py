@@ -193,7 +193,7 @@ class Simulation:
 
         if self.tickwise: # list is not empty
             for i in self.tickwise:
-                self.tickwise_features[i].append(OutputMeasures.AttributeReporter.create_output(self.network,feature=i))
+                self.tickwise_features[i].append(OutputMeasures.AttributeReporter.create_output(self.network, feature=i))
 
         self.time_steps += 1
         if success:
@@ -227,7 +227,8 @@ class Simulation:
 
         results = CreateOutputTable.create_output_table(network=self.network,
                                                         realizations=self.output_realizations,
-                                                        settings_dict=parameter_settings)
+                                                        settings_dict=parameter_settings,
+                                                        tickwise_output=self.tickwise_features)
 
         return pd.DataFrame.from_dict({k:[results[k]] for k in results.keys()})
 
