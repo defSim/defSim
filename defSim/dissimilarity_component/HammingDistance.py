@@ -21,9 +21,9 @@ class HammingDistance(DissimilarityCalculator):
         :returns a float value, representing the distance between the two agents
         """
         # todo: implement in such a way that only categorical attributes are considered, and others are ignored
-        number_of_features = len(network.node[agent1_id])
-        return len([k for k in network.node[agent1_id] if
-                    network.node[agent1_id][k] != network.node[agent2_id][k]]) / number_of_features
+        number_of_features = len(network.nodes[agent1_id])
+        return len([k for k in network.nodes[agent1_id] if
+                    network.nodes[agent1_id][k] != network.nodes[agent2_id][k]]) / number_of_features
 
     @staticmethod
     def calculate_dissimilarity_networkwide(network: nx.Graph):

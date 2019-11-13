@@ -43,7 +43,7 @@ class Axelrod(InfluenceOperator):
 
         if attributes is None:
             # if no specific attributes were given, take all of them
-            attributes = list(network.node[agent_i].keys())
+            attributes = list(network.nodes[agent_i].keys())
 
         if regime != "many-to-one":
             incongruent_features = []
@@ -51,7 +51,7 @@ class Axelrod(InfluenceOperator):
                 #todo this will fail in a global communication regime
                 if network.edges[agent_i, neighbor]['dist'] < 1:
                     for feature in attributes:
-                        if network.node[agent_i][feature] != network.node[neighbor][feature]:
+                        if network.nodes[agent_i][feature] != network.nodes[neighbor][feature]:
                             if feature not in incongruent_features: incongruent_features.append(
                                 feature)  # append the feature name if they are not the same
             if len(incongruent_features) == 0:
@@ -61,12 +61,12 @@ class Axelrod(InfluenceOperator):
                 for neighbor in agents_j:
                     if random.uniform(0, 1) > network.edges[agent_i, neighbor]['dist']:
                         success = True
-                        network.node[neighbor][influenced_feature] = network.node[agent_i][influenced_feature]
+                        network.nodes[neighbor][influenced_feature] = network.nodes[agent_i][influenced_feature]
                         update_dissimilarity(network, [neighbor], dissimilarity_measure)
         else:
             #todo comment and improve time
             close_neighbors = [neighbor for neighbor in agents_j if random.uniform(0, 1) > network.edges[agent_i, neighbor]['dist']]
-            incongruent_features = [] # [feature for feature in attributes if network.node[agent1]]
+            incongruent_features = [] # [feature for feature in attributes if network.nodes[agent1]]
             incongruent_feature_values =[]
             for feature in attributes:
                 neighbors_features = [value for key, value in nx.get_node_attributes(network, feature).items() if key in close_neighbors]
@@ -78,9 +78,9 @@ class Axelrod(InfluenceOperator):
             if len(incongruent_features) != 0: # if the list is not empty
                 influenced_featureID = random.choice([i for i in range(len(incongruent_features))])
                 # if the focal agent does not already
-                if network.node[agent_i][incongruent_features[influenced_featureID]] != incongruent_feature_values[influenced_featureID]:
+                if network.nodes[agent_i][incongruent_features[influenced_featureID]] != incongruent_feature_values[influenced_featureID]:
                     success = True
-                    network.node[agent_i][incongruent_features[influenced_featureID]] = incongruent_feature_values[influenced_featureID]
+                    network.nodes[agent_i][incongruent_features[influenced_featureID]] = incongruent_feature_values[influenced_featureID]
                     update_dissimilarity(network, [agent_i], dissimilarity_measure)
 
         return success

@@ -13,10 +13,10 @@ class TestDissimilarityCalculator(TestCase):
 
 
     def test_HammingDistance_calculate_dissimilarity(self):
-        self.networkTest.node[0]["a"] = 0.5
-        self.networkTest.node[0]["b"] = 0.6
-        self.networkTest.node[1]["a"] = 0.3
-        self.networkTest.node[1]["b"] = 0.6
+        self.networkTest.nodes[0]["a"] = 0.5
+        self.networkTest.nodes[0]["b"] = 0.6
+        self.networkTest.nodes[1]["a"] = 0.3
+        self.networkTest.nodes[1]["b"] = 0.6
         self.assertEqual(HammingDistance.calculate_dissimilarity(self.networkTest,0,1), 0.5)
     def test_HammingDistance_calculate_dissimilarity_networkwide(self):
         agents_init.initialize_attributes(self.networkCategorical, "random_categorical")
@@ -27,11 +27,11 @@ class TestDissimilarityCalculator(TestCase):
     networkCategorical2 = network_init.generate_network("grid")
     networkContinuous2 = network_init.generate_network("grid")
     def test_EuclideanDistance_calculate_dissimilarity(self):
-        self.networkTest.node[0]["a"] = 0.5
-        self.networkTest.node[1]["a"] = 0.3
+        self.networkTest.nodes[0]["a"] = 0.5
+        self.networkTest.nodes[1]["a"] = 0.3
         self.assertEqual(EuclideanDistance.calculate_dissimilarity(self.networkTest,0,1), 0.2)
-        self.networkTest.node[0]["b"] = 0.2
-        self.networkTest.node[1]["c"] = 0.8
+        self.networkTest.nodes[0]["b"] = 0.2
+        self.networkTest.nodes[1]["c"] = 0.8
         self.assertEqual(EuclideanDistance.calculate_dissimilarity(self.networkTest,0,1), math.sqrt((0.5-0.3)**2+(0.2-0.8)**2))
 
 

@@ -35,7 +35,7 @@ def set_categorical_attribute(network: nx.Graph, name: str, values: list, distri
     """
     # todo: implement other distributions
     for i in network.nodes():  # iterate over all nodes
-        network.node[i][name] = random.choice(values)  # initialize the feature's value
+        network.nodes[i][name] = random.choice(values)  # initialize the feature's value
 
 
 def set_continuous_attribute(network: nx.Graph, name: str, shape: tuple = (1), distribution: str = "uniform",
@@ -56,7 +56,7 @@ def set_continuous_attribute(network: nx.Graph, name: str, shape: tuple = (1), d
     # todo: decide whether these functions should also be able to be applied to single nodes
     # todo: decide which distributions are possible
     for i in network.nodes():  # iterate over all nodes
-        network.node[i][name] = random.uniform(0, 1)  # initialize the feature's value
+        network.nodes[i][name] = random.uniform(0, 1)  # initialize the feature's value
 
 
 def initialize_attributes(network: nx.Graph, realization: str, **kwargs):

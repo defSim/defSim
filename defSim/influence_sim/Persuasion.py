@@ -73,7 +73,7 @@ class Persuasion(InfluenceOperator):
 
         if attributes is None:
             # if no specific attributes were given, take all of them
-            attributes = list(network.node[agent_i].keys())
+            attributes = list(network.nodes[agent_i].keys())
 
         # whether influence was exerted
         success = False
@@ -86,22 +86,22 @@ class Persuasion(InfluenceOperator):
                     success = True
                     # transform the opinion of agent_i to an argument of the closest opinion pole by randomly drawing
                     # an argument with a probability conditional on the extremity of the opinion
-                    argument = random.choices([0,1],weights=[1-network.node[agent_i][influenced_feature],
-                                                             network.node[agent_i][influenced_feature]])[0]
+                    argument = random.choices([0,1],weights=[1-network.nodes[agent_i][influenced_feature],
+                                                             network.nodes[agent_i][influenced_feature]])[0]
                     # store the original opinion of the neighbor for bi-directional case
-                    argument_neighbor = network.node[neighbor][influenced_feature]
+                    argument_neighbor = network.nodes[neighbor][influenced_feature]
 
                     # calculate 'opinion' distance on the trait that will be changed
-                    feature_difference = argument - network.node[neighbor][influenced_feature]
+                    feature_difference = argument - network.nodes[neighbor][influenced_feature]
                     # influence function
-                    network.node[neighbor][influenced_feature] = network.node[neighbor][influenced_feature] + \
+                    network.nodes[neighbor][influenced_feature] = network.nodes[neighbor][influenced_feature] + \
                                                                  convergence_rate * feature_difference
                     if bi_directional == True and regime == "one-to-one":
                         argument = random.choices([0, 1], weights=[1 - argument_neighbor,
                                                                    argument_neighbor])[0]
-                        feature_difference = argument - network.node[agent_i][influenced_feature]
+                        feature_difference = argument - network.nodes[agent_i][influenced_feature]
                         # influence function
-                        network.node[agent_i][influenced_feature] = network.node[agent_i][influenced_feature] + \
+                        network.nodes[agent_i][influenced_feature] = network.nodes[agent_i][influenced_feature] + \
                                                                     convergence_rate * feature_difference
                         update_dissimilarity(network, [agent_i, neighbor], dissimilarity_measure)
                     else:
@@ -113,10 +113,10 @@ class Persuasion(InfluenceOperator):
                                network.edges[agent_i, neighbor]['dist'] < confidence_level]
             if len(close_neighbors) != 0:
                 success = True
-                average_value = np.mean([network.node[neighbor][influenced_feature] for neighbor in close_neighbors])
+                average_value = np.mean([network.nodes[neighbor][influenced_feature] for neighbor in close_neighbors])
                 argument = random.choices([0, 1], weights=[1 - average_value, average_value])[0]
-                feature_difference = argument - network.node[agent_i][influenced_feature]
-                network.node[agent_i][influenced_feature] = network.node[agent_i][influenced_feature] + \
+                feature_difference = argument - network.nodes[agent_i][influenced_feature]
+                network.nodes[agent_i][influenced_feature] = network.nodes[agent_i][influenced_feature] + \
                                                             convergence_rate * feature_difference
                 update_dissimilarity(network, [agent_i], dissimilarity_measure)
 
