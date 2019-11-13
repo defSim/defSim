@@ -17,7 +17,7 @@ setup(name='defSim',
                 'defSim/tools',
                 'defSim/dissimilarity_component'],
       install_requires=[
-            'networkx',
+            'networkx' >= 2.4,
             'numpy', 'pandas'
       ],
       include_package_data=True,
