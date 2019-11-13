@@ -227,7 +227,7 @@ class Simulation:
         except KeyError:
             step_size = 100
 
-        all_attributes = self.network.node[1].keys()
+        all_attributes = self.network.nodes[1].keys()
         node_matcher = iso.categorical_node_match(all_attributes, [0 for i in range(len(all_attributes))])
         network_comparison = self.network.copy()
         while 1:
