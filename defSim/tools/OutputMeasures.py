@@ -18,7 +18,7 @@ class ClusterFinder(OutputTableCreator):
         links with dissimilarity != 1 are preserved)
         :returns: A list with sizes of the retrieved clusters
         """
-        cluster_dissimilarity_threshold = kwargs.get('cluster_dissimilarity_threshold',0)
+        cluster_dissimilarity_threshold = kwargs.get('cluster_dissimilarity_threshold', 0)
         strict_zones = kwargs.get('strict_zones', False)
 
         networkcopy = network.copy()

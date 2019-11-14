@@ -183,21 +183,10 @@ def _produce_spatial_random_graph(**kwargs) -> nx.Graph:
     #todo: description
 
     # check the parameters or initialize default values
-    try:
-        num_agents = kwargs["num_agents"]
-    except KeyError:
-        # print("Number of agents was not specified, default value 49 is used.")
-        num_agents = 49
-    try:
-        min_neighbors = kwargs["min_neighbors"]
-    except KeyError:
-        # print("Minimal number of neighbors was not specified, default value 2 is used.")
-        min_neighbors = 8
-    try:
-        proximity_weight = kwargs["proximity_weight"]
-    except KeyError:
-        # print("Proximity weights was not specified, default value 1 is used.")
-        proximity_weight = 1
+    num_agents = kwargs.get("num_agents", 49)
+    min_neighbors = kwargs.get("min_neighbors", 8)
+    proximity_weight = kwargs.get("proximity_weight", 1)
+    return_positions = kwargs.get('return_positions', False)
 
     xypos = np.column_stack((np.random.uniform(0, 100, num_agents), np.random.uniform(0, 100, num_agents)))
 
@@ -240,7 +229,10 @@ def _produce_spatial_random_graph(**kwargs) -> nx.Graph:
     G.add_nodes_from([i for i in range(num_agents)])
     G.add_edges_from(edgelist)
 
-    return G
+    if return_positions:
+        return G, distmatrix
+    else:
+        return G
 
 
 def _produce_networkx_graph(name: str,**kwargs):
