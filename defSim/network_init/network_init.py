@@ -230,7 +230,7 @@ def _produce_spatial_random_graph(**kwargs) -> nx.Graph:
     G.add_edges_from(edgelist)
 
     if return_positions:
-        return G, distmatrix
+        return G, xypos
     else:
         return G
 
