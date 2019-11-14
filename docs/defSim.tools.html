@@ -186,7 +186,7 @@
 
 <dl class="function">
 <dt id="defSim.tools.CreateOutputTable.create_output_table">
-<code class="sig-prename descclassname">defSim.tools.CreateOutputTable.</code><code class="sig-name descname">create_output_table</code><span class="sig-paren">(</span><em class="sig-param">network: networkx.classes.graph.Graph</em>, <em class="sig-param">realizations: List[str] = []</em>, <em class="sig-param">colnames: List[str] = []</em>, <em class="sig-param">agents: List[int] = []</em>, <em class="sig-param">settings_dict: dict = {}</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span> &#x2192; int<a class="headerlink" href="#defSim.tools.CreateOutputTable.create_output_table" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">defSim.tools.CreateOutputTable.</code><code class="sig-name descname">create_output_table</code><span class="sig-paren">(</span><em class="sig-param">network: networkx.classes.graph.Graph</em>, <em class="sig-param">realizations: List[str] = []</em>, <em class="sig-param">colnames: List[str] = []</em>, <em class="sig-param">agents: List[int] = []</em>, <em class="sig-param">settings_dict: dict = {}</em>, <em class="sig-param">tickwise_output: dict = {}</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span> &#x2192; int<a class="headerlink" href="#defSim.tools.CreateOutputTable.create_output_table" title="Permalink to this definition">¶</a></dt>
 <dd><p>This function works as a factory method for the OutputTableCreator component.
 It calls the create_output function of a specific implementation of the OutputTableCreator and passes to it
 the kwargs dictionary.</p>
@@ -213,6 +213,8 @@ return the same output as the Regions realization</p></li>
 <li><p><strong>agents</strong> – A list of the indices of all agents that will be considered by the output table.</p></li>
 <li><p><strong>settings_dict</strong> – A dictionary of column names and values that will be added to the output table. Can be used
 to merge output with parameter setting values.</p></li>
+<li><p><strong>tickwise_output</strong> – A dictionary with a list of lists with values of agents on some given feature at each tick
+during the simulation run. This function will create a column for each key in the dictionary.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>

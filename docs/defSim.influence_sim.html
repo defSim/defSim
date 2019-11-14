@@ -374,7 +374,8 @@ means no interaction. Passed as a kwargs argument.</p></li>
 <dd><p>The weighted linear influence function implements the experienced opinion shift as a function of the
 pre-interaction cultural or opinional distance between the agents involved. The <code class="docutils literal notranslate"><span class="pre">homophily</span></code> parameter controls
 the steepness of the attraction/repulsion curve. Formally:</p>
-<p><span class="math notranslate nohighlight">\(o_{i,t+1} = o_{i,t} + \textrm{convergence_rate} \cdot (1 - \textrm{homophily} | o_{j} - o_{it} |)\)</span></p>
+<div class="math notranslate nohighlight">
+\[o_{i,t+1} = o_{i,t} + \textrm{convergence_rate} \cdot (1 - \textrm{homophily} | o_{j} - o_{it} |)\]</div>
 <p>Thereafter, opinions are bounded such that they never fall outside the range <span class="math notranslate nohighlight">\([0,1]\)</span></p>
 <p>Crucial is the homophily parameter. The higher its value, the smaller the shift of the receiving
 agent in the direction of the sending agent will be. With this parameter, we can integrate ideas of positive,
