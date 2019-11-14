@@ -1,25 +1,25 @@
 
 `M. A. Keijzer <https://www.marijnkeijzer.nl>`__ // October 2019 (last
-updated: October 9th, 2019)
+updated: November 14th, 2019)
 
 Introduction to ``defSim``
 ==========================
 
 This short tutorial explains the two ways in which defSim can be used:
 
-1. `The Comprehensive Way <#1.-The-Comprehensive-Way>`__
+1. `The Unified Way <#1.-The-Unified-Way>`__
 2. `The Modular Way <#2.-The-Modular-Way>`__
 
 --------------
 
-1. The Comprehensive Way
-------------------------
+1. The Unified Way
+------------------
 
-Using ``defSim`` the comprehensive way is the go-to use for quick
+Using ``defSim`` the unified way is the go-to use for quick
 replications, to illustrate well-know model dynamics, and for teaching
 purposes. All modules of defSim are called automatically, using
 reasonable default values or user specified parameters. There are two
-comprehensive classes available for using defSim in this way: the
+classes available for using defSim in this way: the
 ```Simulation`` <https://marijnkeijzer.github.io/defSim/defSim.html#module-defSim.Simulation>`__
 class and the
 ```Experiment`` <https://marijnkeijzer.github.io/defSim/defSim.html#module-defSim.Experiment>`__
@@ -78,6 +78,7 @@ class specific method ``return_values``.
           <th></th>
           <th>network</th>
           <th>topology</th>
+          <th>ms_rewiring</th>
           <th>attributes_initializer</th>
           <th>focal_agent_selector</th>
           <th>neighbor_selector</th>
@@ -93,6 +94,7 @@ class specific method ``return_values``.
           <th>time_steps</th>
           <th>influence_steps</th>
           <th>output_realizations</th>
+          <th>tickwise</th>
         </tr>
       </thead>
       <tbody>
@@ -100,6 +102,7 @@ class specific method ``return_values``.
           <th>0</th>
           <td>None</td>
           <td>grid</td>
+          <td>None</td>
           <td>random_categorical</td>
           <td>random</td>
           <td>random</td>
@@ -114,6 +117,7 @@ class specific method ``return_values``.
           <td>[]</td>
           <td>0</td>
           <td>0</td>
+          <td>[]</td>
           <td>[]</td>
         </tr>
       </tbody>
@@ -1205,15 +1209,14 @@ modules are called sequentially in a loop (``focal_agent_sim``,
 criterium is satisfied. The process is visualized in the flow chart
 right of this text.
 
-The comprehensive way calls all of these modules in the background, but
-defSim is designed in such a way that a *modular* use of the package is
-easy and user-friendly. All modules take a networkx object as in- and
-output. Writing an extension is easy, since we can just use this
-networkx object to manipulate outside of one of the modules.
-Alternatively, it is also possible to write an extension within the
-defSim framework. Adding your own (published) extension to the defSim
-package is a great way to transparently share your code and attract
-attention to your work.
+The unified way calls all of these modules in the background, but defSim
+is designed in such a way that a *modular* use of the package is easy
+and user-friendly. All modules take a networkx object as in- and output.
+Writing an extension is easy, since we can just use this networkx object
+to manipulate outside of one of the modules. Alternatively, it is also
+possible to write an extension within the defSim framework. Adding your
+own (published) extension to the defSim package is a great way to
+transparently share your code and attract attention to your work.
 
 Now, let’s turn to two of these examples. One in which we manipulate the
 networkx object, and one in which we write our own module-method.
@@ -1242,12 +1245,12 @@ agents experience a push away from the source.
     # here we introduce the biased media agent. An agent connected to all others, with a biased opinion.
     agents = list(ABM.nodes()) # store the original agentset to pass to the agent selectors
     ABM.add_node('biased_media') # create new node
-    ABM.node['biased_media']['f01'] = 0.23 # fix the opinion
+    ABM.nodes['biased_media']['f01'] = 0.23 # fix the opinion
     for i in agents: # add an edge between media source and all other agents
         ABM.add_edge('biased_media',i)
         
     # initialize the dissimilarity calculator (= euclidean in the continuous opinion world)
-    calculator = ds.dissimilarity_calculator.select_calculator("euclidean")
+    calculator = ds.select_calculator("euclidean")
     calculator.calculate_dissimilarity_networkwide(ABM)
 
 .. code:: ipython3
