@@ -18,7 +18,7 @@ The flow of a single simulation run implemented by defSim looks like this:
 
 All elements on the left represent the separate modules.
 
-The :class:`~defSim.Simulation` class handles the execution of all modules as depicted in the flow chart, and returns a single row of results as a Pandas dataframe. The :class:`~defSim.Experiment` class handles multiple executions of the simulation class, calling the simulation class effectively a number of times (repetitions) for every user-given parameter combination. Running these two classes is what we call using defSim *the comprehensive way*. Alternatively, you might want to use just one of a couple of the pre-programmed modules, and use your own code to create a variation on the traditional social influence models. This is what we call using defSim *the modular way*. 
+The :class:`~defSim.Simulation` class handles the execution of all modules as depicted in the flow chart, and returns a single row of results as a Pandas dataframe. The :class:`~defSim.Experiment` class handles multiple executions of the simulation class, calling the simulation class effectively a number of times (repetitions) for every user-given parameter combination. Running these two classes is what we call using defSim *the unified way*. Alternatively, you might want to use just one of a couple of the pre-programmed modules, and use your own code to create a variation on the traditional social influence models. This is what we call using defSim *the modular way*. 
 
 :doc:`Learn the basics of defSim on our introduction page <Introduction_to_defSim>`
 
@@ -32,8 +32,8 @@ Contents of the documentation
    Introduction <Introduction_to_defSim>
    
 
-Comprehensive use
------------------
+Unified use
+-----------
 
 .. toctree::
    
