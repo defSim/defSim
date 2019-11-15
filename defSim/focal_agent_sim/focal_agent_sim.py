@@ -1,6 +1,8 @@
 from abc import ABC, abstractmethod
 import networkx as nx
 from typing import List
+import inspect
+
 
 class FocalAgentSelector(ABC):
     """
@@ -36,5 +38,7 @@ def select_focal_agent(network: nx.Graph, realization: str, agents: List[int]=[]
 
     if realization == "random":
         return RandomSelector.select_agent(network, agents, **kwargs)
+    elif inspect.isclass(realization):
+        return realization.select_agent(network, agents, **kwargs)
     else:
-        raise ValueError("Can only select from the options ['random', 'Alternative1', 'Alternative2']")
+        raise ValueError("Can only select from the options ['random'] or input an own implementation of the FocalAgentSelector")
