@@ -22,7 +22,7 @@ class Persuasion(InfluenceOperator):
         Motivation: Models with persuasive social influence can be grounded on the assumption that people are unable to
         communicate their precise opinion position, but rather communicate an argument close to their opinion position.
         We take the opinion position op the sending agent in the model (between 0 and 1) as the probability that this
-        agent will communicate argument 1. It is a special case of the opinion 'urn'-model (todo: source)
+        agent will communicate argument 1. It is a special case of the opinion 'urn'-model
         where a random argument is drawn from a collection of arguments :math:`O` in the memory of agent :math:`i`,
         containing either pro or con arguments as :math:`\{0,1\}`. Such an 'urn'-based opinion can be transformed to a
         continuous opinion by taking :math:`\dfrac{\sum_{x \in O_i} x}{|O|}`.
@@ -50,22 +50,9 @@ class Persuasion(InfluenceOperator):
         :returns: true if agent(s) were successfully influenced
         """
 
-        try:
-            confidence_level = kwargs["confidence_level"]
-        except KeyError:
-            confidence_level = 1
-        try:
-            convergence_rate = kwargs["convergence_rate"]
-        except KeyError:
-            convergence_rate = 0.5
-
-        try:
-            bi_directional = kwargs["bi_directional"]
-        except KeyError:
-            # show error message only in the relevant case
-            # if regime == "one-to-one":
-            # print("Bi-directionality was not specified, default value False is used.")
-            bi_directional = False
+        kwargs.get('confidence_level', 1)
+        kwargs.get('convergence_rate', 0.5)
+        kwargs.get('bi_directional', False)
 
         # in case of one-to-one, j is only one agent, but we still want to iterate over it
         if type(agents_j) != list:
@@ -86,8 +73,8 @@ class Persuasion(InfluenceOperator):
                     success = True
                     # transform the opinion of agent_i to an argument of the closest opinion pole by randomly drawing
                     # an argument with a probability conditional on the extremity of the opinion
-                    argument = random.choices([0,1],weights=[1-network.nodes[agent_i][influenced_feature],
-                                                             network.nodes[agent_i][influenced_feature]])[0]
+                    argument = random.choices([0,1], weights=[1-network.nodes[agent_i][influenced_feature],
+                                                              network.nodes[agent_i][influenced_feature]])[0]
                     # store the original opinion of the neighbor for bi-directional case
                     argument_neighbor = network.nodes[neighbor][influenced_feature]
 
@@ -95,14 +82,14 @@ class Persuasion(InfluenceOperator):
                     feature_difference = argument - network.nodes[neighbor][influenced_feature]
                     # influence function
                     network.nodes[neighbor][influenced_feature] = network.nodes[neighbor][influenced_feature] + \
-                                                                 convergence_rate * feature_difference
+                                                                  convergence_rate * feature_difference
                     if bi_directional == True and regime == "one-to-one":
                         argument = random.choices([0, 1], weights=[1 - argument_neighbor,
                                                                    argument_neighbor])[0]
                         feature_difference = argument - network.nodes[agent_i][influenced_feature]
                         # influence function
                         network.nodes[agent_i][influenced_feature] = network.nodes[agent_i][influenced_feature] + \
-                                                                    convergence_rate * feature_difference
+                                                                     convergence_rate * feature_difference
                         update_dissimilarity(network, [agent_i, neighbor], dissimilarity_measure)
                     else:
                         update_dissimilarity(network, [neighbor], dissimilarity_measure)
@@ -117,7 +104,7 @@ class Persuasion(InfluenceOperator):
                 argument = random.choices([0, 1], weights=[1 - average_value, average_value])[0]
                 feature_difference = argument - network.nodes[agent_i][influenced_feature]
                 network.nodes[agent_i][influenced_feature] = network.nodes[agent_i][influenced_feature] + \
-                                                            convergence_rate * feature_difference
+                                                             convergence_rate * feature_difference
                 update_dissimilarity(network, [agent_i], dissimilarity_measure)
 
         return success
