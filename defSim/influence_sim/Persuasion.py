@@ -50,9 +50,9 @@ class Persuasion(InfluenceOperator):
         :returns: true if agent(s) were successfully influenced
         """
 
-        kwargs.get('confidence_level', 1)
-        kwargs.get('convergence_rate', 0.5)
-        kwargs.get('bi_directional', False)
+        confidence_level = kwargs.get('confidence_level', 1)
+        convergence_rate = kwargs.get('convergence_rate', 0.5)
+        bi_directional = kwargs.get('bi_directional', False)
 
         # in case of one-to-one, j is only one agent, but we still want to iterate over it
         if type(agents_j) != list:
