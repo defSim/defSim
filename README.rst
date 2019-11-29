@@ -10,7 +10,15 @@ For a description of all of defSim's functions, see the `documentation <https://
 How to install defSim
 ---------------------
 
-To install the package, clone the repository to a folder of your choice and execute the following command in that folder:
+To install the package, you can use pip:
+
+.. code-block:: console
+
+   pip install git+https://github.com/marijnkeijzer/defSim
+
+**For developers**:
+
+Clone the repository to a folder of your choice and execute the following command in that folder:
 
 .. code-block:: console
 
