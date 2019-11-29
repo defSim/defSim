@@ -62,7 +62,7 @@ class Simulation:
                  max_iterations: int = 100000,
                  communication_regime: str = "one-to-one",
                  parameter_dict={},
-                 seed=None,
+                 seed=random.randint(10000,99999),
                  output_realizations=[],
                  tickwise: List[str] = []
                  ):

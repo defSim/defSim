@@ -91,8 +91,10 @@ class Experiment:
                  stop_condition: str = "max_iteration",
                  stop_condition_parameters: dict = {},
                  max_iterations: int = 100000,
-                 repetitions: int = 1):
+                 repetitions: int = 1,
+                 seed: int = random.randint(10000, 99999)):
         self.network = network
+        self.communication_regime = {"communication_regime": communication_regime}
         self.topology = topology
         self.network_parameters = network_parameters
         self.attributes_initializer = attributes_initializer
@@ -112,8 +114,9 @@ class Experiment:
         self.stop_condition_parameters = stop_condition_parameters
         self.max_iterations = max_iterations
         self.repetitions = repetitions
-        self.communication_regime = {"communication_regime": communication_regime}
+        self.seed = seed
         self.parameter_dict_list = []  # this is the internal dictionary that is created by permuting all parameters
+        random.seed(self.seed)
 
     def estimate_runtime(self):
         """
@@ -276,7 +279,8 @@ class Experiment:
                                 communication_regime=parameter_dict["communication_regime"],
                                 parameter_dict=parameter_dict,
                                 dissimilarity_measure=self.dissimilarity_measure,
-                                tickwise=self.tickwise
+                                tickwise=self.tickwise,
+                                seed=random.randint(10000, 99999)
                                 )
         return simulation.run_simulation()
 
