@@ -40,6 +40,8 @@ def create_output_table(network: nx.Graph, realizations: List[str or OutputTable
           return the same output as the Regions realization
         * Homogeneity:
         * AverageDistance:
+        * AverageOpinion: REPORTS AVERAGE OPINION (REQUIRES A LIST OF FEATURES FOR WHICH THIS NEEDS TO BE CALCULATED IF
+          F>1: passed in the kwargs dictionary as AverageOpinionFeatures)
 
     :param agents: A list of the indices of all agents that will be considered by the output table.
     :param settings_dict: A dictionary of column names and values that will be added to the output table. Can be used
@@ -80,6 +82,10 @@ def create_output_table(network: nx.Graph, realizations: List[str or OutputTable
         output['Homogeneity'] = clusterlist[0] / len(network.nodes())
     if "AverageDistance" or "Basic" in realizations:
         output['AverageDistance'] = sum(nx.get_edge_attributes(network, 'dist').values()) / len(network.edges())
+    if "AverageOpinion" or "Basic" in realizations:
+        opinionfeatures = kwargs.get("AverageOpinionFeatures", ['f01'])
+        for i in opinionfeatures:
+            output['AverageOpinion'] = sum(nx.get_node_attributes(network, i).values()) / len(network.edges())
 
     if tickwise_output:
         for f in tickwise_output.keys():
