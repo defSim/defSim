@@ -13,6 +13,9 @@ import os
 ## Examples: https://github.com/marijnkeijzer/defSim/blob/master/defSim/tools/OutputMeasures.py
 
 class PolarizationReporter(OutputTableCreator):
+
+    label = "Polarization"
+
     @staticmethod
     def create_output(network: nx.Graph, **kwargs):
         """
@@ -27,7 +30,7 @@ class PolarizationReporter(OutputTableCreator):
 
         distances = list(nx.get_edge_attributes(network, 'dist').values())
 
-        return np.var(distances_pos_neg)
+        return np.var(distances)
 
 simulation = Simulation(
                     topology = 'grid',
@@ -42,7 +45,7 @@ simulation = Simulation(
                     parameter_dict={
                        'homophily': 2
                        },
-                    output_realizations = ["AverageDistance"]
+                    output_realizations = [PolarizationReporter]
                     )
 
 print(simulation.run_simulation())
@@ -60,7 +63,7 @@ experiment = Experiment(
                     influence_parameters={
                        'homophily': [1, 2]
                        },
-                    output_realizations = [0],
+                    output_realizations = [PolarizationReporter],
                     repetitions=1
                 )
 
