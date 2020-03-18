@@ -1,3 +1,4 @@
+import inspect
 from abc import ABC, abstractmethod
 import networkx as nx
 from typing import List
@@ -96,7 +97,8 @@ def create_output_table(network: nx.Graph, realizations: List[str or OutputTable
             output['AverageOpinion'] = sum(nx.get_node_attributes(network, i).values()) / len(network.edges())
 
     # Create custom outputs (by calling implementations of OutputTableCreator)
-    custom_realizations = [realization for realization in realizations if issubclass(realization, OutputTableCreator)]
+    ## Select only those realizations which are classes (not instances of a class) and of those only if they are a subclass of OutputTableCreator
+    custom_realizations = [realization for realization in realizations if inspect.isclass(realization) and issubclass(realization, OutputTableCreator)]
     for Realization in custom_realizations:
         if Realization.label != "":
             output[Realization.label] = Realization.create_output(network)
