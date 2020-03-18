@@ -121,7 +121,6 @@ class Experiment:
         self.repetitions = repetitions
         self.seed = seed
         self.parameter_dict_list = []  # this is the internal dictionary that is created by permuting all parameters
-        random.seed(self.seed)
 
     def estimate_runtime(self):
         """
@@ -250,6 +249,7 @@ class Experiment:
                 "stop_condition": self.stop_condition,
                 "max_iterations": self.max_iterations,
                 "output_realizations": self.output_realizations,
+                "seed": self.seed,
                 "parameter_dicts": chunk
             }
             with open(os.path.join("pickles", "chunk%d.p" % i), "wb") as parameterFile:
@@ -287,7 +287,7 @@ class Experiment:
                                 dissimilarity_measure=self.dissimilarity_measure,
                                 output_realizations = self.output_realizations,
                                 tickwise=self.tickwise,
-                                seed=random.randint(10000, 99999)
+                                seed=self.seed
                                 )
         return simulation.run_simulation()
 
