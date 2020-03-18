@@ -70,19 +70,19 @@ def create_output_table(network: nx.Graph, realizations: List[str or OutputTable
         output['ClusterFinder'] = len(clusterlist)
     if "RegionsList" in realizations:
         output['RegionsList'] = ClusterFinder.create_output(network)
-    if "Regions" or "Basic" in realizations:
+    if any([i in realizations for i in ["Regions", "Basic"]]):
         output['Regions'] = len(ClusterFinder.create_output(network))
     if "ZonesList" in realizations:
         output['ZonesList'] = ClusterFinder.create_output(network, strict_zones=True)
-    if "Zones" or "Basic" in realizations:
+    if any([i in realizations for i in ["Zones", "Basic"]]):
         output['Zones'] = len(ClusterFinder.create_output(network, strict_zones=True))
     if "Isolates" in realizations:
         output['Isolates'] = clusterlist.count(1)
-    if "Homogeneity" or "Basic" in realizations:
+    if any([i in realizations for i in ["Homogeneity", "Basic"]]):
         output['Homogeneity'] = clusterlist[0] / len(network.nodes())
-    if "AverageDistance" or "Basic" in realizations:
+    if any([i in realizations for i in ["AverageDistance", "Basic"]]):
         output['AverageDistance'] = sum(nx.get_edge_attributes(network, 'dist').values()) / len(network.edges())
-    if "AverageOpinion" or "Basic" in realizations:
+    if any([i in realizations for i in ["AverageOpinion", "Basic"]]):
         opinionfeatures = kwargs.get("AverageOpinionFeatures", ['f01'])
         for i in opinionfeatures:
             output['AverageOpinion'] = sum(nx.get_node_attributes(network, i).values()) / len(network.edges())
