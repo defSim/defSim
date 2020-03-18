@@ -298,6 +298,7 @@ class Experiment:
                         self.attribute_parameters,
                         self.communication_regime,
                         self.stop_condition_parameters,
+                        self.output_parameters,
                         self.focal_agent_parameters,
                         self.neighbor_parameters,
                         self.network_modifier_parameters,
