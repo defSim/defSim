@@ -40,7 +40,7 @@ class Simulation:
         communication_regime (str = "one-to-one"): Options are "one-to-one", "one-to-many" and "many-to-one".
         parameter_dict: A dictionary with all parameters that will be passed to the specific component implementations.
         seed (str = None): A seed for stable replication
-        output_realizations (List = [str]): A list of strings with realizations for the tools.CreateOutputTable.create_output_table class
+        output_realizations (list = [str or CreateOutputTable.OutputTableCreator]): This optional list should contain all output to generate at the end of each run, by name for defaults or as class inheriting from OutputTableCreator
         tickwise (List = [str]):  A list of strings with the names of agent attributes that need to be recorded at every timestep
     """
 

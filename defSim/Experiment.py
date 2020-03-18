@@ -11,6 +11,7 @@ from defSim.focal_agent_sim import focal_agent_sim
 from defSim.dissimilarity_component import dissimilarity_calculator
 from defSim.network_init import network_init
 from defSim.Simulation import Simulation
+from defSim.tools.CreateOutputTable import OutputTableCreator
 import multiprocessing as mp
 import random
 import pandas as pd
@@ -67,7 +68,7 @@ class Experiment:
         stop_condition (String = "pragmatic_convergence"): Determines at what point a simulation is supposed to stop. Options include "strict_convergence", which means that it is theoretically not possible anymore for any agent to influence another, "pragmatic_convergence", which means that it is assumed that little change is possible anymore, and "max_iteration" which just stops the simulation after a certain amount of time steps.
         stop_condition_parameters (dict = {}): This dictionary should contain all optional parameters that influence how convergence is determined.
         max_iterations (int = 100000): The maximum number of iterations a Simulation should run.
-        output_parameters (dict = {}): This dictionary should contain all optional parameters that influence the generated output.
+        output_realizations (list = [str or OutputTableCreator]): This optional list should contain all output to generate at the end of each run, by name for defaults or as class inheriting from OutputTableCreator
         repetitions (int = 1): How often each simulation should be repeated.
         seed (int = random.randint(10000, 99999)): Optionally set seed for replicability.
     """
@@ -93,7 +94,7 @@ class Experiment:
                  stop_condition: str = "max_iteration",
                  stop_condition_parameters: dict = {},
                  max_iterations: int = 100000,
-                 output_parameters: dict = {},
+                 output_parameters: list = [str or OutputTableCreator],
                  repetitions: int = 1,
                  seed: int = random.randint(10000, 99999)):
         self.network = network
@@ -283,6 +284,7 @@ class Experiment:
                                 communication_regime=parameter_dict["communication_regime"],
                                 parameter_dict=parameter_dict,
                                 dissimilarity_measure=self.dissimilarity_measure,
+                                output_realizations = self.output_realizations,
                                 tickwise=self.tickwise,
                                 seed=random.randint(10000, 99999)
                                 )
@@ -298,7 +300,6 @@ class Experiment:
                         self.attribute_parameters,
                         self.communication_regime,
                         self.stop_condition_parameters,
-                        self.output_parameters,
                         self.focal_agent_parameters,
                         self.neighbor_parameters,
                         self.network_modifier_parameters,
