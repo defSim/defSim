@@ -94,9 +94,9 @@ class Experiment:
                  stop_condition: str = "max_iteration",
                  stop_condition_parameters: dict = {},
                  max_iterations: int = 100000,
-                 output_realizations: list = [str or OutputTableCreator],
+                 output_realizations: list = [],
                  repetitions: int = 1,
-                 seed: int = random.randint(10000, 99999)):
+                 seed: int = None):
         self.network = network
         self.communication_regime = {"communication_regime": communication_regime}
         self.topology = topology
