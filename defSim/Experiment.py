@@ -249,6 +249,7 @@ class Experiment:
                 "dissimilarity_measure": self.dissimilarity_measure,
                 "stop_condition": self.stop_condition,
                 "max_iterations": self.max_iterations,
+                "output_realizations": self.output_realizations,
                 "parameter_dicts": chunk
             }
             with open(os.path.join("pickles", "chunk%d.p" % i), "wb") as parameterFile:

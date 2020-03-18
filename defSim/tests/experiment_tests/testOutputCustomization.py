@@ -29,6 +29,23 @@ class PolarizationReporter(OutputTableCreator):
 
         return np.var(distances_pos_neg)
 
+simulation = Simulation(
+                    topology = 'grid',
+                    attributes_initializer="random_continuous",
+                    focal_agent_selector = 'random',
+                    neighbor_selector = 'random',                           
+                    influence_function = 'weighted_linear',
+                    dissimilarity_measure="euclidean",                           
+                    stop_condition = 'max_iteration',                           
+                    max_iterations=25000,
+                    communication_regime = 'one-to-one',
+                    parameter_dict={
+                       'homophily': 2
+                       },
+                    output_realizations = ["AverageDistance"]
+                    )
+
+print(simulation.run_simulation())
 
 experiment = Experiment(
                     topology = 'grid',
@@ -43,7 +60,7 @@ experiment = Experiment(
                     influence_parameters={
                        'homophily': [1, 2]
                        },
-                    output_realizations = [],
+                    output_realizations = [0],
                     repetitions=1
                 )
 
