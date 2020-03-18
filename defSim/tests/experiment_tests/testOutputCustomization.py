@@ -1,6 +1,6 @@
-import defSim as ds
 from defSim.Simulation import Simulation
 from defSim.Experiment import Experiment
+from defSim.tools.CreateOutputTable import OutputTableCreator
 import pandas as pd
 import numpy as np
 import networkx as nx
@@ -12,7 +12,7 @@ import os
 ## Every output reporter should implement a static method called 'create_output', which calculates and returns the desired output
 ## Examples: https://github.com/marijnkeijzer/defSim/blob/master/defSim/tools/OutputMeasures.py
 
-class PolarizationReporter(ds.tools.CreateOutputTable.OutputTableCreator):
+class PolarizationReporter(OutputTableCreator):
     @staticmethod
     def create_output(network: nx.Graph, **kwargs):
         """
@@ -28,7 +28,7 @@ class PolarizationReporter(ds.tools.CreateOutputTable.OutputTableCreator):
         distances = list(nx.get_edge_attributes(network, 'dist').values())
 
         return np.var(distances_pos_neg)
-        
+
 
 experiment = Experiment(
                     topology = 'grid',

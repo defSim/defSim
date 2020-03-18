@@ -67,7 +67,9 @@ class Experiment:
         stop_condition (String = "pragmatic_convergence"): Determines at what point a simulation is supposed to stop. Options include "strict_convergence", which means that it is theoretically not possible anymore for any agent to influence another, "pragmatic_convergence", which means that it is assumed that little change is possible anymore, and "max_iteration" which just stops the simulation after a certain amount of time steps.
         stop_condition_parameters (dict = {}): This dictionary should contain all optional parameters that influence how convergence is determined.
         max_iterations (int = 100000): The maximum number of iterations a Simulation should run.
+        output_parameters (dict = {}): This dictionary should contain all optional parameters that influence the generated output.
         repetitions (int = 1): How often each simulation should be repeated.
+        seed (int = random.randint(10000, 99999)): Optionally set seed for replicability.
     """
 
     def __init__(self,
@@ -91,6 +93,7 @@ class Experiment:
                  stop_condition: str = "max_iteration",
                  stop_condition_parameters: dict = {},
                  max_iterations: int = 100000,
+                 output_parameters: dict = {},
                  repetitions: int = 1,
                  seed: int = random.randint(10000, 99999)):
         self.network = network
@@ -113,6 +116,7 @@ class Experiment:
         self.stop_condition = stop_condition
         self.stop_condition_parameters = stop_condition_parameters
         self.max_iterations = max_iterations
+        self.output_parameters = output_parameters
         self.repetitions = repetitions
         self.seed = seed
         self.parameter_dict_list = []  # this is the internal dictionary that is created by permuting all parameters
