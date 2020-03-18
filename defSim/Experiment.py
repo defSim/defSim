@@ -94,7 +94,7 @@ class Experiment:
                  stop_condition: str = "max_iteration",
                  stop_condition_parameters: dict = {},
                  max_iterations: int = 100000,
-                 output_parameters: list = [str or OutputTableCreator],
+                 output_realizations: list = [str or OutputTableCreator],
                  repetitions: int = 1,
                  seed: int = random.randint(10000, 99999)):
         self.network = network
@@ -117,7 +117,7 @@ class Experiment:
         self.stop_condition = stop_condition
         self.stop_condition_parameters = stop_condition_parameters
         self.max_iterations = max_iterations
-        self.output_parameters = output_parameters
+        self.output_realizations = output_realizations
         self.repetitions = repetitions
         self.seed = seed
         self.parameter_dict_list = []  # this is the internal dictionary that is created by permuting all parameters
