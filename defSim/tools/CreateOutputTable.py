@@ -97,7 +97,7 @@ def create_output_table(network: nx.Graph, realizations: List[str or OutputTable
     if any([i in realizations for i in ["AverageOpinion", "Basic"]]):
         opinionfeatures = kwargs.get("AverageOpinionFeatures", ['f01'])
         for i in opinionfeatures:
-            output['AverageOpinion'] = sum(nx.get_node_attributes(network, i).values()) / len(network.edges())
+            output['AverageOpinion'] = sum(nx.get_node_attributes(network, i).values()) / len(network.nodes())
 
     # Output the entire networkX Graph object
     if "Graph" in realizations:
