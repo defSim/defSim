@@ -24,7 +24,7 @@ class OutputTableCreator(ABC):
         :returns: #todo: a tuple?
         """
         pass
-        
+
 
 def create_output_table(network: nx.Graph, realizations: List[str or OutputTableCreator]=[], colnames: List[str]=[],
                         agents: List[int]=[], settings_dict: dict={}, tickwise_output: dict={}, **kwargs):
@@ -57,6 +57,8 @@ def create_output_table(network: nx.Graph, realizations: List[str or OutputTable
         to merge output with parameter setting values.
     :param tickwise_output: A dictionary with a list of lists with values of agents on some given feature at each tick
         during the simulation run. This function will create a column for each key in the dictionary.
+    :param include_settings: Does not need to be set for standard use of this function, but can be used to limit 
+        output only to generated output measures (e.g. to generate single values for tickwise output)
 
     :returns: A dictionary.
     """
@@ -65,7 +67,7 @@ def create_output_table(network: nx.Graph, realizations: List[str or OutputTable
         for i in removenodes:
             network.remove_node(i)
 
-    from .OutputMeasures import ClusterFinder
+    from .OutputMeasures import ClusterFinder, AverageDistanceReporter
 
     # Initialize output dictionary by including settings for the simulation run
     output = settings_dict
@@ -95,11 +97,11 @@ def create_output_table(network: nx.Graph, realizations: List[str or OutputTable
 
     # Output related to opinions and opinion distances
     if any([i in realizations for i in ["AverageDistance", "Basic"]]):
-        output['AverageDistance'] = sum(nx.get_edge_attributes(network, 'dist').values()) / len(network.edges())
+        output['AverageDistance'] = AverageDistanceReporter.create_output(network)
     if any([i in realizations for i in ["AverageOpinion", "Basic"]]):
         opinionfeatures = kwargs.get("AverageOpinionFeatures", ['f01'])
         for i in opinionfeatures:
-            output['AverageOpinion'] = sum(nx.get_node_attributes(network, i).values()) / len(network.nodes())
+            output['AverageOpinion{}'.format(i)] = AverageOpinionReporter.create_output(network, i)
 
     # Output the entire networkX Graph object
     if "Graph" in realizations:

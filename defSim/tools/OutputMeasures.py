@@ -4,7 +4,7 @@ from .CreateOutputTable import OutputTableCreator
 
 class ClusterFinder(OutputTableCreator):
     @staticmethod
-    def create_output(network: nx.Graph, **kwargs):
+    def create_output(network: nx.Graph, cluster_dissimilarity_threshold = 0, strict_zones: bool = False, **kwargs):
         """
         Finds the size and number of cultural regions, zones, or clusters present in the graph. Following Axelrod (1997)
         *regions* are defined as a set of connected nodes with an identical attribute profile.
@@ -18,8 +18,6 @@ class ClusterFinder(OutputTableCreator):
         links with dissimilarity != 1 are preserved)
         :returns: A list with sizes of the retrieved clusters
         """
-        cluster_dissimilarity_threshold = kwargs.get('cluster_dissimilarity_threshold', 0)
-        strict_zones = kwargs.get('strict_zones', False)
 
         networkcopy = network.copy()
         if strict_zones:
@@ -32,9 +30,10 @@ class ClusterFinder(OutputTableCreator):
 
         return [len(c) for c in sorted(nx.connected_components(networkcopy), key=len, reverse=True)]
 
+
 class AttributeReporter(OutputTableCreator):
     @staticmethod
-    def create_output(network: nx.Graph, **kwargs):
+    def create_output(network: nx.Graph, feature: str = None, **kwargs):
         """
 
         THIS FUNCTION WILL OUTPUT A SINGLE ROW OF A DATAFRAME WHERE THE COLUMNS ARE USER-GIVEN AGENT-FEATURES AND COLUMN
@@ -45,6 +44,36 @@ class AttributeReporter(OutputTableCreator):
         :return:
         """
 
-        feature = kwargs.get('feature', False)
-
         return list(nx.get_node_attributes(network, feature).values())
+
+
+class AverageDistanceReporter(OutputTableCreator):
+    @staticmethod
+    def create_output(network: nx.Graph, **kwargs):
+        """
+
+        Output the average feature distance across all edges. Based on
+        calculated distances in the network (so based on whatever
+        distance measure was specified in the simulation).
+
+        :param network: A NetworkX object
+
+        :return: Average distance (float)
+        """    
+
+        return sum(nx.get_edge_attributes(network, 'dist').values()) / len(network.edges())
+
+
+class AverageOpinionReporter(OutputTableCreator):
+    @staticmethod
+    def create_output(network: nx.Graph, feature: str = "f01", **kwargs):
+        """
+
+        Output the average opinion on a feature across all agents. 
+
+        :param network: A NetworkX object
+
+        :return: Average opinion (float)
+        """    
+
+        return sum(nx.get_node_attributes(network, i).values()) / len(network.nodes())
