@@ -76,4 +76,4 @@ class AverageOpinionReporter(OutputTableCreator):
         :return: Average opinion (float)
         """    
 
-        return sum(nx.get_node_attributes(network, i).values()) / len(network.nodes())
+        return sum(nx.get_node_attributes(network, feature).values()) / len(network.nodes())

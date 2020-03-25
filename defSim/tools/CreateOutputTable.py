@@ -67,7 +67,7 @@ def create_output_table(network: nx.Graph, realizations: List[str or OutputTable
         for i in removenodes:
             network.remove_node(i)
 
-    from .OutputMeasures import ClusterFinder, AverageDistanceReporter
+    from .OutputMeasures import ClusterFinder, AverageDistanceReporter, AverageOpinionReporter
 
     # Initialize output dictionary by including settings for the simulation run
     output = settings_dict
