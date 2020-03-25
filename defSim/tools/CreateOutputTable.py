@@ -73,6 +73,7 @@ def create_output_table(network: nx.Graph, realizations: List[str or OutputTable
     if "ClusterFinder" or "ClusterFinderList" or "Basic" or "Isolates" or "Homogeneity" in realizations:
         clusterlist = ClusterFinder.create_output(network, **kwargs)
 
+    # Output related to clustering
     if "ClusterFinderList" in realizations:
         output['ClusterFinderList'] = clusterlist
     if "ClusterFinder" in realizations:
@@ -89,12 +90,18 @@ def create_output_table(network: nx.Graph, realizations: List[str or OutputTable
         output['Isolates'] = clusterlist.count(1)
     if any([i in realizations for i in ["Homogeneity", "Basic"]]):
         output['Homogeneity'] = clusterlist[0] / len(network.nodes())
+
+    # Output related to opinions and opinion distances
     if any([i in realizations for i in ["AverageDistance", "Basic"]]):
         output['AverageDistance'] = sum(nx.get_edge_attributes(network, 'dist').values()) / len(network.edges())
     if any([i in realizations for i in ["AverageOpinion", "Basic"]]):
         opinionfeatures = kwargs.get("AverageOpinionFeatures", ['f01'])
         for i in opinionfeatures:
             output['AverageOpinion'] = sum(nx.get_node_attributes(network, i).values()) / len(network.edges())
+
+    # Output the entire networkX Graph object
+    if "Graph" in realizations:
+        output['Graph'] = network
 
     # Create custom outputs (by calling implementations of OutputTableCreator)
     ## Select only those realizations which are classes (not instances of a class) and of those only if they are a subclass of OutputTableCreator
