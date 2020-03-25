@@ -15,7 +15,7 @@ class OutputTableCreator(ABC):
 
     @staticmethod
     @abstractmethod
-    def create_output(network: nx.Graph, **kwargs) -> int:
+    def create_output(network: nx.Graph, **kwargs):
         """
         This method receives a NetworkX object, performs some calculation, and outputs a cell for the output table.
 
@@ -24,9 +24,10 @@ class OutputTableCreator(ABC):
         :returns: #todo: a tuple?
         """
         pass
+        
 
 def create_output_table(network: nx.Graph, realizations: List[str or OutputTableCreator]=[], colnames: List[str]=[],
-                        agents: List[int]=[], settings_dict: dict={}, tickwise_output: dict={}, **kwargs) -> int:
+                        agents: List[int]=[], settings_dict: dict={}, tickwise_output: dict={}, **kwargs):
     """
     This function works as a factory method for the OutputTableCreator component.
     It calls the create_output function of a specific implementation of the OutputTableCreator and passes to it
