@@ -49,6 +49,7 @@ def create_output_table(network: nx.Graph, realizations: List[str or OutputTable
         * AverageDistance:
         * AverageOpinion: REPORTS AVERAGE OPINION (REQUIRES A LIST OF FEATURES FOR WHICH THIS NEEDS TO BE CALCULATED IF
           F>1: passed in the kwargs dictionary as AverageOpinionFeatures)
+        * Graph: Returns the entire NetworkX Graph
 
     :param agents: A list of the indices of all agents that will be considered by the output table.
     :param settings_dict: A dictionary of column names and values that will be added to the output table. Can be used
