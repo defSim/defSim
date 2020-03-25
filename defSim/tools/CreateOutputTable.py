@@ -3,6 +3,8 @@ from abc import ABC, abstractmethod
 import networkx as nx
 from typing import List
 
+_implemented_output_realizations = ["Basic", "ClusterFinderList", "ClusterFinder", "RegionsList", "Regions", "ZonesList", "Zones", "Isolates", "AverageDistance", "AverageOpinion", "Graph"]
+
 class OutputTableCreator(ABC):
     """
     This class is responsible for creating output for the output table.
@@ -57,8 +59,6 @@ def create_output_table(network: nx.Graph, realizations: List[str or OutputTable
         to merge output with parameter setting values.
     :param tickwise_output: A dictionary with a list of lists with values of agents on some given feature at each tick
         during the simulation run. This function will create a column for each key in the dictionary.
-    :param include_settings: Does not need to be set for standard use of this function, but can be used to limit 
-        output only to generated output measures (e.g. to generate single values for tickwise output)
 
     :returns: A dictionary.
     """
