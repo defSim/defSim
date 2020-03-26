@@ -118,19 +118,30 @@ class WeightedLinear(InfluenceOperator):
                 else:
                     update_dissimilarity(network, [neighbor], dissimilarity_measure)
                 success = True
+
         else: # applies "many-to-one"
             set_of_influencers = [neighbor for neighbor in agents_j]
-            # a decision rule can be added here (...in agents_j if ...)
+            
             if len(set_of_influencers) != 0:
-                # we now simply take as focal point the average opinion in the group
-                average_value = np.mean([network.nodes[neighbor][influenced_feature] for neighbor in set_of_influencers])
-                # as distance we take the mean of all distances
-                average_distance = np.mean([network.edges[agent_i, neighbor]["dist"] for neighbor in set_of_influencers])
+                ## Calculate total influence as average of influence from all neighbors
+                influence_values = []
+                for neighbor in set_of_influencers:
+                    # calculate feature distance on the feature that will be changed
+                    feature_difference = network.nodes[neighbor][influenced_feature] - \
+                                         network.nodes[agent_i][influenced_feature]
 
-                feature_difference = average_value - network.nodes[agent_i][influenced_feature]
-                network.nodes[agent_i][influenced_feature] = network.nodes[agent_i][influenced_feature] + \
-                    convergence_rate * (1 - homophily * abs(average_distance)) * feature_difference
-                update_dissimilarity(network, [agent_i], dissimilarity_measure)
+                    # calculate influence
+                    influence_values.append(convergence_rate * (1 - homophily * abs(network.edges[agent_i, neighbor]["dist"])) * \
+                        feature_difference)
+                
+                overall_influence = sum(influence_values) / len(influence_values)
+                network.nodes[agent_i][influenced_feature] = network.nodes[agent_i][influenced_feature] + overall_influence
+                
+                # bounding the opinions to the pre-supposed opinion scale [0,1]
+                if network.nodes[agent_i][influenced_feature] > 1: network.nodes[agent_i][influenced_feature] = 1
+                if network.nodes[agent_i][influenced_feature] < 0: network.nodes[agent_i][influenced_feature] = 0                    
+                
+                update_dissimilarity(network, [agent_i], AverageFeatureDistance)
                 success = True
 
         return success
