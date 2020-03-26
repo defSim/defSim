@@ -3,6 +3,8 @@ from abc import ABC, abstractmethod
 import networkx as nx
 from typing import List
 
+_implemented_output_realizations = ["Basic", "ClusterFinderList", "ClusterFinder", "RegionsList", "Regions", "ZonesList", "Zones", "Isolates", "AverageDistance", "AverageOpinion", "Graph"]
+
 class OutputTableCreator(ABC):
     """
     This class is responsible for creating output for the output table.
@@ -15,7 +17,7 @@ class OutputTableCreator(ABC):
 
     @staticmethod
     @abstractmethod
-    def create_output(network: nx.Graph, **kwargs) -> int:
+    def create_output(network: nx.Graph, **kwargs):
         """
         This method receives a NetworkX object, performs some calculation, and outputs a cell for the output table.
 
@@ -25,8 +27,9 @@ class OutputTableCreator(ABC):
         """
         pass
 
+
 def create_output_table(network: nx.Graph, realizations: List[str or OutputTableCreator]=[], colnames: List[str]=[],
-                        agents: List[int]=[], settings_dict: dict={}, tickwise_output: dict={}, **kwargs) -> int:
+                        agents: List[int]=[], settings_dict: dict={}, tickwise_output: dict={}, **kwargs):
     """
     This function works as a factory method for the OutputTableCreator component.
     It calls the create_output function of a specific implementation of the OutputTableCreator and passes to it
@@ -46,9 +49,10 @@ def create_output_table(network: nx.Graph, realizations: List[str or OutputTable
           distance between network network neighbors as defined by the user in the kwargs dictionary. Default is to
           return the same output as the Regions realization
         * Homogeneity:
-        * AverageDistance:
-        * AverageOpinion: REPORTS AVERAGE OPINION (REQUIRES A LIST OF FEATURES FOR WHICH THIS NEEDS TO BE CALCULATED IF
-          F>1: passed in the kwargs dictionary as AverageOpinionFeatures)
+        * AverageDistance: Reports average distance between connected agents, based on dissimilarity calculated during simulation.
+        * AverageOpinion: Reports average opinion (requires a list of features for which this needs to be calculated if number of features > 1.
+            Pass this list in the kwargs dictionary as AverageOpinionFeatures.
+        * Graph: Returns the entire NetworkX Graph
 
     :param agents: A list of the indices of all agents that will be considered by the output table.
     :param settings_dict: A dictionary of column names and values that will be added to the output table. Can be used
@@ -63,7 +67,7 @@ def create_output_table(network: nx.Graph, realizations: List[str or OutputTable
         for i in removenodes:
             network.remove_node(i)
 
-    from .OutputMeasures import ClusterFinder
+    from .OutputMeasures import ClusterFinder, AverageDistanceReporter, AverageOpinionReporter
 
     # Initialize output dictionary by including settings for the simulation run
     output = settings_dict
@@ -73,6 +77,7 @@ def create_output_table(network: nx.Graph, realizations: List[str or OutputTable
     if "ClusterFinder" or "ClusterFinderList" or "Basic" or "Isolates" or "Homogeneity" in realizations:
         clusterlist = ClusterFinder.create_output(network, **kwargs)
 
+    # Output related to clustering
     if "ClusterFinderList" in realizations:
         output['ClusterFinderList'] = clusterlist
     if "ClusterFinder" in realizations:
@@ -89,12 +94,18 @@ def create_output_table(network: nx.Graph, realizations: List[str or OutputTable
         output['Isolates'] = clusterlist.count(1)
     if any([i in realizations for i in ["Homogeneity", "Basic"]]):
         output['Homogeneity'] = clusterlist[0] / len(network.nodes())
+
+    # Output related to opinions and opinion distances
     if any([i in realizations for i in ["AverageDistance", "Basic"]]):
-        output['AverageDistance'] = sum(nx.get_edge_attributes(network, 'dist').values()) / len(network.edges())
+        output['AverageDistance'] = AverageDistanceReporter.create_output(network)
     if any([i in realizations for i in ["AverageOpinion", "Basic"]]):
         opinionfeatures = kwargs.get("AverageOpinionFeatures", ['f01'])
         for i in opinionfeatures:
-            output['AverageOpinion'] = sum(nx.get_node_attributes(network, i).values()) / len(network.edges())
+            output['AverageOpinion{}'.format(i)] = AverageOpinionReporter.create_output(network, i)
+
+    # Output the entire networkX Graph object
+    if "Graph" in realizations:
+        output['Graph'] = network
 
     # Create custom outputs (by calling implementations of OutputTableCreator)
     ## Select only those realizations which are classes (not instances of a class) and of those only if they are a subclass of OutputTableCreator

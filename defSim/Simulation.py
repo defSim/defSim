@@ -1,4 +1,5 @@
 from typing import List
+import inspect
 import random
 import time
 import pandas as pd
@@ -88,7 +89,20 @@ class Simulation:
         self.influence_steps = 0  # counts the successful influence steps
         self.output_realizations = output_realizations
         self.tickwise = tickwise
-        self.tickwise_features = {feature: [] for feature in self.tickwise}
+        self.tickwise_output = {}
+        for tickwise_realization in self.tickwise:
+            if tickwise_realization in CreateOutputTable._implemented_output_realizations:
+                self.tickwise_output['defaults'] = []
+            else:
+                if inspect.isclass(tickwise_realization) and issubclass(tickwise_realization, CreateOutputTable.OutputTableCreator):
+                    if tickwise_realization.label != "":
+                        self.tickwise_output[tickwise_realization.label] = []
+                    else:
+                        tickwise_realization.label = "CustomOutput{}".format(random.randint(1000,9999))
+                        self.tickwise_output[tickwise_realization.label] = []
+                else:
+                    self.tickwise_output[tickwise_realization] = []
+
 
     def return_values(self) -> pd.DataFrame:
         """
@@ -107,7 +121,6 @@ class Simulation:
                 parameter_df[i] = [self.__dict__[i]]
 
         return parameter_df
-
 
     def run_simulation(self) -> pd.DataFrame:
         """
@@ -192,8 +205,15 @@ class Simulation:
                                                      **self.parameter_dict)
 
         if self.tickwise: # list is not empty
+            defaults_selected = [i for i in self.tickwise if i in CreateOutputTable._implemented_output_realizations]
+            if len(defaults_selected) > 0:
+                self.tickwise_output['defaults'].append(CreateOutputTable.create_output_table(network=self.network, realizations = defaults_selected))
             for i in self.tickwise:
-                self.tickwise_features[i].append(OutputMeasures.AttributeReporter.create_output(self.network, feature=i))
+                if not i in defaults_selected:
+                    if inspect.isclass(i) and issubclass(i, CreateOutputTable.OutputTableCreator):
+                        self.tickwise_output[i.label].append(i.create_output(network=self.network))
+                    else:
+                        self.tickwise_output[i].append(OutputMeasures.AttributeReporter.create_output(self.network, feature=i))
 
         self.time_steps += 1
         if success:
@@ -228,7 +248,7 @@ class Simulation:
         results = CreateOutputTable.create_output_table(network=self.network,
                                                         realizations=self.output_realizations,
                                                         settings_dict=parameter_settings,
-                                                        tickwise_output=self.tickwise_features)
+                                                        tickwise_output=self.tickwise_output)
 
         return pd.DataFrame.from_dict({k:[results[k]] for k in results.keys()})
 
