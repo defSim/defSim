@@ -141,7 +141,7 @@ class WeightedLinear(InfluenceOperator):
                 if network.nodes[agent_i][influenced_feature] > 1: network.nodes[agent_i][influenced_feature] = 1
                 if network.nodes[agent_i][influenced_feature] < 0: network.nodes[agent_i][influenced_feature] = 0                    
                 
-                update_dissimilarity(network, [agent_i], AverageFeatureDistance)
+                update_dissimilarity(network, [agent_i], dissimilarity_measure)
                 success = True
 
         return success
