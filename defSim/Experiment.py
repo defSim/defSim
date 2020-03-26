@@ -14,6 +14,8 @@ from defSim.Simulation import Simulation
 from defSim.tools.CreateOutputTable import OutputTableCreator
 import multiprocessing as mp
 import random
+import timeit
+import warnings
 import pandas as pd
 import time
 import os
@@ -122,21 +124,67 @@ class Experiment:
         self.seed = seed
         self.parameter_dict_list = []  # this is the internal dictionary that is created by permuting all parameters
 
-    def estimate_runtime(self):
+    def estimate_runtime(self, sample_runs: int = None, sample_steps: int = 10):
         """
         This function creates the parameterDictList if that hasn't happened already and then infers from its
         length the runtime of the whole experiment.
 
+        Runtime estimates are for running on a single core.
+
         :returns: estimated time of simulation in seconds
         """
 
-        #todo: obviously the implementation in the current state is a joke. Put something proper in here.
+        if self.stop_condition != "max_iteration":
+            warnings.warn("Runtime estimates are based on max number of iterations. Runtime estimates for simulations with different stop conditions are highly unreliable.")
+
+        if sample_steps > self.max_iterations:
+            warnings.warn("Number of sample steps greater than max iterations of the simulations.")
+
+        # Create parameter_dict_list if not set yet
         if len(self.parameter_dict_list) == 0:
             self.parameter_dict_list = self._create_parameter_dictionaries()
 
+        # Select parameter combinations to test (subset of all simulations in the experiment)
+        if sample_runs is not None and sample_runs < len(self.parameter_dict_list):
+            selected_parameter_combinations = random.sample(self.parameter_dict_list, sample_runs)
+        else:
+            selected_parameter_combinations = self.parameter_dict_list
+            if sample_runs is not None and sample_runs > len(self.parameter_dict_list): 
+                warnings.warn("Reducing number of sampled simulations to total number of simulations in the experiment.")
+
+        # Set up simulations
+        simulations_to_run = []
+        for parameter_combination in selected_parameter_combinations:
+            simulations_to_run.append(Simulation(network=self.network.copy() if self.network is not None else self.network,
+                                topology=self.topology,
+                                attributes_initializer=self.attributes_initializer,
+                                focal_agent_selector=self.focal_agent_selector,
+                                neighbor_selector=self.neighbor_selector,
+                                influence_function=self.influence_function,
+                                influenceable_attributes= self.influencable_attributes,
+                                stop_condition=self.stop_condition,
+                                max_iterations=self.max_iterations,
+                                communication_regime=parameter_combination["communication_regime"],
+                                parameter_dict=parameter_combination,
+                                dissimilarity_measure=self.dissimilarity_measure,
+                                output_realizations = self.output_realizations,
+                                tickwise=self.tickwise,
+                                seed=self.seed
+                                ))
+
+        # Setup each simulation and record mean setup time
+        sampled_setup_times = [timeit.timeit(lambda: sim.initialize_simulation(), number = 1) for sim in simulations_to_run]
+        mean_setup_time = np.mean(sampled_setup_times)
+        
+        # Execute single steps of each simulation (sample_steps times per simulation) and record mean time per step
+        sampled_execution_times = [timeit.timeit(lambda: sim.run_simulation_step(), number = sample_steps) for sim in simulations_to_run]
+        mean_execution_time = np.mean(sampled_execution_times) / sample_steps
+
         num_simulations = len(self.parameter_dict_list)
-        assumed_time_per_simulation = 8
-        return num_simulations * assumed_time_per_simulation
+
+        # Estimated time in seconds based on number of simulations, setup time and step time
+        # Assumes that simulations run until max iterations
+        return num_simulations * mean_setup_time + (num_simulations * mean_execution_time * self.max_iterations)
 
     def return_values(self):
         """
