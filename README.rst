@@ -15,6 +15,12 @@ To install the package, you can use pip:
 .. code-block:: console
 
    pip install git+https://github.com/marijnkeijzer/defSim
+   
+Similarly, to update from a previously installed version:
+
+.. code-block:: console
+
+   pip install git+https://github.com/marijnkeijzer/defSim --upgrade
 
 **For developers**:
 
