@@ -36,12 +36,12 @@ class AttributeReporter(OutputTableCreator):
     def create_output(network: nx.Graph, feature: str = None, **kwargs):
         """
 
-        THIS FUNCTION WILL OUTPUT A SINGLE ROW OF A DATAFRAME WHERE THE COLUMNS ARE USER-GIVEN AGENT-FEATURES AND COLUMN
-        VALUES CONTAIN A LIST OF ALL THE AGENTS' VALUES ON THE GIVEN FEATURE.
+        This function will output a single row of a dataframe where the columns are user-given agent-features and column
+        values contain a list of all the agents'  values on the given feature.
 
-        :param network:
-        :param feature:
-        :return:
+        :param network: A NetworkX object
+        :param feature: The name of the feature to output
+        :return: A list of feature values for each agent
         """
 
         return list(nx.get_node_attributes(network, feature).values())

@@ -49,9 +49,9 @@ def create_output_table(network: nx.Graph, realizations: List[str or OutputTable
           distance between network network neighbors as defined by the user in the kwargs dictionary. Default is to
           return the same output as the Regions realization
         * Homogeneity:
-        * AverageDistance:
-        * AverageOpinion: REPORTS AVERAGE OPINION (REQUIRES A LIST OF FEATURES FOR WHICH THIS NEEDS TO BE CALCULATED IF
-          F>1: passed in the kwargs dictionary as AverageOpinionFeatures)
+        * AverageDistance: Reports average distance between connected agents, based on dissimilarity calculated during simulation.
+        * AverageOpinion: Reports average opinion (requires a list of features for which this needs to be calculated if number of features > 1.
+            Pass this list in the kwargs dictionary as AverageOpinionFeatures.
         * Graph: Returns the entire NetworkX Graph
 
     :param agents: A list of the indices of all agents that will be considered by the output table.
