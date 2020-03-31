@@ -4,6 +4,7 @@ import networkx as nx
 from .influence_sim import InfluenceOperator
 from ..tools.NetworkDistanceUpdater import update_dissimilarity
 from defSim.dissimilarity_component.dissimilarity_calculator import DissimilarityCalculator
+from defSim.agents_init.RandomContinuousInitializer import RandomContinuousInitializer
 from typing import List
 import numpy as np
 
@@ -56,12 +57,14 @@ class WeightedLinear(InfluenceOperator):
             position the receiving agent will adopt. E.g. when set to 1, the receiving agent assimilates - adopting the
             sending agent's position fully, but when set to 0.5, the receiving agent moves only half-way towards the
             sending agent's position. Passed as a kwargs argument.
-        :param float=1 homophily: A number :math:`\geq` 0 that controls the shape of the influence curve. At 0, agents
+        :param float=0 homophily: A number :math:`\geq` 0 that controls the shape of the influence curve. At 0, agents
             do not show a preference for similar others (only positive influence). At 1, agents more strongly adjust
             their opinion when confronted with similar others (moderated positive influence). At values > 1, there
             exists a point at which influence becomes negative, making agents shift away from the sending agents
             expressed opinion.
         :param bool=False bi_directional: A boolean specifying whether influence is bi- or uni-directional.
+        :param dict=None feature_bounds: A dictionary with keys 'min' and 'max' to define boundaries of feature range. 
+            Defaults to values specified in :class:`~defSim.agents_init.RandomContinuousInitializer.RandomContinuousInitializers`
         :returns: true if agent(s) were successfully influenced
         """
 
@@ -81,6 +84,11 @@ class WeightedLinear(InfluenceOperator):
             # if regime == "one-to-one":
             # print("Bi-directionality was not specified, default value False is used.")
             bi_directional = False
+
+
+        feature_bounds = kwargs.get("continuous_feature_bounds", None)
+        if feature_bounds is None:
+            feature_bounds = RandomContinuousInitializer.default_feature_bounds
 
         # in case of one-to-one, j is only one agent, but we still want to iterate over it
         if type(agents_j) != list:
@@ -105,8 +113,8 @@ class WeightedLinear(InfluenceOperator):
                     convergence_rate * (1 - homophily * abs(network.edges[agent_i, neighbor]["dist"])) * \
                     feature_difference
                 # bounding the opinions to the pre-supposed opinion scale [0,1]
-                if network.nodes[neighbor][influenced_feature] > 1: network.nodes[neighbor][influenced_feature] = 1
-                if network.nodes[neighbor][influenced_feature] < 0: network.nodes[neighbor][influenced_feature] = 0
+                if network.nodes[neighbor][influenced_feature] > feature_bounds['max']: network.nodes[neighbor][influenced_feature] = feature_bounds['max']
+                if network.nodes[neighbor][influenced_feature] < feature_bounds['min']: network.nodes[neighbor][influenced_feature] = feature_bounds['min']
 
                 if bi_directional == True and regime == "one-to-one":
                     # influence function applied again
@@ -137,9 +145,9 @@ class WeightedLinear(InfluenceOperator):
                 overall_influence = sum(influence_values) / len(influence_values)
                 network.nodes[agent_i][influenced_feature] = network.nodes[agent_i][influenced_feature] + overall_influence
                 
-                # bounding the opinions to the pre-supposed opinion scale [0,1]
-                if network.nodes[agent_i][influenced_feature] > 1: network.nodes[agent_i][influenced_feature] = 1
-                if network.nodes[agent_i][influenced_feature] < 0: network.nodes[agent_i][influenced_feature] = 0                    
+                # bounding the opinions to the pre-supposed opinion scale 
+                if network.nodes[agent_i][influenced_feature] > feature_bounds['max']: network.nodes[agent_i][influenced_feature] = feature_bounds['max']
+                if network.nodes[agent_i][influenced_feature] < feature_bounds['min']: network.nodes[agent_i][influenced_feature] = feature_bounds['min']                    
                 
                 update_dissimilarity(network, [agent_i], dissimilarity_measure)
                 success = True

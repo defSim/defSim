@@ -1,6 +1,7 @@
 import networkx as nx
 from abc import ABC, abstractmethod
 import random
+import warnings
 
 
 class AttributesInitializer(ABC):
@@ -55,8 +56,18 @@ def set_continuous_attribute(network: nx.Graph, name: str, shape: tuple = (1), d
     """
     # todo: decide whether these functions should also be able to be applied to single nodes
     # todo: decide which distributions are possible
-    for i in network.nodes():  # iterate over all nodes
-        network.nodes[i][name] = random.uniform(0, 1)  # initialize the feature's value
+
+    if not distribution in ["uniform"]:
+        raise NotImplementedError("The selected distribution has not been implemented. Select from: [uniform].")
+
+    if distribution == "uniform":
+        try:
+            feature_bounds = kwargs['feature_bounds']
+        except KeyError as e:
+            raise KeyError('Creating features with continuous random uniform distribution requires feature_bounds to set min and max value') from e
+
+        for i in network.nodes():  # iterate over all nodes
+            network.nodes[i][name] = random.uniform(feature_bounds['min'], feature_bounds['max'])  # initialize the feature's value
 
 
 def initialize_attributes(network: nx.Graph, realization: str, **kwargs):
