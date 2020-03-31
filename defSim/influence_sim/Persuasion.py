@@ -56,7 +56,7 @@ class Persuasion(InfluenceOperator):
 
         # Arguments communicated will be based on extremes of the opinion scale
         # If not specified, default random continuous bounds are assumed
-        feature_bounds = kwargs.get("continuous_feature_bounds", None)
+        feature_bounds = kwargs.get("feature_bounds", None)
         if feature_bounds is None:
             feature_bounds = RandomContinuousInitializer.default_feature_bounds
 

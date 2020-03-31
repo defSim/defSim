@@ -86,7 +86,7 @@ class WeightedLinear(InfluenceOperator):
             bi_directional = False
 
 
-        feature_bounds = kwargs.get("continuous_feature_bounds", None)
+        feature_bounds = kwargs.get("feature_bounds", None)
         if feature_bounds is None:
             feature_bounds = RandomContinuousInitializer.default_feature_bounds
 
