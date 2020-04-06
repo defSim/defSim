@@ -324,7 +324,7 @@ it is one, the influenced agent takes the value of the influencing agent. Passed
 <dd><p>Motivation: Models with persuasive social influence can be grounded on the assumption that people are unable to
 communicate their precise opinion position, but rather communicate an argument close to their opinion position.
 We take the opinion position op the sending agent in the model (between 0 and 1) as the probability that this
-agent will communicate argument 1. It is a special case of the opinion ‘urn’-model (todo: source)
+agent will communicate argument 1. It is a special case of the opinion ‘urn’-model
 where a random argument is drawn from a collection of arguments <span class="math notranslate nohighlight">\(O\)</span> in the memory of agent <span class="math notranslate nohighlight">\(i\)</span>,
 containing either pro or con arguments as <span class="math notranslate nohighlight">\(\{0,1\}\)</span>. Such an ‘urn’-based opinion can be transformed to a
 continuous opinion by taking <span class="math notranslate nohighlight">\(\dfrac{\sum_{x \in O_i} x}{|O|}\)</span>.</p>
@@ -351,6 +351,8 @@ sending agent’s position. Passed as a kwargs argument.</p></li>
 at which agents do not interact anymore. 1 means that even the most dissimilar agents still interact, 0
 means no interaction. Passed as a kwargs argument.</p></li>
 <li><p><strong>bi_directional</strong> (<em>bool=False</em>) – A boolean specifying whether influence is bi- or uni-directional.</p></li>
+<li><p><strong>feature_bounds</strong> (<em>dict=None</em>) – A dictionary with keys ‘min’ and ‘max’ to define boundaries of feature range.
+Defaults to values specified in <code class="xref py py-class docutils literal notranslate"><span class="pre">RandomContinuousInitializers</span></code></p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
@@ -408,12 +410,14 @@ parameters are the following:</p></li>
 position the receiving agent will adopt. E.g. when set to 1, the receiving agent assimilates - adopting the
 sending agent’s position fully, but when set to 0.5, the receiving agent moves only half-way towards the
 sending agent’s position. Passed as a kwargs argument.</p></li>
-<li><p><strong>homophily</strong> (<em>float=1</em>) – A number <span class="math notranslate nohighlight">\(\geq\)</span> 0 that controls the shape of the influence curve. At 0, agents
+<li><p><strong>homophily</strong> (<em>float=0</em>) – A number <span class="math notranslate nohighlight">\(\geq\)</span> 0 that controls the shape of the influence curve. At 0, agents
 do not show a preference for similar others (only positive influence). At 1, agents more strongly adjust
 their opinion when confronted with similar others (moderated positive influence). At values &gt; 1, there
 exists a point at which influence becomes negative, making agents shift away from the sending agents
 expressed opinion.</p></li>
 <li><p><strong>bi_directional</strong> (<em>bool=False</em>) – A boolean specifying whether influence is bi- or uni-directional.</p></li>
+<li><p><strong>feature_bounds</strong> (<em>dict=None</em>) – A dictionary with keys ‘min’ and ‘max’ to define boundaries of feature range.
+Defaults to values specified in <code class="xref py py-class docutils literal notranslate"><span class="pre">RandomContinuousInitializers</span></code></p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>

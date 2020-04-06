@@ -164,7 +164,7 @@
 <span id="experiment-class"></span><h1>Experiment class<a class="headerlink" href="#module-defSim.Experiment" title="Permalink to this headline">¶</a></h1>
 <dl class="class">
 <dt id="defSim.Experiment.Experiment">
-<em class="property">class </em><code class="sig-prename descclassname">defSim.Experiment.</code><code class="sig-name descname">Experiment</code><span class="sig-paren">(</span><em class="sig-param">network: networkx.classes.graph.Graph = None</em>, <em class="sig-param">communication_regime: List = 'one-to-one'</em>, <em class="sig-param">topology: str = 'grid'</em>, <em class="sig-param">network_parameters: dict = {}</em>, <em class="sig-param">attributes_initializer: str = 'random_categorical'</em>, <em class="sig-param">attribute_parameters: dict = {}</em>, <em class="sig-param">focal_agent_selector: str = 'random'</em>, <em class="sig-param">focal_agent_parameters: dict = {}</em>, <em class="sig-param">neighbor_selector: str = 'random'</em>, <em class="sig-param">neighbor_parameters: dict = {}</em>, <em class="sig-param">influence_function: str = 'axelrod'</em>, <em class="sig-param">influence_parameters: dict = {}</em>, <em class="sig-param">influenceable_attributes: list = None</em>, <em class="sig-param">network_modifier: str = 'random'</em>, <em class="sig-param">network_modifier_parameters: dict = {}</em>, <em class="sig-param">dissimilarity_measure: str = 'hamming'</em>, <em class="sig-param">tickwise: List = []</em>, <em class="sig-param">stop_condition: str = 'max_iteration'</em>, <em class="sig-param">stop_condition_parameters: dict = {}</em>, <em class="sig-param">max_iterations: int = 100000</em>, <em class="sig-param">repetitions: int = 1</em><span class="sig-paren">)</span><a class="headerlink" href="#defSim.Experiment.Experiment" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">defSim.Experiment.</code><code class="sig-name descname">Experiment</code><span class="sig-paren">(</span><em class="sig-param">network: networkx.classes.graph.Graph = None</em>, <em class="sig-param">communication_regime: List = 'one-to-one'</em>, <em class="sig-param">topology: str = 'grid'</em>, <em class="sig-param">network_parameters: dict = {}</em>, <em class="sig-param">attributes_initializer: str = 'random_categorical'</em>, <em class="sig-param">attribute_parameters: dict = {}</em>, <em class="sig-param">focal_agent_selector: str = 'random'</em>, <em class="sig-param">focal_agent_parameters: dict = {}</em>, <em class="sig-param">neighbor_selector: str = 'random'</em>, <em class="sig-param">neighbor_parameters: dict = {}</em>, <em class="sig-param">influence_function: str = 'axelrod'</em>, <em class="sig-param">influence_parameters: dict = {}</em>, <em class="sig-param">influenceable_attributes: list = None</em>, <em class="sig-param">network_modifier: str = 'random'</em>, <em class="sig-param">network_modifier_parameters: dict = {}</em>, <em class="sig-param">dissimilarity_measure: str = 'hamming'</em>, <em class="sig-param">tickwise: List = []</em>, <em class="sig-param">stop_condition: str = 'max_iteration'</em>, <em class="sig-param">stop_condition_parameters: dict = {}</em>, <em class="sig-param">max_iterations: int = 100000</em>, <em class="sig-param">output_realizations: list = []</em>, <em class="sig-param">repetitions: int = 1</em>, <em class="sig-param">seed: int = None</em><span class="sig-paren">)</span><a class="headerlink" href="#defSim.Experiment.Experiment" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>The main class for creating and running experiments. Each simulation consists of 7 modular components, where
 each component is independent from the others and can thus be replaced by a different implementation of that
@@ -203,18 +203,27 @@ making it possible to easily compare simulation runs with e.g. different number 
 <li><p><strong>stop_condition</strong> (<em>String = &quot;pragmatic_convergence&quot;</em>) – Determines at what point a simulation is supposed to stop. Options include “strict_convergence”, which means that it is theoretically not possible anymore for any agent to influence another, “pragmatic_convergence”, which means that it is assumed that little change is possible anymore, and “max_iteration” which just stops the simulation after a certain amount of time steps.</p></li>
 <li><p><strong>stop_condition_parameters</strong> (<em>dict = {}</em>) – This dictionary should contain all optional parameters that influence how convergence is determined.</p></li>
 <li><p><strong>max_iterations</strong> (<em>int = 100000</em>) – The maximum number of iterations a Simulation should run.</p></li>
+<li><p><strong>output_realizations</strong> (<em>list =</em><em> [</em><em>str</em><em> or </em><a class="reference internal" href="defSim.tools.html#defSim.tools.CreateOutputTable.OutputTableCreator" title="defSim.tools.CreateOutputTable.OutputTableCreator"><em>OutputTableCreator</em></a><em>]</em>) – This optional list should contain all output to generate at the end of each run, by name for defaults or as class inheriting from OutputTableCreator</p></li>
 <li><p><strong>repetitions</strong> (<em>int = 1</em>) – How often each simulation should be repeated.</p></li>
+<li><p><strong>seed</strong> (<em>int = random.randint</em><em>(</em><em>10000</em><em>, </em><em>99999</em><em>)</em>) – Optionally set seed for replicability.</p></li>
 </ul>
 </dd>
 </dl>
 <dl class="method">
 <dt id="defSim.Experiment.Experiment.estimate_runtime">
-<code class="sig-name descname">estimate_runtime</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#defSim.Experiment.Experiment.estimate_runtime" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">estimate_runtime</code><span class="sig-paren">(</span><em class="sig-param">sample_runs: int = None</em>, <em class="sig-param">sample_steps: int = 10</em><span class="sig-paren">)</span><a class="headerlink" href="#defSim.Experiment.Experiment.estimate_runtime" title="Permalink to this definition">¶</a></dt>
 <dd><p>This function creates the parameterDictList if that hasn’t happened already and then infers from its
 length the runtime of the whole experiment.</p>
+<p>Runtime estimates are for running on a single core.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>estimated time of simulation in seconds</p>
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>sample_runs</strong> (<em>int=None</em>) – The number of entries in the parameterDictList to sample in order to estimate the runtime.</p></li>
+<li><p><strong>sample_steps</strong> (<em>int=10</em>) – The number of iterations executed in each simulation run to base the estimated runtime on.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>estimated time of simulation in seconds</p>
 </dd>
 </dl>
 </dd></dl>
