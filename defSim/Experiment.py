@@ -131,6 +131,8 @@ class Experiment:
 
         Runtime estimates are for running on a single core.
 
+        :param int=None sample_runs: The number of entries in the parameterDictList to sample in order to estimate the runtime.
+        :param int=10 sample_steps: The number of iterations executed in each simulation run to base the estimated runtime on.
         :returns: estimated time of simulation in seconds
         """
 
