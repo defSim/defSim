@@ -11,7 +11,8 @@ class EuclideanDistance(DissimilarityCalculator):
     @staticmethod
     def calculate_dissimilarity(network: nx.Graph, agent1_id: int, agent2_id: int) -> float:
         """
-        Calculates euclidean distance of the agents' feature vectors.
+        Calculates normalized euclidean distance of the agents' feature vectors where feature values do not exceed the
+        [0,1] bounds.
 
         :param network: The network in which the agents exist.
         :param agent1_id: The index of the first agent.
@@ -19,9 +20,10 @@ class EuclideanDistance(DissimilarityCalculator):
 
         :returns: A float value, representing the distance between the two agents.
         """
+
         agent1_attributes = np.array(list(network.nodes[agent1_id].values()))
         agent2_attributes = np.array(list(network.nodes[agent2_id].values()))
-        return np.linalg.norm(agent1_attributes - agent2_attributes)
+        return np.linalg.norm(agent1_attributes - agent2_attributes) / np.sqrt(len(agent1_attributes))
 
     @staticmethod
     def calculate_dissimilarity_networkwide(network: nx.Graph):
@@ -31,6 +33,7 @@ class EuclideanDistance(DissimilarityCalculator):
 
         :param network: The network that is modified.
         """
+
         for agent in network.nodes():
             for neighbor in network.neighbors(agent):
                 network.edges[agent, neighbor]['dist'] = EuclideanDistance.calculate_dissimilarity(network,
