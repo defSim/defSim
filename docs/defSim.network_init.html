@@ -84,13 +84,19 @@
 </ul>
 <ul class="current">
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Networks</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#module-defSim.network_init.network_init">network_init module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-defSim.network_init.network_init">generate_network</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-defSim.network_init.network_init">read_network</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-defSim.network_init.network_init">network_generators</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-defSim.network_init.network_init">execute_ms_rewiring</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="defSim.agents_init.html">Agent features</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="defSim.agents_init.html#module-defSim.agents_init.agents_init">agents_init module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="defSim.agents_init.html#module-defSim.agents_init.agents_init">initialize_attributes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="defSim.agents_init.html#module-defSim.agents_init.RandomCategoricalInitializer">RandomCategoricalInitializer</a></li>
 <li class="toctree-l2"><a class="reference internal" href="defSim.agents_init.html#module-defSim.agents_init.RandomContinuousInitializer">RandomContinuousInitializer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="defSim.agents_init.html#module-defSim.agents_init.agents_init">set_categorical_attribute</a></li>
+<li class="toctree-l2"><a class="reference internal" href="defSim.agents_init.html#module-defSim.agents_init.agents_init">set_continuous_attribute</a></li>
+<li class="toctree-l2"><a class="reference internal" href="defSim.agents_init.html#module-defSim.agents_init.agents_init">Abstract Base Class</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="defSim.focal_agent_sim.html">Focal agent selection</a><ul>
@@ -160,10 +166,57 @@
 </div> --> <!-- turned off on 21/10/2019 -->
            <div itemprop="articleBody">
             
-  <div class="section" id="network-initialization-component">
-<h1>Network (initialization component)<a class="headerlink" href="#network-initialization-component" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="network-network-init">
+<h1>Network (network_init)<a class="headerlink" href="#network-network-init" title="Permalink to this headline">¶</a></h1>
+<p>This page lists all the functions involved in generating the NetworkX Graph object. Most notably ‘generate_network’ is the factory method that you should call to produce a network from scratch, and ‘read_network’ is the function you should call when you want to produce a network from an adjacency matrix or edgelist.</p>
 <div class="section" id="module-defSim.network_init.network_init">
-<span id="network-init-module"></span><h2>network_init module<a class="headerlink" href="#module-defSim.network_init.network_init" title="Permalink to this headline">¶</a></h2>
+<span id="generate-network"></span><h2>generate_network<a class="headerlink" href="#module-defSim.network_init.network_init" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="defSim.network_init.network_init.generate_network">
+<code class="sig-prename descclassname">defSim.network_init.network_init.</code><code class="sig-name descname">generate_network</code><span class="sig-paren">(</span><em class="sig-param">name: str</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span> &#x2192; networkx.classes.graph.Graph<a class="headerlink" href="#defSim.network_init.network_init.generate_network" title="Permalink to this definition">¶</a></dt>
+<dd><p>This factory method calls the graph generator and returns the desired network. It takes as arguments the name of the
+required network and a dictionary containing all the arguments that are required by the desired graph generator.
+defSim can produce three types networks (‘grid’, ‘spatial_random_graph’, and ‘ring’), but will also accept and call
+any network generator in the <a class="reference external" href="https://networkx.github.io/documentation/stable/reference/generators.html">NetworkX Graph Generator library</a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> – A string with the name of the network type.
+Possible options:
+“spatial_random_graph”, “ring”, “grid”</p></li>
+<li><p><strong>kwargs</strong> – A dictionary containing the parameter names as keys and their respective values
+as values to be passed to the function that produces the network.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><p>ValueError if not one of the possible network topologies is selected.</p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>A NetworkX Graph object.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="module-defSim.network_init.network_init">
+<span id="read-network"></span><h2>read_network<a class="headerlink" href="#module-defSim.network_init.network_init" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="defSim.network_init.network_init.read_network">
+<code class="sig-prename descclassname">defSim.network_init.network_init.</code><code class="sig-name descname">read_network</code><span class="sig-paren">(</span><em class="sig-param">network_input: numpy.ndarray</em><span class="sig-paren">)</span><a class="headerlink" href="#defSim.network_init.network_init.read_network" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function takes the structure of an empirically measured network, provided as an adjacency matrix,
+and creates a network graph object out of it.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>network_input</strong> – Either an adjacency matrix where the entry (i,j) represents whether an edge between
+i and j exists or if applicable, its strength,
+or the path to a file containing an edge list</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="module-defSim.network_init.network_init">
+<span id="network-generators"></span><h2>network_generators<a class="headerlink" href="#module-defSim.network_init.network_init" title="Permalink to this headline">¶</a></h2>
 <dl class="function">
 <dt id="defSim.network_init.network_init._produce_grid_network">
 <code class="sig-prename descclassname">defSim.network_init.network_init.</code><code class="sig-name descname">_produce_grid_network</code><span class="sig-paren">(</span><em class="sig-param">**kwargs</em><span class="sig-paren">)</span> &#x2192; networkx.classes.graph.Graph<a class="headerlink" href="#defSim.network_init.network_init._produce_grid_network" title="Permalink to this definition">¶</a></dt>
@@ -177,27 +230,6 @@ connected to its neighborhood depending on the parameters “neighborhood” and
 in each cardinal direction. In a Moore neighborhood, each agent is connected to their 8 immediate neighbors.</p></li>
 <li><p><strong>radius</strong> (<em>int=1</em>) – Increases the number of connections further than the immediate neigbourhood.
 An agent in a Moore neighborhood with radius 2 has 24 connections.</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>A NetworkX Graph object.</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="function">
-<dt id="defSim.network_init.network_init._produce_networkx_graph">
-<code class="sig-prename descclassname">defSim.network_init.network_init.</code><code class="sig-name descname">_produce_networkx_graph</code><span class="sig-paren">(</span><em class="sig-param">name: str</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#defSim.network_init.network_init._produce_networkx_graph" title="Permalink to this definition">¶</a></dt>
-<dd><p>This method allows for passing on the graph generation to one of the generators included in the
-<a class="reference external" href="https://networkx.github.io/documentation/stable/reference/generators.html">NetworkX package</a>. Provide the name
-of the method as the first argument here, and pass all (required) arguments for the NetworkX function in the kwargs
-dictionary.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>name</strong> – Name of the NetworkX graph generator to be used</p></li>
-<li><p><strong>kwargs</strong> – A dictionary containing the parameter names as keys and their respective values as values to be
-passed to the function that produces the network.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
@@ -242,6 +274,30 @@ passed to the function that produces the network.</p></li>
 </dd></dl>
 
 <dl class="function">
+<dt id="defSim.network_init.network_init._produce_networkx_graph">
+<code class="sig-prename descclassname">defSim.network_init.network_init.</code><code class="sig-name descname">_produce_networkx_graph</code><span class="sig-paren">(</span><em class="sig-param">name: str</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#defSim.network_init.network_init._produce_networkx_graph" title="Permalink to this definition">¶</a></dt>
+<dd><p>This method allows for passing on the graph generation to one of the generators included in the
+<a class="reference external" href="https://networkx.github.io/documentation/stable/reference/generators.html">NetworkX package</a>. Provide the name
+of the method as the first argument here, and pass all (required) arguments for the NetworkX function in the kwargs
+dictionary.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> – Name of the NetworkX graph generator to be used</p></li>
+<li><p><strong>kwargs</strong> – A dictionary containing the parameter names as keys and their respective values as values to be
+passed to the function that produces the network.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A NetworkX Graph object.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="module-defSim.network_init.network_init">
+<span id="execute-ms-rewiring"></span><h2>execute_ms_rewiring<a class="headerlink" href="#module-defSim.network_init.network_init" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
 <dt id="defSim.network_init.network_init.execute_ms_rewiring">
 <code class="sig-prename descclassname">defSim.network_init.network_init.</code><code class="sig-name descname">execute_ms_rewiring</code><span class="sig-paren">(</span><em class="sig-param">network: networkx.classes.graph.Graph</em>, <em class="sig-param">rewiring_prop: float</em><span class="sig-paren">)</span><a class="headerlink" href="#defSim.network_init.network_init.execute_ms_rewiring" title="Permalink to this definition">¶</a></dt>
 <dd><p>This method executes Maslov Sneppen rewiring (Maslov &amp; Sneppen, 2002). Until a given proportion of the network
@@ -260,43 +316,6 @@ Sampling these edges happens with replacement, so rewiring_prop may exceed 1.</p
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><p>NetworkX Graph object</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="function">
-<dt id="defSim.network_init.network_init.generate_network">
-<code class="sig-prename descclassname">defSim.network_init.network_init.</code><code class="sig-name descname">generate_network</code><span class="sig-paren">(</span><em class="sig-param">name: str</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span> &#x2192; networkx.classes.graph.Graph<a class="headerlink" href="#defSim.network_init.network_init.generate_network" title="Permalink to this definition">¶</a></dt>
-<dd><p>This is the factory method that returns a specific network.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>name</strong> – A string with the name of the network type.
-Possible options:
-“spatial_random_graph”, “ring”, “grid”</p></li>
-<li><p><strong>kwargs</strong> – A dictionary containing the parameter names as keys and their respective values
-as values to be passed to the function that produces the network.</p></li>
-</ul>
-</dd>
-<dt class="field-even">Raises</dt>
-<dd class="field-even"><p>ValueError if not one of the possible network topologies is selected.</p>
-</dd>
-<dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>A NetworkX Graph object.</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="function">
-<dt id="defSim.network_init.network_init.read_network">
-<code class="sig-prename descclassname">defSim.network_init.network_init.</code><code class="sig-name descname">read_network</code><span class="sig-paren">(</span><em class="sig-param">network_input: numpy.ndarray</em><span class="sig-paren">)</span><a class="headerlink" href="#defSim.network_init.network_init.read_network" title="Permalink to this definition">¶</a></dt>
-<dd><p>This function takes the structure of an empirically measured network, provided as an adjacency matrix,
-and creates a network graph object out of it.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>network_input</strong> – Either an adjacency matrix where the entry (i,j) represents whether an edge between
-i and j exists or if applicable, its strength,
-or the path to a file containing an edge list</p>
 </dd>
 </dl>
 </dd></dl>
