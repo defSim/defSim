@@ -22,6 +22,7 @@ import os
 import pickle
 from defSim.tools import ClusterExecutionScript
 import shutil
+import copy
 
 
 class Experiment:
@@ -171,7 +172,7 @@ class Experiment:
                                 dissimilarity_measure=self.dissimilarity_measure,
                                 output_realizations = self.output_realizations,
                                 tickwise=self.tickwise,
-                                seed=self.seed
+                                seed=parameter_combination["seed"]
                                 ))
 
         # Setup each simulation and record mean setup time
@@ -337,7 +338,7 @@ class Experiment:
                                 dissimilarity_measure=self.dissimilarity_measure,
                                 output_realizations = self.output_realizations,
                                 tickwise=self.tickwise,
-                                seed=self.seed
+                                seed=parameter_dict['seed']
                                 )
         return simulation.run_simulation()
 
@@ -372,5 +373,22 @@ class Experiment:
             for pair in key_value_pairs:
                 new_dict.update(pair)
             full_dict_list.append(new_dict)  # and add the dictionary to the list of all dictionaries
+
         # now we want to repeat each parameter combination as often as the number of repetitions
-        return list(it.chain.from_iterable(it.repeat(x, self.repetitions) for x in full_dict_list))
+        full_repetitions_list = list(it.chain.from_iterable(it.repeat(x, self.repetitions) for x in full_dict_list))
+
+        # creating a copy of the parameter combinations 
+        # (required to be able to set separate seeds) for different repetition
+        full_repetitions_list = [copy.copy(parameter_combination) for parameter_combination in full_repetitions_list]
+
+        # add individual seeds to each parameter combination, based on experiment seed
+        if self.seed is not None:
+        	random.seed(self.seed)
+        	seeds = [random.randint(10000,99999) for _ in range(len(full_repetitions_list))]
+        else:
+        	seeds = rep([None], times = len(full_repetitions_list))
+
+        for index in range(len(full_repetitions_list)):
+        	full_repetitions_list[index]['seed'] = seeds[index]
+
+        return full_repetitions_list
