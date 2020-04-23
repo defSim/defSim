@@ -11,7 +11,7 @@ class CorrelatedContinuousInitializer(AttributesInitializer):
     """
     
     @staticmethod
-    def initialize_attributes(network: nx.Graph, num_features: int = None, distribution: str = 'uniform', covariances: [list] or np.array = None, correlation: float = None, **kwargs):
+    def initialize_attributes(network: nx.Graph, distribution: str = 'uniform', **kwargs):
         """
         Randomly initializes a number of continuous features between 0 and 1 for each node.
         Specify either a covariance matrix or a single correlation value (which is then applied to all pairs of attributes).
@@ -19,18 +19,23 @@ class CorrelatedContinuousInitializer(AttributesInitializer):
         distribution which is eventually returned.
         If both are specified only the covariance matrix is used.
         :param network: The graph object whose nodes' attributes are modified.
-        :param int=1 num_features: How many different attributes each node has.
         :param str='uniform' distribution: Type of continuous distribution to draw feature values from.
+        :param int=1 num_features: How many different attributes each node has.        
         :param [list] or numpy.array covariances: Complete covariance matrix (see agents_init.generate_correlated_continuous_attributes)
         :param float correlation: Single correlation value to apply to all pairs of attributes
         """        
-        
-        if num_features is None:
+
+        if not distribution in ["uniform", "gaussian"]:
+            raise NotImplementedError("The selected distribution has not been implemented. Select from: ['uniform', 'gaussian'].")               
+
+        try:
+            num_features = kwargs["num_features"]
+        except KeyError:
             warnings.warn("Number of features not specified, using 2 as default")
             num_features = 2
-            
-        if not distribution in ["uniform", "gaussian"]:
-            raise NotImplementedError("The selected distribution has not been implemented. Select from: ['uniform', 'gaussian'].")
+    
+        covariances = kwargs.get("covariances", None)
+        correlation = kwargs.get("correlation", None)
         
         if covariances is None:
             if correlation is None:
@@ -39,14 +44,12 @@ class CorrelatedContinuousInitializer(AttributesInitializer):
             covariances = []
             for i in range(num_features):
                 covariances.append([correlation if not i == j else 1 for j in range(num_features)])
-            print(covariances)
             
         if not isinstance(covariances, np.ndarray):
             covariances = np.array(covariances)
         
         n_agents = len(network.nodes)
         features = generate_correlated_continuous_attributes(num_features, n_agents, covariances, distribution)
-        print(np.corrcoef(features))
         
         for feature_num, feature in enumerate(features):
             feature_name = 'f' + str("%02d" % (feature_num + 1))
