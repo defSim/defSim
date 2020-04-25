@@ -1,9 +1,6 @@
 import networkx as nx
 import numpy as np
-try:
-    import scipy.stats as stats
-except ModuleNotFoundError:
-    pass
+import scipy.stats as stats
 from abc import ABC, abstractmethod
 import random
 import math
@@ -64,6 +61,8 @@ def generate_correlated_continuous_attributes(n_attributes: int, n_values: int, 
     if not distribution in ["uniform", "gaussian"]:
         raise NotImplementedError("The selected distribution has not been implemented. Select from: ['uniform', 'gaussian'].")
 
+    if not isinstance(covariances, np.ndarray):
+        covariances = np.array(covariances)
     
     means = [0 for _ in range(n_attributes)]
     
@@ -74,26 +73,12 @@ def generate_correlated_continuous_attributes(n_attributes: int, n_values: int, 
                 if not row_index == column_index:
                     covariances[row_index, column_index] = 2 * math.sin(math.pi * covariances[row_index, column_index] / 6)
 
-    base_data = np.transpose(np.random.multivariate_normal(mean = means, cov = covariances, size = n_values))
+    base_data = np.random.multivariate_normal(mean = means, cov = covariances, size = n_values)
 
     if distribution == "gaussian":
-        final_attributes = np.apply_along_axis(rescale_attribute, axis = 1, arr = base_data)    
+        final_attributes = np.apply_along_axis(rescale_attribute, axis = 0, arr = base_data)    
     elif distribution == "uniform":
-        try:
-            # first try scipy.stats vectorized normal cdf function (fastest)
-            final_attributes = np.apply_along_axis(stats.norm.cdf, axis = 1, arr = base_data)
-        except NameError:
-            # if this function cannot be found (scipy not available)
-            # try statistics.NormDist().cdf (available from Python 3.8) (slower)
-            try:
-                final_attributes = np.apply_along_axis(np.vectorize(statistics.NormDist().cdf), axis = 1, arr = base_data)
-            except AttributeError:
-                # if statistics.NormDist cannot be found (Python < 3.8)
-                # define own normalcdf function for standard normal distribution (slowest)
-                def normcdf(x):
-                    return (1.0 + math.erf(x / math.sqrt(2.0))) / 2.0
-                final_attributes = np.apply_along_axis(np.vectorize(normcdf), axis = 1, arr = m)
-    
+        final_attributes = np.apply_along_axis(stats.norm.cdf, axis = 0, arr = base_data)    
     
     return final_attributes        
 
@@ -160,6 +145,7 @@ def initialize_attributes(network: nx.Graph, realization: str, **kwargs):
     from . import RandomContinuousInitializer
     from . import RandomCategoricalInitializer
     from . import CorrelatedContinuousInitializer
+    from . import NetworkCorrelatedContinuousInitializer
 
     if realization == "random_categorical":
         RandomCategoricalInitializer.RandomCategoricalInitializer.initialize_attributes(network, **kwargs)
@@ -167,5 +153,7 @@ def initialize_attributes(network: nx.Graph, realization: str, **kwargs):
         RandomContinuousInitializer.RandomContinuousInitializer.initialize_attributes(network, **kwargs)
     elif realization == 'correlated_continuous':
         CorrelatedContinuousInitializer.CorrelatedContinuousInitializer.initialize_attributes(network, **kwargs)
+    elif realization == 'network_correlated_continuous':
+        NetworkCorrelatedContinuousInitializer.NetworkCorrelatedContinuousInitializer.initialize_attributes(network, **kwargs)        
     else:
         raise ValueError("Can only select from the options ['random_categorical', 'random_continuous', 'correlated_continuous']")

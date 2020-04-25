@@ -44,15 +44,12 @@ class CorrelatedContinuousInitializer(AttributesInitializer):
             covariances = []
             for i in range(num_features):
                 covariances.append([correlation if not i == j else 1 for j in range(num_features)])
-            
-        if not isinstance(covariances, np.ndarray):
-            covariances = np.array(covariances)
         
         n_agents = len(network.nodes)
-        features = generate_correlated_continuous_attributes(num_features, n_agents, covariances, distribution)
+        feature_values = generate_correlated_continuous_attributes(num_features, n_agents, covariances, distribution)
         
-        for feature_num, feature in enumerate(features):
-            feature_name = 'f' + str("%02d" % (feature_num + 1))
-            for node_num, node in enumerate(network.nodes):
-                network.nodes[node][feature_name] = feature[node_num]
+        feature_names = ['f' + str("%02d" % (feature_num + 1)) for feature_num in range(num_features)]
+        for node_num, node in enumerate(network.nodes):
+            for feature_num, feature in enumerate(feature_names):
+                network.nodes[node][feature] = feature_values[node_num, feature_num]
                       
