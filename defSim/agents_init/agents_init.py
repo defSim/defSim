@@ -145,7 +145,6 @@ def initialize_attributes(network: nx.Graph, realization: str, **kwargs):
     from . import RandomContinuousInitializer
     from . import RandomCategoricalInitializer
     from . import CorrelatedContinuousInitializer
-    from . import NetworkCorrelatedContinuousInitializer
 
     if realization == "random_categorical":
         RandomCategoricalInitializer.RandomCategoricalInitializer.initialize_attributes(network, **kwargs)
