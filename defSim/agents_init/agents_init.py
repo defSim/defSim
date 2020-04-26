@@ -152,8 +152,6 @@ def initialize_attributes(network: nx.Graph, realization: str, **kwargs):
     elif realization == "random_continuous":
         RandomContinuousInitializer.RandomContinuousInitializer.initialize_attributes(network, **kwargs)
     elif realization == 'correlated_continuous':
-        CorrelatedContinuousInitializer.CorrelatedContinuousInitializer.initialize_attributes(network, **kwargs)
-    elif realization == 'network_correlated_continuous':
-        NetworkCorrelatedContinuousInitializer.NetworkCorrelatedContinuousInitializer.initialize_attributes(network, **kwargs)        
+        CorrelatedContinuousInitializer.CorrelatedContinuousInitializer.initialize_attributes(network, **kwargs)    
     else:
         raise ValueError("Can only select from the options ['random_categorical', 'random_continuous', 'correlated_continuous']")
