@@ -24,13 +24,13 @@ class CorrelatedContinuousInitializer(AttributesInitializer):
         The generated feature values can be spread across the network in a non-random way, by placing more weight on attribute values
         close to the current mean value of the first attribute among network neighbors. Weights are bsaed on a Beta distribution with
         its mode set to the mean value among neighbors. The concentration of weights around the mode can be adjusted with the 
-        'neighbor_influence_concentration' parameter. The strength of neighbor influence can be adjusted using the 'neighbor_influence_strength' parameter. 
-        When 'neighbor_influence_strength' == 0 (default) attribute values are randomly assigned to agents.
+        'neighbor_similarity_concentration' parameter. The strength of neighbor influence can be adjusted using the 'neighbor_similarity_strength' parameter. 
+        When 'neighbor_similarity_strength' == 0 (default) attribute values are randomly assigned to agents.
         
         :param network: The graph object whose nodes' attributes are modified.
         :param str='uniform' distribution: Type of continuous distribution to draw feature values from.
-        :param float=10 neighbor_influence_concentration: How closely concentrated (peaked) the weight distribution is around the mean value of neighbors (minimum value > 2 required to maintain integrity of the distribution)
-        :param float=0 neighbor_influence_strength: Strength of weighting by neighbor value. 0 = no influence of neighbors
+        :param float=10 neighbor_similarity_concentration: How closely concentrated (peaked) the weight distribution is around the mean value of neighbors (minimum value > 2 required to maintain integrity of the distribution)
+        :param float=0 neighbor_similarity_strength: Strength of weighting by neighbor value. 0 = no influence of neighbors
         :param int=1 num_features: How many different attributes each node has.  
         :param str='f01' neighbor_influence_feature: Sets the feature on which neighbor similarity will be determined.
         :param [list] or numpy.array covariances: Complete covariance matrix (see agents_init.generate_correlated_continuous_attributes)
@@ -48,16 +48,16 @@ class CorrelatedContinuousInitializer(AttributesInitializer):
             warnings.warn("Number of features not specified, using 1 as default")
             num_features = 1
             
-        neighbor_influence_concentration = kwargs.get("neighbor_influence_concentration", 10)
+        neighbor_similarity_concentration = kwargs.get("neighbor_similarity_concentration", 10)
         allow_inverse_concentration = kwargs.get("allow_inverse_concentration", False)
-        if neighbor_influence_concentration <= 2 and not allow_inverse_concentration:
-            raise ValueError("neighbor_influence_concentration must be greater than 2 to maintain single-peaked distribution. Set 'allow_inverse_concentration' to True to override.")
-        elif neighbor_influence_concentration <= 0:
-            raise ValueError("neighbor_influence_concentration must be greater than  0.")
+        if neighbor_similarity_concentration <= 2 and not allow_inverse_concentration:
+            raise ValueError("neighbor_similarity_concentration must be greater than 2 to maintain single-peaked distribution. Set 'allow_inverse_concentration' to True to override.")
+        elif neighbor_similarity_concentration <= 0:
+            raise ValueError("neighbor_similarity_concentration must be greater than  0.")
             
-        neighbor_influence_strength = kwargs.get("neighbor_influence_strength", 0)
-        if neighbor_influence_strength < 0:
-            raise ValueError("neighbor_influence_strength cannot be negative (to avoid negative choice weights). Try 0 < neighbor_influence_concentration < 2 instead for anticoordination with neighbors.")
+        neighbor_similarity_strength = kwargs.get("neighbor_similarity_strength", 0)
+        if neighbor_similarity_strength < 0:
+            raise ValueError("neighbor_similarity_strength cannot be negative (to avoid negative choice weights). Try 0 < neighbor_similarity_concentration < 2 instead for anticoordination with neighbors.")
     
         neighbor_influence_feature = kwargs.get("neighbor_influence_feature", "f01")
 
@@ -82,7 +82,7 @@ class CorrelatedContinuousInitializer(AttributesInitializer):
         
         # Assign attribute valuees to agents
         # If neighbor influence is greater than 0, add network similarity             
-        if neighbor_influence_strength == 0:
+        if neighbor_similarity_strength == 0:
             for node_num, node in enumerate(network.nodes):
                 for feature_num, feature in enumerate(feature_names):
                     network.nodes[node][feature] = feature_values[node_num, feature_num]
@@ -119,11 +119,11 @@ class CorrelatedContinuousInitializer(AttributesInitializer):
                     mean_neighbor_value = sum(neighbor_values) / len(neighbor_values)
                     # set alpha and beta for a beta distribution so that the
                     # mode of the distribution is at mean neighbor value
-                    # peakedness of the distribution is set by 'neighbor_influence_concentration'
-                    bdist_alpha = mean_neighbor_value*(neighbor_influence_concentration-2)+1
-                    bdist_beta = (1-mean_neighbor_value)*(neighbor_influence_concentration-2)+1
-                    # add weight based on beta pdf, scaled by 'neighbor_influence_strength'
-                    weights = [weight + (neighbor_influence_strength * stats.beta.pdf(sorted_features[index,0], bdist_alpha, bdist_beta)) for index, weight in enumerate(weights)]
+                    # peakedness of the distribution is set by 'neighbor_similarity_concentration'
+                    bdist_alpha = mean_neighbor_value*(neighbor_similarity_concentration-2)+1
+                    bdist_beta = (1-mean_neighbor_value)*(neighbor_similarity_concentration-2)+1
+                    # add weight based on beta pdf, scaled by 'neighbor_similarity_strength'
+                    weights = [weight + (neighbor_similarity_strength * stats.beta.pdf(sorted_features[index,0], bdist_alpha, bdist_beta)) for index, weight in enumerate(weights)]
 
                 selected_row = random.choices(population = list(range(np.ma.size(sorted_features, axis = 0))), weights = weights, k = 1)
                 feature_values = sorted_features[selected_row].tolist()[0]
