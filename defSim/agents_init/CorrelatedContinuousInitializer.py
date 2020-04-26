@@ -1,6 +1,8 @@
 import networkx as nx
 import numpy as np
+import scipy.stats as stats
 import warnings
+import random
 from .agents_init import AttributesInitializer
 from .agents_init import generate_correlated_continuous_attributes
 
