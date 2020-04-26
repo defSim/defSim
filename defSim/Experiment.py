@@ -449,7 +449,7 @@ class Experiment:
         	random.seed(self.seed)
         	seeds = [random.randint(10000,99999) for _ in range(len(full_repetitions_list))]
         else:
-        	seeds = rep([None], times = len(full_repetitions_list))
+        	seeds = [None for _ in len(full_repetitions_list)]
 
         for index in range(len(full_repetitions_list)):
         	full_repetitions_list[index]['seed'] = seeds[index]
