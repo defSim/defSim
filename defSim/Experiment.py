@@ -305,7 +305,7 @@ class Experiment:
 	                print("Waiting for", remaining, "tasks to complete...")
 	                time.sleep(2)
 	            pool.join()
-	            return pd.concat(results.get())
+	            return pd.concat(results.get()).reset_index()
 	        else:   # if NOT parallel
 	            result_list = [self._create_and_run_simulation(parameter_dict) for parameter_dict in
 	                           self.parameter_dict_list]
@@ -449,7 +449,7 @@ class Experiment:
         	random.seed(self.seed)
         	seeds = [random.randint(10000,99999) for _ in range(len(full_repetitions_list))]
         else:
-        	seeds = rep([None], times = len(full_repetitions_list))
+        	seeds = [None for _ in len(full_repetitions_list)]
 
         for index in range(len(full_repetitions_list)):
         	full_repetitions_list[index]['seed'] = seeds[index]

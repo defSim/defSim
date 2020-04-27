@@ -122,17 +122,20 @@ class Simulation:
 
         return parameter_df
 
-    def run_simulation(self) -> pd.DataFrame:
+    def run_simulation(self, initialize: bool = True) -> pd.DataFrame:
         """
         This method initializes the network if none is given, initializes the attributes of the agents, and also
         computes and sets the distances between each neighbor.
         It then calls different functions that execute the simulation based on which stop criterion was selected.
-
+        
+        :param bool=True initialize: Initialize the simualtion before running (disable if initialization was 
+            done separately)
         :returns: A pandas Dataframe that contains one row of data. To see what output the output contains see
             :func:`~create_output_table`
 
         """
-        self.initialize_simulation()
+        if initialize:
+            self.initialize_simulation()
 
         if self.stop_condition == "pragmatic_convergence":
             self._run_until_pragmatic_convergence()
