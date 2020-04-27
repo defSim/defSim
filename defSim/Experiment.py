@@ -305,7 +305,7 @@ class Experiment:
 	                print("Waiting for", remaining, "tasks to complete...")
 	                time.sleep(2)
 	            pool.join()
-	            return pd.concat(results.get()).reset_index()
+	            return pd.concat(results.get())
 	        else:   # if NOT parallel
 	            result_list = [self._create_and_run_simulation(parameter_dict) for parameter_dict in
 	                           self.parameter_dict_list]
