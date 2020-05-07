@@ -8,7 +8,7 @@ from .agents_init import AttributesInitializer
 from .agents_init import generate_correlated_continuous_attributes
 
 def apply_neighbor_similarity_beta_weights(network, feature_values, feature_names, neighbor_similarity_feature, neighbor_similarity_concentration, neighbor_similarity_strength):
-    ### TODO: allow select similarity feature ###
+    similarity_feature_col = feature_names.index(neighbor_similarity_feature)
 
     ## first initialize all features for all nodes
     for node in network.nodes:
@@ -16,7 +16,7 @@ def apply_neighbor_similarity_beta_weights(network, feature_values, feature_name
             network.nodes[node][feature] = None        
 
     ## sort features by first column (first feature)
-    sorted_indexes = np.argsort(feature_values[:,0] )
+    sorted_indexes = np.argsort(feature_values[:,similarity_feature_col])
     sorted_features = feature_values[sorted_indexes]
     
     ## the code beyond this point only works with values ranging between 0 and 1
