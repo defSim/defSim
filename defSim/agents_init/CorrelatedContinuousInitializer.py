@@ -8,6 +8,10 @@ from .agents_init import AttributesInitializer
 from .agents_init import generate_correlated_continuous_attributes
 
 def apply_neighbor_similarity_beta_weights(network, feature_values, feature_names, neighbor_similarity_feature, neighbor_similarity_concentration, neighbor_similarity_strength):
+    '''
+    Distribute feature values across nodes in a network in a non-random way by taking average neighbor values from an initial random network and redistributing 
+    semi-randomly with weighting by average of neighbor values. 
+    '''
     similarity_feature_col = feature_names.index(neighbor_similarity_feature)
 
     ## first initialize all features for all nodes
@@ -18,10 +22,6 @@ def apply_neighbor_similarity_beta_weights(network, feature_values, feature_name
     ## sort features by first column (first feature)
     sorted_indexes = np.argsort(feature_values[:,similarity_feature_col])
     sorted_features = feature_values[sorted_indexes]
-    
-    ## the code beyond this point only works with values ranging between 0 and 1
-    if (np.amin(sorted_features) < 0) or (np.amax(sorted_features) > 1):
-        raise ValueError('Attribute values outside range [0,1] not supported. Rescale first.')
     
     ## get a list of all nodes, in random order
     nodes_list = list(network.nodes)
@@ -55,7 +55,20 @@ def apply_neighbor_similarity_beta_weights(network, feature_values, feature_name
 
 
 class SimilarityPostprocessor():
-    def __init__(self, network, dissimilarity_criterion, feature_names, neighbor_similarity_feature):
+    '''
+    This class holds functions to perform postprocessing on (correlated) features with the goal of
+    enforcing a minimum level of similarity among neighbors. The main parameter to set here is the
+    dissimilarity criterion. The dissimilarity cirterion works by setting a limit on the maximum
+    dissimilarity between neighbors on the neighbor_similarity_feature.
+    '''
+
+    def __init__(self, network: nx.Graph, dissimilarity_criterion: float, feature_names: list, neighbor_similarity_feature: str):
+        """
+        :param nx.Graph network: The graph object whose nodes' attributes are modified.
+        :param float dissimilarity_criterion: maximum allowable attribute value distance between neighbors.
+        :param list feature_names: List of all feature names as strings
+        :param str neighbor_similarity_feature: Name of feature on which neighbor similarity is to be enforced
+        """        
         self.network = network
         self.dissimilarity_criterion = dissimilarity_criterion
         self.feature_names = feature_names
@@ -64,7 +77,14 @@ class SimilarityPostprocessor():
         self.constant_num_dissimilar_count = 0
 
 
-    def dissimilarity_data_for_node(self, node):
+    def dissimilarity_data_for_node(self, node: str):
+        '''
+        Looks up the neighbors of a given node in the current network, and finds the maximum 
+        dissimilarity. Returns the node identifier, maximum dissimilarity, and the node's own value
+        on the similarity feature.
+        :param str node: Node identifier to look up in the network
+        :returns list: node identifier, maximum observed dissimilarity to neighbors, node's own attribute value
+        '''
         neighbor_values = [self.network.nodes[neighbor][self.neighbor_similarity_feature] for neighbor in self.network.neighbors(node)]
         node_value = self.network.nodes[node][self.neighbor_similarity_feature]
         max_dissimilarity = max([abs(neighbor_val - node_value) for neighbor_val in neighbor_values])
@@ -72,6 +92,10 @@ class SimilarityPostprocessor():
         return [node, max_dissimilarity, node_value]
 
     def create_dissimilarity_data(self):
+        '''
+        Finds the dissimilarity data for each node in the network and stores data for all nodes
+        as a numpy array. 
+        '''
         nodes = list(self.network.nodes)
 
         # go through list once
@@ -81,7 +105,13 @@ class SimilarityPostprocessor():
 
         self.dissimilarity_data = np.array(dissimilarity_data)                 
 
-    def update_dissimilarity(self, node1, node2):
+    def update_dissimilarity(self, node1: str, node2: str):
+        '''
+        For two given nodes, and all their neighbors, recalculate dissimilarity data. Use after swapping nodes to bring
+        data up to date with new network position. The stored dissimilarity data is modified in place.
+        :param str node1: Node identifier for first node
+        :param str node2: Node identifier for second node
+        '''
         node1_neighbors = self.network.neighbors(node1)
         node2_neighbors = self.network.neighbors(node2)
 
@@ -95,6 +125,21 @@ class SimilarityPostprocessor():
              self.dissimilarity_data[np.where(self.dissimilarity_data[:,0] == neighbor)] = self.dissimilarity_data_for_node(neighbor)          
 
     def improvement_if_swapped(self, node1_data, node2_data):
+        '''
+        Check whether dissimilarity in the network would be improved if two given nodes are swapped. 
+        First, attribute values for each node's neighbors are gathered.
+        Then, dissimilarity is calculated as if the two nodes swapped position. 
+        Then, improvement is checked by comparing the total dissimilarity in the current position to the total
+        dissimilarity in the new positions. The idea is that a swap is not an improvement if reducing dissimilarity
+        for one node means increaing dissimilarity for the other node more. More weight is given to large 
+        dissimilarities by squaring all absolute dissimilarity values.
+
+        :param node1_data: row from the np.array containing dissimilarity data. Contains node identifier, current dissimilarity and
+            attribute value for the first node
+        :param node2_data: row from the np.array containing dissimilarity data. Contains node identifier, current dissimilarity and
+            attribute value for the second node
+        :returns bool: True if swapping these nodes would improve dissimilarity, else false
+        '''
         current_dissimilarity_node1 = node1_data[1]
         current_dissimilarity_node2 = node2_data[1]
 
@@ -109,7 +154,12 @@ class SimilarityPostprocessor():
 
         return (current_dissimilarity_node1**2 + current_dissimilarity_node2**2) - (new_dissimilarity_node1**2 + new_dissimilarity_node2**2)
 
-    def swap_nodes(self, node1, node2):
+    def swap_nodes(self, node1: str, node2: str):
+        '''
+        Swap attribute values for two network nodes. (Effectively swapping the network position of two agents.)
+        :param str node1: Node identifier for first node
+        :param str node2: Node identifier for second node
+        '''
         for feature_name in self.feature_names:
             node1_old_value = self.network.nodes[node1][feature_name]
             node2_old_value = self.network.nodes[node2][feature_name]
@@ -117,6 +167,13 @@ class SimilarityPostprocessor():
             self.network.nodes[node2][feature_name] = node1_old_value             
  
     def swap_dissimilar_nodes(self):
+        '''
+        Finds nodes in the network whose dissimilarity to neighbors on the neighbor similarity feature exceeds the
+        dissimilarity criterion, and swaps these nodes if swapping would improve dissimilarity. 
+        Tracks the number of swaps made. 
+        :returns tuple: Number of swaps made, np.array containing data for all nodes which exceeded dissimilarity criterion
+        '''
+
         swaps = 0
 
         # improve most dissimilar  
@@ -131,7 +188,6 @@ class SimilarityPostprocessor():
                 except TypeError:
                     other_node = self.dissimilarity_data[max_improvement_indices[0]]
 
-                #print("Swapping node {} and {}".format(dissimilar_node[0], other_node[0]))
                 self.swap_nodes(dissimilar_node[0], other_node[0])
                 self.update_dissimilarity(dissimilar_node[0], other_node[0])
                 swaps += 1
@@ -139,6 +195,19 @@ class SimilarityPostprocessor():
         return (swaps, too_dissimilar_nodes)
 
     def check_convergence(self, swaps, current_dissimilar_nodes, nodes_involved_previous, num_dissimilar_previous):
+        '''
+        Checks whether the postprocessing procedure has converged. If convergence is detected but there are still agents
+        who are too dissimilar from their neighbor according to the dissimilarity criterion, a warning is given.
+        Convergence is detected when:
+        - no swaps were made and no nodes are too dissimilar OR
+        - no swaps were made but there are still some nodes too dissimilar --> warning OR
+        - the set of agents who ware too dissimilar has not changed for 10 iterations --> warning OR
+        - the set of agents who are too dissimilar is not constant but the number of agents too dissimilar has not changed
+            for 50 iterations --> warning
+
+        :returns bool: True if one of the convergence conditions detected, else false.
+
+        '''
 
         if swaps == 0:
             if len(current_dissimilar_nodes) > 0:
@@ -164,13 +233,22 @@ class SimilarityPostprocessor():
 
         return False
 
-    def process(self, postprocessing_iterations): 
+    def process(self, postprocessing_iterations: str or int): 
+        '''
+        Apply the postprocessing procedure to a network. Postprocessing can either run to convergence or to a maximum
+        number of iterations. Even if a maximum number of iterations is set, convergence will still end postprocessing.
+
+        :param str or int postprocessing_iterations: Maximum number of postprocessing iterations (int) or 'convergence'
+            to run without limiting maximum number of iterations
+        '''
 
         iteration = 0
         num_dissimilar_previous = 0
         nodes_involved_previous = []
         self.set_constant_count = 0
         self.constant_num_dissimilar_count = 0
+
+        self.create_dissimilarity_data()
 
         if postprocessing_iterations == "convergence":
 
@@ -217,9 +295,19 @@ class CorrelatedContinuousInitializer(AttributesInitializer):
         its mode set to the mean value among neighbors. The concentration of weights around the mode can be adjusted with the 
         'neighbor_similarity_concentration' parameter. The strength of neighbor influence can be adjusted using the 'neighbor_similarity_strength' parameter. 
         When 'neighbor_similarity_strength' == 0 (default) attribute values are randomly assigned to agents.
+
+        Regardless of whether this non-random distribution has been applied, a minimum level of similarity between neighbors can be
+        enforced by applying a postprocessing procedure which moves nodes whose dissimilarity to neighbors exceeds the value specified as
+        'neighbor_similarity_criterion'. Postprocessing can be enabled either running to convergence using 'neighbor_similarity_postprocessing': 'convergence', 
+        or to a maximum number of iterations (if convergence is not reached sooner) using 'neighbor_similarity_postprocessing': int.
+
+        For a basic neighbor similarity approach where only postprocessing is applied, with a maximum of 10 iterations and a dissimilarity criterion of 0.75,
+        set 'neighbor_similarity' to True and don't make further adjustments. For custom setups, you can select any combination of weighted distribution
+        and postprocessing by setting the relevant parameters.
         
         :param network: The graph object whose nodes' attributes are modified.
         :param str='uniform' distribution: Type of continuous distribution to draw feature values from.
+        :param bool=False neighbor_similarity: If set to True, a default application of neighbor similarity is used. Regardless of the value of this parameter, similarity options can always be customized individually
         :param float=10 neighbor_similarity_concentration: How closely concentrated (peaked) the weight distribution is around the mean value of neighbors (minimum value > 2 required to maintain integrity of the distribution)
         :param float=0 neighbor_similarity_strength: Strength of weighting by neighbor value. 0 = no influence of neighbors
         :param int=1 num_features: How many different attributes each node has.  
@@ -227,6 +315,8 @@ class CorrelatedContinuousInitializer(AttributesInitializer):
         :param [list] or numpy.array covariances: Complete covariance matrix (see agents_init.generate_correlated_continuous_attributes)
         :param float correlation: Single correlation value to apply to all pairs of attributes
         :param bool allow_inverse_concentration: Use to allow concentrations below 2, which result in anticoordination with neighbors
+        :param str or int neighbor_similarity_postprocessing: Sets the number of postprocessing iterations (integer to set max number of iterations, 'convergence' to not set a maximum)
+        :param floag neighbor_similarity_criterion: Maximum allowable dissimilarity to neighbors during postprocessing
         """        
 
         # Check inputs
@@ -287,21 +377,25 @@ class CorrelatedContinuousInitializer(AttributesInitializer):
         n_agents = len(network.nodes)
      
         feature_values = generate_correlated_continuous_attributes(num_features, (n_agents), covariances, distribution)
+
+    
+        ## the code beyond this point only works with values ranging between 0 and 1
+        if (np.amin(feature_values) < 0) or (np.amax(feature_values) > 1):
+            raise ValueError('Attribute values outside range [0,1] not supported. Rescale first.')        
         
         # Define feature names
         feature_names = ['f' + str("%02d" % (feature_num + 1)) for feature_num in range(num_features)]   
         
-        # Assign attribute valuees to agents
-        # If neighbor influence is greater than 0, add network similarity             
-        if neighbor_similarity_strength == 0:
-            for node_num, node in enumerate(network.nodes):
-                for feature_num, feature in enumerate(feature_names):
-                    network.nodes[node][feature] = feature_values[node_num, feature_num]
-        else:
+        # Assign attribute values to agents           
+        for node_num, node in enumerate(network.nodes):
+            for feature_num, feature in enumerate(feature_names):
+                network.nodes[node][feature] = feature_values[node_num, feature_num]
+
+        # If neighbor influence is greater than 0, add network similarity 
+        if neighbor_similarity_strength > 0:
             apply_neighbor_similarity_beta_weights(network, feature_values, feature_names, neighbor_similarity_feature, neighbor_similarity_concentration, neighbor_similarity_strength)
 
         if postprocessing_iterations == 'convergence' or postprocessing_iterations > 0:
             dissimilarity_criterion = kwargs.get("neighbor_similarity_criterion", 0.75)
             similarity_postprocessor = SimilarityPostprocessor(network, dissimilarity_criterion, feature_names, neighbor_similarity_feature)
-            similarity_postprocessor.create_dissimilarity_data()
             similarity_postprocessor.process(postprocessing_iterations)                     
