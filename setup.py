@@ -1,10 +1,10 @@
 from setuptools import setup
 
 setup(name='defSim',
-      version='0.1',
+      version='1.0',
       description='The Discrete Event Framework for Social Influence Models',
       url='https://github.com/marijnkeijzer/defSim',
-      author='Laukemper & Keijzer',
+      author='Laukemper, Keijzer, Bakker',
       author_email='m.a.keijzer@rug.nl',
       license='MIT',
       packages=['defSim',
