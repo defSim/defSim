@@ -122,17 +122,20 @@ class Simulation:
 
         return parameter_df
 
-    def run_simulation(self) -> pd.DataFrame:
+    def run_simulation(self, initialize: bool = True) -> pd.DataFrame:
         """
         This method initializes the network if none is given, initializes the attributes of the agents, and also
         computes and sets the distances between each neighbor.
         It then calls different functions that execute the simulation based on which stop criterion was selected.
-
+        
+        :param bool=True initialize: Initialize the simualtion before running (disable if initialization was 
+            done separately)
         :returns: A pandas Dataframe that contains one row of data. To see what output the output contains see
             :func:`~create_output_table`
 
         """
-        self.initialize_simulation()
+        if initialize:
+            self.initialize_simulation()
 
         if self.stop_condition == "pragmatic_convergence":
             self._run_until_pragmatic_convergence()
@@ -151,6 +154,11 @@ class Simulation:
         This method initializes the network if none is given, initializes the attributes of the agents, and also
         computes and sets the distances between each neighbor.
         """
+
+        # reset steps
+        self.time_steps = 0
+        self.influence_steps = 0
+
         if self.seed is None:
             self.seed = random.randint(10000,99999)
         random.seed(self.seed)
@@ -270,7 +278,7 @@ class Simulation:
         network_comparison = self.network.copy()
         while 1:
             self.run_simulation_step()
-            if self.time_steps == self.max_iterations:
+            if self.time_steps >= self.max_iterations:
                 break
             if self.time_steps % step_size == 0:
                 if nx.is_isomorphic(self.network, network_comparison, node_match=node_matcher):
@@ -308,7 +316,7 @@ class Simulation:
         else:
             while 1:
                 self.run_simulation_step()
-                if self.time_steps == self.max_iterations:
+                if self.time_steps >= self.max_iterations:
                     break
                 if self.time_steps % 100 == 0:
                     if not NetworkDistanceUpdater.check_dissimilarity(self.network, threshold):
