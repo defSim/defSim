@@ -2,6 +2,7 @@ import networkx as nx
 from abc import ABC, abstractmethod
 import random
 import warnings
+import inspect
 
 
 class AttributesInitializer(ABC):
@@ -39,8 +40,10 @@ def initialize_attributes(network: nx.Graph, realization: str, **kwargs):
         RandomCategoricalInitializer.RandomCategoricalInitializer.initialize_attributes(network, **kwargs)
     elif realization == "random_continuous":
         RandomContinuousInitializer.RandomContinuousInitializer.initialize_attributes(network, **kwargs)
+    elif inspect.isclass(realization):
+        realization.initialize_attributes(network, **kwargs)
     else:
-        raise ValueError("Can only select from the options ['random_categorical', 'random_continuous']")
+        raise ValueError("Can only select from the options ['random_categorical', 'random_continuous'] or supply a realization of the ABC")
 
 
 def set_categorical_attribute(network: nx.Graph, name: str, values: list, distribution: str = "uniform", **kwargs):
