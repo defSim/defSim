@@ -26,8 +26,8 @@ import copy
 
 
 def call_simulation_run(simulation):
-    """ 
-    Utility function to enable running predefined simulations 
+    """
+    Utility function to enable running predefined simulations
     using multiprocessing.
     """
     return simulation.run_simulation()
@@ -143,7 +143,7 @@ class Experiment:
         """
 		If simulations are specified, this function infers the experiment runtime from sampled runs/steps.
 
-        If no simulations are specified, function creates the parameterDictList if that hasn't happened already and then infers from 
+        If no simulations are specified, function creates the parameterDictList if that hasn't happened already and then infers from
         sampled runs the runtime of the whole experiment.
 
         Runtime estimates are for running on a single core.
@@ -154,66 +154,74 @@ class Experiment:
         """
 
         if self.simulations is not None:
-        	# make copy to prevent modifying simulations which must be run later
-        	simulations_copy = copy.deepcopy(self.simulations)
-       		# Select parameter combinations to test (subset of all simulations in the experiment)
-	        if sample_runs is not None and sample_runs < len(simulations_copy):
-	            simulations_to_run = random.sample(simulations_copy, sample_runs)
-	        else:
-	            simulations_to_run = simulations_copy
-	            if sample_runs is not None and sample_runs > len(simulations_copy): 
-	                warnings.warn("Reducing number of sampled simulations to total number of simulations in the experiment.")
+            # make copy to prevent modifying simulations which must be run later
+            simulations_copy = copy.deepcopy(self.simulations)
+            # Select parameter combinations to test (subset of all simulations in the experiment)
+            if sample_runs is not None and sample_runs < len(simulations_copy):
+                simulations_to_run = random.sample(simulations_copy, sample_runs)
+            else:
+                simulations_to_run = simulations_copy
+                if sample_runs is not None and sample_runs > len(simulations_copy):
+                    warnings.warn(
+                        "Reducing number of sampled simulations to total number of simulations in the experiment.")
 
         else:
-	        if self.stop_condition != "max_iteration":
-	            warnings.warn("Runtime estimates are based on max number of iterations. Runtime estimates for simulations with different stop conditions are highly unreliable.")
+            if self.stop_condition != "max_iteration":
+                warnings.warn(
+                    "Runtime estimates are based on max number of iterations. Runtime estimates for simulations with different stop conditions are highly unreliable.")
 
-	        if sample_steps > self.max_iterations:
-	            warnings.warn("Number of sample steps greater than max iterations of the simulations.")
+            if sample_steps > self.max_iterations:
+                warnings.warn("Number of sample steps greater than max iterations of the simulations.")
 
-	        # Create parameter_dict_list if not set yet
-	        if len(self.parameter_dict_list) == 0:
-	            self.parameter_dict_list = self._create_parameter_dictionaries()
+            # Create parameter_dict_list if not set yet
+            if len(self.parameter_dict_list) == 0:
+                self.parameter_dict_list = self._create_parameter_dictionaries()
 
-	        # Select parameter combinations to test (subset of all simulations in the experiment)
-	        if sample_runs is not None and sample_runs < len(self.parameter_dict_list):
-	            selected_parameter_combinations = random.sample(self.parameter_dict_list, sample_runs)
-	        else:
-	            selected_parameter_combinations = self.parameter_dict_list
-	            if sample_runs is not None and sample_runs > len(self.parameter_dict_list): 
-	                warnings.warn("Reducing number of sampled simulations to total number of simulations in the experiment.")
+            # Select parameter combinations to test (subset of all simulations in the experiment)
+            if sample_runs is not None and sample_runs < len(self.parameter_dict_list):
+                selected_parameter_combinations = random.sample(self.parameter_dict_list, sample_runs)
+            else:
+                selected_parameter_combinations = self.parameter_dict_list
+                if sample_runs is not None and sample_runs > len(self.parameter_dict_list):
+                    warnings.warn(
+                        "Reducing number of sampled simulations to total number of simulations in the experiment.")
 
-	        # Set up simulations
-	        simulations_to_run = []
-	        for parameter_combination in selected_parameter_combinations:
-	            simulations_to_run.append(Simulation(network=self.network.copy() if self.network is not None else self.network,
-	                                topology=self.topology,
-	                                attributes_initializer=self.attributes_initializer,
-	                                focal_agent_selector=self.focal_agent_selector,
-	                                neighbor_selector=self.neighbor_selector,
-	                                influence_function=self.influence_function,
-	                                influenceable_attributes= self.influencable_attributes,
-	                                stop_condition=self.stop_condition,
-	                                max_iterations=self.max_iterations,
-	                                communication_regime=parameter_combination["communication_regime"],
-	                                parameter_dict=parameter_combination,
-	                                dissimilarity_measure=self.dissimilarity_measure,
-	                                output_realizations = self.output_realizations,
-	                                tickwise=self.tickwise,
-	                                seed=parameter_combination["seed"]
-	                                ))
+            # Set up simulations
+            simulations_to_run = []
+            for parameter_combination in selected_parameter_combinations:
+                simulations_to_run.append(
+                    Simulation(network=self.network.copy() if self.network is not None else self.network,
+                               topology=self.topology,
+                               attributes_initializer=self.attributes_initializer,
+                               focal_agent_selector=self.focal_agent_selector,
+                               neighbor_selector=self.neighbor_selector,
+                               influence_function=self.influence_function,
+                               influenceable_attributes=self.influencable_attributes,
+                               stop_condition=self.stop_condition,
+                               max_iterations=self.max_iterations,
+                               communication_regime=parameter_combination["communication_regime"],
+                               parameter_dict=parameter_combination,
+                               dissimilarity_measure=self.dissimilarity_measure,
+                               output_realizations=self.output_realizations,
+                               tickwise=self.tickwise,
+                               seed=parameter_combination["seed"]
+                               ))
 
         # Setup each simulation and record mean setup time
-        sampled_setup_times = [timeit.timeit(lambda: sim.initialize_simulation(), number = 1) for sim in simulations_to_run]
+        sampled_setup_times = [timeit.timeit(lambda: sim.initialize_simulation(), number=1) for sim in
+                               simulations_to_run]
         mean_setup_time = np.mean(sampled_setup_times)
-        
+
         # Execute single steps of each simulation (sample_steps times per simulation) and record mean time per step
-        sampled_execution_times = [timeit.timeit(lambda: sim.run_simulation_step(), number = sample_steps) for sim in simulations_to_run]
+        sampled_execution_times = [timeit.timeit(lambda: sim.run_simulation_step(), number=sample_steps) for sim in
+                                   simulations_to_run]
         mean_execution_time = np.mean(sampled_execution_times) / sample_steps
 
         if self.simulations is not None:
             num_simulations = len(self.simulations)
-            warnings.warn("Runtime estimates are based on {} iterations because true maximum iterations for user-defined simulations are unknown.".format(self.max_iterations))
+            warnings.warn(
+                "Runtime estimates are based on {} iterations because true maximum iterations for user-defined simulations are unknown.".format(
+                    self.max_iterations))
         else:
             num_simulations = len(self.parameter_dict_list)
 
@@ -252,7 +260,7 @@ class Experiment:
         If the experiment is defined by parameter combinations:
         Starts the experiment by first creating the parameter_dict_list if that hasn't happened already and then
         creates a simulation for each parameter combination in the parameter_dict_list.
-        
+
         If parallel is true, the simulations are run on multiple cores on the machine, their number determined by num_cores.
 
         :param parallel: Boolean that determines in which mode the simulations will run.
@@ -276,40 +284,40 @@ class Experiment:
                     time.sleep(2)
                     pool.join()
                 return pd.concat(results.get())
-            else:   # if NOT parallel
+            else:  # if NOT parallel
                 result_list = [sim.run_simulation() for sim in self.simulations]
                 return pd.concat(result_list).reset_index()
         # if simulations are to be created based on parameter combinations
         else:
-	        if not isinstance(self.network, nx.Graph) and self.network is not None:
-	            self.network = network_init.read_network(self.network)
-	            # not implemented yet
+            if not isinstance(self.network, nx.Graph) and self.network is not None:
+                self.network = network_init.read_network(self.network)
+                # not implemented yet
 
-	        # since the creation of the grid network takes awfully long, we don't want to create that in each
-	        # simulation
-	        # todo: refactor, cause this won't work if the parameters of the network are variables
-	        # if self.topology == "grid":
-	        #    self.network = NetworkBuilder.generate_network("grid", **self.network_parameters)
+            # since the creation of the grid network takes awfully long, we don't want to create that in each
+            # simulation
+            # todo: refactor, cause this won't work if the parameters of the network are variables
+            # if self.topology == "grid":
+            #    self.network = NetworkBuilder.generate_network("grid", **self.network_parameters)
 
-	        if len(self.parameter_dict_list) == 0:
-	            self.parameter_dict_list = self._create_parameter_dictionaries()
-	        print("%d different parameter combinations" % len(self.parameter_dict_list))
-	        if parallel:
-	            pool = mp.Pool(num_cores)
-	            results = pool.map_async(self._create_and_run_simulation, self.parameter_dict_list)
-	            pool.close()
-	            while 1:
-	                if results.ready():
-	                    break
-	                remaining = results._number_left
-	                print("Waiting for", remaining, "tasks to complete...")
-	                time.sleep(2)
-	            pool.join()
-	            return pd.concat(results.get()).reset_index()
-	        else:   # if NOT parallel
-	            result_list = [self._create_and_run_simulation(parameter_dict) for parameter_dict in
-	                           self.parameter_dict_list]
-	            return pd.concat(result_list).reset_index()
+            if len(self.parameter_dict_list) == 0:
+                self.parameter_dict_list = self._create_parameter_dictionaries()
+            print("%d different parameter combinations" % len(self.parameter_dict_list))
+            if parallel:
+                pool = mp.Pool(num_cores)
+                results = pool.map_async(self._create_and_run_simulation, self.parameter_dict_list)
+                pool.close()
+                while 1:
+                    if results.ready():
+                        break
+                    remaining = results._number_left
+                    print("Waiting for", remaining, "tasks to complete...")
+                    time.sleep(2)
+                pool.join()
+                return pd.concat(results.get()).reset_index()
+            else:  # if NOT parallel
+                result_list = [self._create_and_run_simulation(parameter_dict) for parameter_dict in
+                               self.parameter_dict_list]
+                return pd.concat(result_list).reset_index()
 
     def run_on_cluster(self,
                        chunk_size: int = 2400,
@@ -380,7 +388,7 @@ class Experiment:
                     ClusterExecutionScript.__file__, i, os.path.abspath("pickles"), os.path.abspath(output_path)))
             os.system("sbatch %s" % os.path.abspath(batchfile_path))
             print("script created at %s" % os.path.abspath(batchfile_path))
-        #todo: this cannot work, can it? Only when the simulations are actually executed, they need access to the files
+        # todo: this cannot work, can it? Only when the simulations are actually executed, they need access to the files
         # time.sleep(1)  # probably unncessary, but I don't want to delete the folder to quickly
         # shutil.rmtree("pickles")
 
@@ -391,13 +399,13 @@ class Experiment:
                                 focal_agent_selector=self.focal_agent_selector,
                                 neighbor_selector=self.neighbor_selector,
                                 influence_function=self.influence_function,
-                                influenceable_attributes= self.influencable_attributes,
+                                influenceable_attributes=self.influencable_attributes,
                                 stop_condition=self.stop_condition,
                                 max_iterations=self.max_iterations,
                                 communication_regime=parameter_dict["communication_regime"],
                                 parameter_dict=parameter_dict,
                                 dissimilarity_measure=self.dissimilarity_measure,
-                                output_realizations = self.output_realizations,
+                                output_realizations=self.output_realizations,
                                 tickwise=self.tickwise,
                                 seed=parameter_dict['seed']
                                 )
@@ -406,7 +414,7 @@ class Experiment:
     def _create_parameter_dictionaries(self) -> List[dict]:
         """
         creates from a set of dictionaries that might contain lists as values another set of dictionaries that
-        contain all possible combinations of values for each key. 
+        contain all possible combinations of values for each key.
 
         If a seed is set for the experiment, this also creates an individual seed for each simulation.
 
@@ -440,14 +448,14 @@ class Experiment:
         # now we want to repeat each parameter combination as often as the number of repetitions
         full_repetitions_list = list(it.chain.from_iterable(it.repeat(x, self.repetitions) for x in full_dict_list))
 
-        # creating a copy of the parameter combinations 
+        # creating a copy of the parameter combinations
         # (required to be able to set separate seeds) for different repetition
         full_repetitions_list = [copy.copy(parameter_combination) for parameter_combination in full_repetitions_list]
 
         # add individual seeds to each parameter combination, based on experiment seed
         if self.seed is not None:
             random.seed(self.seed)
-            seeds = [random.randint(10000,99999) for _ in range(len(full_repetitions_list))]
+            seeds = [random.randint(10000, 99999) for _ in range(len(full_repetitions_list))]
         else:
             seeds = [None for _ in range(len(full_repetitions_list))]
 
