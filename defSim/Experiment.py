@@ -446,12 +446,12 @@ class Experiment:
 
         # add individual seeds to each parameter combination, based on experiment seed
         if self.seed is not None:
-        	random.seed(self.seed)
-        	seeds = [random.randint(10000,99999) for _ in range(len(full_repetitions_list))]
+            random.seed(self.seed)
+            seeds = [random.randint(10000,99999) for _ in range(len(full_repetitions_list))]
         else:
-        	seeds = [None for _ in len(full_repetitions_list)]
+            seeds = [None for _ in range(len(full_repetitions_list))]
 
         for index in range(len(full_repetitions_list)):
-        	full_repetitions_list[index]['seed'] = seeds[index]
+            full_repetitions_list[index]['seed'] = seeds[index]
 
         return full_repetitions_list
