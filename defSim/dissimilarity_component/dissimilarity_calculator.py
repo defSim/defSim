@@ -13,7 +13,7 @@ class DissimilarityCalculator(ABC):
 
     @staticmethod
     @abstractmethod
-    def calculate_dissimilarity(network: nx.Graph, agent1_id: int, agent2_id: int) -> float:
+    def calculate_dissimilarity(network: nx.Graph, agent1_id: int, agent2_id: int, **kwargs) -> float:
         """
         This function calculates how dissimilar two agents are based on their attributes and/or their distance in
         the network.
@@ -29,7 +29,7 @@ class DissimilarityCalculator(ABC):
 
     @staticmethod
     @abstractmethod
-    def calculate_dissimilarity_networkwide(network: nx.Graph):
+    def calculate_dissimilarity_networkwide(network: nx.Graph, **kwargs):
         """
         Calculates the distance from each agent to each other and sets that distance as an attribute on the edge
         between them.

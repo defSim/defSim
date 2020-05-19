@@ -3,7 +3,7 @@ from defSim.dissimilarity_component.dissimilarity_calculator import Dissimilarit
 import networkx as nx
 
 
-def update_dissimilarity(network: nx.Graph, agents: List[int], calculator: DissimilarityCalculator):
+def update_dissimilarity(network: nx.Graph, agents: List[int], calculator: DissimilarityCalculator, **kwargs):
     """
     This method recomputes the edges between a certain set of agents and all their neighbors and then modifies
     the edges between them respectively.
@@ -14,7 +14,10 @@ def update_dissimilarity(network: nx.Graph, agents: List[int], calculator: Dissi
     """
     for agent in agents:
         for neighbor in network.neighbors(agent):
-            network.edges[neighbor, agent]['dist'] = calculator.calculate_dissimilarity(network, agent, neighbor)
+            network.edges[neighbor, agent]['dist'] = calculator.calculate_dissimilarity(network,
+                                                                                        agent,
+                                                                                        neighbor,
+                                                                                        **kwargs)
 
 
 def check_dissimilarity(network: nx.Graph, threshold: float):

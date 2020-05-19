@@ -8,7 +8,7 @@ class HammingDistance(DissimilarityCalculator):
     """
 
     @staticmethod
-    def calculate_dissimilarity(network: nx.Graph, agent1_id: int, agent2_id: int) -> float:
+    def calculate_dissimilarity(network: nx.Graph, agent1_id: int, agent2_id: int, **kwargs) -> float:
         """
         Computes the Hamming Distance between two Agents, i.e. returns the proportion of features that
         the two agents have not in common. 1 means therefore total dissimilarity, and 0 is total overlap.
@@ -26,7 +26,7 @@ class HammingDistance(DissimilarityCalculator):
                     network.nodes[agent1_id][k] != network.nodes[agent2_id][k]]) / number_of_features
 
     @staticmethod
-    def calculate_dissimilarity_networkwide(network: nx.Graph):
+    def calculate_dissimilarity_networkwide(network: nx.Graph, **kwargs):
         """
         Calculates the distance from each agent to each other and sets that distance as an attribute on the edge
         between them.
@@ -35,5 +35,7 @@ class HammingDistance(DissimilarityCalculator):
         """
         for agent in network.nodes():
             for neighbor in network.neighbors(agent):
-                network.edges[agent, neighbor]['dist'] = HammingDistance.calculate_dissimilarity(network, agent,
-                                                                                                  neighbor)
+                network.edges[agent, neighbor]['dist'] = HammingDistance.calculate_dissimilarity(network,
+                                                                                                 agent,
+                                                                                                 neighbor,
+                                                                                                 **kwargs)
