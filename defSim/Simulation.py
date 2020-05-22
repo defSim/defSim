@@ -174,7 +174,7 @@ class Simulation:
             agents_init.initialize_attributes(self.network, self.attributes_initializer, **self.parameter_dict)
 
         # initialization of distances between neighbors
-        self.dissimilarity_calculator.calculate_dissimilarity_networkwide(self.network, **self.parameter_dict)
+        self.dissimilarity_calculator.calculate_dissimilarity_networkwide(self.network)
 
     def run_simulation_step(self):
         """
