@@ -26,8 +26,7 @@ class HammingDistance(DissimilarityCalculator):
         # todo: implement in such a way that only categorical attributes are considered, and others are ignored
         number_of_features = len(network.nodes[agent1_id])
         return len([k for k in network.nodes[agent1_id] if
-                    network.nodes[agent1_id][k] != network.nodes[agent2_id][k] and
-                    k not in self.exclude]) / number_of_features
+                    network.nodes[agent1_id][k] != network.nodes[agent2_id][k]]) / number_of_features
 
     def calculate_dissimilarity_networkwide(self, network: nx.Graph, **kwargs):
         """
