@@ -10,6 +10,9 @@ from defSim.network_init.network_init import generate_network
 
 from defSim.agents_init import agents_init
 from defSim.agents_init.agents_init import initialize_attributes
+from defSim.agents_init.agents_init import set_categorical_attribute
+from defSim.agents_init.agents_init import set_continuous_attribute
+from defSim.agents_init.agents_init import AttributesInitializer
 
 from defSim.network_evolution_sim.network_evolution_sim import NetworkModifier
 

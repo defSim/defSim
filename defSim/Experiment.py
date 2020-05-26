@@ -105,7 +105,7 @@ class Experiment:
                  influenceable_attributes: list = None,  # the list that is passed to the influence function
                  network_modifier: str = "random" or network_evolution_sim.NetworkModifier,
                  network_modifier_parameters: dict = {},
-                 dissimilarity_measure: str = "hamming" or dissimilarity_calculator,
+                 dissimilarity_measure: str = "hamming" or dissimilarity_calculator.DissimilarityCalculator,
                  tickwise: list = [],
                  stop_condition: str = "max_iteration",
                  stop_condition_parameters: dict = {},
@@ -126,7 +126,7 @@ class Experiment:
         self.neighbor_parameters = neighbor_parameters
         self.influence_function = influence_function
         self.influence_parameters = influence_parameters
-        self.influencable_attributes = influenceable_attributes
+        self.influenceable_attributes = influenceable_attributes
         self.network_modifier = "random"  # todo: implement a dummy network modifier
         self.network_modifier_parameters = network_modifier_parameters
         self.dissimilarity_measure = dissimilarity_measure
@@ -196,7 +196,7 @@ class Experiment:
                                focal_agent_selector=self.focal_agent_selector,
                                neighbor_selector=self.neighbor_selector,
                                influence_function=self.influence_function,
-                               influenceable_attributes=self.influencable_attributes,
+                               influenceable_attributes=self.influenceable_attributes,
                                stop_condition=self.stop_condition,
                                max_iterations=self.max_iterations,
                                communication_regime=parameter_combination["communication_regime"],
@@ -363,7 +363,7 @@ class Experiment:
                 "focal_agent_selector": self.focal_agent_selector,
                 "neighbor_selector": self.neighbor_selector,
                 "influence_function": self.influence_function,
-                "influencable_attributes": self.influencable_attributes,
+                "influenceable_attributes": self.influenceable_attributes,
                 "network_modifier": self.network_modifier,
                 "dissimilarity_measure": self.dissimilarity_measure,
                 "stop_condition": self.stop_condition,
@@ -399,7 +399,7 @@ class Experiment:
                                 focal_agent_selector=self.focal_agent_selector,
                                 neighbor_selector=self.neighbor_selector,
                                 influence_function=self.influence_function,
-                                influenceable_attributes=self.influencable_attributes,
+                                influenceable_attributes=self.influenceable_attributes,
                                 stop_condition=self.stop_condition,
                                 max_iterations=self.max_iterations,
                                 communication_regime=parameter_dict["communication_regime"],

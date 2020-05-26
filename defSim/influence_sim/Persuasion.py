@@ -100,9 +100,9 @@ class Persuasion(InfluenceOperator):
                         # influence function
                         network.nodes[agent_i][influenced_feature] = network.nodes[agent_i][influenced_feature] + \
                                                                      convergence_rate * feature_difference
-                        update_dissimilarity(network, [agent_i, neighbor], dissimilarity_measure)
+                        update_dissimilarity(network, [agent_i, neighbor], dissimilarity_measure, **kwargs)
                     else:
-                        update_dissimilarity(network, [neighbor], dissimilarity_measure)
+                        update_dissimilarity(network, [neighbor], dissimilarity_measure, **kwargs)
 
         else:
             # many to one
@@ -115,7 +115,7 @@ class Persuasion(InfluenceOperator):
                 feature_difference = argument - network.nodes[agent_i][influenced_feature]
                 network.nodes[agent_i][influenced_feature] = network.nodes[agent_i][influenced_feature] + \
                                                              convergence_rate * feature_difference
-                update_dissimilarity(network, [agent_i], dissimilarity_measure)
+                update_dissimilarity(network, [agent_i], dissimilarity_measure, **kwargs)
 
         return success
     #todo: TESTING

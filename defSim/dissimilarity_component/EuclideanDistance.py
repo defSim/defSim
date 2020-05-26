@@ -2,14 +2,18 @@ from .dissimilarity_calculator import DissimilarityCalculator
 import numpy as np
 import networkx as nx
 
+# todo: documentation on 'exclude'
 
 class EuclideanDistance(DissimilarityCalculator):
     """
     Implements the DissimilarityCalculator as a calculator of the euclidean distance
     """
 
-    @staticmethod
-    def calculate_dissimilarity(network: nx.Graph, agent1_id: int, agent2_id: int) -> float:
+    def __init__(self, exclude=None):
+        # documentation omitted
+        self.exclude = exclude
+
+    def calculate_dissimilarity(self, network: nx.Graph, agent1_id: int, agent2_id: int) -> float:
         """
         Calculates normalized euclidean distance of the agents' feature vectors where feature values do not exceed the
         [0,1] bounds.
@@ -21,12 +25,12 @@ class EuclideanDistance(DissimilarityCalculator):
         :returns: A float value, representing the distance between the two agents.
         """
 
-        agent1_attributes = np.array(list(network.nodes[agent1_id].values()))
-        agent2_attributes = np.array(list(network.nodes[agent2_id].values()))
-        return np.linalg.norm(agent1_attributes - agent2_attributes) / np.sqrt(len(agent1_attributes))
+        agent1_attributes = [v for k, v in network.nodes[agent1_id].items() if k not in self.exclude]
+        agent2_attributes = [v for k, v in network.nodes[agent2_id].items() if k not in self.exclude]
 
-    @staticmethod
-    def calculate_dissimilarity_networkwide(network: nx.Graph):
+        return np.linalg.norm((np.array(agent1_attributes) - np.array(agent2_attributes)) / np.sqrt(len(agent1_attributes)))
+
+    def calculate_dissimilarity_networkwide(self, network: nx.Graph, **kwargs):
         """
         Calculates the distance from each agent to each other and sets that distance as an attribute on the edge
         between them.
@@ -36,6 +40,6 @@ class EuclideanDistance(DissimilarityCalculator):
 
         for agent in network.nodes():
             for neighbor in network.neighbors(agent):
-                network.edges[agent, neighbor]['dist'] = EuclideanDistance.calculate_dissimilarity(network,
-                                                                                                    agent,
-                                                                                                    neighbor)
+                network.edges[agent, neighbor]['dist'] = self.calculate_dissimilarity(network,
+                                                                                      agent,
+                                                                                      neighbor)

@@ -128,9 +128,9 @@ class Simulation:
         computes and sets the distances between each neighbor.
         It then calls different functions that execute the simulation based on which stop criterion was selected.
         
-        :param bool=True initialize: Initialize the simualtion before running (disable if initialization was 
+        :param bool=True initialize: Initialize the simulation before running (disable if initialization was
             done separately)
-        :returns: A pandas Dataframe that contains one row of data. To see what output the output contains see
+        :returns: A Pandas DataFrame that contains one row of data. To see what output the output contains see
             :func:`~create_output_table`
 
         """
@@ -172,6 +172,7 @@ class Simulation:
             self.attributes_initializer.initialize_attributes(self.network, **self.parameter_dict)
         else:
             agents_init.initialize_attributes(self.network, self.attributes_initializer, **self.parameter_dict)
+
         # initialization of distances between neighbors
         self.dissimilarity_calculator.calculate_dissimilarity_networkwide(self.network)
 
