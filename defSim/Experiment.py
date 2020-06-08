@@ -280,13 +280,13 @@ class Experiment:
                     if results.ready():
                         break
                     remaining = results._number_left
-                    print("Waiting for", remaining, "tasks to complete...")
+                    print("Waiting for", remaining, "tasks to complete...", end='\r')
                     time.sleep(2)
                     pool.join()
                 return pd.concat(results.get())
             else:  # if NOT parallel
                 result_list = [sim.run_simulation() for sim in self.simulations]
-                return pd.concat(result_list).reset_index()
+                return pd.concat(result_list).reset_index(drop=True)
         # if simulations are to be created based on parameter combinations
         else:
             if not isinstance(self.network, nx.Graph) and self.network is not None:
