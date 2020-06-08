@@ -84,9 +84,9 @@ class BoundedConfidence(InfluenceOperator):
                         # i_t+1 = i + (j-i)
                         network.nodes[agent_i][influenced_feature] = network.nodes[agent_i][
                                                                         influenced_feature] + convergence_rate * feature_difference
-                        update_dissimilarity(network, [agent_i, neighbor], dissimilarity_measure)
+                        update_dissimilarity(network, [agent_i, neighbor], dissimilarity_measure, **kwargs)
                     else:
-                        update_dissimilarity(network, [neighbor], dissimilarity_measure)
+                        update_dissimilarity(network, [neighbor], dissimilarity_measure, **kwargs)
         else:
             # many to one
             close_neighbors = [neighbor for neighbor in agents_j if
