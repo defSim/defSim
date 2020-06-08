@@ -5,7 +5,7 @@ influence_sim module
 -------------------------------------------------------
 
 .. automodule:: defSim.influence_sim.influence_sim
-    :members:
+    :members: spread_influence
     :undoc-members:
     :show-inheritance:
 
@@ -38,5 +38,14 @@ WeightedLinear
 
 .. automodule:: defSim.influence_sim.WeightedLinear
     :members:
+    :undoc-members:
+    :show-inheritance:
+    
+    
+ABC
+-------------------------------------------------------
+
+.. automodule:: defSim.influence_sim.influence_sim
+    :members: InfluenceOperator
     :undoc-members:
     :show-inheritance:

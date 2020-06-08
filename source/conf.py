@@ -19,8 +19,8 @@ print(os.path.abspath('..'))
 # -- Project information -----------------------------------------------------
 
 project = 'defSim'
-copyright = '2019, Laukemper & Keijzer'
-author = 'Laukemper & Keijzer'
+copyright = '2019-2020, Laukemper, Keijzer & Bakker'
+author = 'Laukemper, Keijzer & Bakker'
 
 # The full version, including alpha/beta/rc tags
 release = 'alpha'

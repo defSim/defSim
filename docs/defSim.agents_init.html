@@ -96,7 +96,7 @@
 <li class="toctree-l2"><a class="reference internal" href="#module-defSim.agents_init.RandomContinuousInitializer">RandomContinuousInitializer</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#module-defSim.agents_init.agents_init">set_categorical_attribute</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#module-defSim.agents_init.agents_init">set_continuous_attribute</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#module-defSim.agents_init.agents_init">Abstract Base Class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#abc">ABC</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="defSim.focal_agent_sim.html">Focal agent selection</a><ul>
@@ -124,9 +124,10 @@
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="defSim.dissimilarity_component.html">Dissimilarity updaters</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="defSim.dissimilarity_component.html#module-defSim.dissimilarity_component.dissimilarity_calculator">DissimilarityCalculator module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="defSim.dissimilarity_component.html#module-defSim.dissimilarity_component.dissimilarity_calculator">select_calculator</a></li>
 <li class="toctree-l2"><a class="reference internal" href="defSim.dissimilarity_component.html#module-defSim.dissimilarity_component.EuclideanDistance">EuclideanDistance</a></li>
 <li class="toctree-l2"><a class="reference internal" href="defSim.dissimilarity_component.html#module-defSim.dissimilarity_component.HammingDistance">HammingDistance</a></li>
+<li class="toctree-l2"><a class="reference internal" href="defSim.dissimilarity_component.html#abc">ABC</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="defSim.tools.html">Tools</a><ul>
@@ -295,9 +296,10 @@ The values of the attribute are drawn from a distribution that is set by the use
 </dd></dl>
 
 </div>
-<div class="section" id="module-defSim.agents_init.agents_init">
-<span id="abstract-base-class"></span><h2>Abstract Base Class<a class="headerlink" href="#module-defSim.agents_init.agents_init" title="Permalink to this headline">¶</a></h2>
-<dl class="class">
+<div class="section" id="abc">
+<h2>ABC<a class="headerlink" href="#abc" title="Permalink to this headline">¶</a></h2>
+<p>The Abstract Base Class of the agent attribute initializer:</p>
+<span class="target" id="module-defSim.agents_init.agents_init"></span><dl class="class">
 <dt id="defSim.agents_init.agents_init.AttributesInitializer">
 <em class="property">class </em><code class="sig-prename descclassname">defSim.agents_init.agents_init.</code><code class="sig-name descname">AttributesInitializer</code><a class="headerlink" href="#defSim.agents_init.agents_init.AttributesInitializer" title="Permalink to this definition">¶</a></dt>
 <dd><p>Initializes and changes attributes of nodes in the network.</p>
@@ -339,7 +341,7 @@ The values of the attribute are drawn from a distribution that is set by the use
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2019, Laukemper &amp; Keijzer.
+        &copy; Copyright 2019-2020, Laukemper, Keijzer &amp; Bakker.
 
     </p>
   </div>

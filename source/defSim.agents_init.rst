@@ -37,8 +37,10 @@ set_continuous_attribute
 .. automodule:: defSim.agents_init.agents_init
     :members: set_continuous_attribute
 
-Abstract Base Class
+ABC
 -------------------------------------------------------
+
+The Abstract Base Class of the agent attribute initializer:
 
 .. automodule:: defSim.agents_init.agents_init
     :members: AttributesInitializer

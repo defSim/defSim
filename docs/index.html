@@ -80,8 +80,6 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="experiment.class.html">Experiment class</a></li>
 <li class="toctree-l1"><a class="reference internal" href="simulation.class.html">Simulation class</a></li>
-</ul>
-<ul>
 <li class="toctree-l1"><a class="reference internal" href="defSim.network_init.html">Networks</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="defSim.network_init.html#module-defSim.network_init.network_init">generate_network</a></li>
 <li class="toctree-l2"><a class="reference internal" href="defSim.network_init.html#module-defSim.network_init.network_init">read_network</a></li>
@@ -95,18 +93,20 @@
 <li class="toctree-l2"><a class="reference internal" href="defSim.agents_init.html#module-defSim.agents_init.RandomContinuousInitializer">RandomContinuousInitializer</a></li>
 <li class="toctree-l2"><a class="reference internal" href="defSim.agents_init.html#module-defSim.agents_init.agents_init">set_categorical_attribute</a></li>
 <li class="toctree-l2"><a class="reference internal" href="defSim.agents_init.html#module-defSim.agents_init.agents_init">set_continuous_attribute</a></li>
-<li class="toctree-l2"><a class="reference internal" href="defSim.agents_init.html#module-defSim.agents_init.agents_init">Abstract Base Class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="defSim.agents_init.html#abc">ABC</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="defSim.focal_agent_sim.html">Focal agent selection</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="defSim.focal_agent_sim.html#module-defSim.focal_agent_sim.focal_agent_sim">focal_agent_sim module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="defSim.focal_agent_sim.html#module-defSim.focal_agent_sim.RandomSelector">RandomSelector</a></li>
+<li class="toctree-l2"><a class="reference internal" href="defSim.focal_agent_sim.html#module-defSim.focal_agent_sim.focal_agent_sim">ABC</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="defSim.neighbor_selector_sim.html">Neighbor selector</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="defSim.neighbor_selector_sim.html#module-defSim.neighbor_selector_sim.neighbor_selector_sim">neighbor_selector_sim module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="defSim.neighbor_selector_sim.html#module-defSim.neighbor_selector_sim.RandomNeighborSelector">RandomNeighborSelector</a></li>
 <li class="toctree-l2"><a class="reference internal" href="defSim.neighbor_selector_sim.html#module-defSim.neighbor_selector_sim.SimilarNeighborSelector">SimilarNeighborSelector</a></li>
+<li class="toctree-l2"><a class="reference internal" href="defSim.neighbor_selector_sim.html#module-defSim.neighbor_selector_sim.neighbor_selector_sim">ABC</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="defSim.influence_sim.html">Influence</a><ul>
@@ -115,6 +115,7 @@
 <li class="toctree-l2"><a class="reference internal" href="defSim.influence_sim.html#module-defSim.influence_sim.BoundedConfidence">BoundedConfidence</a></li>
 <li class="toctree-l2"><a class="reference internal" href="defSim.influence_sim.html#module-defSim.influence_sim.Persuasion">Persuasion</a></li>
 <li class="toctree-l2"><a class="reference internal" href="defSim.influence_sim.html#module-defSim.influence_sim.WeightedLinear">WeightedLinear</a></li>
+<li class="toctree-l2"><a class="reference internal" href="defSim.influence_sim.html#module-defSim.influence_sim.influence_sim">ABC</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="defSim.network_evolution_sim.html">Network evolution</a><ul>
@@ -123,13 +124,15 @@
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="defSim.dissimilarity_component.html">Dissimilarity updaters</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="defSim.dissimilarity_component.html#module-defSim.dissimilarity_component.dissimilarity_calculator">DissimilarityCalculator module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="defSim.dissimilarity_component.html#module-defSim.dissimilarity_component.dissimilarity_calculator">select_calculator</a></li>
 <li class="toctree-l2"><a class="reference internal" href="defSim.dissimilarity_component.html#module-defSim.dissimilarity_component.EuclideanDistance">EuclideanDistance</a></li>
 <li class="toctree-l2"><a class="reference internal" href="defSim.dissimilarity_component.html#module-defSim.dissimilarity_component.HammingDistance">HammingDistance</a></li>
+<li class="toctree-l2"><a class="reference internal" href="defSim.dissimilarity_component.html#abc">ABC</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="defSim.tools.html">Tools</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="defSim.tools.html#module-defSim.tools.CreateOutputTable">CreateOutputTable</a></li>
+<li class="toctree-l2"><a class="reference internal" href="defSim.tools.html#abc-of-createoutputtable">ABC of CreateOutputTable</a></li>
 <li class="toctree-l2"><a class="reference internal" href="defSim.tools.html#module-defSim.tools.OutputMeasures">OutputMeasures</a></li>
 <li class="toctree-l2"><a class="reference internal" href="defSim.tools.html#module-defSim.tools.NetworkDistanceUpdater">NetworkDistanceUpdater</a></li>
 <li class="toctree-l2"><a class="reference internal" href="defSim.tools.html#module-defSim.tools.ClusterExecutionScript">ClusterExecutionScript</a></li>
@@ -172,7 +175,7 @@
 <p>The flow of a single simulation run implemented by defSim looks like this:</p>
 <a class="reference internal image-reference" href="_images/defSim-flow.png"><img alt="defSim workflow" src="_images/defSim-flow.png" style="width: 400px;" /></a>
 <p>All elements on the left represent the separate modules.</p>
-<p>The <a class="reference internal" href="simulation.class.html#module-defSim.Simulation" title="defSim.Simulation"><code class="xref py py-class docutils literal notranslate"><span class="pre">Simulation</span></code></a> class handles the execution of all modules as depicted in the flow chart, and returns a single row of results as a Pandas dataframe. The <a class="reference internal" href="experiment.class.html#module-defSim.Experiment" title="defSim.Experiment"><code class="xref py py-class docutils literal notranslate"><span class="pre">Experiment</span></code></a> class handles multiple executions of the simulation class, calling the simulation class effectively a number of times (repetitions) for every user-given parameter combination. Running these two classes is what we call using defSim <em>the unified way</em>. Alternatively, you might want to use just one of a couple of the pre-programmed modules, and use your own code to create a variation on the traditional social influence models. This is what we call using defSim <em>the modular way</em>.</p>
+<p>The <a class="reference internal" href="simulation.class.html#module-defSim.Simulation" title="defSim.Simulation"><code class="xref py py-class docutils literal notranslate"><span class="pre">Simulation</span></code></a> class handles the execution of all modules as depicted in the flow chart, and returns a single row of results as a Pandas dataframe. The <a class="reference internal" href="experiment.class.html#module-defSim.Experiment" title="defSim.Experiment"><code class="xref py py-class docutils literal notranslate"><span class="pre">Experiment</span></code></a> class handles multiple executions of the simulation class, calling the simulation class effectively a number of times (repetitions) for every user-given parameter combination. Alternatively, you might want to use just one of a couple of the pre-programmed modules, and use your own code to create a variation on the traditional social influence models.</p>
 <p><a class="reference internal" href="Introduction_to_defSim.html"><span class="doc">Learn the basics of defSim on our introduction page</span></a></p>
 </div>
 <hr class="docutils" />
@@ -191,19 +194,10 @@
 </li>
 </ul>
 </div>
-<div class="section" id="unified-use">
-<h2>Unified use<a class="headerlink" href="#unified-use" title="Permalink to this headline">¶</a></h2>
 <div class="toctree-wrapper compound">
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="experiment.class.html">Experiment class</a></li>
 <li class="toctree-l1"><a class="reference internal" href="simulation.class.html">Simulation class</a></li>
-</ul>
-</div>
-</div>
-<div class="section" id="modular-use">
-<h2>Modular use<a class="headerlink" href="#modular-use" title="Permalink to this headline">¶</a></h2>
-<div class="toctree-wrapper compound">
-<ul>
 <li class="toctree-l1"><a class="reference internal" href="defSim.network_init.html">Networks</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="defSim.network_init.html#module-defSim.network_init.network_init">generate_network</a></li>
 <li class="toctree-l2"><a class="reference internal" href="defSim.network_init.html#module-defSim.network_init.network_init">read_network</a></li>
@@ -217,18 +211,20 @@
 <li class="toctree-l2"><a class="reference internal" href="defSim.agents_init.html#module-defSim.agents_init.RandomContinuousInitializer">RandomContinuousInitializer</a></li>
 <li class="toctree-l2"><a class="reference internal" href="defSim.agents_init.html#module-defSim.agents_init.agents_init">set_categorical_attribute</a></li>
 <li class="toctree-l2"><a class="reference internal" href="defSim.agents_init.html#module-defSim.agents_init.agents_init">set_continuous_attribute</a></li>
-<li class="toctree-l2"><a class="reference internal" href="defSim.agents_init.html#module-defSim.agents_init.agents_init">Abstract Base Class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="defSim.agents_init.html#abc">ABC</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="defSim.focal_agent_sim.html">Focal agent selection</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="defSim.focal_agent_sim.html#module-defSim.focal_agent_sim.focal_agent_sim">focal_agent_sim module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="defSim.focal_agent_sim.html#module-defSim.focal_agent_sim.RandomSelector">RandomSelector</a></li>
+<li class="toctree-l2"><a class="reference internal" href="defSim.focal_agent_sim.html#module-defSim.focal_agent_sim.focal_agent_sim">ABC</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="defSim.neighbor_selector_sim.html">Neighbor selector</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="defSim.neighbor_selector_sim.html#module-defSim.neighbor_selector_sim.neighbor_selector_sim">neighbor_selector_sim module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="defSim.neighbor_selector_sim.html#module-defSim.neighbor_selector_sim.RandomNeighborSelector">RandomNeighborSelector</a></li>
 <li class="toctree-l2"><a class="reference internal" href="defSim.neighbor_selector_sim.html#module-defSim.neighbor_selector_sim.SimilarNeighborSelector">SimilarNeighborSelector</a></li>
+<li class="toctree-l2"><a class="reference internal" href="defSim.neighbor_selector_sim.html#module-defSim.neighbor_selector_sim.neighbor_selector_sim">ABC</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="defSim.influence_sim.html">Influence</a><ul>
@@ -237,6 +233,7 @@
 <li class="toctree-l2"><a class="reference internal" href="defSim.influence_sim.html#module-defSim.influence_sim.BoundedConfidence">BoundedConfidence</a></li>
 <li class="toctree-l2"><a class="reference internal" href="defSim.influence_sim.html#module-defSim.influence_sim.Persuasion">Persuasion</a></li>
 <li class="toctree-l2"><a class="reference internal" href="defSim.influence_sim.html#module-defSim.influence_sim.WeightedLinear">WeightedLinear</a></li>
+<li class="toctree-l2"><a class="reference internal" href="defSim.influence_sim.html#module-defSim.influence_sim.influence_sim">ABC</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="defSim.network_evolution_sim.html">Network evolution</a><ul>
@@ -245,20 +242,21 @@
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="defSim.dissimilarity_component.html">Dissimilarity updaters</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="defSim.dissimilarity_component.html#module-defSim.dissimilarity_component.dissimilarity_calculator">DissimilarityCalculator module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="defSim.dissimilarity_component.html#module-defSim.dissimilarity_component.dissimilarity_calculator">select_calculator</a></li>
 <li class="toctree-l2"><a class="reference internal" href="defSim.dissimilarity_component.html#module-defSim.dissimilarity_component.EuclideanDistance">EuclideanDistance</a></li>
 <li class="toctree-l2"><a class="reference internal" href="defSim.dissimilarity_component.html#module-defSim.dissimilarity_component.HammingDistance">HammingDistance</a></li>
+<li class="toctree-l2"><a class="reference internal" href="defSim.dissimilarity_component.html#abc">ABC</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="defSim.tools.html">Tools</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="defSim.tools.html#module-defSim.tools.CreateOutputTable">CreateOutputTable</a></li>
+<li class="toctree-l2"><a class="reference internal" href="defSim.tools.html#abc-of-createoutputtable">ABC of CreateOutputTable</a></li>
 <li class="toctree-l2"><a class="reference internal" href="defSim.tools.html#module-defSim.tools.OutputMeasures">OutputMeasures</a></li>
 <li class="toctree-l2"><a class="reference internal" href="defSim.tools.html#module-defSim.tools.NetworkDistanceUpdater">NetworkDistanceUpdater</a></li>
 <li class="toctree-l2"><a class="reference internal" href="defSim.tools.html#module-defSim.tools.ClusterExecutionScript">ClusterExecutionScript</a></li>
 </ul>
 </li>
 </ul>
-</div>
 </div>
 </div>
 <hr class="docutils" />
@@ -288,7 +286,7 @@
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2019, Laukemper &amp; Keijzer.
+        &copy; Copyright 2019-2020, Laukemper, Keijzer &amp; Bakker.
 
     </p>
   </div>
