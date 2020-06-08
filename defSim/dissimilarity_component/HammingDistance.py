@@ -1,14 +1,14 @@
 from .dissimilarity_calculator import DissimilarityCalculator
 import networkx as nx
 
+# todo: documentation on exclude
 
 class HammingDistance(DissimilarityCalculator):
     """
     Implements the DissimilarityCalculator as a calculator of the Hamming distance
     """
 
-    def __init__(self, exclude=None):
-        # documentation omitted
+    def __init__(self, exclude=[]):
         self.exclude = exclude
 
     def calculate_dissimilarity(self, network: nx.Graph, agent1_id: int, agent2_id: int) -> float:
