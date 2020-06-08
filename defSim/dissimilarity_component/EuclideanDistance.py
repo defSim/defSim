@@ -9,7 +9,7 @@ class EuclideanDistance(DissimilarityCalculator):
     Implements the DissimilarityCalculator as a calculator of the euclidean distance
     """
 
-    def __init__(self, exclude=None):
+    def __init__(self, exclude=[]):
         # documentation omitted
         self.exclude = exclude
 
