@@ -78,30 +78,36 @@
 </ul>
 </li>
 </ul>
-<ul>
+<ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="experiment.class.html">Experiment class</a></li>
 <li class="toctree-l1"><a class="reference internal" href="simulation.class.html">Simulation class</a></li>
-</ul>
-<ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="defSim.network_init.html">Networks</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="defSim.network_init.html#module-defSim.network_init.network_init">network_init module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="defSim.network_init.html#module-defSim.network_init.network_init">generate_network</a></li>
+<li class="toctree-l2"><a class="reference internal" href="defSim.network_init.html#module-defSim.network_init.network_init">read_network</a></li>
+<li class="toctree-l2"><a class="reference internal" href="defSim.network_init.html#module-defSim.network_init.network_init">network_generators</a></li>
+<li class="toctree-l2"><a class="reference internal" href="defSim.network_init.html#module-defSim.network_init.network_init">execute_ms_rewiring</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="defSim.agents_init.html">Agent features</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="defSim.agents_init.html#module-defSim.agents_init.agents_init">agents_init module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="defSim.agents_init.html#module-defSim.agents_init.agents_init">initialize_attributes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="defSim.agents_init.html#module-defSim.agents_init.RandomCategoricalInitializer">RandomCategoricalInitializer</a></li>
 <li class="toctree-l2"><a class="reference internal" href="defSim.agents_init.html#module-defSim.agents_init.RandomContinuousInitializer">RandomContinuousInitializer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="defSim.agents_init.html#module-defSim.agents_init.agents_init">set_categorical_attribute</a></li>
+<li class="toctree-l2"><a class="reference internal" href="defSim.agents_init.html#module-defSim.agents_init.agents_init">set_continuous_attribute</a></li>
+<li class="toctree-l2"><a class="reference internal" href="defSim.agents_init.html#abc">ABC</a></li>
 </ul>
 </li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Focal agent selection</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#module-defSim.focal_agent_sim.focal_agent_sim">focal_agent_sim module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#module-defSim.focal_agent_sim.RandomSelector">RandomSelector</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-defSim.focal_agent_sim.focal_agent_sim">ABC</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="defSim.neighbor_selector_sim.html">Neighbor selector</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="defSim.neighbor_selector_sim.html#module-defSim.neighbor_selector_sim.neighbor_selector_sim">neighbor_selector_sim module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="defSim.neighbor_selector_sim.html#module-defSim.neighbor_selector_sim.RandomNeighborSelector">RandomNeighborSelector</a></li>
 <li class="toctree-l2"><a class="reference internal" href="defSim.neighbor_selector_sim.html#module-defSim.neighbor_selector_sim.SimilarNeighborSelector">SimilarNeighborSelector</a></li>
+<li class="toctree-l2"><a class="reference internal" href="defSim.neighbor_selector_sim.html#module-defSim.neighbor_selector_sim.neighbor_selector_sim">ABC</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="defSim.influence_sim.html">Influence</a><ul>
@@ -110,6 +116,7 @@
 <li class="toctree-l2"><a class="reference internal" href="defSim.influence_sim.html#module-defSim.influence_sim.BoundedConfidence">BoundedConfidence</a></li>
 <li class="toctree-l2"><a class="reference internal" href="defSim.influence_sim.html#module-defSim.influence_sim.Persuasion">Persuasion</a></li>
 <li class="toctree-l2"><a class="reference internal" href="defSim.influence_sim.html#module-defSim.influence_sim.WeightedLinear">WeightedLinear</a></li>
+<li class="toctree-l2"><a class="reference internal" href="defSim.influence_sim.html#module-defSim.influence_sim.influence_sim">ABC</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="defSim.network_evolution_sim.html">Network evolution</a><ul>
@@ -118,13 +125,15 @@
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="defSim.dissimilarity_component.html">Dissimilarity updaters</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="defSim.dissimilarity_component.html#module-defSim.dissimilarity_component.dissimilarity_calculator">DissimilarityCalculator module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="defSim.dissimilarity_component.html#module-defSim.dissimilarity_component.dissimilarity_calculator">select_calculator</a></li>
 <li class="toctree-l2"><a class="reference internal" href="defSim.dissimilarity_component.html#module-defSim.dissimilarity_component.EuclideanDistance">EuclideanDistance</a></li>
 <li class="toctree-l2"><a class="reference internal" href="defSim.dissimilarity_component.html#module-defSim.dissimilarity_component.HammingDistance">HammingDistance</a></li>
+<li class="toctree-l2"><a class="reference internal" href="defSim.dissimilarity_component.html#abc">ABC</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="defSim.tools.html">Tools</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="defSim.tools.html#module-defSim.tools.CreateOutputTable">CreateOutputTable</a></li>
+<li class="toctree-l2"><a class="reference internal" href="defSim.tools.html#abc-of-createoutputtable">ABC of CreateOutputTable</a></li>
 <li class="toctree-l2"><a class="reference internal" href="defSim.tools.html#module-defSim.tools.OutputMeasures">OutputMeasures</a></li>
 <li class="toctree-l2"><a class="reference internal" href="defSim.tools.html#module-defSim.tools.NetworkDistanceUpdater">NetworkDistanceUpdater</a></li>
 <li class="toctree-l2"><a class="reference internal" href="defSim.tools.html#module-defSim.tools.ClusterExecutionScript">ClusterExecutionScript</a></li>
@@ -164,29 +173,6 @@
 <h1>Focal agent (simulation component)<a class="headerlink" href="#focal-agent-simulation-component" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="module-defSim.focal_agent_sim.focal_agent_sim">
 <span id="focal-agent-sim-module"></span><h2>focal_agent_sim module<a class="headerlink" href="#module-defSim.focal_agent_sim.focal_agent_sim" title="Permalink to this headline">¶</a></h2>
-<dl class="class">
-<dt id="defSim.focal_agent_sim.focal_agent_sim.FocalAgentSelector">
-<em class="property">class </em><code class="sig-prename descclassname">defSim.focal_agent_sim.focal_agent_sim.</code><code class="sig-name descname">FocalAgentSelector</code><a class="headerlink" href="#defSim.focal_agent_sim.focal_agent_sim.FocalAgentSelector" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">abc.ABC</span></code></p>
-<p>This class is responsible for sampling the focal agent for the influence process.</p>
-<dl class="method">
-<dt id="defSim.focal_agent_sim.focal_agent_sim.FocalAgentSelector.select_agent">
-<em class="property">abstract static </em><code class="sig-name descname">select_agent</code><span class="sig-paren">(</span><em class="sig-param">network: networkx.classes.graph.Graph</em>, <em class="sig-param">agents: List[int] = []</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span> &#x2192; int<a class="headerlink" href="#defSim.focal_agent_sim.focal_agent_sim.FocalAgentSelector.select_agent" title="Permalink to this definition">¶</a></dt>
-<dd><p>This method selects an agent from a network for the influence process.
-Based on the communication regime, the selected agent is either the source or the target of influence.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>network</strong> – A NetworkX object from which the agent shall be selected.</p></li>
-<li><p><strong>agents</strong> – A list of the indices of all agents in the network</p></li>
-</ul>
-</dd>
-</dl>
-<p>:returns The index of the selected agent.</p>
-</dd></dl>
-
-</dd></dl>
-
 <dl class="function">
 <dt id="defSim.focal_agent_sim.focal_agent_sim.select_focal_agent">
 <code class="sig-prename descclassname">defSim.focal_agent_sim.focal_agent_sim.</code><code class="sig-name descname">select_focal_agent</code><span class="sig-paren">(</span><em class="sig-param">network: networkx.classes.graph.Graph</em>, <em class="sig-param">realization: str</em>, <em class="sig-param">agents: List[int] = []</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span> &#x2192; int<a class="headerlink" href="#defSim.focal_agent_sim.focal_agent_sim.select_focal_agent" title="Permalink to this definition">¶</a></dt>
@@ -231,6 +217,32 @@ the kwargs dictionary.</p>
 </dd></dl>
 
 </div>
+<div class="section" id="module-defSim.focal_agent_sim.focal_agent_sim">
+<span id="abc"></span><h2>ABC<a class="headerlink" href="#module-defSim.focal_agent_sim.focal_agent_sim" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="defSim.focal_agent_sim.focal_agent_sim.FocalAgentSelector">
+<em class="property">class </em><code class="sig-prename descclassname">defSim.focal_agent_sim.focal_agent_sim.</code><code class="sig-name descname">FocalAgentSelector</code><a class="headerlink" href="#defSim.focal_agent_sim.focal_agent_sim.FocalAgentSelector" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">abc.ABC</span></code></p>
+<p>This class is responsible for sampling the focal agent for the influence process.</p>
+<dl class="method">
+<dt id="defSim.focal_agent_sim.focal_agent_sim.FocalAgentSelector.select_agent">
+<em class="property">abstract static </em><code class="sig-name descname">select_agent</code><span class="sig-paren">(</span><em class="sig-param">network: networkx.classes.graph.Graph</em>, <em class="sig-param">agents: List[int] = []</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span> &#x2192; int<a class="headerlink" href="#defSim.focal_agent_sim.focal_agent_sim.FocalAgentSelector.select_agent" title="Permalink to this definition">¶</a></dt>
+<dd><p>This method selects an agent from a network for the influence process.
+Based on the communication regime, the selected agent is either the source or the target of influence.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>network</strong> – A NetworkX object from which the agent shall be selected.</p></li>
+<li><p><strong>agents</strong> – A list of the indices of all agents in the network</p></li>
+</ul>
+</dd>
+</dl>
+<p>:returns The index of the selected agent.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
 </div>
 
 
@@ -252,7 +264,7 @@ the kwargs dictionary.</p>
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2019, Laukemper &amp; Keijzer.
+        &copy; Copyright 2019-2020, Laukemper, Keijzer &amp; Bakker.
 
     </p>
   </div>

@@ -84,13 +84,19 @@
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="defSim.network_init.html">Networks</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="defSim.network_init.html#module-defSim.network_init.network_init">network_init module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="defSim.network_init.html#module-defSim.network_init.network_init">generate_network</a></li>
+<li class="toctree-l2"><a class="reference internal" href="defSim.network_init.html#module-defSim.network_init.network_init">read_network</a></li>
+<li class="toctree-l2"><a class="reference internal" href="defSim.network_init.html#module-defSim.network_init.network_init">network_generators</a></li>
+<li class="toctree-l2"><a class="reference internal" href="defSim.network_init.html#module-defSim.network_init.network_init">execute_ms_rewiring</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="defSim.agents_init.html">Agent features</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="defSim.agents_init.html#module-defSim.agents_init.agents_init">agents_init module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="defSim.agents_init.html#module-defSim.agents_init.agents_init">initialize_attributes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="defSim.agents_init.html#module-defSim.agents_init.RandomCategoricalInitializer">RandomCategoricalInitializer</a></li>
 <li class="toctree-l2"><a class="reference internal" href="defSim.agents_init.html#module-defSim.agents_init.RandomContinuousInitializer">RandomContinuousInitializer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="defSim.agents_init.html#module-defSim.agents_init.agents_init">set_categorical_attribute</a></li>
+<li class="toctree-l2"><a class="reference internal" href="defSim.agents_init.html#module-defSim.agents_init.agents_init">set_continuous_attribute</a></li>
+<li class="toctree-l2"><a class="reference internal" href="defSim.agents_init.html#abc">ABC</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="defSim.focal_agent_sim.html">Focal agent selection</a><ul>
@@ -118,9 +124,10 @@
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="defSim.dissimilarity_component.html">Dissimilarity updaters</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="defSim.dissimilarity_component.html#module-defSim.dissimilarity_component.dissimilarity_calculator">DissimilarityCalculator module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="defSim.dissimilarity_component.html#module-defSim.dissimilarity_component.dissimilarity_calculator">select_calculator</a></li>
 <li class="toctree-l2"><a class="reference internal" href="defSim.dissimilarity_component.html#module-defSim.dissimilarity_component.EuclideanDistance">EuclideanDistance</a></li>
 <li class="toctree-l2"><a class="reference internal" href="defSim.dissimilarity_component.html#module-defSim.dissimilarity_component.HammingDistance">HammingDistance</a></li>
+<li class="toctree-l2"><a class="reference internal" href="defSim.dissimilarity_component.html#abc">ABC</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="defSim.tools.html">Tools</a><ul>
@@ -164,7 +171,7 @@
 <span id="experiment-class"></span><h1>Experiment class<a class="headerlink" href="#module-defSim.Experiment" title="Permalink to this headline">¶</a></h1>
 <dl class="class">
 <dt id="defSim.Experiment.Experiment">
-<em class="property">class </em><code class="sig-prename descclassname">defSim.Experiment.</code><code class="sig-name descname">Experiment</code><span class="sig-paren">(</span><em class="sig-param">network: networkx.classes.graph.Graph = None</em>, <em class="sig-param">communication_regime: List = 'one-to-one'</em>, <em class="sig-param">topology: str = 'grid'</em>, <em class="sig-param">network_parameters: dict = {}</em>, <em class="sig-param">attributes_initializer: str = 'random_categorical'</em>, <em class="sig-param">attribute_parameters: dict = {}</em>, <em class="sig-param">focal_agent_selector: str = 'random'</em>, <em class="sig-param">focal_agent_parameters: dict = {}</em>, <em class="sig-param">neighbor_selector: str = 'random'</em>, <em class="sig-param">neighbor_parameters: dict = {}</em>, <em class="sig-param">influence_function: str = 'axelrod'</em>, <em class="sig-param">influence_parameters: dict = {}</em>, <em class="sig-param">influenceable_attributes: list = None</em>, <em class="sig-param">network_modifier: str = 'random'</em>, <em class="sig-param">network_modifier_parameters: dict = {}</em>, <em class="sig-param">dissimilarity_measure: str = 'hamming'</em>, <em class="sig-param">tickwise: List = []</em>, <em class="sig-param">stop_condition: str = 'max_iteration'</em>, <em class="sig-param">stop_condition_parameters: dict = {}</em>, <em class="sig-param">max_iterations: int = 100000</em>, <em class="sig-param">output_realizations: list = []</em>, <em class="sig-param">repetitions: int = 1</em>, <em class="sig-param">seed: int = None</em><span class="sig-paren">)</span><a class="headerlink" href="#defSim.Experiment.Experiment" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">defSim.Experiment.</code><code class="sig-name descname">Experiment</code><span class="sig-paren">(</span><em class="sig-param">simulations: List[defSim.Simulation.Simulation] = None</em>, <em class="sig-param">network: networkx.classes.graph.Graph = None</em>, <em class="sig-param">communication_regime: List = 'one-to-one'</em>, <em class="sig-param">topology: str = 'grid'</em>, <em class="sig-param">network_parameters: dict = {}</em>, <em class="sig-param">attributes_initializer: str = 'random_categorical'</em>, <em class="sig-param">attribute_parameters: dict = {}</em>, <em class="sig-param">focal_agent_selector: str = 'random'</em>, <em class="sig-param">focal_agent_parameters: dict = {}</em>, <em class="sig-param">neighbor_selector: str = 'random'</em>, <em class="sig-param">neighbor_parameters: dict = {}</em>, <em class="sig-param">influence_function: str = 'axelrod'</em>, <em class="sig-param">influence_parameters: dict = {}</em>, <em class="sig-param">influenceable_attributes: list = None</em>, <em class="sig-param">network_modifier: str = 'random'</em>, <em class="sig-param">network_modifier_parameters: dict = {}</em>, <em class="sig-param">dissimilarity_measure: str = 'hamming'</em>, <em class="sig-param">tickwise: list = []</em>, <em class="sig-param">stop_condition: str = 'max_iteration'</em>, <em class="sig-param">stop_condition_parameters: dict = {}</em>, <em class="sig-param">max_iterations: int = 100000</em>, <em class="sig-param">output_realizations: list = []</em>, <em class="sig-param">repetitions: int = 1</em>, <em class="sig-param">seed: int = None</em><span class="sig-paren">)</span><a class="headerlink" href="#defSim.Experiment.Experiment" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>The main class for creating and running experiments. Each simulation consists of 7 modular components, where
 each component is independent from the others and can thus be replaced by a different implementation of that
@@ -181,9 +188,12 @@ These components are:</p>
 dictionary. In these dictionaries, the keys are the names of the parameters and the values their respective value.
 It is also possible to pass a list of values as the dictionary value, which then creates a simulation for each value,
 making it possible to easily compare simulation runs with e.g. different number of agents.</p>
+<p>Alternatively, customizations outside of these parameters can be applied to individual simulations. These simulations
+can then be passed as a list and executed as an experiment.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
+<li><p><strong>simulations</strong> (<em>List</em><em>[</em><a class="reference internal" href="simulation.class.html#defSim.Simulation.Simulation" title="defSim.Simulation.Simulation"><em>Simulation</em></a><em>] or </em><em>None</em>) – This is a list of simulations to run. If simulations is not None, no new simulations are generated regardless of parameters specified.</p></li>
 <li><p><strong>network</strong> (<em>nx.Graph</em><em>, </em><em>np.array</em><em> or </em><em>String</em>) – This is either a preloaded networkx graph, an adjacency matrix as a numpy array, or the full path to a file with and edge list.</p></li>
 <li><p><strong>communication_regime</strong> (<em>List</em><em> or </em><em>String = &quot;one-to-one&quot;</em>) – Options are “one-to-one”, “one-to-many” and “many-to-one”. For this parameter, it is possible to pass a list of multiple of these options.</p></li>
 <li><p><strong>topology</strong> (<em>String = &quot;grid&quot;</em>) – Options are “grid”, “ring” and “spatial_random_graph”.</p></li>
@@ -212,8 +222,11 @@ making it possible to easily compare simulation runs with e.g. different number 
 <dl class="method">
 <dt id="defSim.Experiment.Experiment.estimate_runtime">
 <code class="sig-name descname">estimate_runtime</code><span class="sig-paren">(</span><em class="sig-param">sample_runs: int = None</em>, <em class="sig-param">sample_steps: int = 10</em><span class="sig-paren">)</span><a class="headerlink" href="#defSim.Experiment.Experiment.estimate_runtime" title="Permalink to this definition">¶</a></dt>
-<dd><p>This function creates the parameterDictList if that hasn’t happened already and then infers from its
-length the runtime of the whole experiment.</p>
+<dd><blockquote>
+<div><p>If simulations are specified, this function infers the experiment runtime from sampled runs/steps.</p>
+</div></blockquote>
+<p>If no simulations are specified, function creates the parameterDictList if that hasn’t happened already and then infers from
+sampled runs the runtime of the whole experiment.</p>
 <p>Runtime estimates are for running on a single core.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -243,9 +256,12 @@ returned to the console to make the Experiment object more transparent.</p>
 <dl class="method">
 <dt id="defSim.Experiment.Experiment.run">
 <code class="sig-name descname">run</code><span class="sig-paren">(</span><em class="sig-param">parallel: bool = False</em>, <em class="sig-param">num_cores=8</em><span class="sig-paren">)</span> &#x2192; pandas.core.frame.DataFrame<a class="headerlink" href="#defSim.Experiment.Experiment.run" title="Permalink to this definition">¶</a></dt>
-<dd><p>Starts the experiment by first creating the parameter_dict_list if that hasn’t happened already and then
-creates a simulation for each parameter combination in the parameter_dict_list.
-If parallel is true, the simulations are run on multiple cores on the machine, their number determined by num_cores.</p>
+<dd><p>If the experiment is defined by a list of simulations:
+Runs each simulation.</p>
+<p>If the experiment is defined by parameter combinations:
+Starts the experiment by first creating the parameter_dict_list if that hasn’t happened already and then
+creates a simulation for each parameter combination in the parameter_dict_list.</p>
+<p>If parallel is true, the simulations are run on multiple cores on the machine, their number determined by num_cores.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
@@ -301,7 +317,7 @@ To be able to use this method the script with the Experiment must be executed on
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2019, Laukemper &amp; Keijzer.
+        &copy; Copyright 2019-2020, Laukemper, Keijzer &amp; Bakker.
 
     </p>
   </div>

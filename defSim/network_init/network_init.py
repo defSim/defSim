@@ -5,7 +5,11 @@ import random
 
 def generate_network(name: str, **kwargs) -> nx.Graph:
     """
-    This is the factory method that returns a specific network.
+    This factory method calls the graph generator and returns the desired network. It takes as arguments the name of the
+    required network and a dictionary containing all the arguments that are required by the desired graph generator.
+    defSim can produce three types networks ('grid', 'spatial_random_graph', and 'ring'), but will also accept and call
+    any network generator in the `NetworkX Graph Generator library
+    <https://networkx.github.io/documentation/stable/reference/generators.html>`_.
 
     :param name: A string with the name of the network type.
         Possible options:

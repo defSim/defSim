@@ -62,7 +62,7 @@ class Axelrod(InfluenceOperator):
                     if random.uniform(0, 1) > network.edges[agent_i, neighbor]['dist']:
                         success = True
                         network.nodes[neighbor][influenced_feature] = network.nodes[agent_i][influenced_feature]
-                        update_dissimilarity(network, [neighbor], dissimilarity_measure)
+                        update_dissimilarity(network, [neighbor], dissimilarity_measure, **kwargs)
         else:
             #todo comment and improve time
             close_neighbors = [neighbor for neighbor in agents_j if random.uniform(0, 1) > network.edges[agent_i, neighbor]['dist']]
@@ -81,6 +81,6 @@ class Axelrod(InfluenceOperator):
                 if network.nodes[agent_i][incongruent_features[influenced_featureID]] != incongruent_feature_values[influenced_featureID]:
                     success = True
                     network.nodes[agent_i][incongruent_features[influenced_featureID]] = incongruent_feature_values[influenced_featureID]
-                    update_dissimilarity(network, [agent_i], dissimilarity_measure)
+                    update_dissimilarity(network, [agent_i], dissimilarity_measure, **kwargs)
 
         return success
