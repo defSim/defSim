@@ -1,27 +1,22 @@
 Agents (initialization component)
 ======================================
 
+This component is concerned with initializing agent attributes at the start of the simulation. The following methods are available:
+
+.. toctree ::
+   
+   Random Categorical Initializer <defSim.agents_init.RandomCategoricalInitializer>
+   Random Continuous Initializer <defSim.agents_init.RandomContinuousInitializer>
+   Correlated Continuous Initializer <defSim.agents_init.CorrelatedContinuousInitializer>
+
+
 initialize_attributes
 -------------------------------------------------------
 
+To initialize attributes, the following function can be called:
+
 .. automodule:: defSim.agents_init.agents_init
     :members: initialize_attributes
-    :undoc-members:
-    :show-inheritance:
-
-RandomCategoricalInitializer
-------------------------------------------------------------------
-
-.. automodule:: defSim.agents_init.RandomCategoricalInitializer
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
-RandomContinuousInitializer
------------------------------------------------------------------
-
-.. automodule:: defSim.agents_init.RandomContinuousInitializer
-    :members:
     :undoc-members:
     :show-inheritance:
     
@@ -37,7 +32,7 @@ set_continuous_attribute
 .. automodule:: defSim.agents_init.agents_init
     :members: set_continuous_attribute
 
-ABC
+Abstract Base Class
 -------------------------------------------------------
 
 The Abstract Base Class of the agent attribute initializer:

@@ -28,12 +28,8 @@ Contents of the documentation
 =============================
 
 .. toctree::
-   
+      
    Introduction <Introduction_to_defSim>
-   
-
-.. toctree::
-   
    Experiment class <experiment.class>
    Simulation class <simulation.class>
    Networks <defSim.network_init>
