@@ -1,6 +1,15 @@
 Neighbor selector (simulation component)
 =======================================================
 
+This component is concerned with selecting the neighbor of the focal agent (i.e. the agent who receives the focal
+agent's attribute value) at each timestep in the simulation run.
+
+The following methods are available:
+
+.. toctree::
+   Random Neighbor Selector <defSim.neighbor_selector_sim.RandomNeighborSelector>
+   Similar Neighbor Selector <defSim.neighbor_selector_sim.SimilarNeighborSelector>
+
 neighbor_selector_sim module
 -------------------------------------------------------
 
@@ -9,25 +18,9 @@ neighbor_selector_sim module
     :undoc-members:
     :show-inheritance:
 
-RandomNeighborSelector
 -------------------------------------------------------
 
-.. automodule:: defSim.neighbor_selector_sim.RandomNeighborSelector
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
-
-SimilarNeighborSelector
--------------------------------------------------------
-
-.. automodule:: defSim.neighbor_selector_sim.SimilarNeighborSelector
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
-
-ABC
+Abstract Base Class (ABC)
 -------------------------------------------------------
 
 .. automodule:: defSim.neighbor_selector_sim.neighbor_selector_sim

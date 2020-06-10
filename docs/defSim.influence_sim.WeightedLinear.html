@@ -30,8 +30,9 @@
               href="genindex.html"/>
         <link rel="search" title="Search" href="search.html"/>
     <link rel="top" title="defSim alpha documentation" href="index.html"/>
-        <link rel="next" title="Random Selector" href="defSim.focal_agent_sim.RandomSelector.html"/>
-        <link rel="prev" title="CorrelatedContinuousInitializer" href="defSim.agents_init.CorrelatedContinuousInitializer.html"/> 
+        <link rel="up" title="Influence (simulation component)" href="defSim.influence_sim.html"/>
+        <link rel="next" title="Network evolution (simulation component)" href="defSim.network_evolution_sim.html"/>
+        <link rel="prev" title="Axelrod" href="defSim.influence_sim.Axelrod.html"/> 
 
   
   <script src="_static/js/modernizr.min.js"></script>
@@ -98,10 +99,10 @@
 <li class="toctree-l2"><a class="reference internal" href="defSim.agents_init.html#abstract-base-class-abc">Abstract Base Class (ABC)</a></li>
 </ul>
 </li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Focal agent selection</a><ul>
+<li class="toctree-l1"><a class="reference internal" href="defSim.focal_agent_sim.html">Focal agent selection</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="defSim.focal_agent_sim.RandomSelector.html">Random Selector</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#module-defSim.focal_agent_sim.focal_agent_sim">focal_agent_sim module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#module-defSim.focal_agent_sim.focal_agent_sim">Abstract Base Class (ABC)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="defSim.focal_agent_sim.html#module-defSim.focal_agent_sim.focal_agent_sim">focal_agent_sim module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="defSim.focal_agent_sim.html#module-defSim.focal_agent_sim.focal_agent_sim">Abstract Base Class (ABC)</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="defSim.neighbor_selector_sim.html">Neighbor selector</a><ul>
@@ -111,11 +112,11 @@
 <li class="toctree-l2"><a class="reference internal" href="defSim.neighbor_selector_sim.html#module-defSim.neighbor_selector_sim.neighbor_selector_sim">Abstract Base Class (ABC)</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="defSim.influence_sim.html">Influence</a><ul>
+<li class="toctree-l1 current"><a class="reference internal" href="defSim.influence_sim.html">Influence</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="defSim.influence_sim.BoundedConfidence.html">Bounded Confidence</a></li>
 <li class="toctree-l2"><a class="reference internal" href="defSim.influence_sim.Persuasion.html">Persuasion</a></li>
 <li class="toctree-l2"><a class="reference internal" href="defSim.influence_sim.Axelrod.html">Similarity Adoption</a></li>
-<li class="toctree-l2"><a class="reference internal" href="defSim.influence_sim.WeightedLinear.html">Weighted Linear Influence</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Weighted Linear Influence</a></li>
 <li class="toctree-l2"><a class="reference internal" href="defSim.influence_sim.html#module-defSim.influence_sim.influence_sim">influence_sim module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="defSim.influence_sim.html#module-defSim.influence_sim.influence_sim">Abstract Base Class (ABC)</a></li>
 </ul>
@@ -171,64 +172,70 @@
 </div> --> <!-- turned off on 21/10/2019 -->
            <div itemprop="articleBody">
             
-  <div class="section" id="focal-agent-simulation-component">
-<h1>Focal agent (simulation component)<a class="headerlink" href="#focal-agent-simulation-component" title="Permalink to this headline">¶</a></h1>
-<p>This component is concerned with selecting the focal agent (i.e. the agent who sends their attribute value) at each
-timestep in the simulation run.</p>
-<p>The following methods are available:</p>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="defSim.focal_agent_sim.RandomSelector.html">Random Selector</a></li>
-</ul>
-</div>
-<div class="section" id="module-defSim.focal_agent_sim.focal_agent_sim">
-<span id="focal-agent-sim-module"></span><h2>focal_agent_sim module<a class="headerlink" href="#module-defSim.focal_agent_sim.focal_agent_sim" title="Permalink to this headline">¶</a></h2>
-<dl class="function">
-<dt id="defSim.focal_agent_sim.focal_agent_sim.select_focal_agent">
-<code class="sig-prename descclassname">defSim.focal_agent_sim.focal_agent_sim.</code><code class="sig-name descname">select_focal_agent</code><span class="sig-paren">(</span><em class="sig-param">network: networkx.classes.graph.Graph</em>, <em class="sig-param">realization: str</em>, <em class="sig-param">agents: List[int] = []</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span> &#x2192; int<a class="headerlink" href="#defSim.focal_agent_sim.focal_agent_sim.select_focal_agent" title="Permalink to this definition">¶</a></dt>
-<dd><p>This function works as a factory method for the FocalAgentSelector component.
-It calls the select_agent function of a specific implementation of the FocalAgentSelector and passes to it
-the kwargs dictionary.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>network</strong> – A NetworkX object from which the focal agent will be selected</p></li>
-<li><p><strong>realization</strong> – The specific FocalAgentSelector that shall be used to sample the focal agent. Options are “random”, …</p></li>
-<li><p><strong>agents</strong> – A list of the indices of all agents in the network.</p></li>
-</ul>
-</dd>
-</dl>
-<p>:returns The index of the focal agent in the network.</p>
-</dd></dl>
-
-</div>
-<hr class="docutils" />
-<div class="section" id="module-defSim.focal_agent_sim.focal_agent_sim">
-<span id="abstract-base-class-abc"></span><h2>Abstract Base Class (ABC)<a class="headerlink" href="#module-defSim.focal_agent_sim.focal_agent_sim" title="Permalink to this headline">¶</a></h2>
+  <div class="section" id="module-defSim.influence_sim.WeightedLinear">
+<span id="weightedlinear"></span><h1>WeightedLinear<a class="headerlink" href="#module-defSim.influence_sim.WeightedLinear" title="Permalink to this headline">¶</a></h1>
 <dl class="class">
-<dt id="defSim.focal_agent_sim.focal_agent_sim.FocalAgentSelector">
-<em class="property">class </em><code class="sig-prename descclassname">defSim.focal_agent_sim.focal_agent_sim.</code><code class="sig-name descname">FocalAgentSelector</code><a class="headerlink" href="#defSim.focal_agent_sim.focal_agent_sim.FocalAgentSelector" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">abc.ABC</span></code></p>
-<p>This class is responsible for sampling the focal agent for the influence process.</p>
+<dt id="defSim.influence_sim.WeightedLinear.WeightedLinear">
+<em class="property">class </em><code class="sig-prename descclassname">defSim.influence_sim.WeightedLinear.</code><code class="sig-name descname">WeightedLinear</code><a class="headerlink" href="#defSim.influence_sim.WeightedLinear.WeightedLinear" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="defSim.influence_sim.html#defSim.influence_sim.influence_sim.InfluenceOperator" title="defSim.influence_sim.influence_sim.InfluenceOperator"><code class="xref py py-class docutils literal notranslate"><span class="pre">defSim.influence_sim.influence_sim.InfluenceOperator</span></code></a></p>
 <dl class="method">
-<dt id="defSim.focal_agent_sim.focal_agent_sim.FocalAgentSelector.select_agent">
-<em class="property">abstract static </em><code class="sig-name descname">select_agent</code><span class="sig-paren">(</span><em class="sig-param">network: networkx.classes.graph.Graph</em>, <em class="sig-param">agents: List[int] = []</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span> &#x2192; int<a class="headerlink" href="#defSim.focal_agent_sim.focal_agent_sim.FocalAgentSelector.select_agent" title="Permalink to this definition">¶</a></dt>
-<dd><p>This method selects an agent from a network for the influence process.
-Based on the communication regime, the selected agent is either the source or the target of influence.</p>
+<dt id="defSim.influence_sim.WeightedLinear.WeightedLinear.spread_influence">
+<em class="property">static </em><code class="sig-name descname">spread_influence</code><span class="sig-paren">(</span><em class="sig-param">network: networkx.classes.graph.Graph, agent_i: int, agents_j: List[int], regime: str, dissimilarity_measure: defSim.dissimilarity_component.dissimilarity_calculator.DissimilarityCalculator, attributes: List[str] = None, **kwargs</em><span class="sig-paren">)</span> &#x2192; bool<a class="headerlink" href="#defSim.influence_sim.WeightedLinear.WeightedLinear.spread_influence" title="Permalink to this definition">¶</a></dt>
+<dd><p>The weighted linear influence function implements the experienced opinion shift as a function of the
+pre-interaction cultural or opinional distance between the agents involved. The <code class="docutils literal notranslate"><span class="pre">homophily</span></code> parameter controls
+the steepness of the attraction/repulsion curve. Formally:</p>
+<div class="math notranslate nohighlight">
+\[o_{i,t+1} = o_{i,t} + \textrm{convergence_rate} \cdot (1 - \textrm{homophily} | o_{j} - o_{it} |)\]</div>
+<p>Thereafter, opinions are bounded such that they never fall outside the range <span class="math notranslate nohighlight">\([0,1]\)</span></p>
+<p>Crucial is the homophily parameter. The higher its value, the smaller the shift of the receiving
+agent in the direction of the sending agent will be. With this parameter, we can integrate ideas of positive,
+moderated positive, and negative influence into one functional model.</p>
+<p>Three critical values for the <code class="docutils literal notranslate"><span class="pre">homophily</span></code> parameter:</p>
+<ul class="simple">
+<li><p>homophily == 0: only positive influence, the agents exhibit no preference for like-minded others.</p></li>
+<li><p>homophily &gt; 0: moderated positive influence, the agents exhibit a preference for like-minded others and move
+less towards the sender as their distance increases.</p></li>
+<li><p>homophily &gt; 1: moderated postive influence AND negative influence, the agents exhibit a preference for
+like-minded others and move less towards the sender as their distance increases, until distance
+<span class="math notranslate nohighlight">\(1 / \textrm{homophily}\)</span> where agents experience a push away from the sending agent.</p></li>
+</ul>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>network</strong> – A NetworkX object from which the agent shall be selected.</p></li>
-<li><p><strong>agents</strong> – A list of the indices of all agents in the network</p></li>
+<li><p><strong>network</strong> – The network in which the agents exist.</p></li>
+<li><p><strong>agent_i</strong> – The index of the focal agent that is either the source or the target of the influence</p></li>
+<li><p><strong>agents_j</strong> – A list of indices of the agents who can be either the source or the targets of the influence.
+The list can have a single entry, implementing one-to-one communication.</p></li>
+<li><p><strong>attributes</strong> – A list of the names of all the attributes that are subject to influence. If an agent has
+e.g. the attributes “Sex” and “Music taste”, only supply [“Music taste”] as a parameter for this function.
+The influence function itself can still be a function of the “Sex” attribute.</p></li>
+<li><p><strong>regime</strong> – Either “one-to-one”, “one-to-many” or “many-to-one”</p></li>
+<li><p><strong>dissimilarity_measure</strong> – An instance of
+a <code class="xref py py-class docutils literal notranslate"><span class="pre">DissimilarityCalculator</span></code>.</p></li>
+<li><p><strong>kwargs</strong> – Additional parameters specific to the implementation of the InfluenceOperator. Possible
+parameters are the following:</p></li>
+<li><p><strong>convergence_rate</strong> (<em>float=0.5</em>) – A number between 0 and 1 determining what proportion of the sending agent’s
+position the receiving agent will adopt. E.g. when set to 1, the receiving agent assimilates - adopting the
+sending agent’s position fully, but when set to 0.5, the receiving agent moves only half-way towards the
+sending agent’s position. Passed as a kwargs argument.</p></li>
+<li><p><strong>homophily</strong> (<em>float=0</em>) – A number <span class="math notranslate nohighlight">\(\geq\)</span> 0 that controls the shape of the influence curve. At 0, agents
+do not show a preference for similar others (only positive influence). At 1, agents more strongly adjust
+their opinion when confronted with similar others (moderated positive influence). At values &gt; 1, there
+exists a point at which influence becomes negative, making agents shift away from the sending agents
+expressed opinion.</p></li>
+<li><p><strong>bi_directional</strong> (<em>bool=False</em>) – A boolean specifying whether influence is bi- or uni-directional.</p></li>
+<li><p><strong>feature_bounds</strong> (<em>dict=None</em>) – A dictionary with keys ‘min’ and ‘max’ to define boundaries of feature range.
+Defaults to values specified in <code class="xref py py-class docutils literal notranslate"><span class="pre">RandomContinuousInitializers</span></code></p></li>
 </ul>
 </dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>true if agent(s) were successfully influenced</p>
+</dd>
 </dl>
-<p>:returns The index of the selected agent.</p>
 </dd></dl>
 
 </dd></dl>
 
-</div>
 </div>
 
 
@@ -238,10 +245,10 @@ Based on the communication regime, the selected agent is either the source or th
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="defSim.focal_agent_sim.RandomSelector.html" class="btn btn-neutral float-right" title="Random Selector" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="defSim.network_evolution_sim.html" class="btn btn-neutral float-right" title="Network evolution (simulation component)" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="defSim.agents_init.CorrelatedContinuousInitializer.html" class="btn btn-neutral" title="CorrelatedContinuousInitializer" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="defSim.influence_sim.Axelrod.html" class="btn btn-neutral" title="Axelrod" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

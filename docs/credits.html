@@ -30,8 +30,7 @@
               href="genindex.html"/>
         <link rel="search" title="Search" href="search.html"/>
     <link rel="top" title="defSim alpha documentation" href="index.html"/>
-        <link rel="next" title="Random Selector" href="defSim.focal_agent_sim.RandomSelector.html"/>
-        <link rel="prev" title="CorrelatedContinuousInitializer" href="defSim.agents_init.CorrelatedContinuousInitializer.html"/> 
+        <link rel="prev" title="Tools" href="defSim.tools.html"/> 
 
   
   <script src="_static/js/modernizr.min.js"></script>
@@ -98,10 +97,10 @@
 <li class="toctree-l2"><a class="reference internal" href="defSim.agents_init.html#abstract-base-class-abc">Abstract Base Class (ABC)</a></li>
 </ul>
 </li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Focal agent selection</a><ul>
+<li class="toctree-l1"><a class="reference internal" href="defSim.focal_agent_sim.html">Focal agent selection</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="defSim.focal_agent_sim.RandomSelector.html">Random Selector</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#module-defSim.focal_agent_sim.focal_agent_sim">focal_agent_sim module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#module-defSim.focal_agent_sim.focal_agent_sim">Abstract Base Class (ABC)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="defSim.focal_agent_sim.html#module-defSim.focal_agent_sim.focal_agent_sim">focal_agent_sim module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="defSim.focal_agent_sim.html#module-defSim.focal_agent_sim.focal_agent_sim">Abstract Base Class (ABC)</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="defSim.neighbor_selector_sim.html">Neighbor selector</a><ul>
@@ -140,7 +139,7 @@
 <li class="toctree-l2"><a class="reference internal" href="defSim.tools.html#module-defSim.tools.ClusterExecutionScript">ClusterExecutionScript</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="credits.html">Credits</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Credits</a></li>
 </ul>
 
             
@@ -171,64 +170,18 @@
 </div> --> <!-- turned off on 21/10/2019 -->
            <div itemprop="articleBody">
             
-  <div class="section" id="focal-agent-simulation-component">
-<h1>Focal agent (simulation component)<a class="headerlink" href="#focal-agent-simulation-component" title="Permalink to this headline">¶</a></h1>
-<p>This component is concerned with selecting the focal agent (i.e. the agent who sends their attribute value) at each
-timestep in the simulation run.</p>
-<p>The following methods are available:</p>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="defSim.focal_agent_sim.RandomSelector.html">Random Selector</a></li>
-</ul>
-</div>
-<div class="section" id="module-defSim.focal_agent_sim.focal_agent_sim">
-<span id="focal-agent-sim-module"></span><h2>focal_agent_sim module<a class="headerlink" href="#module-defSim.focal_agent_sim.focal_agent_sim" title="Permalink to this headline">¶</a></h2>
-<dl class="function">
-<dt id="defSim.focal_agent_sim.focal_agent_sim.select_focal_agent">
-<code class="sig-prename descclassname">defSim.focal_agent_sim.focal_agent_sim.</code><code class="sig-name descname">select_focal_agent</code><span class="sig-paren">(</span><em class="sig-param">network: networkx.classes.graph.Graph</em>, <em class="sig-param">realization: str</em>, <em class="sig-param">agents: List[int] = []</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span> &#x2192; int<a class="headerlink" href="#defSim.focal_agent_sim.focal_agent_sim.select_focal_agent" title="Permalink to this definition">¶</a></dt>
-<dd><p>This function works as a factory method for the FocalAgentSelector component.
-It calls the select_agent function of a specific implementation of the FocalAgentSelector and passes to it
-the kwargs dictionary.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>network</strong> – A NetworkX object from which the focal agent will be selected</p></li>
-<li><p><strong>realization</strong> – The specific FocalAgentSelector that shall be used to sample the focal agent. Options are “random”, …</p></li>
-<li><p><strong>agents</strong> – A list of the indices of all agents in the network.</p></li>
-</ul>
-</dd>
-</dl>
-<p>:returns The index of the focal agent in the network.</p>
-</dd></dl>
-
-</div>
+  <div class="section" id="credits">
+<h1>Credits<a class="headerlink" href="#credits" title="Permalink to this headline">¶</a></h1>
+<p>If you use defSim, please use the following citation to refer to the software:</p>
+<blockquote>
+<div><p>Laukemper, A.L., Keijzer, M.A., &amp; Bakker, D.M. (2019). defSim (Version 1) [Computer Software]. Available from <a class="reference external" href="https://github.com/marijnkeijzer/defSim">https://github.com/marijnkeijzer/defSim</a></p>
+</div></blockquote>
 <hr class="docutils" />
-<div class="section" id="module-defSim.focal_agent_sim.focal_agent_sim">
-<span id="abstract-base-class-abc"></span><h2>Abstract Base Class (ABC)<a class="headerlink" href="#module-defSim.focal_agent_sim.focal_agent_sim" title="Permalink to this headline">¶</a></h2>
-<dl class="class">
-<dt id="defSim.focal_agent_sim.focal_agent_sim.FocalAgentSelector">
-<em class="property">class </em><code class="sig-prename descclassname">defSim.focal_agent_sim.focal_agent_sim.</code><code class="sig-name descname">FocalAgentSelector</code><a class="headerlink" href="#defSim.focal_agent_sim.focal_agent_sim.FocalAgentSelector" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">abc.ABC</span></code></p>
-<p>This class is responsible for sampling the focal agent for the influence process.</p>
-<dl class="method">
-<dt id="defSim.focal_agent_sim.focal_agent_sim.FocalAgentSelector.select_agent">
-<em class="property">abstract static </em><code class="sig-name descname">select_agent</code><span class="sig-paren">(</span><em class="sig-param">network: networkx.classes.graph.Graph</em>, <em class="sig-param">agents: List[int] = []</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span> &#x2192; int<a class="headerlink" href="#defSim.focal_agent_sim.focal_agent_sim.FocalAgentSelector.select_agent" title="Permalink to this definition">¶</a></dt>
-<dd><p>This method selects an agent from a network for the influence process.
-Based on the communication regime, the selected agent is either the source or the target of influence.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>network</strong> – A NetworkX object from which the agent shall be selected.</p></li>
-<li><p><strong>agents</strong> – A list of the indices of all agents in the network</p></li>
-</ul>
-</dd>
-</dl>
-<p>:returns The index of the selected agent.</p>
-</dd></dl>
-
-</dd></dl>
-
-</div>
+<p>defSim was created by Anton L. Laukemper, Marijn A. Keijzer, &amp; Dieko M. Bakker.</p>
+<p>We thank Andreas Flache, the ToRealSim project group, and the
+Norms and Networks Cluster at the ICS / Department of Sociology, University of Groningen, The Netherlands.</p>
+<p>We would like to thank the Center for Information Technology of the University of Groningen for their support
+and for providing access to the Peregrine high performance computing cluster.</p>
 </div>
 
 
@@ -238,10 +191,8 @@ Based on the communication regime, the selected agent is either the source or th
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="defSim.focal_agent_sim.RandomSelector.html" class="btn btn-neutral float-right" title="Random Selector" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
       
-      
-        <a href="defSim.agents_init.CorrelatedContinuousInitializer.html" class="btn btn-neutral" title="CorrelatedContinuousInitializer" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="defSim.tools.html" class="btn btn-neutral" title="Tools" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

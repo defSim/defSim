@@ -14,9 +14,8 @@ Initializing the attributes can be done using the following function:
 initialize_attributes
 -------------------------------------------------------
 
-.. automodule:: defSim.agents_init.agents_init.initialize_attributes
-    :undoc-members:
-    :show-inheritance:
+.. automodule:: defSim.agents_init.agents_init
+    :members: initialize_attributes
 
 --------------------------------------------------------
 
@@ -25,17 +24,20 @@ initialize_attributes
 set_categorical_attribute
 -------------------------------------------------------
 
-.. automodule:: defSim.agents_init.agents_init.set_categorical_attribute
+.. automodule:: defSim.agents_init.agents_init
+    :members: set_categorical_attribute
 
 set_continuous_attribute
 -------------------------------------------------------
 
-.. automodule:: defSim.agents_init.agents_init.set_continuous_attribute
+.. automodule:: defSim.agents_init.agents_init
+    :members: set_continuous_attribute
 
 Abstract Base Class (ABC)
 -------------------------------------------------------
 
 The Abstract Base Class of the agent attribute initializer:
 
-.. automodule:: defSim.agents_init.agents_init.AttributesInitializer
+.. automodule:: defSim.agents_init.agents_init
+    :members: AttributesInitializer
     

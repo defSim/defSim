@@ -1,6 +1,14 @@
 Influence (simulation component)
 ======================================
 
+The following methods are available
+
+.. toctree::
+   Bounded Confidence <defSim.influence_sim.BoundedConfidence>
+   Persuasion <defSim.influence_sim.Persuasion>
+   Similarity Adoption <defSim.influence_sim.Axelrod>
+   Weighted Linear Influence <defSim.influence_sim.WeightedLinear>
+
 influence_sim module
 -------------------------------------------------------
 
@@ -9,40 +17,9 @@ influence_sim module
     :undoc-members:
     :show-inheritance:
 
-Axelrod
----------------------------------------------
-
-.. automodule:: defSim.influence_sim.Axelrod
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
-BoundedConfidence
 -------------------------------------------------------
 
-.. automodule:: defSim.influence_sim.BoundedConfidence
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
-Persuasion
--------------------------------------------------------
-
-.. automodule:: defSim.influence_sim.Persuasion
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
-WeightedLinear
--------------------------------------------------------
-
-.. automodule:: defSim.influence_sim.WeightedLinear
-    :members:
-    :undoc-members:
-    :show-inheritance:
-    
-    
-ABC
+Abstract Base Class (ABC)
 -------------------------------------------------------
 
 .. automodule:: defSim.influence_sim.influence_sim
