@@ -88,12 +88,13 @@
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="defSim.agents_init.html">Agent features</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="defSim.agents_init.html#module-defSim.agents_init.agents_init">initialize_attributes</a></li>
-<li class="toctree-l2"><a class="reference internal" href="defSim.agents_init.html#module-defSim.agents_init.RandomCategoricalInitializer">RandomCategoricalInitializer</a></li>
-<li class="toctree-l2"><a class="reference internal" href="defSim.agents_init.html#module-defSim.agents_init.RandomContinuousInitializer">RandomContinuousInitializer</a></li>
-<li class="toctree-l2"><a class="reference internal" href="defSim.agents_init.html#module-defSim.agents_init.agents_init">set_categorical_attribute</a></li>
-<li class="toctree-l2"><a class="reference internal" href="defSim.agents_init.html#module-defSim.agents_init.agents_init">set_continuous_attribute</a></li>
-<li class="toctree-l2"><a class="reference internal" href="defSim.agents_init.html#abc">ABC</a></li>
+<li class="toctree-l2"><a class="reference internal" href="defSim.agents_init.RandomCategoricalInitializer.html">Random Categorical Initializer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="defSim.agents_init.RandomContinuousInitializer.html">Random Continuous Initializer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="defSim.agents_init.CorrelatedContinuousInitializer.html">Correlated Continuous Initializer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="defSim.agents_init.html#module-defSim.agents_init.agents_init.initialize_attributes">initialize_attributes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="defSim.agents_init.html#module-defSim.agents_init.agents_init.set_categorical_attribute">set_categorical_attribute</a></li>
+<li class="toctree-l2"><a class="reference internal" href="defSim.agents_init.html#module-defSim.agents_init.agents_init.set_continuous_attribute">set_continuous_attribute</a></li>
+<li class="toctree-l2"><a class="reference internal" href="defSim.agents_init.html#abstract-base-class-abc">Abstract Base Class (ABC)</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="defSim.focal_agent_sim.html">Focal agent selection</a><ul>
@@ -218,9 +219,9 @@
 <h2 id="A">A</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="defSim.tools.html#defSim.tools.OutputMeasures.AttributeReporter">AttributeReporter (class in defSim.tools.OutputMeasures)</a>
+      <li><a href="defSim.agents_init.CorrelatedContinuousInitializer.html#defSim.agents_init.CorrelatedContinuousInitializer.apply_neighbor_similarity_beta_weights">apply_neighbor_similarity_beta_weights() (in module defSim.agents_init.CorrelatedContinuousInitializer)</a>
 </li>
-      <li><a href="defSim.agents_init.html#defSim.agents_init.agents_init.AttributesInitializer">AttributesInitializer (class in defSim.agents_init.agents_init)</a>
+      <li><a href="defSim.tools.html#defSim.tools.OutputMeasures.AttributeReporter">AttributeReporter (class in defSim.tools.OutputMeasures)</a>
 </li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
@@ -244,29 +245,35 @@
 <h2 id="C">C</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="defSim.dissimilarity_component.html#defSim.dissimilarity_component.dissimilarity_calculator.DissimilarityCalculator.calculate_dissimilarity">calculate_dissimilarity() (defSim.dissimilarity_component.dissimilarity_calculator.DissimilarityCalculator static method)</a>
+      <li><a href="defSim.dissimilarity_component.html#defSim.dissimilarity_component.dissimilarity_calculator.DissimilarityCalculator.calculate_dissimilarity">calculate_dissimilarity() (defSim.dissimilarity_component.dissimilarity_calculator.DissimilarityCalculator method)</a>
 
       <ul>
-        <li><a href="defSim.dissimilarity_component.html#defSim.dissimilarity_component.EuclideanDistance.EuclideanDistance.calculate_dissimilarity">(defSim.dissimilarity_component.EuclideanDistance.EuclideanDistance static method)</a>
+        <li><a href="defSim.dissimilarity_component.html#defSim.dissimilarity_component.EuclideanDistance.EuclideanDistance.calculate_dissimilarity">(defSim.dissimilarity_component.EuclideanDistance.EuclideanDistance method)</a>
 </li>
-        <li><a href="defSim.dissimilarity_component.html#defSim.dissimilarity_component.HammingDistance.HammingDistance.calculate_dissimilarity">(defSim.dissimilarity_component.HammingDistance.HammingDistance static method)</a>
+        <li><a href="defSim.dissimilarity_component.html#defSim.dissimilarity_component.HammingDistance.HammingDistance.calculate_dissimilarity">(defSim.dissimilarity_component.HammingDistance.HammingDistance method)</a>
 </li>
       </ul></li>
-      <li><a href="defSim.dissimilarity_component.html#defSim.dissimilarity_component.dissimilarity_calculator.DissimilarityCalculator.calculate_dissimilarity_networkwide">calculate_dissimilarity_networkwide() (defSim.dissimilarity_component.dissimilarity_calculator.DissimilarityCalculator static method)</a>
+      <li><a href="defSim.dissimilarity_component.html#defSim.dissimilarity_component.dissimilarity_calculator.DissimilarityCalculator.calculate_dissimilarity_networkwide">calculate_dissimilarity_networkwide() (defSim.dissimilarity_component.dissimilarity_calculator.DissimilarityCalculator method)</a>
 
       <ul>
-        <li><a href="defSim.dissimilarity_component.html#defSim.dissimilarity_component.EuclideanDistance.EuclideanDistance.calculate_dissimilarity_networkwide">(defSim.dissimilarity_component.EuclideanDistance.EuclideanDistance static method)</a>
+        <li><a href="defSim.dissimilarity_component.html#defSim.dissimilarity_component.EuclideanDistance.EuclideanDistance.calculate_dissimilarity_networkwide">(defSim.dissimilarity_component.EuclideanDistance.EuclideanDistance method)</a>
 </li>
-        <li><a href="defSim.dissimilarity_component.html#defSim.dissimilarity_component.HammingDistance.HammingDistance.calculate_dissimilarity_networkwide">(defSim.dissimilarity_component.HammingDistance.HammingDistance static method)</a>
+        <li><a href="defSim.dissimilarity_component.html#defSim.dissimilarity_component.HammingDistance.HammingDistance.calculate_dissimilarity_networkwide">(defSim.dissimilarity_component.HammingDistance.HammingDistance method)</a>
 </li>
       </ul></li>
+      <li><a href="defSim.agents_init.CorrelatedContinuousInitializer.html#defSim.agents_init.CorrelatedContinuousInitializer.SimilarityPostprocessor.check_convergence">check_convergence() (defSim.agents_init.CorrelatedContinuousInitializer.SimilarityPostprocessor method)</a>
+</li>
       <li><a href="defSim.tools.html#defSim.tools.NetworkDistanceUpdater.check_dissimilarity">check_dissimilarity() (in module defSim.tools.NetworkDistanceUpdater)</a>
 </li>
       <li><a href="defSim.tools.html#defSim.tools.OutputMeasures.ClusterFinder">ClusterFinder (class in defSim.tools.OutputMeasures)</a>
 </li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="defSim.agents_init.CorrelatedContinuousInitializer.html#defSim.agents_init.CorrelatedContinuousInitializer.CorrelatedContinuousInitializer">CorrelatedContinuousInitializer (class in defSim.agents_init.CorrelatedContinuousInitializer)</a>
+</li>
       <li><a href="defSim.tools.html#defSim.tools.ClusterExecutionScript.parallelSimulation.create_and_run_simulation">create_and_run_simulation() (defSim.tools.ClusterExecutionScript.parallelSimulation method)</a>
+</li>
+      <li><a href="defSim.agents_init.CorrelatedContinuousInitializer.html#defSim.agents_init.CorrelatedContinuousInitializer.SimilarityPostprocessor.create_dissimilarity_data">create_dissimilarity_data() (defSim.agents_init.CorrelatedContinuousInitializer.SimilarityPostprocessor method)</a>
 </li>
       <li><a href="defSim.tools.html#defSim.tools.CreateOutputTable.OutputTableCreator.create_output">create_output() (defSim.tools.CreateOutputTable.OutputTableCreator static method)</a>
 
@@ -292,13 +299,21 @@
 <h2 id="D">D</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="defSim.agents_init.html#defSim.agents_init.RandomContinuousInitializer.RandomContinuousInitializer.default_feature_bounds">default_feature_bounds (defSim.agents_init.RandomContinuousInitializer.RandomContinuousInitializer attribute)</a>
+      <li><a href="defSim.agents_init.RandomContinuousInitializer.html#defSim.agents_init.RandomContinuousInitializer.RandomContinuousInitializer.default_feature_bounds">default_feature_bounds (defSim.agents_init.RandomContinuousInitializer.RandomContinuousInitializer attribute)</a>
 </li>
-      <li><a href="defSim.agents_init.html#module-defSim.agents_init.agents_init">defSim.agents_init.agents_init (module)</a>, <a href="defSim.agents_init.html#module-defSim.agents_init.agents_init">[1]</a>, <a href="defSim.agents_init.html#module-defSim.agents_init.agents_init">[2]</a>, <a href="defSim.agents_init.html#module-defSim.agents_init.agents_init">[3]</a>
+      <li><a href="defSim.agents_init.html#module-defSim.agents_init.agents_init.AttributesInitializer">defSim.agents_init.agents_init.AttributesInitializer (module)</a>
 </li>
-      <li><a href="defSim.agents_init.html#module-defSim.agents_init.RandomCategoricalInitializer">defSim.agents_init.RandomCategoricalInitializer (module)</a>
+      <li><a href="defSim.agents_init.html#module-defSim.agents_init.agents_init.initialize_attributes">defSim.agents_init.agents_init.initialize_attributes (module)</a>
 </li>
-      <li><a href="defSim.agents_init.html#module-defSim.agents_init.RandomContinuousInitializer">defSim.agents_init.RandomContinuousInitializer (module)</a>
+      <li><a href="defSim.agents_init.html#module-defSim.agents_init.agents_init.set_categorical_attribute">defSim.agents_init.agents_init.set_categorical_attribute (module)</a>
+</li>
+      <li><a href="defSim.agents_init.html#module-defSim.agents_init.agents_init.set_continuous_attribute">defSim.agents_init.agents_init.set_continuous_attribute (module)</a>
+</li>
+      <li><a href="defSim.agents_init.CorrelatedContinuousInitializer.html#module-defSim.agents_init.CorrelatedContinuousInitializer">defSim.agents_init.CorrelatedContinuousInitializer (module)</a>
+</li>
+      <li><a href="defSim.agents_init.RandomCategoricalInitializer.html#module-defSim.agents_init.RandomCategoricalInitializer">defSim.agents_init.RandomCategoricalInitializer (module)</a>
+</li>
+      <li><a href="defSim.agents_init.RandomContinuousInitializer.html#module-defSim.agents_init.RandomContinuousInitializer">defSim.agents_init.RandomContinuousInitializer (module)</a>
 </li>
       <li><a href="defSim.dissimilarity_component.html#module-defSim.dissimilarity_component.dissimilarity_calculator">defSim.dissimilarity_component.dissimilarity_calculator (module)</a>, <a href="defSim.dissimilarity_component.html#module-defSim.dissimilarity_component.dissimilarity_calculator">[1]</a>
 </li>
@@ -316,10 +331,10 @@
 </li>
       <li><a href="defSim.influence_sim.html#module-defSim.influence_sim.BoundedConfidence">defSim.influence_sim.BoundedConfidence (module)</a>
 </li>
-      <li><a href="defSim.influence_sim.html#module-defSim.influence_sim.influence_sim">defSim.influence_sim.influence_sim (module)</a>, <a href="defSim.influence_sim.html#module-defSim.influence_sim.influence_sim">[1]</a>
-</li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="defSim.influence_sim.html#module-defSim.influence_sim.influence_sim">defSim.influence_sim.influence_sim (module)</a>, <a href="defSim.influence_sim.html#module-defSim.influence_sim.influence_sim">[1]</a>
+</li>
       <li><a href="defSim.influence_sim.html#module-defSim.influence_sim.Persuasion">defSim.influence_sim.Persuasion (module)</a>
 </li>
       <li><a href="defSim.influence_sim.html#module-defSim.influence_sim.WeightedLinear">defSim.influence_sim.WeightedLinear (module)</a>
@@ -345,6 +360,8 @@
       <li><a href="defSim.tools.html#module-defSim.tools.NetworkDistanceUpdater">defSim.tools.NetworkDistanceUpdater (module)</a>
 </li>
       <li><a href="defSim.tools.html#module-defSim.tools.OutputMeasures">defSim.tools.OutputMeasures (module)</a>
+</li>
+      <li><a href="defSim.agents_init.CorrelatedContinuousInitializer.html#defSim.agents_init.CorrelatedContinuousInitializer.SimilarityPostprocessor.dissimilarity_data_for_node">dissimilarity_data_for_node() (defSim.agents_init.CorrelatedContinuousInitializer.SimilarityPostprocessor method)</a>
 </li>
       <li><a href="defSim.dissimilarity_component.html#defSim.dissimilarity_component.dissimilarity_calculator.DissimilarityCalculator">DissimilarityCalculator (class in defSim.dissimilarity_component.dissimilarity_calculator)</a>
 </li>
@@ -394,16 +411,16 @@
 <h2 id="I">I</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="defSim.agents_init.CorrelatedContinuousInitializer.html#defSim.agents_init.CorrelatedContinuousInitializer.SimilarityPostprocessor.improvement_if_swapped">improvement_if_swapped() (defSim.agents_init.CorrelatedContinuousInitializer.SimilarityPostprocessor method)</a>
+</li>
       <li><a href="defSim.influence_sim.html#defSim.influence_sim.influence_sim.InfluenceOperator">InfluenceOperator (class in defSim.influence_sim.influence_sim)</a>
 </li>
-      <li><a href="defSim.agents_init.html#defSim.agents_init.agents_init.AttributesInitializer.initialize_attributes">initialize_attributes() (defSim.agents_init.agents_init.AttributesInitializer static method)</a>
+      <li><a href="defSim.agents_init.CorrelatedContinuousInitializer.html#defSim.agents_init.CorrelatedContinuousInitializer.CorrelatedContinuousInitializer.initialize_attributes">initialize_attributes() (defSim.agents_init.CorrelatedContinuousInitializer.CorrelatedContinuousInitializer static method)</a>
 
       <ul>
-        <li><a href="defSim.agents_init.html#defSim.agents_init.RandomCategoricalInitializer.RandomCategoricalInitializer.initialize_attributes">(defSim.agents_init.RandomCategoricalInitializer.RandomCategoricalInitializer static method)</a>
+        <li><a href="defSim.agents_init.RandomCategoricalInitializer.html#defSim.agents_init.RandomCategoricalInitializer.RandomCategoricalInitializer.initialize_attributes">(defSim.agents_init.RandomCategoricalInitializer.RandomCategoricalInitializer static method)</a>
 </li>
-        <li><a href="defSim.agents_init.html#defSim.agents_init.RandomContinuousInitializer.RandomContinuousInitializer.initialize_attributes">(defSim.agents_init.RandomContinuousInitializer.RandomContinuousInitializer static method)</a>
-</li>
-        <li><a href="defSim.agents_init.html#defSim.agents_init.agents_init.initialize_attributes">(in module defSim.agents_init.agents_init)</a>
+        <li><a href="defSim.agents_init.RandomContinuousInitializer.html#defSim.agents_init.RandomContinuousInitializer.RandomContinuousInitializer.initialize_attributes">(defSim.agents_init.RandomContinuousInitializer.RandomContinuousInitializer static method)</a>
 </li>
       </ul></li>
   </ul></td>
@@ -462,15 +479,17 @@
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="defSim.influence_sim.html#defSim.influence_sim.Persuasion.Persuasion">Persuasion (class in defSim.influence_sim.Persuasion)</a>
 </li>
+      <li><a href="defSim.agents_init.CorrelatedContinuousInitializer.html#defSim.agents_init.CorrelatedContinuousInitializer.SimilarityPostprocessor.process">process() (defSim.agents_init.CorrelatedContinuousInitializer.SimilarityPostprocessor method)</a>
+</li>
   </ul></td>
 </tr></table>
 
 <h2 id="R">R</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="defSim.agents_init.html#defSim.agents_init.RandomCategoricalInitializer.RandomCategoricalInitializer">RandomCategoricalInitializer (class in defSim.agents_init.RandomCategoricalInitializer)</a>
+      <li><a href="defSim.agents_init.RandomCategoricalInitializer.html#defSim.agents_init.RandomCategoricalInitializer.RandomCategoricalInitializer">RandomCategoricalInitializer (class in defSim.agents_init.RandomCategoricalInitializer)</a>
 </li>
-      <li><a href="defSim.agents_init.html#defSim.agents_init.RandomContinuousInitializer.RandomContinuousInitializer">RandomContinuousInitializer (class in defSim.agents_init.RandomContinuousInitializer)</a>
+      <li><a href="defSim.agents_init.RandomContinuousInitializer.html#defSim.agents_init.RandomContinuousInitializer.RandomContinuousInitializer">RandomContinuousInitializer (class in defSim.agents_init.RandomContinuousInitializer)</a>
 </li>
       <li><a href="defSim.neighbor_selector_sim.html#defSim.neighbor_selector_sim.RandomNeighborSelector.RandomNeighborSelector">RandomNeighborSelector (class in defSim.neighbor_selector_sim.RandomNeighborSelector)</a>
 </li>
@@ -528,12 +547,10 @@
         <li><a href="defSim.neighbor_selector_sim.html#defSim.neighbor_selector_sim.neighbor_selector_sim.select_neighbors">(in module defSim.neighbor_selector_sim.neighbor_selector_sim)</a>
 </li>
       </ul></li>
-      <li><a href="defSim.agents_init.html#defSim.agents_init.agents_init.set_categorical_attribute">set_categorical_attribute() (in module defSim.agents_init.agents_init)</a>
+      <li><a href="defSim.agents_init.CorrelatedContinuousInitializer.html#defSim.agents_init.CorrelatedContinuousInitializer.SimilarityPostprocessor">SimilarityPostprocessor (class in defSim.agents_init.CorrelatedContinuousInitializer)</a>
 </li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="defSim.agents_init.html#defSim.agents_init.agents_init.set_continuous_attribute">set_continuous_attribute() (in module defSim.agents_init.agents_init)</a>
-</li>
       <li><a href="defSim.neighbor_selector_sim.html#defSim.neighbor_selector_sim.SimilarNeighborSelector.SimilarNeighborSelector">SimilarNeighborSelector (class in defSim.neighbor_selector_sim.SimilarNeighborSelector)</a>
 </li>
       <li><a href="simulation.class.html#defSim.Simulation.Simulation">Simulation (class in defSim.Simulation)</a>
@@ -552,14 +569,22 @@
         <li><a href="defSim.influence_sim.html#defSim.influence_sim.influence_sim.spread_influence">(in module defSim.influence_sim.influence_sim)</a>
 </li>
       </ul></li>
+      <li><a href="defSim.agents_init.CorrelatedContinuousInitializer.html#defSim.agents_init.CorrelatedContinuousInitializer.SimilarityPostprocessor.swap_dissimilar_nodes">swap_dissimilar_nodes() (defSim.agents_init.CorrelatedContinuousInitializer.SimilarityPostprocessor method)</a>
+</li>
+      <li><a href="defSim.agents_init.CorrelatedContinuousInitializer.html#defSim.agents_init.CorrelatedContinuousInitializer.SimilarityPostprocessor.swap_nodes">swap_nodes() (defSim.agents_init.CorrelatedContinuousInitializer.SimilarityPostprocessor method)</a>
+</li>
   </ul></td>
 </tr></table>
 
 <h2 id="U">U</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="defSim.tools.html#defSim.tools.NetworkDistanceUpdater.update_dissimilarity">update_dissimilarity() (in module defSim.tools.NetworkDistanceUpdater)</a>
+      <li><a href="defSim.agents_init.CorrelatedContinuousInitializer.html#defSim.agents_init.CorrelatedContinuousInitializer.SimilarityPostprocessor.update_dissimilarity">update_dissimilarity() (defSim.agents_init.CorrelatedContinuousInitializer.SimilarityPostprocessor method)</a>
+
+      <ul>
+        <li><a href="defSim.tools.html#defSim.tools.NetworkDistanceUpdater.update_dissimilarity">(in module defSim.tools.NetworkDistanceUpdater)</a>
 </li>
+      </ul></li>
   </ul></td>
 </tr></table>
 

@@ -78,11 +78,9 @@
 </ul>
 </li>
 </ul>
-<ul>
+<ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="experiment.class.html">Experiment class</a></li>
 <li class="toctree-l1"><a class="reference internal" href="simulation.class.html">Simulation class</a></li>
-</ul>
-<ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="defSim.network_init.html">Networks</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="defSim.network_init.html#module-defSim.network_init.network_init">generate_network</a></li>
 <li class="toctree-l2"><a class="reference internal" href="defSim.network_init.html#module-defSim.network_init.network_init">read_network</a></li>
@@ -102,12 +100,14 @@
 <li class="toctree-l1"><a class="reference internal" href="defSim.focal_agent_sim.html">Focal agent selection</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="defSim.focal_agent_sim.html#module-defSim.focal_agent_sim.focal_agent_sim">focal_agent_sim module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="defSim.focal_agent_sim.html#module-defSim.focal_agent_sim.RandomSelector">RandomSelector</a></li>
+<li class="toctree-l2"><a class="reference internal" href="defSim.focal_agent_sim.html#module-defSim.focal_agent_sim.focal_agent_sim">ABC</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="defSim.neighbor_selector_sim.html">Neighbor selector</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="defSim.neighbor_selector_sim.html#module-defSim.neighbor_selector_sim.neighbor_selector_sim">neighbor_selector_sim module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="defSim.neighbor_selector_sim.html#module-defSim.neighbor_selector_sim.RandomNeighborSelector">RandomNeighborSelector</a></li>
 <li class="toctree-l2"><a class="reference internal" href="defSim.neighbor_selector_sim.html#module-defSim.neighbor_selector_sim.SimilarNeighborSelector">SimilarNeighborSelector</a></li>
+<li class="toctree-l2"><a class="reference internal" href="defSim.neighbor_selector_sim.html#module-defSim.neighbor_selector_sim.neighbor_selector_sim">ABC</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="defSim.influence_sim.html">Influence</a><ul>
@@ -116,6 +116,7 @@
 <li class="toctree-l2"><a class="reference internal" href="defSim.influence_sim.html#module-defSim.influence_sim.BoundedConfidence">BoundedConfidence</a></li>
 <li class="toctree-l2"><a class="reference internal" href="defSim.influence_sim.html#module-defSim.influence_sim.Persuasion">Persuasion</a></li>
 <li class="toctree-l2"><a class="reference internal" href="defSim.influence_sim.html#module-defSim.influence_sim.WeightedLinear">WeightedLinear</a></li>
+<li class="toctree-l2"><a class="reference internal" href="defSim.influence_sim.html#module-defSim.influence_sim.influence_sim">ABC</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="defSim.network_evolution_sim.html">Network evolution</a><ul>
@@ -132,6 +133,7 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="defSim.tools.html">Tools</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="defSim.tools.html#module-defSim.tools.CreateOutputTable">CreateOutputTable</a></li>
+<li class="toctree-l2"><a class="reference internal" href="defSim.tools.html#abc-of-createoutputtable">ABC of CreateOutputTable</a></li>
 <li class="toctree-l2"><a class="reference internal" href="defSim.tools.html#module-defSim.tools.OutputMeasures">OutputMeasures</a></li>
 <li class="toctree-l2"><a class="reference internal" href="defSim.tools.html#module-defSim.tools.NetworkDistanceUpdater">NetworkDistanceUpdater</a></li>
 <li class="toctree-l2"><a class="reference internal" href="defSim.tools.html#module-defSim.tools.ClusterExecutionScript">ClusterExecutionScript</a></li>
@@ -191,12 +193,12 @@ It returns an instance of the Calculator that is asked for.</p>
 <span id="euclideandistance"></span><h2>EuclideanDistance<a class="headerlink" href="#module-defSim.dissimilarity_component.EuclideanDistance" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
 <dt id="defSim.dissimilarity_component.EuclideanDistance.EuclideanDistance">
-<em class="property">class </em><code class="sig-prename descclassname">defSim.dissimilarity_component.EuclideanDistance.</code><code class="sig-name descname">EuclideanDistance</code><a class="headerlink" href="#defSim.dissimilarity_component.EuclideanDistance.EuclideanDistance" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">defSim.dissimilarity_component.EuclideanDistance.</code><code class="sig-name descname">EuclideanDistance</code><span class="sig-paren">(</span><em class="sig-param">exclude=[]</em><span class="sig-paren">)</span><a class="headerlink" href="#defSim.dissimilarity_component.EuclideanDistance.EuclideanDistance" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#defSim.dissimilarity_component.dissimilarity_calculator.DissimilarityCalculator" title="defSim.dissimilarity_component.dissimilarity_calculator.DissimilarityCalculator"><code class="xref py py-class docutils literal notranslate"><span class="pre">defSim.dissimilarity_component.dissimilarity_calculator.DissimilarityCalculator</span></code></a></p>
 <p>Implements the DissimilarityCalculator as a calculator of the euclidean distance</p>
 <dl class="method">
 <dt id="defSim.dissimilarity_component.EuclideanDistance.EuclideanDistance.calculate_dissimilarity">
-<em class="property">static </em><code class="sig-name descname">calculate_dissimilarity</code><span class="sig-paren">(</span><em class="sig-param">network: networkx.classes.graph.Graph</em>, <em class="sig-param">agent1_id: int</em>, <em class="sig-param">agent2_id: int</em><span class="sig-paren">)</span> &#x2192; float<a class="headerlink" href="#defSim.dissimilarity_component.EuclideanDistance.EuclideanDistance.calculate_dissimilarity" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">calculate_dissimilarity</code><span class="sig-paren">(</span><em class="sig-param">network: networkx.classes.graph.Graph</em>, <em class="sig-param">agent1_id: int</em>, <em class="sig-param">agent2_id: int</em><span class="sig-paren">)</span> &#x2192; float<a class="headerlink" href="#defSim.dissimilarity_component.EuclideanDistance.EuclideanDistance.calculate_dissimilarity" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculates normalized euclidean distance of the agents’ feature vectors where feature values do not exceed the
 [0,1] bounds.</p>
 <dl class="field-list simple">
@@ -215,7 +217,7 @@ It returns an instance of the Calculator that is asked for.</p>
 
 <dl class="method">
 <dt id="defSim.dissimilarity_component.EuclideanDistance.EuclideanDistance.calculate_dissimilarity_networkwide">
-<em class="property">static </em><code class="sig-name descname">calculate_dissimilarity_networkwide</code><span class="sig-paren">(</span><em class="sig-param">network: networkx.classes.graph.Graph</em><span class="sig-paren">)</span><a class="headerlink" href="#defSim.dissimilarity_component.EuclideanDistance.EuclideanDistance.calculate_dissimilarity_networkwide" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">calculate_dissimilarity_networkwide</code><span class="sig-paren">(</span><em class="sig-param">network: networkx.classes.graph.Graph</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#defSim.dissimilarity_component.EuclideanDistance.EuclideanDistance.calculate_dissimilarity_networkwide" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculates the distance from each agent to each other and sets that distance as an attribute on the edge
 between them.</p>
 <dl class="field-list simple">
@@ -232,12 +234,12 @@ between them.</p>
 <span id="hammingdistance"></span><h2>HammingDistance<a class="headerlink" href="#module-defSim.dissimilarity_component.HammingDistance" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
 <dt id="defSim.dissimilarity_component.HammingDistance.HammingDistance">
-<em class="property">class </em><code class="sig-prename descclassname">defSim.dissimilarity_component.HammingDistance.</code><code class="sig-name descname">HammingDistance</code><a class="headerlink" href="#defSim.dissimilarity_component.HammingDistance.HammingDistance" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">defSim.dissimilarity_component.HammingDistance.</code><code class="sig-name descname">HammingDistance</code><span class="sig-paren">(</span><em class="sig-param">exclude=[]</em><span class="sig-paren">)</span><a class="headerlink" href="#defSim.dissimilarity_component.HammingDistance.HammingDistance" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#defSim.dissimilarity_component.dissimilarity_calculator.DissimilarityCalculator" title="defSim.dissimilarity_component.dissimilarity_calculator.DissimilarityCalculator"><code class="xref py py-class docutils literal notranslate"><span class="pre">defSim.dissimilarity_component.dissimilarity_calculator.DissimilarityCalculator</span></code></a></p>
 <p>Implements the DissimilarityCalculator as a calculator of the Hamming distance</p>
 <dl class="method">
 <dt id="defSim.dissimilarity_component.HammingDistance.HammingDistance.calculate_dissimilarity">
-<em class="property">static </em><code class="sig-name descname">calculate_dissimilarity</code><span class="sig-paren">(</span><em class="sig-param">network: networkx.classes.graph.Graph</em>, <em class="sig-param">agent1_id: int</em>, <em class="sig-param">agent2_id: int</em><span class="sig-paren">)</span> &#x2192; float<a class="headerlink" href="#defSim.dissimilarity_component.HammingDistance.HammingDistance.calculate_dissimilarity" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">calculate_dissimilarity</code><span class="sig-paren">(</span><em class="sig-param">network: networkx.classes.graph.Graph</em>, <em class="sig-param">agent1_id: int</em>, <em class="sig-param">agent2_id: int</em><span class="sig-paren">)</span> &#x2192; float<a class="headerlink" href="#defSim.dissimilarity_component.HammingDistance.HammingDistance.calculate_dissimilarity" title="Permalink to this definition">¶</a></dt>
 <dd><p>Computes the Hamming Distance between two Agents, i.e. returns the proportion of features that
 the two agents have not in common. 1 means therefore total dissimilarity, and 0 is total overlap.
 Only works with categorical attributes.</p>
@@ -255,7 +257,7 @@ Only works with categorical attributes.</p>
 
 <dl class="method">
 <dt id="defSim.dissimilarity_component.HammingDistance.HammingDistance.calculate_dissimilarity_networkwide">
-<em class="property">static </em><code class="sig-name descname">calculate_dissimilarity_networkwide</code><span class="sig-paren">(</span><em class="sig-param">network: networkx.classes.graph.Graph</em><span class="sig-paren">)</span><a class="headerlink" href="#defSim.dissimilarity_component.HammingDistance.HammingDistance.calculate_dissimilarity_networkwide" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">calculate_dissimilarity_networkwide</code><span class="sig-paren">(</span><em class="sig-param">network: networkx.classes.graph.Graph</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#defSim.dissimilarity_component.HammingDistance.HammingDistance.calculate_dissimilarity_networkwide" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculates the distance from each agent to each other and sets that distance as an attribute on the edge
 between them.</p>
 <dl class="field-list simple">
@@ -273,13 +275,13 @@ between them.</p>
 <p>The Abstract Base Class of the dissimilarity component:</p>
 <span class="target" id="module-defSim.dissimilarity_component.dissimilarity_calculator"></span><dl class="class">
 <dt id="defSim.dissimilarity_component.dissimilarity_calculator.DissimilarityCalculator">
-<em class="property">class </em><code class="sig-prename descclassname">defSim.dissimilarity_component.dissimilarity_calculator.</code><code class="sig-name descname">DissimilarityCalculator</code><a class="headerlink" href="#defSim.dissimilarity_component.dissimilarity_calculator.DissimilarityCalculator" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">defSim.dissimilarity_component.dissimilarity_calculator.</code><code class="sig-name descname">DissimilarityCalculator</code><span class="sig-paren">(</span><em class="sig-param">exclude=None</em><span class="sig-paren">)</span><a class="headerlink" href="#defSim.dissimilarity_component.dissimilarity_calculator.DissimilarityCalculator" title="Permalink to this definition">¶</a></dt>
 <dd><p>This class is responsible for determining the distance between nodes, either from one node to another,
 or for every agent in the network to another. The distance could be based on their attributes or actual geodesic
 distance.</p>
 <dl class="method">
 <dt id="defSim.dissimilarity_component.dissimilarity_calculator.DissimilarityCalculator.calculate_dissimilarity">
-<em class="property">abstract static </em><code class="sig-name descname">calculate_dissimilarity</code><span class="sig-paren">(</span><em class="sig-param">network: networkx.classes.graph.Graph</em>, <em class="sig-param">agent1_id: int</em>, <em class="sig-param">agent2_id: int</em><span class="sig-paren">)</span> &#x2192; float<a class="headerlink" href="#defSim.dissimilarity_component.dissimilarity_calculator.DissimilarityCalculator.calculate_dissimilarity" title="Permalink to this definition">¶</a></dt>
+<em class="property">abstract </em><code class="sig-name descname">calculate_dissimilarity</code><span class="sig-paren">(</span><em class="sig-param">network: networkx.classes.graph.Graph</em>, <em class="sig-param">agent1_id: int</em>, <em class="sig-param">agent2_id: int</em><span class="sig-paren">)</span> &#x2192; float<a class="headerlink" href="#defSim.dissimilarity_component.dissimilarity_calculator.DissimilarityCalculator.calculate_dissimilarity" title="Permalink to this definition">¶</a></dt>
 <dd><p>This function calculates how dissimilar two agents are based on their attributes and/or their distance in
 the network.
 Can for example be used to determine whether a neighbor is selected for the influence process.</p>
@@ -297,7 +299,7 @@ Can for example be used to determine whether a neighbor is selected for the infl
 
 <dl class="method">
 <dt id="defSim.dissimilarity_component.dissimilarity_calculator.DissimilarityCalculator.calculate_dissimilarity_networkwide">
-<em class="property">abstract static </em><code class="sig-name descname">calculate_dissimilarity_networkwide</code><span class="sig-paren">(</span><em class="sig-param">network: networkx.classes.graph.Graph</em><span class="sig-paren">)</span><a class="headerlink" href="#defSim.dissimilarity_component.dissimilarity_calculator.DissimilarityCalculator.calculate_dissimilarity_networkwide" title="Permalink to this definition">¶</a></dt>
+<em class="property">abstract </em><code class="sig-name descname">calculate_dissimilarity_networkwide</code><span class="sig-paren">(</span><em class="sig-param">network: networkx.classes.graph.Graph</em><span class="sig-paren">)</span><a class="headerlink" href="#defSim.dissimilarity_component.dissimilarity_calculator.DissimilarityCalculator.calculate_dissimilarity_networkwide" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculates the distance from each agent to each other and sets that distance as an attribute on the edge
 between them.</p>
 <dl class="field-list simple">

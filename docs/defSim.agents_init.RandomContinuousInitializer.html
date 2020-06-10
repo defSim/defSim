@@ -30,8 +30,9 @@
               href="genindex.html"/>
         <link rel="search" title="Search" href="search.html"/>
     <link rel="top" title="defSim alpha documentation" href="index.html"/>
-        <link rel="next" title="RandomCategoricalInitializer" href="defSim.agents_init.RandomCategoricalInitializer.html"/>
-        <link rel="prev" title="Network (network_init)" href="defSim.network_init.html"/> 
+        <link rel="up" title="Agent attributes (initialization component)" href="defSim.agents_init.html"/>
+        <link rel="next" title="CorrelatedContinuousInitializer" href="defSim.agents_init.CorrelatedContinuousInitializer.html"/>
+        <link rel="prev" title="RandomCategoricalInitializer" href="defSim.agents_init.RandomCategoricalInitializer.html"/> 
 
   
   <script src="_static/js/modernizr.min.js"></script>
@@ -88,14 +89,14 @@
 <li class="toctree-l2"><a class="reference internal" href="defSim.network_init.html#module-defSim.network_init.network_init">execute_ms_rewiring</a></li>
 </ul>
 </li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Agent features</a><ul>
+<li class="toctree-l1 current"><a class="reference internal" href="defSim.agents_init.html">Agent features</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="defSim.agents_init.RandomCategoricalInitializer.html">Random Categorical Initializer</a></li>
-<li class="toctree-l2"><a class="reference internal" href="defSim.agents_init.RandomContinuousInitializer.html">Random Continuous Initializer</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Random Continuous Initializer</a></li>
 <li class="toctree-l2"><a class="reference internal" href="defSim.agents_init.CorrelatedContinuousInitializer.html">Correlated Continuous Initializer</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#module-defSim.agents_init.agents_init.initialize_attributes">initialize_attributes</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#module-defSim.agents_init.agents_init.set_categorical_attribute">set_categorical_attribute</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#module-defSim.agents_init.agents_init.set_continuous_attribute">set_continuous_attribute</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#abstract-base-class-abc">Abstract Base Class (ABC)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="defSim.agents_init.html#module-defSim.agents_init.agents_init">initialize_attributes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="defSim.agents_init.html#module-defSim.agents_init.agents_init">set_categorical_attribute</a></li>
+<li class="toctree-l2"><a class="reference internal" href="defSim.agents_init.html#module-defSim.agents_init.agents_init">set_continuous_attribute</a></li>
+<li class="toctree-l2"><a class="reference internal" href="defSim.agents_init.html#abstract-base-class-abc">Abstract Base Class (ABC)</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="defSim.focal_agent_sim.html">Focal agent selection</a><ul>
@@ -170,91 +171,37 @@
 </div> --> <!-- turned off on 21/10/2019 -->
            <div itemprop="articleBody">
             
-  <div class="section" id="agent-attributes-initialization-component">
-<h1>Agent attributes (initialization component)<a class="headerlink" href="#agent-attributes-initialization-component" title="Permalink to this headline">¶</a></h1>
-<p>This component is concerned with initializing the attributes of the agents at the start of the simulation run. The following methods are available:</p>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="defSim.agents_init.RandomCategoricalInitializer.html">Random Categorical Initializer</a></li>
-<li class="toctree-l1"><a class="reference internal" href="defSim.agents_init.RandomContinuousInitializer.html">Random Continuous Initializer</a></li>
-<li class="toctree-l1"><a class="reference internal" href="defSim.agents_init.CorrelatedContinuousInitializer.html">Correlated Continuous Initializer</a></li>
-</ul>
-</div>
-<p>Initializing the attributes can be done using the following function:</p>
-<div class="section" id="module-defSim.agents_init.agents_init.initialize_attributes">
-<span id="initialize-attributes"></span><h2>initialize_attributes<a class="headerlink" href="#module-defSim.agents_init.agents_init.initialize_attributes" title="Permalink to this headline">¶</a></h2>
-<p>This function works as a factory method for the AttributesInitializer component.
-It calls the initialize_attributes function of a specific implementation of the AttributesInitializer and passes to it
-the kwargs dictionary.</p>
+  <div class="section" id="module-defSim.agents_init.RandomContinuousInitializer">
+<span id="randomcontinuousinitializer"></span><h1>RandomContinuousInitializer<a class="headerlink" href="#module-defSim.agents_init.RandomContinuousInitializer" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="defSim.agents_init.RandomContinuousInitializer.RandomContinuousInitializer">
+<em class="property">class </em><code class="sig-prename descclassname">defSim.agents_init.RandomContinuousInitializer.</code><code class="sig-name descname">RandomContinuousInitializer</code><a class="headerlink" href="#defSim.agents_init.RandomContinuousInitializer.RandomContinuousInitializer" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="defSim.agents_init.html#defSim.agents_init.agents_init.AttributesInitializer" title="defSim.agents_init.agents_init.AttributesInitializer"><code class="xref py py-class docutils literal notranslate"><span class="pre">defSim.agents_init.agents_init.AttributesInitializer</span></code></a></p>
+<p>Implements the AttributesInitializer as a random initialization of arbitrary continuous features.</p>
+<dl class="attribute">
+<dt id="defSim.agents_init.RandomContinuousInitializer.RandomContinuousInitializer.default_feature_bounds">
+<code class="sig-name descname">default_feature_bounds</code><em class="property"> = {'max': 1, 'min': 0}</em><a class="headerlink" href="#defSim.agents_init.RandomContinuousInitializer.RandomContinuousInitializer.default_feature_bounds" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="defSim.agents_init.RandomContinuousInitializer.RandomContinuousInitializer.initialize_attributes">
+<em class="property">static </em><code class="sig-name descname">initialize_attributes</code><span class="sig-paren">(</span><em class="sig-param">network: networkx.classes.graph.Graph</em>, <em class="sig-param">feature_bounds: dict = {'max': 1</em>, <em class="sig-param">'min': 0}</em>, <em class="sig-param">distribution: str = 'uniform'</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#defSim.agents_init.RandomContinuousInitializer.RandomContinuousInitializer.initialize_attributes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Randomly initializes a number of continuous features between 0 and 1 for each node.
+Bounds default to min = 0, max = 1</p>
 <dl class="field-list simple">
-<dt class="field-odd">param network</dt>
-<dd class="field-odd"><p>The network that will be modified.</p>
-</dd>
-<dt class="field-even">param realization</dt>
-<dd class="field-even"><p>The specific AttributesInitializer that shall be used to initialize the attributes.
-Options are “random_categorical” and “random_continuous”.</p>
-</dd>
-<dt class="field-odd">param kwargs</dt>
-<dd class="field-odd"><p>The parameter dictionary with all optional parameters.</p>
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>network</strong> – The graph object whose nodes’ attributes are modified.</p></li>
+<li><p><strong>dict={'min'</strong> – 0, ‘max’: 1} feature_bounds: Dictionary containing minimum and maximum feature values.</p></li>
+<li><p><strong>distribution</strong> (<em>str='uniform'</em>) – Type of continuous distribution to draw feature values from.</p></li>
+<li><p><strong>num_features</strong> (<em>int=1</em>) – How many different attributes each node has.</p></li>
+</ul>
 </dd>
 </dl>
-<hr class="docutils" />
-<p><strong>Some useful methods when programming your own attribute initializer:</strong></p>
-</div>
-<div class="section" id="module-defSim.agents_init.agents_init.set_categorical_attribute">
-<span id="set-categorical-attribute"></span><h2>set_categorical_attribute<a class="headerlink" href="#module-defSim.agents_init.agents_init.set_categorical_attribute" title="Permalink to this headline">¶</a></h2>
-<p>Adds a categorical attribute to all nodes in a network. The values for that attribute are drawn from a list
-of possible values provided by the user.</p>
-<dl class="field-list">
-<dt class="field-odd">param network</dt>
-<dd class="field-odd"><p>The graph object whose nodes’ attributes are modified.</p>
-</dd>
-<dt class="field-even">param name</dt>
-<dd class="field-even"><p>the name of the attribute. This is used as a key to call the attribute value in other functions.</p>
-</dd>
-<dt class="field-odd">param values</dt>
-<dd class="field-odd"><p>A list that contains all possible values for that attribute.</p>
-</dd>
-<dt class="field-even">param distribution</dt>
-<dd class="field-even"><p>‘gaussian’, ‘uniform’, or ‘custom’ are possible values.</p>
-</dd>
-<dt class="field-odd">param kwargs</dt>
-<dd class="field-odd"><p>a dictionary containing the parameter name and value for each distribution, these are:</p>
-<p>for gaussian: loc and scale. loc would be the index of the most common value in the values list</p>
-<p>for custom distribution: c. an array-like containing the probabilities for each entry in the values list.</p>
-</dd>
-</dl>
-</div>
-<div class="section" id="module-defSim.agents_init.agents_init.set_continuous_attribute">
-<span id="set-continuous-attribute"></span><h2>set_continuous_attribute<a class="headerlink" href="#module-defSim.agents_init.agents_init.set_continuous_attribute" title="Permalink to this headline">¶</a></h2>
-<p>adds a possibly multidimensional attribute to all nodes in a network.
-The values of the attribute are drawn from a distribution that is set by the user.</p>
-<dl class="field-list">
-<dt class="field-odd">param network</dt>
-<dd class="field-odd"><p>The graph object whose nodes’ attributes are modified.</p>
-</dd>
-<dt class="field-even">param shape</dt>
-<dd class="field-even"><p>sets the output shape of the attribute value. Allows e.g. for multidimensional opinion vectors</p>
-</dd>
-<dt class="field-odd">param name</dt>
-<dd class="field-odd"><p>the name of the attribute. This is used as a key to call the attribute value in other functions</p>
-</dd>
-<dt class="field-even">param distribution</dt>
-<dd class="field-even"><p>“gaussian”, “exponential”, “beta” are possible distributions to choose from</p>
-</dd>
-<dt class="field-odd">param kwargs</dt>
-<dd class="field-odd"><p>a dictionary containing the parameter name and value for each distribution, these are:</p>
-<p>loc, scale for gaussian</p>
-<p>scale for exponential</p>
-<p>a, b for the beta distribution</p>
-</dd>
-</dl>
-</div>
-<div class="section" id="abstract-base-class-abc">
-<h2>Abstract Base Class (ABC)<a class="headerlink" href="#abstract-base-class-abc" title="Permalink to this headline">¶</a></h2>
-<p>The Abstract Base Class of the agent attribute initializer:</p>
-<span class="target" id="module-defSim.agents_init.agents_init.AttributesInitializer"></span><p>Initializes and changes attributes of nodes in the network.</p>
-</div>
+</dd></dl>
+
+</dd></dl>
+
 </div>
 
 
@@ -264,10 +211,10 @@ The values of the attribute are drawn from a distribution that is set by the use
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="defSim.agents_init.RandomCategoricalInitializer.html" class="btn btn-neutral float-right" title="RandomCategoricalInitializer" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="defSim.agents_init.CorrelatedContinuousInitializer.html" class="btn btn-neutral float-right" title="CorrelatedContinuousInitializer" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="defSim.network_init.html" class="btn btn-neutral" title="Network (network_init)" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="defSim.agents_init.RandomCategoricalInitializer.html" class="btn btn-neutral" title="RandomCategoricalInitializer" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
