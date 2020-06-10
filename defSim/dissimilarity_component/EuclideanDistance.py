@@ -28,7 +28,7 @@ class EuclideanDistance(DissimilarityCalculator):
         agent1_attributes = [v for k, v in network.nodes[agent1_id].items() if k not in self.exclude]
         agent2_attributes = [v for k, v in network.nodes[agent2_id].items() if k not in self.exclude]
 
-        return np.linalg.norm((np.array(agent1_attributes) - np.array(agent2_attributes)) / np.sqrt(len(agent1_attributes)))
+        return np.linalg.norm(np.array(agent1_attributes) - np.array(agent2_attributes)) # / np.sqrt(len(agent1_attributes)) # todo: find out why this was added at some point
 
     def calculate_dissimilarity_networkwide(self, network: nx.Graph, **kwargs):
         """
