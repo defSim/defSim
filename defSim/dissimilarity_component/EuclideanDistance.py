@@ -23,7 +23,7 @@ class EuclideanDistance(DissimilarityCalculator):
 
         agent1_attributes = np.array(list(network.nodes[agent1_id].values()))
         agent2_attributes = np.array(list(network.nodes[agent2_id].values()))
-        return np.linalg.norm(agent1_attributes - agent2_attributes) / np.sqrt(len(agent1_attributes))
+        return np.linalg.norm(agent1_attributes - agent2_attributes) # / np.sqrt(len(agent1_attributes)) # todo: find out why this was added at some point
 
     @staticmethod
     def calculate_dissimilarity_networkwide(network: nx.Graph):
@@ -37,5 +37,5 @@ class EuclideanDistance(DissimilarityCalculator):
         for agent in network.nodes():
             for neighbor in network.neighbors(agent):
                 network.edges[agent, neighbor]['dist'] = EuclideanDistance.calculate_dissimilarity(network,
-                                                                                                    agent,
-                                                                                                    neighbor)
+                                                                                                   agent,
+                                                                                                   neighbor)
