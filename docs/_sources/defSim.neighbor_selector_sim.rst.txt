@@ -5,7 +5,7 @@ neighbor_selector_sim module
 -------------------------------------------------------
 
 .. automodule:: defSim.neighbor_selector_sim.neighbor_selector_sim
-    :members:
+    :members: select_neighbors
     :undoc-members:
     :show-inheritance:
 
@@ -26,3 +26,11 @@ SimilarNeighborSelector
     :undoc-members:
     :show-inheritance:
 
+
+ABC
+-------------------------------------------------------
+
+.. automodule:: defSim.neighbor_selector_sim.neighbor_selector_sim
+    :members: NeighborSelector
+    :undoc-members:
+    :show-inheritance:

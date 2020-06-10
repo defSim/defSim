@@ -84,13 +84,19 @@
 </ul>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="defSim.network_init.html">Networks</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="defSim.network_init.html#module-defSim.network_init.network_init">network_init module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="defSim.network_init.html#module-defSim.network_init.network_init">generate_network</a></li>
+<li class="toctree-l2"><a class="reference internal" href="defSim.network_init.html#module-defSim.network_init.network_init">read_network</a></li>
+<li class="toctree-l2"><a class="reference internal" href="defSim.network_init.html#module-defSim.network_init.network_init">network_generators</a></li>
+<li class="toctree-l2"><a class="reference internal" href="defSim.network_init.html#module-defSim.network_init.network_init">execute_ms_rewiring</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="defSim.agents_init.html">Agent features</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="defSim.agents_init.html#module-defSim.agents_init.agents_init">agents_init module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="defSim.agents_init.html#module-defSim.agents_init.agents_init">initialize_attributes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="defSim.agents_init.html#module-defSim.agents_init.RandomCategoricalInitializer">RandomCategoricalInitializer</a></li>
 <li class="toctree-l2"><a class="reference internal" href="defSim.agents_init.html#module-defSim.agents_init.RandomContinuousInitializer">RandomContinuousInitializer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="defSim.agents_init.html#module-defSim.agents_init.agents_init">set_categorical_attribute</a></li>
+<li class="toctree-l2"><a class="reference internal" href="defSim.agents_init.html#module-defSim.agents_init.agents_init">set_continuous_attribute</a></li>
+<li class="toctree-l2"><a class="reference internal" href="defSim.agents_init.html#abc">ABC</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="defSim.focal_agent_sim.html">Focal agent selection</a><ul>
@@ -110,6 +116,7 @@
 <li class="toctree-l2"><a class="reference internal" href="#module-defSim.influence_sim.BoundedConfidence">BoundedConfidence</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#module-defSim.influence_sim.Persuasion">Persuasion</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#module-defSim.influence_sim.WeightedLinear">WeightedLinear</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-defSim.influence_sim.influence_sim">ABC</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="defSim.network_evolution_sim.html">Network evolution</a><ul>
@@ -118,9 +125,10 @@
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="defSim.dissimilarity_component.html">Dissimilarity updaters</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="defSim.dissimilarity_component.html#module-defSim.dissimilarity_component.dissimilarity_calculator">DissimilarityCalculator module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="defSim.dissimilarity_component.html#module-defSim.dissimilarity_component.dissimilarity_calculator">select_calculator</a></li>
 <li class="toctree-l2"><a class="reference internal" href="defSim.dissimilarity_component.html#module-defSim.dissimilarity_component.EuclideanDistance">EuclideanDistance</a></li>
 <li class="toctree-l2"><a class="reference internal" href="defSim.dissimilarity_component.html#module-defSim.dissimilarity_component.HammingDistance">HammingDistance</a></li>
+<li class="toctree-l2"><a class="reference internal" href="defSim.dissimilarity_component.html#abc">ABC</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="defSim.tools.html">Tools</a><ul>
@@ -164,43 +172,6 @@
 <h1>Influence (simulation component)<a class="headerlink" href="#influence-simulation-component" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="module-defSim.influence_sim.influence_sim">
 <span id="influence-sim-module"></span><h2>influence_sim module<a class="headerlink" href="#module-defSim.influence_sim.influence_sim" title="Permalink to this headline">¶</a></h2>
-<dl class="class">
-<dt id="defSim.influence_sim.influence_sim.InfluenceOperator">
-<em class="property">class </em><code class="sig-prename descclassname">defSim.influence_sim.influence_sim.</code><code class="sig-name descname">InfluenceOperator</code><a class="headerlink" href="#defSim.influence_sim.influence_sim.InfluenceOperator" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">abc.ABC</span></code></p>
-<p>The InfluenceOperator is responsible for executing the influence function of the simulation. The influence function
-can be something like bounded confidence, negative influence or only positive influence.</p>
-<dl class="method">
-<dt id="defSim.influence_sim.influence_sim.InfluenceOperator.spread_influence">
-<em class="property">abstract static </em><code class="sig-name descname">spread_influence</code><span class="sig-paren">(</span><em class="sig-param">network: networkx.classes.graph.Graph, agent_i: int, agents_j: List[int], regime: str, dissimilarity_measure: defSim.dissimilarity_component.dissimilarity_calculator.DissimilarityCalculator, attributes: List[str] = None, **kwargs</em><span class="sig-paren">)</span> &#x2192; bool<a class="headerlink" href="#defSim.influence_sim.influence_sim.InfluenceOperator.spread_influence" title="Permalink to this definition">¶</a></dt>
-<dd><p>This function is responsible for executing the influence process. The call of this function can be seen as an
-interaction between agents that either results in successful influence or not. Unsuccessful influence attempts
-can also be interpreted as no interaction at all. The function returns true if influence was successful.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>network</strong> – A NetworkX object in which the agents exist.</p></li>
-<li><p><strong>agent_i</strong> – the index of the focal agent that is either the source or the target of the influence</p></li>
-<li><p><strong>agents_j</strong> – A list of indices of the agents who can be either the source or the targets of the
-influence. The list can have a single entry, implementing one-to-one communication.</p></li>
-<li><p><strong>attributes</strong> – A list of the names of all the attributes that are subject to influence.
-If an agent has e.g. the attributes “Sex” and “Music taste”, only supply [“Music taste”] as a
-parameter for this function. The influence function itself can still be a function of the “Sex”
-attribute.</p></li>
-<li><p><strong>regime</strong> – This string determines the mode in which the agents influence each other.
-In ‘one-to-one’ the focal agent influences one other agent, in ‘one-to-many’ multiple other
-agents and in ‘many-to-one’ the focal agent is influenced by multiple other agents in the network.</p></li>
-<li><p><strong>dissimilarity_measure</strong> – An instance of a <code class="xref py py-class docutils literal notranslate"><span class="pre">DissimilarityCalculator</span></code>.</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>true if agent(s) were successfully influenced</p>
-</dd>
-</dl>
-</dd></dl>
-
-</dd></dl>
-
 <dl class="function">
 <dt id="defSim.influence_sim.influence_sim.spread_influence">
 <code class="sig-prename descclassname">defSim.influence_sim.influence_sim.</code><code class="sig-name descname">spread_influence</code><span class="sig-paren">(</span><em class="sig-param">network: networkx.classes.graph.Graph, realization: str, agent_i: int, agents_j: List[int], regime: str, dissimilarity_measure: defSim.dissimilarity_component.dissimilarity_calculator.DissimilarityCalculator, attributes: List[str] = None, **kwargs</em><span class="sig-paren">)</span> &#x2192; bool<a class="headerlink" href="#defSim.influence_sim.influence_sim.spread_influence" title="Permalink to this definition">¶</a></dt>
@@ -429,6 +400,46 @@ Defaults to values specified in <code class="xref py py-class docutils literal n
 </dd></dl>
 
 </div>
+<div class="section" id="module-defSim.influence_sim.influence_sim">
+<span id="abc"></span><h2>ABC<a class="headerlink" href="#module-defSim.influence_sim.influence_sim" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="defSim.influence_sim.influence_sim.InfluenceOperator">
+<em class="property">class </em><code class="sig-prename descclassname">defSim.influence_sim.influence_sim.</code><code class="sig-name descname">InfluenceOperator</code><a class="headerlink" href="#defSim.influence_sim.influence_sim.InfluenceOperator" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">abc.ABC</span></code></p>
+<p>The InfluenceOperator is responsible for executing the influence function of the simulation. The influence function
+can be something like bounded confidence, negative influence or only positive influence.</p>
+<dl class="method">
+<dt id="defSim.influence_sim.influence_sim.InfluenceOperator.spread_influence">
+<em class="property">abstract static </em><code class="sig-name descname">spread_influence</code><span class="sig-paren">(</span><em class="sig-param">network: networkx.classes.graph.Graph, agent_i: int, agents_j: List[int], regime: str, dissimilarity_measure: defSim.dissimilarity_component.dissimilarity_calculator.DissimilarityCalculator, attributes: List[str] = None, **kwargs</em><span class="sig-paren">)</span> &#x2192; bool<a class="headerlink" href="#defSim.influence_sim.influence_sim.InfluenceOperator.spread_influence" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function is responsible for executing the influence process. The call of this function can be seen as an
+interaction between agents that either results in successful influence or not. Unsuccessful influence attempts
+can also be interpreted as no interaction at all. The function returns true if influence was successful.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>network</strong> – A NetworkX object in which the agents exist.</p></li>
+<li><p><strong>agent_i</strong> – the index of the focal agent that is either the source or the target of the influence</p></li>
+<li><p><strong>agents_j</strong> – A list of indices of the agents who can be either the source or the targets of the
+influence. The list can have a single entry, implementing one-to-one communication.</p></li>
+<li><p><strong>attributes</strong> – A list of the names of all the attributes that are subject to influence.
+If an agent has e.g. the attributes “Sex” and “Music taste”, only supply [“Music taste”] as a
+parameter for this function. The influence function itself can still be a function of the “Sex”
+attribute.</p></li>
+<li><p><strong>regime</strong> – This string determines the mode in which the agents influence each other.
+In ‘one-to-one’ the focal agent influences one other agent, in ‘one-to-many’ multiple other
+agents and in ‘many-to-one’ the focal agent is influenced by multiple other agents in the network.</p></li>
+<li><p><strong>dissimilarity_measure</strong> – An instance of a <code class="xref py py-class docutils literal notranslate"><span class="pre">DissimilarityCalculator</span></code>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>true if agent(s) were successfully influenced</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
 </div>
 
 
@@ -450,7 +461,7 @@ Defaults to values specified in <code class="xref py py-class docutils literal n
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2019, Laukemper &amp; Keijzer.
+        &copy; Copyright 2019-2020, Laukemper, Keijzer &amp; Bakker.
 
     </p>
   </div>

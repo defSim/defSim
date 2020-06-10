@@ -6,6 +6,7 @@ import random
 import math
 import statistics
 import warnings
+import inspect
 
 
 class AttributesInitializer(ABC):
@@ -83,6 +84,33 @@ def generate_correlated_continuous_attributes(n_attributes: int, n_values: int, 
     return final_attributes        
 
 
+def initialize_attributes(network: nx.Graph, realization: str, **kwargs):
+    """
+    This function works as a factory method for the AttributesInitializer component.
+    It calls the initialize_attributes function of a specific implementation of the AttributesInitializer and passes to it
+    the kwargs dictionary.
+
+    :param network: The network that will be modified.
+    :param realization: The specific AttributesInitializer that shall be used to initialize the attributes.
+      Options are "random_categorical" and "random_continuous".
+    :param kwargs: The parameter dictionary with all optional parameters.
+    """
+    from . import RandomContinuousInitializer
+    from . import RandomCategoricalInitializer
+    from . import CorrelatedContinuousInitializer
+
+    if realization == "random_categorical":
+        RandomCategoricalInitializer.RandomCategoricalInitializer.initialize_attributes(network, **kwargs)
+    elif realization == "random_continuous":
+        RandomContinuousInitializer.RandomContinuousInitializer.initialize_attributes(network, **kwargs)
+    elif realization == 'correlated_continuous':
+        CorrelatedContinuousInitializer.CorrelatedContinuousInitializer.initialize_attributes(network, **kwargs)  
+    elif inspect.isclass(realization) or isinstance(realization, AttributesInitializer):
+        realization.initialize_attributes(network, **kwargs)
+    else:
+        raise ValueError("Can only select from the options ['random_categorical', 'random_continuous', 'correlated_continuous'] or supply a realization of the ABC")
+
+
 def set_categorical_attribute(network: nx.Graph, name: str, values: list, distribution: str = "uniform", **kwargs):
     """
     Adds a categorical attribute to all nodes in a network. The values for that attribute are drawn from a list
@@ -130,27 +158,3 @@ def set_continuous_attribute(network: nx.Graph, name: str, shape: tuple = (1), d
 
         for i in network.nodes():  # iterate over all nodes
             network.nodes[i][name] = random.uniform(feature_bounds['min'], feature_bounds['max'])  # initialize the feature's value
-
-
-def initialize_attributes(network: nx.Graph, realization: str, **kwargs):
-    """
-    This function works as a factory method for the AttributesInitializer component.
-    It calls the initialize_attributes function of a specific implementation of the AttributesInitializer and passes to it
-    the kwargs dictionary.
-
-    :param network: The network that will be modified.
-    :param realization: The specific AttributesInitializer that shall be used to initialize the attributes. Options are "random", ..
-    :param kwargs: The parameter dictionary with all optional parameters.
-    """
-    from . import RandomContinuousInitializer
-    from . import RandomCategoricalInitializer
-    from . import CorrelatedContinuousInitializer
-
-    if realization == "random_categorical":
-        RandomCategoricalInitializer.RandomCategoricalInitializer.initialize_attributes(network, **kwargs)
-    elif realization == "random_continuous":
-        RandomContinuousInitializer.RandomContinuousInitializer.initialize_attributes(network, **kwargs)
-    elif realization == 'correlated_continuous':
-        CorrelatedContinuousInitializer.CorrelatedContinuousInitializer.initialize_attributes(network, **kwargs)    
-    else:
-        raise ValueError("Can only select from the options ['random_categorical', 'random_continuous', 'correlated_continuous']")

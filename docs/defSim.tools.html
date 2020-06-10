@@ -77,30 +77,36 @@
 </ul>
 </li>
 </ul>
-<ul>
+<ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="experiment.class.html">Experiment class</a></li>
 <li class="toctree-l1"><a class="reference internal" href="simulation.class.html">Simulation class</a></li>
-</ul>
-<ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="defSim.network_init.html">Networks</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="defSim.network_init.html#module-defSim.network_init.network_init">network_init module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="defSim.network_init.html#module-defSim.network_init.network_init">generate_network</a></li>
+<li class="toctree-l2"><a class="reference internal" href="defSim.network_init.html#module-defSim.network_init.network_init">read_network</a></li>
+<li class="toctree-l2"><a class="reference internal" href="defSim.network_init.html#module-defSim.network_init.network_init">network_generators</a></li>
+<li class="toctree-l2"><a class="reference internal" href="defSim.network_init.html#module-defSim.network_init.network_init">execute_ms_rewiring</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="defSim.agents_init.html">Agent features</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="defSim.agents_init.html#module-defSim.agents_init.agents_init">agents_init module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="defSim.agents_init.html#module-defSim.agents_init.agents_init">initialize_attributes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="defSim.agents_init.html#module-defSim.agents_init.RandomCategoricalInitializer">RandomCategoricalInitializer</a></li>
 <li class="toctree-l2"><a class="reference internal" href="defSim.agents_init.html#module-defSim.agents_init.RandomContinuousInitializer">RandomContinuousInitializer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="defSim.agents_init.html#module-defSim.agents_init.agents_init">set_categorical_attribute</a></li>
+<li class="toctree-l2"><a class="reference internal" href="defSim.agents_init.html#module-defSim.agents_init.agents_init">set_continuous_attribute</a></li>
+<li class="toctree-l2"><a class="reference internal" href="defSim.agents_init.html#abc">ABC</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="defSim.focal_agent_sim.html">Focal agent selection</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="defSim.focal_agent_sim.html#module-defSim.focal_agent_sim.focal_agent_sim">focal_agent_sim module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="defSim.focal_agent_sim.html#module-defSim.focal_agent_sim.RandomSelector">RandomSelector</a></li>
+<li class="toctree-l2"><a class="reference internal" href="defSim.focal_agent_sim.html#module-defSim.focal_agent_sim.focal_agent_sim">ABC</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="defSim.neighbor_selector_sim.html">Neighbor selector</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="defSim.neighbor_selector_sim.html#module-defSim.neighbor_selector_sim.neighbor_selector_sim">neighbor_selector_sim module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="defSim.neighbor_selector_sim.html#module-defSim.neighbor_selector_sim.RandomNeighborSelector">RandomNeighborSelector</a></li>
 <li class="toctree-l2"><a class="reference internal" href="defSim.neighbor_selector_sim.html#module-defSim.neighbor_selector_sim.SimilarNeighborSelector">SimilarNeighborSelector</a></li>
+<li class="toctree-l2"><a class="reference internal" href="defSim.neighbor_selector_sim.html#module-defSim.neighbor_selector_sim.neighbor_selector_sim">ABC</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="defSim.influence_sim.html">Influence</a><ul>
@@ -109,6 +115,7 @@
 <li class="toctree-l2"><a class="reference internal" href="defSim.influence_sim.html#module-defSim.influence_sim.BoundedConfidence">BoundedConfidence</a></li>
 <li class="toctree-l2"><a class="reference internal" href="defSim.influence_sim.html#module-defSim.influence_sim.Persuasion">Persuasion</a></li>
 <li class="toctree-l2"><a class="reference internal" href="defSim.influence_sim.html#module-defSim.influence_sim.WeightedLinear">WeightedLinear</a></li>
+<li class="toctree-l2"><a class="reference internal" href="defSim.influence_sim.html#module-defSim.influence_sim.influence_sim">ABC</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="defSim.network_evolution_sim.html">Network evolution</a><ul>
@@ -117,13 +124,15 @@
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="defSim.dissimilarity_component.html">Dissimilarity updaters</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="defSim.dissimilarity_component.html#module-defSim.dissimilarity_component.dissimilarity_calculator">DissimilarityCalculator module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="defSim.dissimilarity_component.html#module-defSim.dissimilarity_component.dissimilarity_calculator">select_calculator</a></li>
 <li class="toctree-l2"><a class="reference internal" href="defSim.dissimilarity_component.html#module-defSim.dissimilarity_component.EuclideanDistance">EuclideanDistance</a></li>
 <li class="toctree-l2"><a class="reference internal" href="defSim.dissimilarity_component.html#module-defSim.dissimilarity_component.HammingDistance">HammingDistance</a></li>
+<li class="toctree-l2"><a class="reference internal" href="defSim.dissimilarity_component.html#abc">ABC</a></li>
 </ul>
 </li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Tools</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#module-defSim.tools.CreateOutputTable">CreateOutputTable</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#abc-of-createoutputtable">ABC of CreateOutputTable</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#module-defSim.tools.OutputMeasures">OutputMeasures</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#module-defSim.tools.NetworkDistanceUpdater">NetworkDistanceUpdater</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#module-defSim.tools.ClusterExecutionScript">ClusterExecutionScript</a></li>
@@ -163,7 +172,54 @@
 <h1>Tools<a class="headerlink" href="#tools" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="module-defSim.tools.CreateOutputTable">
 <span id="createoutputtable"></span><h2>CreateOutputTable<a class="headerlink" href="#module-defSim.tools.CreateOutputTable" title="Permalink to this headline">¶</a></h2>
-<dl class="class">
+<dl class="function">
+<dt id="defSim.tools.CreateOutputTable.create_output_table">
+<code class="sig-prename descclassname">defSim.tools.CreateOutputTable.</code><code class="sig-name descname">create_output_table</code><span class="sig-paren">(</span><em class="sig-param">network: networkx.classes.graph.Graph</em>, <em class="sig-param">realizations: List[str] = []</em>, <em class="sig-param">colnames: List[str] = []</em>, <em class="sig-param">agents: List[int] = []</em>, <em class="sig-param">settings_dict: dict = {}</em>, <em class="sig-param">tickwise_output: dict = {}</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#defSim.tools.CreateOutputTable.create_output_table" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function works as a factory method for the OutputTableCreator component.
+It calls the create_output function of a specific implementation of the OutputTableCreator and passes to it
+the kwargs dictionary.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>network</strong> – A NetworkX object</p></li>
+<li><p><strong>realizations</strong> – <p>The specific OutputTableCreator that will be used. Currently, the options are:</p>
+<ul>
+<li><p>Basic: Returns the realizations Regions, Zones, Isolates, Homogeneity, AverageDistance</p></li>
+<li><p>ClusterFinder: Method to find clusters based on minimal allowed distance between network neighbors as
+defined by the user in the kwargs dictionary. Default is to return the same output as the Regions realization</p></li>
+<li><p>RegionsList:</p></li>
+<li><p>Regions:</p></li>
+<li><p>ZonesList:</p></li>
+<li><p>Zones:</p></li>
+<li><p>Isolates: Reports the number of isolates as found in the ClusterFinder method, based on minimal allowed
+distance between network network neighbors as defined by the user in the kwargs dictionary. Default is to
+return the same output as the Regions realization</p></li>
+<li><p>Homogeneity:</p></li>
+<li><p>AverageDistance: Reports average distance between connected agents, based on dissimilarity calculated during
+simulation.</p></li>
+<li><p>AverageOpinion: Reports average opinion (requires a list of features for which this needs to be calculated if
+number of features &gt; 1. Pass this list in the kwargs dictionary as AverageOpinionFeatures.)</p></li>
+<li><p>Graph: Returns the entire NetworkX Graph</p></li>
+</ul>
+</p></li>
+<li><p><strong>agents</strong> – A list of the indices of all agents that will be considered by the output table.</p></li>
+<li><p><strong>settings_dict</strong> – A dictionary of column names and values that will be added to the output table. Can be used
+to merge output with parameter setting values.</p></li>
+<li><p><strong>tickwise_output</strong> – A dictionary with a list of lists with values of agents on some given feature at each tick
+during the simulation run. This function will create a column for each key in the dictionary.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A dictionary.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="abc-of-createoutputtable">
+<h2>ABC of CreateOutputTable<a class="headerlink" href="#abc-of-createoutputtable" title="Permalink to this headline">¶</a></h2>
+<p>The Abstract Base Class of the CreateOutputTable method:</p>
+<span class="target" id="module-defSim.tools.CreateOutputTable"></span><dl class="class">
 <dt id="defSim.tools.CreateOutputTable.OutputTableCreator">
 <em class="property">class </em><code class="sig-prename descclassname">defSim.tools.CreateOutputTable.</code><code class="sig-name descname">OutputTableCreator</code><a class="headerlink" href="#defSim.tools.CreateOutputTable.OutputTableCreator" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">abc.ABC</span></code></p>
@@ -190,51 +246,6 @@ column names are autogenerated.</p>
 <code class="sig-name descname">label</code><em class="property"> = ''</em><a class="headerlink" href="#defSim.tools.CreateOutputTable.OutputTableCreator.label" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-</dd></dl>
-
-<dl class="function">
-<dt id="defSim.tools.CreateOutputTable.create_output_table">
-<code class="sig-prename descclassname">defSim.tools.CreateOutputTable.</code><code class="sig-name descname">create_output_table</code><span class="sig-paren">(</span><em class="sig-param">network: networkx.classes.graph.Graph</em>, <em class="sig-param">realizations: List[str] = []</em>, <em class="sig-param">colnames: List[str] = []</em>, <em class="sig-param">agents: List[int] = []</em>, <em class="sig-param">settings_dict: dict = {}</em>, <em class="sig-param">tickwise_output: dict = {}</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#defSim.tools.CreateOutputTable.create_output_table" title="Permalink to this definition">¶</a></dt>
-<dd><p>This function works as a factory method for the OutputTableCreator component.
-It calls the create_output function of a specific implementation of the OutputTableCreator and passes to it
-the kwargs dictionary.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>network</strong> – A NetworkX object from which the focal agent will be selected</p></li>
-<li><p><strong>realizations</strong> – <p>The specific OutputTableCreator that will be used. Currently, the options are:</p>
-<ul>
-<li><p>Basic: Returns the realizations Regions, Zones, Isolates, Homogeneity, AverageDistance</p></li>
-<li><p>ClusterFinder: Method to find clusters based on minimal allowed distance between network neighbors as
-defined by the user in the kwargs dictionary. Default is to return the same output as the Regions realization</p></li>
-<li><p>RegionsList:</p></li>
-<li><p>Regions:</p></li>
-<li><p>ZonesList:</p></li>
-<li><p>Zones:</p></li>
-<li><p>Isolates: Reports the number of isolates as found in the ClusterFinder method, based on minimal allowed
-distance between network network neighbors as defined by the user in the kwargs dictionary. Default is to
-return the same output as the Regions realization</p></li>
-<li><p>Homogeneity:</p></li>
-<li><p>AverageDistance: Reports average distance between connected agents, based on dissimilarity calculated during simulation.</p></li>
-<li><dl class="simple">
-<dt>AverageOpinion: Reports average opinion (requires a list of features for which this needs to be calculated if number of features &gt; 1.</dt><dd><p>Pass this list in the kwargs dictionary as AverageOpinionFeatures.</p>
-</dd>
-</dl>
-</li>
-<li><p>Graph: Returns the entire NetworkX Graph</p></li>
-</ul>
-</p></li>
-<li><p><strong>agents</strong> – A list of the indices of all agents that will be considered by the output table.</p></li>
-<li><p><strong>settings_dict</strong> – A dictionary of column names and values that will be added to the output table. Can be used
-to merge output with parameter setting values.</p></li>
-<li><p><strong>tickwise_output</strong> – A dictionary with a list of lists with values of agents on some given feature at each tick
-during the simulation run. This function will create a column for each key in the dictionary.</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>A dictionary.</p>
-</dd>
-</dl>
 </dd></dl>
 
 </div>
@@ -421,7 +432,7 @@ one machine. This script is called from the command line with 3 arguments.</p>
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2019, Laukemper &amp; Keijzer.
+        &copy; Copyright 2019-2020, Laukemper, Keijzer &amp; Bakker.
 
     </p>
   </div>

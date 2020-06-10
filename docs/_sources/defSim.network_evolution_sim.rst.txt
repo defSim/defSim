@@ -1,6 +1,8 @@
 Network evolution (simulation component)
 ========================================
 
+NOTE: This component is currently non-functional.
+
 network_evolution_sim module
 -------------------------------------------------------
 

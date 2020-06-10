@@ -1,13 +1,13 @@
 Dissimilarity component
 ==========================================
 
-DissimilarityCalculator module
------------------------------------------------------------------
+
+select_calculator
+---------------------------------------------------
 
 .. automodule:: defSim.dissimilarity_component.dissimilarity_calculator
-    :members:
-    :undoc-members:
-    :show-inheritance:
+    :members: select_calculator
+
 
 EuclideanDistance
 -----------------------------------------------------------
@@ -17,6 +17,7 @@ EuclideanDistance
     :undoc-members:
     :show-inheritance:
 
+
 HammingDistance
 ---------------------------------------------------------
 
@@ -24,3 +25,12 @@ HammingDistance
     :members:
     :undoc-members:
     :show-inheritance:
+
+
+ABC
+-------------------------------------------------------
+
+The Abstract Base Class of the dissimilarity component:
+
+.. automodule:: defSim.dissimilarity_component.dissimilarity_calculator
+    :members: DissimilarityCalculator
