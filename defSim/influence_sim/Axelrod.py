@@ -17,7 +17,7 @@ class Axelrod(InfluenceOperator):
     def spread_influence(network: nx.Graph, agent_i: int, agents_j: List[int] or int,
                          regime: str, dissimilarity_measure: DissimilarityCalculator, attributes: List[str] = None, **kwargs) -> bool:
         """
-        In the influence function as Axelrod modeled it #todo insert reference 
+        In the influence function as Axelrod modeled it
         agents are more likely to influence each other if they are more similar. If an agent successfully influences one
         or more agents, the influenced agents adopt one feature on which they disagreed from the influencing agent.
         In the case of many-to-one communication, the influenced agent adopts the mode value of a feature on which there 
@@ -34,10 +34,20 @@ class Axelrod(InfluenceOperator):
         :param regime: Either "one-to-one", "one-to-many" or "many-to-one"
         :param dissimilarity_measure: An instance of a :class:`~defSim.dissimilarity_component.DissimilarityCalculator.DissimilarityCalculator`.
         :param kwargs: Additional parameters specific to the implementation of the InfluenceOperator.
+            Possible parameters are the following:
+        :param float=0 homophily: A number :math:`\geq` 0 that controls the shape of the influence curve. At 0, agents
+            do not show a preference for similar others (only positive influence). At 1, agents more strongly adjust
+            their opinion when confronted with similar others (moderated positive influence). At values > 1, there
+            exists a point at which influence becomes negative, making agents shift away from the sending agents
+            expressed opinion.
         :returns: true if agent(s) were successfully influenced
         """
+        # todo: insert reference to Axelrod
+        # todo: explain the homophily parameter
+
         if type(agents_j) != list:
             agents_j = [agents_j]
+        homophily = kwargs.get("homophily", 1)
 
         success = False
 
@@ -59,13 +69,13 @@ class Axelrod(InfluenceOperator):
             else:
                 influenced_feature = random.choice(incongruent_features)
                 for neighbor in agents_j:
-                    if random.uniform(0, 1) > network.edges[agent_i, neighbor]['dist']:
+                    if random.uniform(0, 1) < ((1-network.edges[agent_i, neighbor]['dist']) ** homophily):
                         success = True
                         network.nodes[neighbor][influenced_feature] = network.nodes[agent_i][influenced_feature]
                         update_dissimilarity(network, [neighbor], dissimilarity_measure, **kwargs)
         else:
             #todo comment and improve time
-            close_neighbors = [neighbor for neighbor in agents_j if random.uniform(0, 1) > network.edges[agent_i, neighbor]['dist']]
+            close_neighbors = [neighbor for neighbor in agents_j if random.uniform(0, 1) < ((1-network.edges[agent_i, neighbor]['dist']) ** homophily)]
             incongruent_features = [] # [feature for feature in attributes if network.nodes[agent1]]
             incongruent_feature_values =[]
             for feature in attributes:
