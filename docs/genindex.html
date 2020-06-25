@@ -113,7 +113,7 @@
 <li class="toctree-l1"><a class="reference internal" href="defSim.influence_sim.html">Influence</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="defSim.influence_sim.BoundedConfidence.html">Bounded Confidence</a></li>
 <li class="toctree-l2"><a class="reference internal" href="defSim.influence_sim.Persuasion.html">Persuasion</a></li>
-<li class="toctree-l2"><a class="reference internal" href="defSim.influence_sim.Axelrod.html">Similarity Adoption</a></li>
+<li class="toctree-l2"><a class="reference internal" href="defSim.influence_sim.SimilarityAdoption.html">Similarity Adoption</a></li>
 <li class="toctree-l2"><a class="reference internal" href="defSim.influence_sim.WeightedLinear.html">Weighted Linear Influence</a></li>
 <li class="toctree-l2"><a class="reference internal" href="defSim.influence_sim.html#module-defSim.influence_sim.influence_sim">influence_sim module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="defSim.influence_sim.html#module-defSim.influence_sim.influence_sim">Abstract Base Class (ABC)</a></li>
@@ -224,15 +224,13 @@
 </li>
       <li><a href="defSim.tools.html#defSim.tools.OutputMeasures.AttributeReporter">AttributeReporter (class in defSim.tools.OutputMeasures)</a>
 </li>
-      <li><a href="defSim.agents_init.html#defSim.agents_init.agents_init.AttributesInitializer">AttributesInitializer (class in defSim.agents_init.agents_init)</a>
-</li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="defSim.agents_init.html#defSim.agents_init.agents_init.AttributesInitializer">AttributesInitializer (class in defSim.agents_init.agents_init)</a>
+</li>
       <li><a href="defSim.tools.html#defSim.tools.OutputMeasures.AverageDistanceReporter">AverageDistanceReporter (class in defSim.tools.OutputMeasures)</a>
 </li>
       <li><a href="defSim.tools.html#defSim.tools.OutputMeasures.AverageOpinionReporter">AverageOpinionReporter (class in defSim.tools.OutputMeasures)</a>
-</li>
-      <li><a href="defSim.influence_sim.Axelrod.html#defSim.influence_sim.Axelrod.Axelrod">Axelrod (class in defSim.influence_sim.Axelrod)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -324,15 +322,15 @@
 </li>
       <li><a href="defSim.focal_agent_sim.RandomSelector.html#module-defSim.focal_agent_sim.RandomSelector">defSim.focal_agent_sim.RandomSelector (module)</a>
 </li>
-      <li><a href="defSim.influence_sim.Axelrod.html#module-defSim.influence_sim.Axelrod">defSim.influence_sim.Axelrod (module)</a>
-</li>
       <li><a href="defSim.influence_sim.BoundedConfidence.html#module-defSim.influence_sim.BoundedConfidence">defSim.influence_sim.BoundedConfidence (module)</a>
 </li>
       <li><a href="defSim.influence_sim.html#module-defSim.influence_sim.influence_sim">defSim.influence_sim.influence_sim (module)</a>, <a href="defSim.influence_sim.html#module-defSim.influence_sim.influence_sim">[1]</a>
 </li>
+      <li><a href="defSim.influence_sim.Persuasion.html#module-defSim.influence_sim.Persuasion">defSim.influence_sim.Persuasion (module)</a>
+</li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="defSim.influence_sim.Persuasion.html#module-defSim.influence_sim.Persuasion">defSim.influence_sim.Persuasion (module)</a>
+      <li><a href="defSim.influence_sim.SimilarityAdoption.html#module-defSim.influence_sim.SimilarityAdoption">defSim.influence_sim.SimilarityAdoption (module)</a>
 </li>
       <li><a href="defSim.influence_sim.WeightedLinear.html#module-defSim.influence_sim.WeightedLinear">defSim.influence_sim.WeightedLinear (module)</a>
 </li>
@@ -552,6 +550,8 @@
 </li>
       <li><a href="defSim.agents_init.html#defSim.agents_init.agents_init.set_continuous_attribute">set_continuous_attribute() (in module defSim.agents_init.agents_init)</a>
 </li>
+      <li><a href="defSim.influence_sim.SimilarityAdoption.html#defSim.influence_sim.SimilarityAdoption.SimilarityAdoption">SimilarityAdoption (class in defSim.influence_sim.SimilarityAdoption)</a>
+</li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="defSim.agents_init.CorrelatedContinuousInitializer.html#defSim.agents_init.CorrelatedContinuousInitializer.SimilarityPostprocessor">SimilarityPostprocessor (class in defSim.agents_init.CorrelatedContinuousInitializer)</a>
@@ -560,12 +560,12 @@
 </li>
       <li><a href="simulation.class.html#defSim.Simulation.Simulation">Simulation (class in defSim.Simulation)</a>
 </li>
-      <li><a href="defSim.influence_sim.Axelrod.html#defSim.influence_sim.Axelrod.Axelrod.spread_influence">spread_influence() (defSim.influence_sim.Axelrod.Axelrod static method)</a>
+      <li><a href="defSim.influence_sim.BoundedConfidence.html#defSim.influence_sim.BoundedConfidence.BoundedConfidence.spread_influence">spread_influence() (defSim.influence_sim.BoundedConfidence.BoundedConfidence static method)</a>
 
       <ul>
-        <li><a href="defSim.influence_sim.BoundedConfidence.html#defSim.influence_sim.BoundedConfidence.BoundedConfidence.spread_influence">(defSim.influence_sim.BoundedConfidence.BoundedConfidence static method)</a>
-</li>
         <li><a href="defSim.influence_sim.Persuasion.html#defSim.influence_sim.Persuasion.Persuasion.spread_influence">(defSim.influence_sim.Persuasion.Persuasion static method)</a>
+</li>
+        <li><a href="defSim.influence_sim.SimilarityAdoption.html#defSim.influence_sim.SimilarityAdoption.SimilarityAdoption.spread_influence">(defSim.influence_sim.SimilarityAdoption.SimilarityAdoption static method)</a>
 </li>
         <li><a href="defSim.influence_sim.WeightedLinear.html#defSim.influence_sim.WeightedLinear.WeightedLinear.spread_influence">(defSim.influence_sim.WeightedLinear.WeightedLinear static method)</a>
 </li>

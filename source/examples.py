@@ -40,7 +40,7 @@ results = simulation.create_output_table()
 # defSim.InfluenceOperator.spread_influence(network, "axelrod", focal_agent,neighbors, "one-to-one", defSim.HammingDistance())
 # instead of using the factory method you can alway import the classes directly from the respective module
 
-from defSim.influence_sim.Axelrod import Axelrod # import the axelrod infuence function
+from defSim.influence_sim.SimilarityAdoption import SimilarityAdoption # import the axelrod infuence function
 
 network = defSim.generate_network("ring")
 defSim.agents_init.initialize_attributes(network, realization="random_categorical")
@@ -50,7 +50,7 @@ calculator.calculate_dissimilarity_networkwide(network)
 for i in range(100):
     focal_agent = defSim.focal_agent_sim.select_focal_agent(network, "random")
     neighbors = defSim.neighbor_selector_sim.select_neighbors(network, "random", focal_agent, "one-to-one")
-    Axelrod.spread_influence(network, focal_agent, neighbors, regime="one-to-one", dissimilarity_measure=defSim.HammingDistance())
+    SimilarityAdoption.spread_influence(network, focal_agent, neighbors, regime="one-to-one", dissimilarity_measure=defSim.HammingDistance())
 
 results = defSim.OutputMeasures.ClusterFinder.create_output(network, cluster_dissimilarity_threshold=.99)
 print(results)

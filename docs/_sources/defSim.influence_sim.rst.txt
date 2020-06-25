@@ -6,7 +6,7 @@ The following methods are available
 .. toctree::
    Bounded Confidence <defSim.influence_sim.BoundedConfidence>
    Persuasion <defSim.influence_sim.Persuasion>
-   Similarity Adoption <defSim.influence_sim.Axelrod>
+   Similarity Adoption <defSim.influence_sim.SimilarityAdoption>
    Weighted Linear Influence <defSim.influence_sim.WeightedLinear>
 
 influence_sim module

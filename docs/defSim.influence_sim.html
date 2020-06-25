@@ -114,7 +114,7 @@
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Influence</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="defSim.influence_sim.BoundedConfidence.html">Bounded Confidence</a></li>
 <li class="toctree-l2"><a class="reference internal" href="defSim.influence_sim.Persuasion.html">Persuasion</a></li>
-<li class="toctree-l2"><a class="reference internal" href="defSim.influence_sim.Axelrod.html">Similarity Adoption</a></li>
+<li class="toctree-l2"><a class="reference internal" href="defSim.influence_sim.SimilarityAdoption.html">Similarity Adoption</a></li>
 <li class="toctree-l2"><a class="reference internal" href="defSim.influence_sim.WeightedLinear.html">Weighted Linear Influence</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#module-defSim.influence_sim.influence_sim">influence_sim module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#module-defSim.influence_sim.influence_sim">Abstract Base Class (ABC)</a></li>
@@ -178,7 +178,7 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="defSim.influence_sim.BoundedConfidence.html">Bounded Confidence</a></li>
 <li class="toctree-l1"><a class="reference internal" href="defSim.influence_sim.Persuasion.html">Persuasion</a></li>
-<li class="toctree-l1"><a class="reference internal" href="defSim.influence_sim.Axelrod.html">Similarity Adoption</a></li>
+<li class="toctree-l1"><a class="reference internal" href="defSim.influence_sim.SimilarityAdoption.html">Similarity Adoption</a></li>
 <li class="toctree-l1"><a class="reference internal" href="defSim.influence_sim.WeightedLinear.html">Weighted Linear Influence</a></li>
 </ul>
 </div>
@@ -195,7 +195,7 @@ and passes the arguments and the kwargs dictionary.</p>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>network</strong> – A NetworkX object that will be modified.</p></li>
 <li><p><strong>realization</strong> – The specific implementation of the InfluenceOperator. Options are “bounded_confidence”,
-“axelrod”, “weighted_linear”, “persuasion”.
+“similarity_adoption”, “weighted_linear”, “persuasion”.
 Alternatively, a user-written implementation of the abstract base class can be given here.</p></li>
 <li><p><strong>agent_i</strong> – the index of the focal agent that is either the source or the target of the influence</p></li>
 <li><p><strong>agents_j</strong> – A list of indices of the agents who can be either the source or the targets of the influence.</p></li>

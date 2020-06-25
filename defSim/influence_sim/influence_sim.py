@@ -58,7 +58,7 @@ def spread_influence(network: nx.Graph,
 
     :param network: A NetworkX object that will be modified.
     :param realization: The specific implementation of the InfluenceOperator. Options are "bounded_confidence",
-        "axelrod", "weighted_linear", "persuasion".
+        "similarity_adoption", "weighted_linear", "persuasion".
         Alternatively, a user-written implementation of the abstract base class can be given here.
     :param agent_i: the index of the focal agent that is either the source or the target of the influence
     :param agents_j: A list of indices of the agents who can be either the source or the targets of the influence.
@@ -69,20 +69,20 @@ def spread_influence(network: nx.Graph,
     :param dissimilarity_measure: An instance of a :class:`~defSim.dissimilarity_component.DissimilarityCalculator.DissimilarityCalculator`.
     :returns: true if agent(s) were successfully influenced
     """
-    from .Axelrod import Axelrod
+    from .SimilarityAdoption import SimilarityAdoption
     from .BoundedConfidence import BoundedConfidence
     from .WeightedLinear import WeightedLinear
     from .Persuasion import Persuasion
 
     # if both functions get the same arguments?
-    if realization == "axelrod":
-        return Axelrod.spread_influence(network,
-                                        agent_i,
-                                        agents_j,
-                                        regime,
-                                        dissimilarity_measure,
-                                        attributes,
-                                        **kwargs)
+    if realization == "similarity_adoption" or "axelrod":  # kept "axelrod" for backwards compatibility
+        return SimilarityAdoption.spread_influence(network,
+                                                   agent_i,
+                                                   agents_j,
+                                                   regime,
+                                                   dissimilarity_measure,
+                                                   attributes,
+                                                   **kwargs)
     elif realization == "bounded_confidence":
         return BoundedConfidence.spread_influence(network,
                                                   agent_i,
@@ -117,5 +117,5 @@ def spread_influence(network: nx.Graph,
                                             **kwargs)
 
     else:
-        raise ValueError("Can only select from the options ['axelrod', 'bounded_confidence', 'weighted_linear', "
+        raise ValueError("Can only select from the options ['similarity_adoption', 'bounded_confidence', 'weighted_linear', "
                          "'persuasion], or supply an implementation of the abstract base class")

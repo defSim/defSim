@@ -8,7 +8,7 @@ from defSim.dissimilarity_component.dissimilarity_calculator import Dissimilarit
 
 
 
-class Axelrod(InfluenceOperator):
+class SimilarityAdoption(InfluenceOperator):
     """
     Implements the InfluenceOperator in a way that recreates the original Axelrod experiment.
     """

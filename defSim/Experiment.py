@@ -74,7 +74,7 @@ class Experiment:
         focal_agent_parameters (dict = {}): Optional dictionary that includes the parameters for the FocalAgentSelector.
         neighbor_selector (str = "random" or :class:`NeighborSelector`): Either a custom NeighborSelector or a string that selects from the predefined options ["random", "similar", ...}
         neighbor_parameters (dict = {}): Optional dictionary that includes the parameters for the NeighborSelector.
-        influence_function (str = "axelrod" or :class:`InfluenceOperator`): Either a custom influence function or a string that selects from the predefined options ["axelrod", "bounded_confidence", "weighted_linear", ...}
+        influence_function (str = "similarity_adoption" or :class:`InfluenceOperator`): Either a custom influence function or a string that selects from the predefined options ["similarity_adoption", "bounded_confidence", "weighted_linear", ...}
         influence_parameters (dict = {}): Optional dictionary that includes the parameters for the InfluenceFunction.
         influenceable_attributes (list = []): With this list you select all attributes that are allowed to be changed by the influence function. If the list is empty, all attributes are affected by influence.
         network_modifier: (String = "random" or :class:`NetworkModifier`) Either a custom NetworkModifier or a string selecting from the predefined options ["random", ...]
@@ -100,7 +100,7 @@ class Experiment:
                  focal_agent_parameters: dict = {},
                  neighbor_selector: str = "random" or neighbor_selector_sim.NeighborSelector,
                  neighbor_parameters: dict = {},
-                 influence_function: str = "axelrod" or influence_sim.InfluenceOperator,
+                 influence_function: str = "similarity_adoption" or influence_sim.InfluenceOperator,
                  influence_parameters: dict = {},
                  influenceable_attributes: list = None,  # the list that is passed to the influence function
                  network_modifier: str = "random" or network_evolution_sim.NetworkModifier,
@@ -280,7 +280,7 @@ class Experiment:
                     if results.ready():
                         break
                     remaining = results._number_left
-                    print("Waiting for", remaining, "tasks to complete...", end='\r')
+#                    print("\rWaiting for", remaining, "tasks to complete...", end="")
                     time.sleep(2)
                     pool.join()
                 return pd.concat(results.get())
@@ -310,7 +310,7 @@ class Experiment:
                     if results.ready():
                         break
                     remaining = results._number_left
-                    print("Waiting for", remaining, "tasks to complete...")
+#                    print("\rWaiting for", remaining, "tasks to complete...", end="")
                     time.sleep(2)
                 pool.join()
                 return pd.concat(results.get()).reset_index()
