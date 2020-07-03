@@ -75,7 +75,7 @@ def spread_influence(network: nx.Graph,
     from .Persuasion import Persuasion
 
     # if both functions get the same arguments?
-    if realization == "similarity_adoption" or "axelrod":  # kept "axelrod" for backwards compatibility
+    if realization in ["similarity_adoption", "axelrod"]:  # kept "axelrod" for backwards compatibility
         return SimilarityAdoption.spread_influence(network,
                                                    agent_i,
                                                    agents_j,
