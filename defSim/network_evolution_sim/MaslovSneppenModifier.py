@@ -3,9 +3,13 @@ import networkx as nx
 from .network_evolution_sim import NetworkModifier
 
 
-class MaslovSneppenRewiring(NetworkModifier):
+class MaslovSneppenModifier(NetworkModifier):
 
-    @staticmethod
+    def __init__(self, rewiring_prop: float = None, rewiring_exact: int = None):
+        super().__init__()
+        self.rewiring_prop = rewiring_prop
+        self.rewiring_exact = rewiring_exact
+
     def rewire_network(network: nx.Graph, rewiring_prop: float = None, rewiring_exact = None, **kwargs):
         """
         This method executes Maslov Sneppen rewiring (Maslov & Sneppen, 2002). Until a given proportion of the network
@@ -23,12 +27,17 @@ class MaslovSneppenRewiring(NetworkModifier):
         :return: Does not return the network. The network is modified in place.
         """
 
-        if self.rewiring_exact is not None and self.rewiring_prop is None:
-            rewire_n = self.rewiring_exact
-        elif self.rewiring_exact is None and self.rewiring_prop is not None:
-            rewire_n = self.rewiring_prop * network.number_of_edges()
-        elif self.rewiring_exact is not None and self.rewiring_prop is not None:
-            rewire_n = self.rewiring_exact
+        if rewiring_prop is None:
+            rewiring_prop = self.rewiring_prop
+        if rewiring_exact is None:
+            rewiring_exact = self.rewiring_exact
+
+        if rewiring_exact is not None and rewiring_prop is None:
+            rewire_n = rewiring_exact
+        elif rewiring_exact is None and rewiring_prop is not None:
+            rewire_n = rewiring_prop * network.number_of_edges()
+        elif rewiring_exact is not None and rewiring_prop is not None:
+            rewire_n = rewiring_exact
             warnings.warn("Both proportional and exact rewiring specified, using exact.")
                 
         ticker = 0

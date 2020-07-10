@@ -1,6 +1,7 @@
-from typing import List
+from typing import List, Union
 import inspect
 import random
+import warnings
 import time
 import pandas as pd
 import networkx as nx
@@ -11,6 +12,8 @@ from defSim.focal_agent_sim import focal_agent_sim
 from defSim.neighbor_selector_sim import neighbor_selector_sim
 from defSim.influence_sim import influence_sim
 from defSim.network_evolution_sim import network_evolution_sim
+from defSim.network_evolution_sim.network_evolution_sim import NetworkModifier
+from defSim.network_evolution_sim.MaslovSneppenModifier import MaslovSneppenModifier
 from defSim.tools import NetworkDistanceUpdater
 from defSim.dissimilarity_component.dissimilarity_calculator import DissimilarityCalculator
 from defSim.dissimilarity_component.dissimilarity_calculator import select_calculator
@@ -29,7 +32,7 @@ class Simulation:
     Args:
         network (nx.Graph=None): A NetworkX object that was created from empirical data.
         topology (String = "grid"): Options are "grid", "ring" and "spatial_random_graph", or you could give the name of one of the generators included in the `NetworkX package <https://networkx.github.io/documentation/stable/reference/generators.html>`__..
-        ms_rewiring (float = None): A threshold for the minimum proportion of edges in the graph object that need to be rewired.
+        network_modifiers (NetworkModifier or List = None): A modifier or list of modifiers to apply to the network after initialization. Each modifier should be derived from the NetworkModifier base class.
         attributes_initializer (String = "random_categorical" or :class:`AttributesInitializer`): Either be a custom AttributesInitializer or a string that selects from the predefined choices: ["random_categorical", "random_continuous"...]
         focal_agent_selector (str = "random" or :class:`FocalAgentSelector`): Either a custom FocalAgentSelector or a string that selects from the predefined options ["random", ...]
         neighbor_selector (str = "random" or :class:`NeighborSelector`): Either a custom NeighborSelector or a string that selects from the predefined options ["random", "similar" ...}
@@ -51,7 +54,7 @@ class Simulation:
     def __init__(self,
                  network=None,
                  topology: str = "grid",
-                 ms_rewiring = None,
+                 network_modifiers: List[NetworkModifier] = None,
                  attributes_initializer: str = "random_categorical" or agents_init.AttributesInitializer,
                  focal_agent_selector: str = "random" or focal_agent_sim.FocalAgentSelector,
                  neighbor_selector: str = "random" or neighbor_selector_sim.NeighborSelector,
@@ -69,7 +72,7 @@ class Simulation:
                  ):
         self.network = network
         self.topology = topology
-        self.ms_rewiring = ms_rewiring
+        self.network_modifiers = network_modifiers
         self.attributes_initializer = attributes_initializer
         self.focal_agent_selector = focal_agent_selector
         self.neighbor_selector = neighbor_selector
@@ -168,7 +171,13 @@ class Simulation:
             self.seed = random.randint(10000,99999)
         random.seed(self.seed)
         if not self.network_provided:
-            self.network = network_init.generate_network(self.topology, **self.parameter_dict)
+            if 'ms_rewiring' in list(self.parameter_dict.keys()):
+                warnings.warn("Setting ms_rewiring in parameter dict is deprecated. Pass an instance of MaslovSneppenModifier in network_modifiers instead.", DeprecationWarning)
+                if self.network_modifiers is None:
+                    self.network_modifiers = [MaslovSneppenModifier(rewiring_prop = self.parameter_dict['ms_rewiring'])]
+                else:
+                    self.network_modifiers.append(MaslovSneppenModifier(rewiring_prop = self.parameter_dict['ms_rewiring']))
+            self.network = network_init.generate_network(self.topology, network_modifiers = self.network_modifiers, **self.parameter_dict)
 
         # storing the indices of the agents to access them quicker
         self.agentIDs = list(self.network)
