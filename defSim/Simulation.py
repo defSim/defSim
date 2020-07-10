@@ -140,7 +140,7 @@ class Simulation:
             self.initialize_simulation()
 
         if self.influence_function == 'list':
-            self.influence_function = self.parameter_dict['influence_functions']
+            self.influence_function = self.parameter_dict['influence_function']
 
         if self.stop_condition == "pragmatic_convergence":
             self._run_until_pragmatic_convergence()
