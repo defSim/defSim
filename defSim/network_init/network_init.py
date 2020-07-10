@@ -264,17 +264,7 @@ def _produce_networkx_graph(name: str,**kwargs):
 
 def execute_ms_rewiring(network: nx.Graph, rewiring_prop: float):
     """
-    This method executes Maslov Sneppen rewiring (Maslov & Sneppen, 2002). Until a given proportion of the network
-    edges is rewired, the algorithm will pick two edges at random, remove them, and construct an edge between a
-    different combination of nodes that have just lost an edge. Effectively, this introduces randomization of network
-    structure, while leaving the degree distribution unchanged. Because the parameter `rewiring_prop` functions as a
-    threshold for number of rewiring iterations that need to be executed, it can exceed 1. Actually, to achieve a
-    random network starting from a network with structure, the rewiring proportion should exceed 1.
-
-    :param network: NetworkX Graph object
-    :param rewiring_prop: A threshold for the minimum proportion of edges in the graph object that need to be rewired.
-        Sampling these edges happens with replacement, so rewiring_prop may exceed 1.
-    :return: NetworkX Graph object
+    This method is deprecated and will be removed.
     """
     from .network_evolution_sim import MaslovSneppenModifier
 
