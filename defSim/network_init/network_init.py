@@ -266,7 +266,7 @@ def execute_ms_rewiring(network: nx.Graph, rewiring_prop: float):
     """
     This method is deprecated and will be removed.
     """
-    from .network_evolution_sim import MaslovSneppenModifier
+    from defSim.network_evolution_sim.MaslovSneppenModifier import MaslovSneppenModifier
 
     warnings.warn("Function execute_ms_rewiring is deprecated, use network_evolution_sim/MaslovSneppenModifier instead.", DeprecationWarning)
-    MaslovSneppenModifier.rewire_network(network = network, rewiring_prop = rewiring_prop)
+    MaslovSneppenModifier().rewire_network(network = network, rewiring_prop = rewiring_prop)
