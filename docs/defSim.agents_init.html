@@ -70,15 +70,13 @@
           
             
             
-                <ul>
+                <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="Introduction_to_defSim.html">Introduction</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="Introduction_to_defSim.html#the-unified-way">1. The Unified Way</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Introduction_to_defSim.html#the-modular-way">2. The Modular Way</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Introduction_to_defSim.html#some-useful-resources">Some useful resources</a></li>
 </ul>
 </li>
-</ul>
-<ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="experiment.class.html">Experiment class</a></li>
 <li class="toctree-l1"><a class="reference internal" href="simulation.class.html">Simulation class</a></li>
 <li class="toctree-l1"><a class="reference internal" href="defSim.network_init.html">Networks</a><ul>
@@ -92,10 +90,10 @@
 <li class="toctree-l2"><a class="reference internal" href="defSim.agents_init.RandomCategoricalInitializer.html">Random Categorical Initializer</a></li>
 <li class="toctree-l2"><a class="reference internal" href="defSim.agents_init.RandomContinuousInitializer.html">Random Continuous Initializer</a></li>
 <li class="toctree-l2"><a class="reference internal" href="defSim.agents_init.CorrelatedContinuousInitializer.html">Correlated Continuous Initializer</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#module-defSim.agents_init.agents_init">initialize_attributes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#initialize-attributes">initialize_attributes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#module-defSim.agents_init.agents_init">set_categorical_attribute</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#module-defSim.agents_init.agents_init">set_continuous_attribute</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#abstract-base-class-abc">Abstract Base Class (ABC)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#abstract-base-class">Abstract Base Class</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="defSim.focal_agent_sim.html">Focal agent selection</a><ul>
@@ -170,9 +168,9 @@
 </div> --> <!-- turned off on 21/10/2019 -->
            <div itemprop="articleBody">
             
-  <div class="section" id="agent-attributes-initialization-component">
-<h1>Agent attributes (initialization component)<a class="headerlink" href="#agent-attributes-initialization-component" title="Permalink to this headline">¶</a></h1>
-<p>This component is concerned with initializing the attributes of the agents at the start of the simulation run. The following methods are available:</p>
+<div class="section" id="agents-initialization-component">
+<h1>Agents (initialization component)<a class="headerlink" href="#agents-initialization-component" title="Permalink to this headline">¶</a></h1>
+<p>This component is concerned with initializing agent attributes at the start of the simulation. The following methods are available:</p>
 <div class="toctree-wrapper compound">
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="defSim.agents_init.RandomCategoricalInitializer.html">Random Categorical Initializer</a></li>
@@ -180,10 +178,10 @@
 <li class="toctree-l1"><a class="reference internal" href="defSim.agents_init.CorrelatedContinuousInitializer.html">Correlated Continuous Initializer</a></li>
 </ul>
 </div>
-<p>Initializing the attributes can be done using the following function:</p>
-<div class="section" id="module-defSim.agents_init.agents_init">
-<span id="initialize-attributes"></span><h2>initialize_attributes<a class="headerlink" href="#module-defSim.agents_init.agents_init" title="Permalink to this headline">¶</a></h2>
-<dl class="function">
+<div class="section" id="initialize-attributes">
+<h2>initialize_attributes<a class="headerlink" href="#initialize-attributes" title="Permalink to this headline">¶</a></h2>
+<p>To initialize attributes, the following function can be called:</p>
+<span class="target" id="module-defSim.agents_init.agents_init"></span><dl class="function">
 <dt id="defSim.agents_init.agents_init.initialize_attributes">
 <code class="sig-prename descclassname">defSim.agents_init.agents_init.</code><code class="sig-name descname">initialize_attributes</code><span class="sig-paren">(</span><em class="sig-param">network: networkx.classes.graph.Graph</em>, <em class="sig-param">realization: str</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#defSim.agents_init.agents_init.initialize_attributes" title="Permalink to this definition">¶</a></dt>
 <dd><p>This function works as a factory method for the AttributesInitializer component.
@@ -201,8 +199,7 @@ Options are “random_categorical” and “random_continuous”.</p></li>
 </dl>
 </dd></dl>
 
-<hr class="docutils" />
-<p><strong>Some useful methods when programming your own attribute initializer:</strong></p>
+
 </div>
 <div class="section" id="module-defSim.agents_init.agents_init">
 <span id="set-categorical-attribute"></span><h2>set_categorical_attribute<a class="headerlink" href="#module-defSim.agents_init.agents_init" title="Permalink to this headline">¶</a></h2>
@@ -252,9 +249,8 @@ The values of the attribute are drawn from a distribution that is set by the use
 </dl>
 </dd></dl>
 
-</div>
-<div class="section" id="abstract-base-class-abc">
-<h2>Abstract Base Class (ABC)<a class="headerlink" href="#abstract-base-class-abc" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="abstract-base-class">
+<h2>Abstract Base Class<a class="headerlink" href="#abstract-base-class" title="Permalink to this headline">¶</a></h2>
 <p>The Abstract Base Class of the agent attribute initializer:</p>
 <span class="target" id="module-defSim.agents_init.agents_init"></span><dl class="class">
 <dt id="defSim.agents_init.agents_init.AttributesInitializer">

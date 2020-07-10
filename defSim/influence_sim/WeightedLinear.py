@@ -63,8 +63,6 @@ class WeightedLinear(InfluenceOperator):
             exists a point at which influence becomes negative, making agents shift away from the sending agents
             expressed opinion.
         :param bool=False bi_directional: A boolean specifying whether influence is bi- or uni-directional.
-        :param dict=None feature_bounds: A dictionary with keys 'min' and 'max' to define boundaries of feature range. 
-            Defaults to values specified in :class:`~defSim.agents_init.RandomContinuousInitializer.RandomContinuousInitializers`
         :returns: true if agent(s) were successfully influenced
         """
 
@@ -84,11 +82,6 @@ class WeightedLinear(InfluenceOperator):
             # if regime == "one-to-one":
             # print("Bi-directionality was not specified, default value False is used.")
             bi_directional = False
-
-
-        feature_bounds = kwargs.get("feature_bounds", None)
-        if feature_bounds is None:
-            feature_bounds = RandomContinuousInitializer.default_feature_bounds
 
         # in case of one-to-one, j is only one agent, but we still want to iterate over it
         if type(agents_j) != list:
@@ -113,8 +106,8 @@ class WeightedLinear(InfluenceOperator):
                     convergence_rate * (1 - homophily * abs(network.edges[agent_i, neighbor]["dist"])) * \
                     feature_difference
                 # bounding the opinions to the pre-supposed opinion scale [0,1]
-                if network.nodes[neighbor][influenced_feature] > feature_bounds['max']: network.nodes[neighbor][influenced_feature] = feature_bounds['max']
-                if network.nodes[neighbor][influenced_feature] < feature_bounds['min']: network.nodes[neighbor][influenced_feature] = feature_bounds['min']
+                if network.nodes[neighbor][influenced_feature] > 1: network.nodes[neighbor][influenced_feature] = 1
+                if network.nodes[neighbor][influenced_feature] < 0: network.nodes[neighbor][influenced_feature] = 0
 
                 if bi_directional == True and regime == "one-to-one":
                     # influence function applied again
@@ -145,9 +138,9 @@ class WeightedLinear(InfluenceOperator):
                 overall_influence = sum(influence_values) / len(influence_values)
                 network.nodes[agent_i][influenced_feature] = network.nodes[agent_i][influenced_feature] + overall_influence
                 
-                # bounding the opinions to the pre-supposed opinion scale 
-                if network.nodes[agent_i][influenced_feature] > feature_bounds['max']: network.nodes[agent_i][influenced_feature] = feature_bounds['max']
-                if network.nodes[agent_i][influenced_feature] < feature_bounds['min']: network.nodes[agent_i][influenced_feature] = feature_bounds['min']                    
+                # bounding the opinions to the pre-supposed opinion scale [0, 1]
+                if network.nodes[agent_i][influenced_feature] > 1: network.nodes[agent_i][influenced_feature] = 1
+                if network.nodes[agent_i][influenced_feature] < 0: network.nodes[agent_i][influenced_feature] = 0                    
                 
                 update_dissimilarity(network, [agent_i], dissimilarity_measure, **kwargs)
                 success = True

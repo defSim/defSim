@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 {
   "defSim/tests/test_boundedConfidence.py::TestBoundedConfidence::test_spread_influence": true,
   "defSim/tests/test_dissimilarityCalculator.py::TestDissimilarityCalculator::test_EuclideanDistance_calculate_dissimilarity": true,
@@ -7,3 +8,6 @@
   "defSim/tests/test_weightedLinear.py::TestWeightedLinear::test_setting_opinion_bounds": true,
   "defSim/tests/test_weightedLinear.py::TestWeightedLinear::test_spread_influence": true
 }
+=======
+{}
+>>>>>>> correlatedFeatures

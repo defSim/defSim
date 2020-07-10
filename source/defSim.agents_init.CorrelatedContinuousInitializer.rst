@@ -1,5 +1,5 @@
 CorrelatedContinuousInitializer
------------------------------------------------------------------
+==========================================
 
 .. automodule:: defSim.agents_init.CorrelatedContinuousInitializer
     :members:

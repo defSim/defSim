@@ -9,10 +9,9 @@ class RandomContinuousInitializer(AttributesInitializer):
     Implements the AttributesInitializer as a random initialization of arbitrary continuous features.
 
     """
-    default_feature_bounds = {'min': 0, 'max': 1}
 
     @staticmethod
-    def initialize_attributes(network: nx.Graph, feature_bounds: dict = default_feature_bounds, distribution: str = 'uniform', **kwargs):
+    def initialize_attributes(network: nx.Graph, distribution: str = 'uniform', **kwargs):
         """
 
         Randomly initializes a number of continuous features between 0 and 1 for each node.
@@ -30,4 +29,4 @@ class RandomContinuousInitializer(AttributesInitializer):
             num_features = 1         
 
         for i in range(num_features):
-            set_continuous_attribute(network, 'f' + str("%02d" % (i + 1)), feature_bounds = feature_bounds, distribution = distribution)
+            set_continuous_attribute(network, 'f' + str("%02d" % (i + 1)), distribution = distribution)
