@@ -89,6 +89,9 @@ class Simulation:
         self.influence_steps = 0  # counts the successful influence steps
         self.output_realizations = output_realizations
         self.tickwise = tickwise
+        self.initialize_tickwise_output()
+
+    def initialize_tickwise_output(self):
         self.tickwise_output = {}
         for tickwise_realization in self.tickwise:
             if tickwise_realization in CreateOutputTable._implemented_output_realizations:
@@ -101,8 +104,7 @@ class Simulation:
                         tickwise_realization.label = "CustomOutput{}".format(random.randint(1000,9999))
                         self.tickwise_output[tickwise_realization.label] = []
                 else:
-                    self.tickwise_output[tickwise_realization] = []
-
+                    self.tickwise_output[tickwise_realization] = []        
 
     def return_values(self) -> pd.DataFrame:
         """
@@ -158,6 +160,9 @@ class Simulation:
         # reset steps
         self.time_steps = 0
         self.influence_steps = 0
+
+        # reset tickwise output
+        self.initialize_tickwise_output()
 
         if self.seed is None:
             self.seed = random.randint(10000,99999)
