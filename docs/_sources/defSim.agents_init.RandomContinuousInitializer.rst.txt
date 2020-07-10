@@ -1,5 +1,5 @@
 RandomContinuousInitializer
------------------------------------------------------------------
+==========================================
 
 .. automodule:: defSim.agents_init.RandomContinuousInitializer
     :members:

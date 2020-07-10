@@ -1,5 +1,5 @@
 RandomCategoricalInitializer
-------------------------------------------------------------------
+==========================================
 
 .. automodule:: defSim.agents_init.RandomCategoricalInitializer
     :members:
