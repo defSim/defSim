@@ -1,6 +1,6 @@
 from defSim.network_init import network_init
 from defSim.agents_init import agents_init
-from defSim.dissimilarity_component.dissimilarity_calculator import HammingDistance
+from defSim.dissimilarity_component.HammingDistance import HammingDistance
 from defSim.tools import NetworkDistanceUpdater
 import networkx.algorithms.isomorphism as iso
 import timeit
@@ -8,9 +8,9 @@ import random
 
 random.seed("random")
 network = network_init.generate_network("grid")
-agents_init.initialize_attributes(network, "random")
+agents_init.initialize_attributes(network, "random_categorical")
 network_comparison = network.copy()
-HammingDistance.calculate_dissimilarity_networkwide(network)
+HammingDistance().calculate_dissimilarity_networkwide(network)
 
 all_attributes = network.nodes[1].keys()
 def test_isomorphic():

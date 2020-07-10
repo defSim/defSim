@@ -5,7 +5,7 @@ from defSim.neighbor_selector_sim import neighbor_selector_sim
 from defSim.influence_sim import influence_sim
 from defSim.Simulation import Simulation
 from defSim.Experiment import Experiment
-from defSim.dissimilarity_component.dissimilarity_calculator import HammingDistance
+from defSim.dissimilarity_component.HammingDistance import HammingDistance
 import random
 import timeit
 
