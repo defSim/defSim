@@ -167,7 +167,7 @@ class Simulation:
         if self.seed is None:
             self.seed = random.randint(10000,99999)
         random.seed(self.seed)
-        if self.network is None:
+        if not self.network_provided:
             self.network = network_init.generate_network(self.topology, **self.parameter_dict)
 
         # storing the indices of the agents to access them quicker
