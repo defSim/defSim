@@ -291,8 +291,7 @@ class Experiment:
         else:
             if not isinstance(self.network, nx.Graph) and self.network is not None:
                 self.network = network_init.read_network(self.network)
-                # not implemented yet
-
+                
             # since the creation of the grid network takes awfully long, we don't want to create that in each
             # simulation
             # todo: refactor, cause this won't work if the parameters of the network are variables

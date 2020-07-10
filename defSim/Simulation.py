@@ -167,7 +167,12 @@ class Simulation:
         if self.seed is None:
             self.seed = random.randint(10000,99999)
         random.seed(self.seed)
-        if not self.network_provided:
+        if self.network_provided:
+            if self.network == 'list':
+                    self.network = self.parameter_dict['networks']            
+            if not isinstance(self.network, nx.Graph) and self.network is not None:
+                self.network = network_init.read_network(self.network)
+        else:
             self.network = network_init.generate_network(self.topology, **self.parameter_dict)
 
         # storing the indices of the agents to access them quicker
