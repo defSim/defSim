@@ -33,6 +33,8 @@ def rewire_network(network: nx.Graph, realization: str, **kwargs):
     """
     from .MaslovSneppenModifier import MaslovSneppenModifier
     if realization == "maslov_sneppen":
-        MaslovSneppenModifier.rewire_network(network, **kwargs)
+        rewiring_prop = kwargs.get('rewiring_prop', None)
+        rewiring_exact = kwargs.get('rewiring_exact', None)
+        MaslovSneppenModifier(rewiring_prop = rewiring_prop, rewiring_exact = rewiring_exact).rewire_network(network, **kwargs)
     else:
         raise ValueError("Can only select from the options ['maslov_sneppen']")

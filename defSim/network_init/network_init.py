@@ -33,7 +33,7 @@ def generate_network(name: str, network_modifiers = None, **kwargs) -> nx.Graph:
 
     if network_modifiers is not None:
         for modifier in network_modifiers:
-            modifier.rewire_network()
+            modifier.rewire_network(network)
 
     return network
 
