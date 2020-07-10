@@ -288,11 +288,7 @@ class Experiment:
                 result_list = [sim.run_simulation() for sim in self.simulations]
                 return pd.concat(result_list).reset_index(drop=True)
         # if simulations are to be created based on parameter combinations
-        else:
-            if not isinstance(self.network, nx.Graph) and self.network is not None:
-                self.network = network_init.read_network(self.network)
-                # not implemented yet
-
+        else:              
             # since the creation of the grid network takes awfully long, we don't want to create that in each
             # simulation
             # todo: refactor, cause this won't work if the parameters of the network are variables
@@ -393,7 +389,7 @@ class Experiment:
         # shutil.rmtree("pickles")
 
     def _create_and_run_simulation(self, parameter_dict):
-        simulation = Simulation(network=self.network.copy() if self.network is not None else self.network,
+        simulation = Simulation(network=self.network.copy() if isinstance(self.network, nx.Graph) else self.network,
                                 topology=self.topology,
                                 attributes_initializer=self.attributes_initializer,
                                 focal_agent_selector=self.focal_agent_selector,
