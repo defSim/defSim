@@ -169,7 +169,7 @@ class Simulation:
         random.seed(self.seed)
         if self.network_provided:
             if self.network == 'list':
-                    self.network = self.parameter_dict['networks']            
+                    self.network = self.parameter_dict['network']            
             if not isinstance(self.network, nx.Graph) and self.network is not None:
                 self.network = network_init.read_network(self.network)
         else:
