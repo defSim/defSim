@@ -48,17 +48,9 @@ class Persuasion(InfluenceOperator):
         :param float=1 confidence_level: A number between 0 and 1 determining the cutoff value for the dissimilarity
             at which agents do not interact anymore. 1 means that even the most dissimilar agents still interact, 0
             means no interaction. Passed as a kwargs argument.
-        :param bool=False bi_directional: A boolean specifying whether influence is bi- or uni-directional.
-        :param dict=None feature_bounds: A dictionary with keys 'min' and 'max' to define boundaries of feature range. 
-            Defaults to values specified in :class:`~defSim.agents_init.RandomContinuousInitializer.RandomContinuousInitializers`        
+        :param bool=False bi_directional: A boolean specifying whether influence is bi- or uni-directional.     
         :returns: true if agent(s) were successfully influenced
         """
-
-        # Arguments communicated will be based on extremes of the opinion scale
-        # If not specified, default random continuous bounds are assumed
-        feature_bounds = kwargs.get("feature_bounds", None)
-        if feature_bounds is None:
-            feature_bounds = RandomContinuousInitializer.default_feature_bounds
 
         confidence_level = kwargs.get('confidence_level', 1)
         convergence_rate = kwargs.get('convergence_rate', 0.5)
@@ -83,7 +75,7 @@ class Persuasion(InfluenceOperator):
                     success = True
                     # transform the opinion of agent_i to an argument of the closest opinion pole by randomly drawing
                     # an argument with a probability conditional on the extremity of the opinion
-                    argument = random.choices([feature_bounds['min'], feature_bounds['max']], weights=[1-network.nodes[agent_i][influenced_feature],
+                    argument = random.choices([0, 1], weights=[1-network.nodes[agent_i][influenced_feature],
                                                               network.nodes[agent_i][influenced_feature]])[0]
                     # store the original opinion of the neighbor for bi-directional case
                     argument_neighbor = network.nodes[neighbor][influenced_feature]
@@ -94,7 +86,7 @@ class Persuasion(InfluenceOperator):
                     network.nodes[neighbor][influenced_feature] = network.nodes[neighbor][influenced_feature] + \
                                                                   convergence_rate * feature_difference
                     if bi_directional == True and regime == "one-to-one":
-                        argument = random.choices([feature_bounds['min'], feature_bounds['max']], weights=[1 - argument_neighbor,
+                        argument = random.choices([0, 1], weights=[1 - argument_neighbor,
                                                                    argument_neighbor])[0]
                         feature_difference = argument - network.nodes[agent_i][influenced_feature]
                         # influence function
@@ -111,7 +103,7 @@ class Persuasion(InfluenceOperator):
             if len(close_neighbors) != 0:
                 success = True
                 average_value = np.mean([network.nodes[neighbor][influenced_feature] for neighbor in close_neighbors])
-                argument = random.choices([feature_bounds['min'], feature_bounds['max']], weights=[1 - average_value, average_value])[0]
+                argument = random.choices([0, 1], weights=[1 - average_value, average_value])[0]
                 feature_difference = argument - network.nodes[agent_i][influenced_feature]
                 network.nodes[agent_i][influenced_feature] = network.nodes[agent_i][influenced_feature] + \
                                                              convergence_rate * feature_difference
