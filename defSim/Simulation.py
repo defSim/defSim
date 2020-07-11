@@ -16,6 +16,7 @@ from defSim.dissimilarity_component.dissimilarity_calculator import Dissimilarit
 from defSim.dissimilarity_component.dissimilarity_calculator import select_calculator
 from defSim.tools import OutputMeasures
 from defSim.tools import CreateOutputTable
+from defSim.tools.ConvergenceChecks import ConvergenceCheck, PragmaticConvergenceCheck, OpinionDistanceConvergenceCheck
 
 
 class Simulation:
@@ -146,7 +147,8 @@ class Simulation:
             self._run_until_pragmatic_convergence()
         elif self.stop_condition == "strict_convergence":
             self._run_until_strict_convergence()
-
+        elif isinstance(self.stop_condition, ConvergenceCheck):
+            self._run_until_convergence()
         elif self.stop_condition == "max_iteration":
             self._run_until_max_iteration()
         else:
@@ -287,18 +289,15 @@ class Simulation:
         except KeyError:
             step_size = 100
 
-        all_attributes = self.network.nodes[1].keys()
-        node_matcher = iso.categorical_node_match(all_attributes, [0 for i in range(len(all_attributes))])
-        network_comparison = self.network.copy()
+        stop_condition = PragmaticConvergenceCheck(initial_network = self.network.copy())
+
         while 1:
             self.run_simulation_step()
             if self.time_steps >= self.max_iterations:
                 break
             if self.time_steps % step_size == 0:
-                if nx.is_isomorphic(self.network, network_comparison, node_match=node_matcher):
+                if stop_condition.check_convergence(self.network):
                     break
-                else:
-                    network_comparison = self.network.copy()
 
     def _run_until_strict_convergence(self):
         """
@@ -307,34 +306,48 @@ class Simulation:
         continues.
 
         :param float=0.0 threshold: A value between 0 and 1 that determines at what distance two agents can't influence each other anymore.
-        :param boolean=True check_each_step: A boolean that determines whether convergence should be checked each step or only every hundreth
-            step to save time.
+        :param int=100 step_size: determines how often it should be checked for a change in the network.
         """
         try:
             threshold = self.parameter_dict["threshold"]
         except KeyError:
             threshold = 0.0
         try:
-            check_each_step = self.parameter_dict["check_each_step"]
+            step_size = self.parameter_dict["step_size"]
         except KeyError:
-            check_each_step = True
+            step_size = 100
 
-        self.time_steps = 0
-        if check_each_step:
-            while 1:
-                self.run_simulation_step()
-                if self.time_steps == self.max_iterations:
+        stop_condition = OpinionDistanceConvergenceCheck(threshold = threshold)
+        
+        while 1:
+            self.run_simulation_step()
+            if self.time_steps >= self.max_iterations:
+                break
+            if self.time_steps % step_size == 0:
+                if stop_condition.check_convergence(self.network):
                     break
-                if not NetworkDistanceUpdater.check_dissimilarity(self.network, threshold):
+
+    def _run_until_convergence(self):
+        """
+        The convergence of the simulation is periodically checked using a custom convergence check 
+        set in self.stop_condition. Every step_size steps (defaults to 100), the check_convergence
+        method of this custom stop condition is called. The simulation terminates if this method
+        returns true or self.max_iterations is reached.
+
+        :param int=100 step_size: determines how often it should be checked for a change in the network.
+        """
+        try:
+            step_size = self.parameter_dict["step_size"]
+        except KeyError:
+            step_size = 100
+
+        while 1:
+            self.run_simulation_step()
+            if self.time_steps >= self.max_iterations:
+                break
+            if self.time_steps % step_size == 0:
+                if self.stop_condition.check_convergence(self.network, **self.parameter_dict):
                     break
-        else:
-            while 1:
-                self.run_simulation_step()
-                if self.time_steps >= self.max_iterations:
-                    break
-                if self.time_steps % 100 == 0:
-                    if not NetworkDistanceUpdater.check_dissimilarity(self.network, threshold):
-                        break
 
     def _run_until_max_iteration(self):
         for iteration in range(self.max_iterations):
