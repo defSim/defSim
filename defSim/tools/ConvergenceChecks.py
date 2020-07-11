@@ -1,3 +1,4 @@
+from defSim.tools import NetworkDistanceUpdater
 from abc import ABC, abstractmethod
 import networkx as nx
 import networkx.algorithms.isomorphism as iso
@@ -10,7 +11,7 @@ class ConvergenceCheck(ABC):
     """
 
     @abstractmethod
-    def check_convergence(network: nx.Graph, **kwargs) -> bool:
+    def check_convergence(self, network: nx.Graph, **kwargs) -> bool:
         """
         This method receives a NetworkX object and returns whether the simulation has converged or not.
 
@@ -34,7 +35,7 @@ class PragmaticConvergenceCheck(ConvergenceCheck):
         all_attributes = initial_network.nodes[1].keys()
         self._node_matcher = iso.categorical_node_match(all_attributes, [0 for i in range(len(all_attributes))])                
 
-    def check_convergence(network: nx.Graph, **kwargs) -> bool:
+    def check_convergence(self, network: nx.Graph, **kwargs) -> bool:
         """
         This method receives a NetworkX object checks whether all attributes and the network structure
         are identical to the stored network from the previous call.
@@ -44,7 +45,7 @@ class PragmaticConvergenceCheck(ConvergenceCheck):
         :returns: True if no attributes changed and network structure has not changed, else False. 
         """            
 
-        if nx.is_isomorphic(self.network, self._previous_network, node_match=self._node_matcher):
+        if nx.is_isomorphic(network, self._previous_network, node_match=self._node_matcher):
             return True
         else:
             self._previous_network = network.copy()
@@ -63,7 +64,7 @@ class OpinionDistanceConvergenceCheck(ConvergenceCheck):
     def __init__(self, threshold):
         self.threshold = threshold   
 
-    def check_convergence(network: nx.Graph, **kwargs) -> bool:
+    def check_convergence(self, network: nx.Graph, **kwargs) -> bool:
         """
         This method receives a NetworkX object checks whether any pair of agents is within the specified
         opinion distance from each other, indicating that they could theoretically be influenced.
@@ -73,5 +74,5 @@ class OpinionDistanceConvergenceCheck(ConvergenceCheck):
         :returns: True if converged according to specified criteria, else False. 
         """
 
-        return not NetworkDistanceUpdater.check_dissimilarity(network, self.threshold):
+        return not NetworkDistanceUpdater.check_dissimilarity(network, self.threshold)
                      
