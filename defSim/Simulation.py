@@ -159,8 +159,8 @@ class Simulation:
 
     def initialize_simulation(self):
         """
-        This method initializes the network if none is given, initializes the attributes of the agents, and also
-        computes and sets the distances between each neighbor.
+        This method initializes the network if none is given, applies network modifiers, initializes the attributes of the agents, 
+        and also computes and sets the distances between each neighbor.
         """
 
         # reset steps
@@ -174,19 +174,27 @@ class Simulation:
             self.seed = random.randint(10000,99999)
         random.seed(self.seed)
 
+        ## if deprecated ms_rewiring parameter is set in parameter dict, replace with network modifier
+        if 'ms_rewiring' in list(self.parameter_dict.keys()):
+            warnings.warn("Setting ms_rewiring in parameter dict is deprecated. Pass an instance of MaslovSneppenModifier in network_modifiers instead.", DeprecationWarning)
+            if self.network_modifiers is None:
+                self.network_modifiers = [MaslovSneppenModifier(rewiring_prop = self.parameter_dict['ms_rewiring'])]
+            else:
+                self.network_modifiers.append(MaslovSneppenModifier(rewiring_prop = self.parameter_dict['ms_rewiring']))        
+
+        # read or generate network if no nx.Graph was provided, apply network modifiers
         if self.network_provided:
             if self.network == 'list':
                     self.network = self.parameter_dict['network']            
-            if not isinstance(self.network, nx.Graph) and self.network is not None:
+            elif not isinstance(self.network, nx.Graph) and self.network is not None:
                 self.network = network_init.read_network(self.network)
-        else:
-            if 'ms_rewiring' in list(self.parameter_dict.keys()):
-                warnings.warn("Setting ms_rewiring in parameter dict is deprecated. Pass an instance of MaslovSneppenModifier in network_modifiers instead.", DeprecationWarning)
-                if self.network_modifiers is None:
-                    self.network_modifiers = [MaslovSneppenModifier(rewiring_prop = self.parameter_dict['ms_rewiring'])]
-                else:
-                    self.network_modifiers.append(MaslovSneppenModifier(rewiring_prop = self.parameter_dict['ms_rewiring']))            
-            self.network = network_init.generate_network(self.topology, network_modifiers = self.network_modifiers, **self.parameter_dict)
+
+            ## apply network modifiers
+            if self.network_modifiers is not None:
+                for modifier in self.network_modifiers:
+                    modifier.rewire_network(network)            
+        else:           
+            self.network = network_init.generate_network(self.topology, network_modifiers = self.network_modifiers, **self.parameter_dict)                          
 
         # storing the indices of the agents to access them quicker
         self.agentIDs = list(self.network)
