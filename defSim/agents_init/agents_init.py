@@ -132,24 +132,43 @@ def set_categorical_attribute(network: nx.Graph, name: str, values: list, distri
 def set_continuous_attribute(network: nx.Graph, name: str, shape: tuple = (1), distribution: str = "uniform",
                              **kwargs):
     """
-    adds a possibly multidimensional attribute to all nodes in a network.
+    Adds a continuous attribute to all nodes in a network.
     The values of the attribute are drawn from a distribution that is set by the user.
 
     :param network: The graph object whose nodes' attributes are modified.
     :param shape: sets the output shape of the attribute value. Allows e.g. for multidimensional opinion vectors
     :param name: the name of the attribute. This is used as a key to call the attribute value in other functions
-    :param distribution: "gaussian", "exponential", "beta" are possible distributions to choose from
+    :param distribution: "normal", "uniform", "beta" are possible distributions to choose from
     :param kwargs: a dictionary containing the parameter name and value for each distribution, these are: \n
-        loc, scale for gaussian \n
-        scale for exponential \n
+        loc, scale for normal (truncated at [0,1]) \n
         a, b for the beta distribution \n
     """
-    # todo: decide whether these functions should also be able to be applied to single nodes
-    # todo: decide which distributions are possible
 
-    if not distribution in ["uniform"]:
-        raise NotImplementedError("The selected distribution has not been implemented. Select from: [uniform].")
+    if not distribution in ["uniform", "normal", "beta"]:
+        raise NotImplementedError("The selected distribution has not been implemented. Select from: [uniform, normal, beta].")
 
+    rng = np.random.default_rng()
+
+    # NOTE: it would probably be faster to let numpy draw all random values at once, and then assign them
+    # that's something we can do if this ever becomes a performance issue (which it likely won't)
     if distribution == "uniform":
         for i in network.nodes():  # iterate over all nodes
-            network.nodes[i][name] = random.uniform(0, 1)  # initialize the feature's value
+            network.nodes[i][name] = rng.uniform(low = 0, high = 1)  # initialize the feature's value
+
+    elif distribution == "normal":
+        # with default values loc = 0.5 and scale = 0.2, 
+        # approximately 1.2% of generated values will fall outside [0,1]
+        # these are set to 0 or 1
+        loc = kwargs.get("loc", 0.5)
+        scale = kwargs.get("scale", 0.2)
+        for i in network.nodes():
+            network.nodes[i][name] = rng.normal(loc = loc, scale = scale)
+
+    elif distribution == "beta":
+        # with default values a = 3, b = 3, the center of the distribution is at 0.5
+        # the distribution is symmetrical, and approximately 50% of all values fall
+        # between 0.36 and 0.64
+        a = kwargs.get("a", 3)
+        b = kwargs.get("b", 3)
+        for i in network.nodes():
+            network.nodes[i][name] = rng.beta(a = a, b = b)
