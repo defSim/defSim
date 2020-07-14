@@ -134,18 +134,20 @@ def set_continuous_attribute(network: nx.Graph, name: str, shape: tuple = (1), d
     """
     Adds a continuous attribute to all nodes in a network.
     The values of the attribute are drawn from a distribution that is set by the user.
+    Random values are drawn using the numpy.random module.
 
     :param network: The graph object whose nodes' attributes are modified.
     :param shape: sets the output shape of the attribute value. Allows e.g. for multidimensional opinion vectors
     :param name: the name of the attribute. This is used as a key to call the attribute value in other functions
-    :param distribution: "normal", "uniform", "beta" are possible distributions to choose from
+    :param distribution: "normal", "uniform", "beta", "triangular" are possible distributions to choose from
     :param kwargs: a dictionary containing the parameter name and value for each distribution, these are: \n
-        loc, scale for normal (truncated at [0,1]) \n
-        a, b for the beta distribution \n
+        loc, scale to set center and spread for the normal distribution (truncated at [0,1]) \n
+        a, b to set center and shape for the beta distribution for the beta distribution \n
+        loc to set center for the triangular distribution
     """
 
-    if not distribution in ["uniform", "normal", "beta"]:
-        raise NotImplementedError("The selected distribution has not been implemented. Select from: [uniform, normal, beta].")
+    if not distribution in ["uniform", "normal", "beta", "triangular"]:
+        raise NotImplementedError("The selected distribution has not been implemented. Select from: [uniform, normal, beta, triangular].")
 
     rng = np.random.default_rng()
 
@@ -162,7 +164,7 @@ def set_continuous_attribute(network: nx.Graph, name: str, shape: tuple = (1), d
         loc = kwargs.get("loc", 0.5)
         scale = kwargs.get("scale", 0.2)
         for i in network.nodes():
-            network.nodes[i][name] = rng.normal(loc = loc, scale = scale)
+            network.nodes[i][name] = min(1, max(0, rng.normal(loc = loc, scale = scale)))
 
     elif distribution == "beta":
         # with default values a = 3, b = 3, the center of the distribution is at 0.5
@@ -172,3 +174,10 @@ def set_continuous_attribute(network: nx.Graph, name: str, shape: tuple = (1), d
         b = kwargs.get("b", 3)
         for i in network.nodes():
             network.nodes[i][name] = rng.beta(a = a, b = b)
+
+    elif distribution == "triangular":
+        # with default value mode loc = 0.5, the mode of the triangular distribution
+        # is at 0.5 and the distribution is symmetrical over the interval [0,1]
+        loc = kwags.get("loc", 0.5)
+        for i in network.nodes():
+            network.nodes[i][name] = rng.triangular(left = 0, mode = loc, right = 1)        
