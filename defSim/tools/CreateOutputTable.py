@@ -15,8 +15,8 @@ class OutputTableCreator(ABC):
 
     label = ""
 
-    @abstractmethod
     @staticmethod
+    @abstractmethod    
     def create_output(network: nx.Graph, **kwargs):
         """
         This method receives a NetworkX object, performs some calculation, and outputs a cell for the output table.
