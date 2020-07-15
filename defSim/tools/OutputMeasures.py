@@ -9,7 +9,7 @@ class ClusterFinder(OutputTableCreator):
         self.cluster_dissimilarity_threshold = cluster_dissimilarity_threshold
         self.strict_zones = strict_zones    
 
-    def create_output(network: nx.Graph, **kwargs):
+    def create_output(self, network: nx.Graph, **kwargs):
         """
         Finds the size and number of cultural regions, zones, or clusters present in the graph. Following Axelrod (1997)
         *regions* are defined as a set of connected nodes with an identical attribute profile.
@@ -42,7 +42,7 @@ class AttributeReporter(OutputTableCreator):
         super().__init__()
         self.feature = feature 
 
-    def create_output(network: nx.Graph, **kwargs):
+    def create_output(self, network: nx.Graph, **kwargs):
         """
 
         This function will output a single row of a dataframe where the columns are user-given agent-features and column
@@ -58,8 +58,7 @@ class AttributeReporter(OutputTableCreator):
 
 class AverageDistanceReporter(OutputTableCreator):
 
-    @staticmethod
-    def create_output(network: nx.Graph, **kwargs):
+    def create_output(self, network: nx.Graph, **kwargs):
         """
 
         Output the average feature distance across all edges. Based on
@@ -80,7 +79,7 @@ class AverageOpinionReporter(OutputTableCreator):
         super().__init__()
         self.feature = feature     
 
-    def create_output(network: nx.Graph, **kwargs):
+    def create_output(self, network: nx.Graph, **kwargs):
         """
 
         Output the average opinion on a feature across all agents. 
