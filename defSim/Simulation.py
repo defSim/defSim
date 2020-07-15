@@ -250,10 +250,10 @@ class Simulation:
                 self.tickwise_output['defaults'].append(CreateOutputTable.create_output_table(network=self.network, realizations = defaults_selected))
             for i in self.tickwise:
                 if not i in defaults_selected:
-                    if inspect.isclass(i) and issubclass(i, CreateOutputTable.OutputTableCreator):
+                    if (inspect.isclass(i) and issubclass(i, CreateOutputTable.OutputTableCreator)) or isinstance(i, CreateOutputTable.OutputTableCreator):
                         self.tickwise_output[i.label].append(i.create_output(network=self.network))
                     else:
-                        self.tickwise_output[i].append(OutputMeasures.AttributeReporter.create_output(self.network, feature=i))
+                        self.tickwise_output[i].append(OutputMeasures.AttributeReporter(feature = i).create_output(self.network))
 
         self.time_steps += 1
         if success:

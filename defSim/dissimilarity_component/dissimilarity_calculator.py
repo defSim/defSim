@@ -48,10 +48,13 @@ def select_calculator(realization: str) -> DissimilarityCalculator:
     """
     from .HammingDistance import HammingDistance
     from .EuclideanDistance import EuclideanDistance
+    from .ManhattanDistance import ManhattanDistance
 
     if realization == "hamming":
         return HammingDistance()
     elif realization == "euclidean":
         return EuclideanDistance()
+    elif realization == "manhattan":
+        return ManhattanDistance() 
     else:
         raise ValueError("Can only select from the options ['hamming', 'euclidean']")
