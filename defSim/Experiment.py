@@ -64,7 +64,7 @@ class Experiment:
 
     Args:
         simulations(List[Simulation] or None): This is a list of simulations to run. If simulations is not None, no new simulations are generated regardless of parameters specified.
-        network(nx.Graph, np.array or String): This is either a preloaded networkx graph, an adjacency matrix as a numpy array, or the full path to a file with and edge list.
+        network(nx.Graph, np.array or String): This is either a preloaded networkx graph, an adjacency matrix as a numpy array, the full path to a file with and edge list, or "list". If "list", a list of networks can be passed to one of the parameter dicts (suggested: network_parameters) which will be iterated over in the simulations of the experiment.
         communication_regime (List or String = "one-to-one"): Options are "one-to-one", "one-to-many" and "many-to-one". For this parameter, it is possible to pass a list of multiple of these options.
         topology (String = "grid"): Options are "grid", "ring" and "spatial_random_graph".
         network_parameters (dict = {}): This dictionary should contain all optional parameters for creating the network structure. Refer to the specific documentation of the network types to see what can be modified.

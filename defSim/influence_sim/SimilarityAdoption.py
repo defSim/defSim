@@ -35,11 +35,12 @@ class SimilarityAdoption(InfluenceOperator):
         :param dissimilarity_measure: An instance of a :class:`~defSim.dissimilarity_component.DissimilarityCalculator.DissimilarityCalculator`.
         :param kwargs: Additional parameters specific to the implementation of the InfluenceOperator.
             Possible parameters are the following:
-        :param float=0 homophily: A number :math:`\geq` 0 that controls the shape of the influence curve. At 0, agents
-            do not show a preference for similar others (only positive influence). At 1, agents more strongly adjust
-            their opinion when confronted with similar others (moderated positive influence). At values > 1, there
-            exists a point at which influence becomes negative, making agents shift away from the sending agents
-            expressed opinion.
+        :param float=0 homophily: A number :math:`>` 0 that controls the shape of the influence curve.
+            At 1, homophily is linear, like in Axelrod (1997)
+            When the value for homophily :math:`>` 1, agents prefer similar agents more and more.
+            When 0 :math:`<` homophily :math:`<` 1, agents have less of a preference for more similar neighbors.
+            However, the values for the probability of successful influence will always be the same at 0, .5, and 1
+            overlap. Respectively: 0, .5 and 1.
         :returns: true if agent(s) were successfully influenced
         """
         # todo: insert reference to Axelrod
@@ -69,13 +70,28 @@ class SimilarityAdoption(InfluenceOperator):
             else:
                 influenced_feature = random.choice(incongruent_features)
                 for neighbor in agents_j:
-                    if random.uniform(0, 1) < ((1-network.edges[agent_i, neighbor]['dist']) ** homophily):
+                    if network.edges[agent_i, neighbor]['dist'] >= .5:
+                        p_infl_success = (
+                                (1 / 2) ** (1 - homophily) * (1 - network.edges[agent_i, neighbor]['dist']) ** homophily)
+                    else:
+                        p_infl_success = (1 - (1 / 2) ** (1 - homophily) * (
+                                1 - (1 - network.edges[agent_i, neighbor]['dist'])) ** homophily)
+                    if random.uniform(0, 1) < p_infl_success:
                         success = True
                         network.nodes[neighbor][influenced_feature] = network.nodes[agent_i][influenced_feature]
                         update_dissimilarity(network, [neighbor], dissimilarity_measure, **kwargs)
         else:
-            #todo comment and improve time
-            close_neighbors = [neighbor for neighbor in agents_j if random.uniform(0, 1) < ((1-network.edges[agent_i, neighbor]['dist']) ** homophily)]
+            close_neighbors = []
+            for neighbor in agents_j:
+                if network.edges[agent_i, neighbor]['dist'] >= .5:
+                    p_infl_success = (
+                                (1 / 2) ** (1 - homophily) * (1 - network.edges[agent_i, neighbor]['dist']) ** homophily)
+                else:
+                    p_infl_success = (1 - (1 / 2) ** (1 - homophily) * (
+                                1 - (1 - network.edges[agent_i, neighbor]['dist'])) ** homophily)
+                #todo comment and improve time
+                if random.uniform(0, 1) < p_infl_success:
+                    close_neighbors.append(neighbor)
             incongruent_features = [] # [feature for feature in attributes if network.nodes[agent1]]
             incongruent_feature_values =[]
             for feature in attributes:
