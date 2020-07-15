@@ -114,7 +114,7 @@ def create_output_table(network: nx.Graph, realizations: List[str or OutputTable
     custom_realizations = [realization for realization in realizations if (inspect.isclass(realization) and issubclass(realization, OutputTableCreator)) or isinstance(realization, OutputTableCreator)]
     for realization in custom_realizations:
         if realization.label != "":
-            output[Realization.label] = realization.create_output(network)
+            output[realization.label] = realization.create_output(network)
         else:
             output["CustomOutput{}".format(custom_realizations.index(realization))] = realization.create_output(network)
 
