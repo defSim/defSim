@@ -58,7 +58,6 @@ class AttributeReporter(OutputTableCreator):
 
 class AverageDistanceReporter(OutputTableCreator):
 
-    @staticmethod
     def create_output(self, network: nx.Graph, **kwargs):
         """
 
