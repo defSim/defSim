@@ -30,7 +30,7 @@ class Simulation:
     values per parameter and also all optional parameters are passed in one combined dictionary.
 
     Args:
-        network (nx.Graph=None): A NetworkX object that was created from empirical data.
+        network (str nx.Graph=None): A NetworkX object that was created (e.g. from empirical data) or "list". If "list", the network is read from the parameter dict under the 'network' parameter.
         topology (String = "grid"): Options are "grid", "ring" and "spatial_random_graph", or you could give the name of one of the generators included in the `NetworkX package <https://networkx.github.io/documentation/stable/reference/generators.html>`__..
         network_modifiers (NetworkModifier or List = None): A modifier or list of modifiers to apply to the network after initialization. Each modifier should be derived from the NetworkModifier base class.
         attributes_initializer (String = "random_categorical" or :class:`AttributesInitializer`): Either be a custom AttributesInitializer or a string that selects from the predefined choices: ["random_categorical", "random_continuous"...]
