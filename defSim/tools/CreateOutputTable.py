@@ -15,8 +15,8 @@ class OutputTableCreator(ABC):
 
     label = ""
 
-    @staticmethod
     @abstractmethod
+    @staticmethod
     def create_output(network: nx.Graph, **kwargs):
         """
         This method receives a NetworkX object, performs some calculation, and outputs a cell for the output table.
@@ -77,7 +77,7 @@ def create_output_table(network: nx.Graph, realizations: List[str or OutputTable
     # Create default outputs (called by name)
     ## workaround to call the ClusterFinder method only once
     if "ClusterFinder" or "ClusterFinderList" or "Basic" or "Isolates" or "Homogeneity" in realizations:
-        clusterlist = ClusterFinder.create_output(network, **kwargs)
+        clusterlist = ClusterFinder().create_output(network, **kwargs)
 
     # Output related to clustering
     if "ClusterFinderList" in realizations:
@@ -85,13 +85,13 @@ def create_output_table(network: nx.Graph, realizations: List[str or OutputTable
     if "ClusterFinder" in realizations:
         output['ClusterFinder'] = len(clusterlist)
     if "RegionsList" in realizations:
-        output['RegionsList'] = ClusterFinder.create_output(network)
+        output['RegionsList'] = ClusterFinder().create_output(network)
     if any([i in realizations for i in ["Regions", "Basic"]]):
-        output['Regions'] = len(ClusterFinder.create_output(network))
+        output['Regions'] = len(ClusterFinder().create_output(network))
     if "ZonesList" in realizations:
-        output['ZonesList'] = ClusterFinder.create_output(network, strict_zones=True)
+        output['ZonesList'] = ClusterFinder(strict_zones=True).create_output(network)
     if any([i in realizations for i in ["Zones", "Basic"]]):
-        output['Zones'] = len(ClusterFinder.create_output(network, strict_zones=True))
+        output['Zones'] = len(ClusterFinder(strict_zones=True).create_output(network))
     if "Isolates" in realizations:
         output['Isolates'] = clusterlist.count(1)
     if any([i in realizations for i in ["Homogeneity", "Basic"]]):
@@ -103,7 +103,7 @@ def create_output_table(network: nx.Graph, realizations: List[str or OutputTable
     if any([i in realizations for i in ["AverageOpinion", "Basic"]]):
         opinionfeatures = kwargs.get("AverageOpinionFeatures", ['f01'])
         for i in opinionfeatures:
-            output['AverageOpinion{}'.format(i)] = AverageOpinionReporter.create_output(network, i)
+            output['AverageOpinion{}'.format(i)] = AverageOpinionReporter(feature = i).create_output(network)
 
     # Output the entire networkX Graph object
     if "Graph" in realizations:
@@ -111,12 +111,12 @@ def create_output_table(network: nx.Graph, realizations: List[str or OutputTable
 
     # Create custom outputs (by calling implementations of OutputTableCreator)
     ## Select only those realizations which are classes (not instances of a class) and of those only if they are a subclass of OutputTableCreator
-    custom_realizations = [realization for realization in realizations if inspect.isclass(realization) and issubclass(realization, OutputTableCreator)]
-    for Realization in custom_realizations:
-        if Realization.label != "":
-            output[Realization.label] = Realization.create_output(network)
+    custom_realizations = [realization for realization in realizations if (inspect.isclass(realization) and issubclass(realization, OutputTableCreator)) or isinstance(realization, OutputTableCreator)]
+    for realization in custom_realizations:
+        if realization.label != "":
+            output[Realization.label] = realization.create_output(network)
         else:
-            output["CustomOutput{}".format(custom_realizations.index(Realization))] = Realization.create_output(network)
+            output["CustomOutput{}".format(custom_realizations.index(realization))] = realization.create_output(network)
 
     # Add tickwise output if applicable
     if tickwise_output:
