@@ -10,7 +10,7 @@ class TestWeightedLinear(TestCase):
     def test_spread_influence(self):
         network1 = network_init.generate_network("grid", **{"num_agents": 4})
         agents_init.initialize_attributes(network1, "random_continuous", **{"num_features": 1})
-        EuclideanDistance.calculate_dissimilarity_networkwide(network1)
+        EuclideanDistance().calculate_dissimilarity_networkwide(network1)
 
         # run one instance to see if it doesn't break (most simple test)
         WeightedLinear.WeightedLinear.spread_influence(network1,
@@ -40,7 +40,7 @@ class TestWeightedLinear(TestCase):
 
         network1 = network_init.generate_network("grid", **{"num_agents": 4})
         agents_init.initialize_attributes(network1, "random_continuous", **{"num_features": 1})
-        EuclideanDistance.calculate_dissimilarity_networkwide(network1)
+        EuclideanDistance().calculate_dissimilarity_networkwide(network1)
 
         # run one instance to see if it doesn't break (most simple test)
         WeightedLinear.WeightedLinear.spread_influence(network1,
