@@ -99,7 +99,7 @@ def create_output_table(network: nx.Graph, realizations: List[str or OutputTable
 
     # Output related to opinions and opinion distances
     if any([i in realizations for i in ["AverageDistance", "Basic"]]):
-        output['AverageDistance'] = AverageDistanceReporter.create_output(network)
+        output['AverageDistance'] = AverageDistanceReporter().create_output(network)
     if any([i in realizations for i in ["AverageOpinion", "Basic"]]):
         opinionfeatures = kwargs.get("AverageOpinionFeatures", ['f01'])
         for i in opinionfeatures:
