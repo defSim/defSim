@@ -96,6 +96,11 @@ class Simulation:
         self.initialize_tickwise_output()
 
     def initialize_tickwise_output(self):
+        if 'output_step_size' in self.parameter_dict.keys():
+            self.tickwise_output_step_size = self.parameter_dict['output_step_size']
+        else:
+            self.tickwise_output_step_size = 1
+
         self.tickwise_output = {}
         for tickwise_realization in self.tickwise:
             if tickwise_realization in CreateOutputTable._implemented_output_realizations:
@@ -246,7 +251,7 @@ class Simulation:
                                                      self.influenceable_attributes,
                                                      **self.parameter_dict)
 
-        if self.tickwise: # list is not empty
+        if self.tickwise and self.time_steps % self.tickwise_output_step_size == 0: # list is not empty
             defaults_selected = [i for i in self.tickwise if i in CreateOutputTable._implemented_output_realizations]
             if len(defaults_selected) > 0:
                 self.tickwise_output['defaults'].append(CreateOutputTable.create_output_table(network=self.network, realizations = defaults_selected))
