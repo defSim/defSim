@@ -31,6 +31,8 @@ from defSim.influence_sim import influence_sim
 from defSim.influence_sim.influence_sim import spread_influence
 from defSim.influence_sim.influence_sim import InfluenceOperator
 
+from defSim.network_evolution_sim.MaslovSneppenModifier import MaslovSneppenModifier
+
 import defSim.tools
 from defSim.tools import OutputMeasures
 from defSim.tools.OutputMeasures import ClusterFinder
