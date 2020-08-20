@@ -14,7 +14,7 @@ def update_dissimilarity(network: nx.Graph, agents: List[int], calculator: Dissi
     """
     for agent in agents:
         for neighbor in network.neighbors(agent):
-            network.edges[neighbor, agent]['dist'] = calculator.calculate_dissimilarity(network,
+            network.edges[agent, neighbor]['dist'] = calculator.calculate_dissimilarity(network,
                                                                                         agent,
                                                                                         neighbor)
 
