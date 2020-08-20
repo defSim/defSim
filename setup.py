@@ -18,7 +18,9 @@ setup(name='defSim',
                 'defSim/dissimilarity_component'],
       install_requires=[
             'networkx>=2.4',
-            'numpy', 'pandas'
+            'numpy',
+            'pandas',
+            'scipy>=1.1.0'
       ],
       include_package_data=True,
       test_suite="pytest-runner",
