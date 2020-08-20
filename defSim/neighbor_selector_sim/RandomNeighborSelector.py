@@ -30,7 +30,10 @@ class RandomNeighborSelector(NeighborSelector):
         :returns: A list of the indices of the relevant other agents.
         """
         if regime == "one-to-one":
-            return [(random.choice([neighbor for neighbor in network[focal_agent]]))]
+            try:  # workaround for graphs where some agents do not have any neighbors (random.choice does not like choosing from empty list)
+                return [(random.choice([neighbor for neighbor in network[focal_agent]]))]
+            except:
+                return []
         elif regime == "one-to-many":
             return [neighbor for neighbor in network[focal_agent]] #todo: implement directed graphs
         elif regime == "many-to-one":
