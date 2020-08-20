@@ -38,3 +38,10 @@
 
 # ignore these files for mac users
 .DS_Store
+
+# folders generated using testing
+batchscripts/
+pickles/
+
+# jupyter notebook checkpoints
+.ipynb_checkpoints

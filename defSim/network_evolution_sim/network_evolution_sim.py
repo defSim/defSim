@@ -31,10 +31,10 @@ def rewire_network(network: nx.Graph, realization: str, **kwargs):
     :param realization: The specific NetworkModifier that shall be used to initialize the attributes. Options are "maslov_sneppen", ..
     :param kwargs: The parameter dictionary with all optional parameters.
     """
-    from .NetworkHomophily import MaslovSneppen
+    from .MaslovSneppenModifier import MaslovSneppenModifier
     if realization == "maslov_sneppen":
-        MaslovSneppen.rewire_network(network, **kwargs)
-    elif realization == "alternative1":
-        print("implement alternative initialization")
+        rewiring_prop = kwargs.get('rewiring_prop', None)
+        rewiring_exact = kwargs.get('rewiring_exact', None)
+        MaslovSneppenModifier(rewiring_prop = rewiring_prop, rewiring_exact = rewiring_exact).rewire_network(network, **kwargs)
     else:
-        raise ValueError("Can only select from the options ['random', 'Alternative1', 'Alternative2']")
+        raise ValueError("Can only select from the options ['maslov_sneppen']")

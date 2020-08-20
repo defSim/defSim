@@ -1,6 +1,7 @@
-from typing import List
+from typing import List, Union
 import inspect
 import random
+import warnings
 import time
 import pandas as pd
 import networkx as nx
@@ -11,11 +12,14 @@ from defSim.focal_agent_sim import focal_agent_sim
 from defSim.neighbor_selector_sim import neighbor_selector_sim
 from defSim.influence_sim import influence_sim
 from defSim.network_evolution_sim import network_evolution_sim
+from defSim.network_evolution_sim.network_evolution_sim import NetworkModifier
+from defSim.network_evolution_sim.MaslovSneppenModifier import MaslovSneppenModifier
 from defSim.tools import NetworkDistanceUpdater
 from defSim.dissimilarity_component.dissimilarity_calculator import DissimilarityCalculator
 from defSim.dissimilarity_component.dissimilarity_calculator import select_calculator
 from defSim.tools import OutputMeasures
 from defSim.tools import CreateOutputTable
+from defSim.tools.ConvergenceChecks import ConvergenceCheck, PragmaticConvergenceCheck, OpinionDistanceConvergenceCheck
 
 
 class Simulation:
@@ -27,9 +31,9 @@ class Simulation:
     values per parameter and also all optional parameters are passed in one combined dictionary.
 
     Args:
-        network (nx.Graph=None): A NetworkX object that was created from empirical data.
+        network (str nx.Graph=None): A NetworkX object that was created (e.g. from empirical data) or "list". If "list", the network is read from the parameter dict under the 'network' parameter.
         topology (String = "grid"): Options are "grid", "ring" and "spatial_random_graph", or you could give the name of one of the generators included in the `NetworkX package <https://networkx.github.io/documentation/stable/reference/generators.html>`__..
-        ms_rewiring (float = None): A threshold for the minimum proportion of edges in the graph object that need to be rewired.
+        network_modifiers (NetworkModifier or List = None): A modifier or list of modifiers to apply to the network after initialization. Each modifier should be derived from the NetworkModifier base class.
         attributes_initializer (String = "random_categorical" or :class:`AttributesInitializer`): Either be a custom AttributesInitializer or a string that selects from the predefined choices: ["random_categorical", "random_continuous"...]
         focal_agent_selector (str = "random" or :class:`FocalAgentSelector`): Either a custom FocalAgentSelector or a string that selects from the predefined options ["random", ...]
         neighbor_selector (str = "random" or :class:`NeighborSelector`): Either a custom NeighborSelector or a string that selects from the predefined options ["random", "similar" ...}
@@ -51,7 +55,7 @@ class Simulation:
     def __init__(self,
                  network=None,
                  topology: str = "grid",
-                 ms_rewiring = None,
+                 network_modifiers: List[NetworkModifier] = None,
                  attributes_initializer: str = "random_categorical" or agents_init.AttributesInitializer,
                  focal_agent_selector: str = "random" or focal_agent_sim.FocalAgentSelector,
                  neighbor_selector: str = "random" or neighbor_selector_sim.NeighborSelector,
@@ -69,7 +73,7 @@ class Simulation:
                  ):
         self.network = network
         self.topology = topology
-        self.ms_rewiring = ms_rewiring
+        self.network_modifiers = network_modifiers
         self.attributes_initializer = attributes_initializer
         self.focal_agent_selector = focal_agent_selector
         self.neighbor_selector = neighbor_selector
@@ -92,6 +96,11 @@ class Simulation:
         self.initialize_tickwise_output()
 
     def initialize_tickwise_output(self):
+        if 'output_step_size' in self.parameter_dict.keys():
+            self.tickwise_output_step_size = self.parameter_dict['output_step_size']
+        else:
+            self.tickwise_output_step_size = 1
+
         self.tickwise_output = {}
         for tickwise_realization in self.tickwise:
             if tickwise_realization in CreateOutputTable._implemented_output_realizations:
@@ -146,7 +155,8 @@ class Simulation:
             self._run_until_pragmatic_convergence()
         elif self.stop_condition == "strict_convergence":
             self._run_until_strict_convergence()
-
+        elif isinstance(self.stop_condition, ConvergenceCheck):
+            self._run_until_convergence()
         elif self.stop_condition == "max_iteration":
             self._run_until_max_iteration()
         else:
@@ -156,8 +166,8 @@ class Simulation:
 
     def initialize_simulation(self):
         """
-        This method initializes the network if none is given, initializes the attributes of the agents, and also
-        computes and sets the distances between each neighbor.
+        This method initializes the network if none is given, applies network modifiers, initializes the attributes of the agents, 
+        and also computes and sets the distances between each neighbor.
         """
 
         # reset steps
@@ -170,13 +180,28 @@ class Simulation:
         if self.seed is None:
             self.seed = random.randint(10000,99999)
         random.seed(self.seed)
+
+        ## if deprecated ms_rewiring parameter is set in parameter dict, replace with network modifier
+        if 'ms_rewiring' in list(self.parameter_dict.keys()):
+            warnings.warn("Setting ms_rewiring in parameter dict is deprecated. Pass an instance of MaslovSneppenModifier in network_modifiers instead.", DeprecationWarning)
+            if self.network_modifiers is None:
+                self.network_modifiers = [MaslovSneppenModifier(rewiring_prop = self.parameter_dict['ms_rewiring'])]
+            else:
+                self.network_modifiers.append(MaslovSneppenModifier(rewiring_prop = self.parameter_dict['ms_rewiring']))        
+
+        # read or generate network if no nx.Graph was provided, apply network modifiers
         if self.network_provided:
             if self.network == 'list':
                     self.network = self.parameter_dict['network']            
-            if not isinstance(self.network, nx.Graph) and self.network is not None:
+            elif not isinstance(self.network, nx.Graph) and self.network is not None:
                 self.network = network_init.read_network(self.network)
-        else:
-            self.network = network_init.generate_network(self.topology, **self.parameter_dict)
+
+            ## apply network modifiers
+            if self.network_modifiers is not None:
+                for modifier in self.network_modifiers:
+                    modifier.rewire_network(network)            
+        else:           
+            self.network = network_init.generate_network(self.topology, network_modifiers = self.network_modifiers, **self.parameter_dict)                          
 
         # storing the indices of the agents to access them quicker
         self.agentIDs = list(self.network)
@@ -226,16 +251,16 @@ class Simulation:
                                                      self.influenceable_attributes,
                                                      **self.parameter_dict)
 
-        if self.tickwise: # list is not empty
+        if self.tickwise and self.time_steps % self.tickwise_output_step_size == 0: # list is not empty
             defaults_selected = [i for i in self.tickwise if i in CreateOutputTable._implemented_output_realizations]
             if len(defaults_selected) > 0:
                 self.tickwise_output['defaults'].append(CreateOutputTable.create_output_table(network=self.network, realizations = defaults_selected))
             for i in self.tickwise:
                 if not i in defaults_selected:
-                    if inspect.isclass(i) and issubclass(i, CreateOutputTable.OutputTableCreator):
+                    if (inspect.isclass(i) and issubclass(i, CreateOutputTable.OutputTableCreator)) or isinstance(i, CreateOutputTable.OutputTableCreator):
                         self.tickwise_output[i.label].append(i.create_output(network=self.network))
                     else:
-                        self.tickwise_output[i].append(OutputMeasures.AttributeReporter.create_output(self.network, feature=i))
+                        self.tickwise_output[i].append(OutputMeasures.AttributeReporter(feature = i).create_output(self.network))
 
         self.time_steps += 1
         if success:
@@ -287,18 +312,15 @@ class Simulation:
         except KeyError:
             step_size = 100
 
-        all_attributes = self.network.nodes[1].keys()
-        node_matcher = iso.categorical_node_match(all_attributes, [0 for i in range(len(all_attributes))])
-        network_comparison = self.network.copy()
+        stop_condition = PragmaticConvergenceCheck(initial_network = self.network.copy())
+
         while 1:
             self.run_simulation_step()
             if self.time_steps >= self.max_iterations:
                 break
             if self.time_steps % step_size == 0:
-                if nx.is_isomorphic(self.network, network_comparison, node_match=node_matcher):
+                if stop_condition.check_convergence(self.network):
                     break
-                else:
-                    network_comparison = self.network.copy()
 
     def _run_until_strict_convergence(self):
         """
@@ -307,34 +329,48 @@ class Simulation:
         continues.
 
         :param float=0.0 threshold: A value between 0 and 1 that determines at what distance two agents can't influence each other anymore.
-        :param boolean=True check_each_step: A boolean that determines whether convergence should be checked each step or only every hundreth
-            step to save time.
+        :param int=100 step_size: determines how often it should be checked for a change in the network.
         """
         try:
             threshold = self.parameter_dict["threshold"]
         except KeyError:
             threshold = 0.0
         try:
-            check_each_step = self.parameter_dict["check_each_step"]
+            step_size = self.parameter_dict["step_size"]
         except KeyError:
-            check_each_step = True
+            step_size = 100
 
-        self.time_steps = 0
-        if check_each_step:
-            while 1:
-                self.run_simulation_step()
-                if self.time_steps == self.max_iterations:
+        stop_condition = OpinionDistanceConvergenceCheck(threshold = threshold)
+        
+        while 1:
+            self.run_simulation_step()
+            if self.time_steps >= self.max_iterations:
+                break
+            if self.time_steps % step_size == 0:
+                if stop_condition.check_convergence(self.network):
                     break
-                if not NetworkDistanceUpdater.check_dissimilarity(self.network, threshold):
+
+    def _run_until_convergence(self):
+        """
+        The convergence of the simulation is periodically checked using a custom convergence check 
+        set in self.stop_condition. Every step_size steps (defaults to 100), the check_convergence
+        method of this custom stop condition is called. The simulation terminates if this method
+        returns true or self.max_iterations is reached.
+
+        :param int=100 step_size: determines how often it should be checked for a change in the network.
+        """
+        try:
+            step_size = self.parameter_dict["step_size"]
+        except KeyError:
+            step_size = 100
+
+        while 1:
+            self.run_simulation_step()
+            if self.time_steps >= self.max_iterations:
+                break
+            if self.time_steps % step_size == 0:
+                if self.stop_condition.check_convergence(self.network, **self.parameter_dict):
                     break
-        else:
-            while 1:
-                self.run_simulation_step()
-                if self.time_steps >= self.max_iterations:
-                    break
-                if self.time_steps % 100 == 0:
-                    if not NetworkDistanceUpdater.check_dissimilarity(self.network, threshold):
-                        break
 
     def _run_until_max_iteration(self):
         for iteration in range(self.max_iterations):

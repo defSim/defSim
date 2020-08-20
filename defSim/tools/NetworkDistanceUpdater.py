@@ -32,4 +32,3 @@ def check_dissimilarity(network: nx.Graph, threshold: float):
     """
 
     return any(threshold < val < 1 for key, val in nx.get_edge_attributes(network, 'dist').items())
-    pass

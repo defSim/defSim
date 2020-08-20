@@ -1,9 +1,10 @@
 import numpy as np
 import networkx as nx
 import random
+import warnings
 
 
-def generate_network(name: str, **kwargs) -> nx.Graph:
+def generate_network(name: str, network_modifiers = None, **kwargs) -> nx.Graph:
     """
     This factory method calls the graph generator and returns the desired network. It takes as arguments the name of the
     required network and a dictionary containing all the arguments that are required by the desired graph generator.
@@ -30,8 +31,9 @@ def generate_network(name: str, **kwargs) -> nx.Graph:
     #else:
     #    raise ValueError("Can only select from the options ['grid', 'spatial_random_graph', 'ring']")
 
-    if 'ms_rewiring' in kwargs:
-        network = execute_ms_rewiring(network,kwargs['ms_rewiring'])
+    if network_modifiers is not None:
+        for modifier in network_modifiers:
+            modifier.rewire_network(network)
 
     return network
 
@@ -262,28 +264,9 @@ def _produce_networkx_graph(name: str,**kwargs):
 
 def execute_ms_rewiring(network: nx.Graph, rewiring_prop: float):
     """
-    This method executes Maslov Sneppen rewiring (Maslov & Sneppen, 2002). Until a given proportion of the network
-    edges is rewired, the algorithm will pick two edges at random, remove them, and construct an edge between a
-    different combination of nodes that have just lost an edge. Effectively, this introduces randomization of network
-    structure, while leaving the degree distribution unchanged. Because the parameter `rewiring_prop` functions as a
-    threshold for number of rewiring iterations that need to be executed, it can exceed 1. Actually, to achieve a
-    random network starting from a network with structure, the rewiring proportion should exceed 1.
-
-    :param network: NetworkX Graph object
-    :param rewiring_prop: A threshold for the minimum proportion of edges in the graph object that need to be rewired.
-        Sampling these edges happens with replacement, so rewiring_prop may exceed 1.
-    :return: NetworkX Graph object
+    This method is deprecated and will be removed.
     """
-    ticker = 0
-    while rewiring_prop * network.number_of_edges() > ticker:
-        agentA, agentB = random.choice(list(network.edges()))
-        agentC, agentD = random.choice(list(network.edges()))
-        if((agentA != agentC) & (agentA != agentD) & (agentB != agentC) & (agentB != agentD) &
-           (network.has_edge(agentA,agentC)==False) & (network.has_edge(agentB,agentD)==False)):
-            network.remove_edge(agentA,agentB)
-            network.remove_edge(agentC,agentD)
-            network.add_edge(agentA,agentC)
-            network.add_edge(agentB,agentD)
-            ticker += 1
-    return network
+    from defSim.network_evolution_sim.MaslovSneppenModifier import MaslovSneppenModifier
 
+    warnings.warn("Function execute_ms_rewiring is deprecated, use network_evolution_sim/MaslovSneppenModifier instead.", DeprecationWarning)
+    MaslovSneppenModifier().rewire_network(network = network, rewiring_prop = rewiring_prop)
