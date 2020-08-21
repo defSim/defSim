@@ -12,11 +12,18 @@ def update_dissimilarity(network: nx.Graph, agents: List[int], calculator: Dissi
     :param network: The network that is updated.
     :param agents: A list containing the indices of all agents whose edges should be updated.
     """
-    for agent in agents:
+    for agent in agents:  # all ties in Graph and all outgoing ties in DiGraph
         for neighbor in network.neighbors(agent):
             network.edges[agent, neighbor]['dist'] = calculator.calculate_dissimilarity(network,
                                                                                         agent,
                                                                                         neighbor)
+        try:  # for incoming ties in DiGraphs
+            for neighbor in network.predecessors(agent):
+                network.edges[neighbor, agent]['dist'] = calculator.calculate_dissimilarity(network,
+                                                                                            agent,
+                                                                                            neighbor)
+        except:
+            pass
 
 
 def check_dissimilarity(network: nx.Graph, threshold: float):
