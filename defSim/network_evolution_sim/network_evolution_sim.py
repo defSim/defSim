@@ -32,9 +32,13 @@ def rewire_network(network: nx.Graph, realization: str, **kwargs):
     :param kwargs: The parameter dictionary with all optional parameters.
     """
     from .MaslovSneppenModifier import MaslovSneppenModifier
+    from .NewTiesModifier import NewTiesModifier
     if realization == "maslov_sneppen":
         rewiring_prop = kwargs.get('rewiring_prop', None)
         rewiring_exact = kwargs.get('rewiring_exact', None)
         MaslovSneppenModifier(rewiring_prop = rewiring_prop, rewiring_exact = rewiring_exact).rewire_network(network, **kwargs)
+    elif realization == "new_ties":
+        new_ties_probability = kwargs.get('new_ties_probability', None)
+        NewTiesModifier(new_ties_probability = new_ties_probability).rewire_network(network, **kwargs)
     else:
         raise ValueError("Can only select from the options ['maslov_sneppen']")
