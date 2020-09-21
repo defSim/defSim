@@ -76,7 +76,7 @@ def create_output_table(network: nx.Graph, realizations: List[str or OutputTable
 
     # Create default outputs (called by name)
     ## workaround to call the ClusterFinder method only once
-    if "ClusterFinder" or "ClusterFinderList" or "Basic" or "Isolates" or "Homogeneity" in realizations:
+    if any([i in realizations for i in ["ClusterFinder", "ClusterFinderList", "Basic", "Isolates", "Homogeneity"]]):
         clusterlist = ClusterFinder().create_output(network, **kwargs)
 
     # Output related to clustering

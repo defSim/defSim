@@ -12,6 +12,7 @@ from defSim.dissimilarity_component import dissimilarity_calculator
 from defSim.network_init import network_init
 from defSim.Simulation import Simulation
 from defSim.tools.CreateOutputTable import OutputTableCreator
+from defSim.tools.CreateDataFiles import DataFileCreator, create_data_files
 import multiprocessing as mp
 import random
 import timeit
@@ -84,6 +85,8 @@ class Experiment:
         stop_condition_parameters (dict = {}): This dictionary should contain all optional parameters that influence how convergence is determined.
         max_iterations (int = 100000): The maximum number of iterations a Simulation should run.
         output_realizations (list = [str or OutputTableCreator]): This optional list should contain all output to generate at the end of each run, by name for defaults or as class inheriting from OutputTableCreator
+        output_folder_path (str or pathlib.Path): If not None, the output table is saved to file(s) in this location. 
+        output_file_types (List[str or DataFileCreator]): Determines which types of output files will be saved at output_folder_path. See tools.CreateDataFiles for options.
         repetitions (int = 1): How often each simulation should be repeated.
         seed (int = random.randint(10000, 99999)): Optionally set seed for replicability.
     """
@@ -111,6 +114,8 @@ class Experiment:
                  stop_condition_parameters: dict = {},
                  max_iterations: int = 100000,
                  output_realizations: list = [],
+                 output_folder_path: str or pathlib.Path = None,
+                 output_file_types: List[str or DataFileCreator] = [],                 
                  repetitions: int = 1,
                  seed: int = None):
         self.simulations = simulations
@@ -135,6 +140,8 @@ class Experiment:
         self.stop_condition_parameters = stop_condition_parameters
         self.max_iterations = max_iterations
         self.output_realizations = output_realizations
+        self.output_folder_path = output_folder_path
+        self.output_file_types = output_file_types        
         self.repetitions = repetitions
         self.seed = seed
         self.parameter_dict_list = []  # this is the internal dictionary that is created by permuting all parameters
@@ -283,10 +290,17 @@ class Experiment:
 #                    print("\rWaiting for", remaining, "tasks to complete...", end="")
                     time.sleep(2)
                     pool.join()
-                return pd.concat(results.get())
+
+                results_dataframe = pd.concat(results.get()).reset_index()
+                if self.output_folder_path is not None:
+                    create_data_files(output_table = results_dataframe, realizations = self.output_file_types, output_folder_path = self.output_folder_path)                
+                return results_dataframe
             else:  # if NOT parallel
                 result_list = [sim.run_simulation() for sim in self.simulations]
-                return pd.concat(result_list).reset_index(drop=True)
+                results_dataframe = pd.concat(result_list).reset_index()
+                if self.output_folder_path is not None:
+                    create_data_files(output_table = results_dataframe, realizations = self.output_file_types, output_folder_path = self.output_folder_path)                
+                return results_dataframe
         # if simulations are to be created based on parameter combinations
         else:              
             # since the creation of the grid network takes awfully long, we don't want to create that in each
@@ -309,11 +323,17 @@ class Experiment:
 #                    print("\rWaiting for", remaining, "tasks to complete...", end="")
                     time.sleep(2)
                 pool.join()
-                return pd.concat(results.get()).reset_index()
+                results_dataframe = pd.concat(results.get()).reset_index()
+                if self.output_folder_path is not None:
+                    create_data_files(output_table = results_dataframe, realizations = self.output_file_types, output_folder_path = self.output_folder_path)                
+                return results_dataframe
             else:  # if NOT parallel
                 result_list = [self._create_and_run_simulation(parameter_dict) for parameter_dict in
                                self.parameter_dict_list]
-                return pd.concat(result_list).reset_index()
+                results_dataframe = pd.concat(result_list).reset_index()
+                if self.output_folder_path is not None:
+                    create_data_files(output_table = results_dataframe, realizations = self.output_file_types, output_folder_path = self.output_folder_path)                
+                return results_dataframe
 
     def run_on_cluster(self,
                        chunk_size: int = 2400,
