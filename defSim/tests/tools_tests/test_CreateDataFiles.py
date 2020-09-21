@@ -1,5 +1,5 @@
 from defSim.tools.CreateDataFiles import create_data_files
-from defSim import Simulation
+from defSim import Simulation, Experiment
 import pandas as pd
 import numpy as np
 from unittest import TestCase
@@ -54,3 +54,8 @@ class TestCreateDataFilesWithSimData(TestCase):
     def test_file_creation_from_sim(self):
         self.sim = Simulation(output_folder_path = "./output/fromsim", output_file_types = ['pickle', 'csv', 'json', 'stata'], tickwise = ['f01'])
         self.sim.run_simulation()
+
+class TestCreateDataFilesWithExperimentData(TestCase):
+    def test_file_creation(self):
+        experiment = Experiment(output_folder_path = "./output/fromexperiment", output_file_types = ['pickle', 'csv', 'json', 'stata'], tickwise = ['f01'], attribute_parameters = {'num_features': [1, 2]})
+        experiment.run()

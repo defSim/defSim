@@ -29,7 +29,6 @@ class PickleFileCreator(DataFileCreator):
         output_path = output_path.with_suffix('.pickle')
         # remove file if output file already exists at given path
         if output_path.exists():
-            print("EXISTS")
             output_path.unlink()
         # create new output file
         output_table.to_pickle(path = output_path, **kwargs)
@@ -85,6 +84,21 @@ class JsonFileCreator(DataFileCreator):
 
 class StataFileCreator(DataFileCreator):
     def create_file(self, output_table: pd.DataFrame, output_path: str or pathlib.Path, **kwargs):
+        # try to convert any 'object' columns to appropriate types
+        output_table = output_table.convert_dtypes()
+        # convert any int64 to int32
+        columns_to_convert = list(output_table.select_dtypes(include=['int64']).columns)
+        for column in columns_to_convert:
+            output_table[column] = output_table[column].astype(int)
+        # convert string to str
+        columns_to_convert = list(output_table.select_dtypes(include=['string']).columns)
+        for column in columns_to_convert:
+            output_table[column] = output_table[column].astype(str)
+        # coerce unconverted data types to str     
+        columns_to_convert = list(output_table.select_dtypes(include=['object']).columns)
+        for column in columns_to_convert:
+            output_table[column] = output_table[column].astype(str)      
+
         # file path for output type
         output_path = output_path.with_suffix('.dta')
         # remove file if output file already exists at given path
@@ -181,7 +195,6 @@ def create_data_files(output_table: pd.DataFrame, realizations: List[str or Data
     tickwise_dataframes = {}
     for column in tickwise_columns:
         tickwise_dataframes[column] = unpack_tickwise_column(tickwise_output_table[[column]])
-    print(tickwise_dataframes)
 
     # set all string realizations to lowercase, keep all non-strings
     realizations = [realization.lower() if isinstance(realization, str) else realization for realization in realizations]
