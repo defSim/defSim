@@ -106,7 +106,47 @@ class MarkdownFileCreator(DataFileCreator):
             output_table.to_markdown(buf = outfile, **kwargs)
 
 
-def create_data_files(output_table: pd.DataFrame, realizations: List[str or DataFileCreator]=[], **kwargs):
+def unpack_tickwise_column(tickwise_column):
+    """
+    This function turns a column containing tickwise data into its own dataframe. 
+    In output from simulations, columns of tickwise data contain a list of lists.
+    Each sub-list represents values from one tick.
+
+    :param tickwise_column: Pandas dataframe consisting of a single column with tickwise data.
+
+    :returns: Unpacked version of this column where columns represent values and rows represent
+        ticks. If the original columns contained multiple rows, a dataframe is returned for 
+        each row.
+    """
+
+    output_dataframes = {}
+
+    for index, row in tickwise_column.iterrows():
+        output_dataframes[index] = pd.DataFrame(row[0])
+
+    return output_dataframes
+
+
+def create_tickwise_files(tickwise_dataframes, output_folder: Path, realization: DataFileCreator, **kwargs):
+    """
+    This function takes a dictionary of tickwise dataframes and stores them in files indexed by
+    name of the tickwise column and simulation number.
+
+    :param tickwise_dataframes: Dictionary containing dataframes indexed first by 
+        column name and then by simulation number.
+    :param output_folder = pathlib.Path: Path to folder where output files are stored.
+    :param realization: DataFileCreator to apply to each dataframe. Set output path on initialization
+        of the DataFileCreator instance.
+    """
+
+    for column_name, rows in tickwise_dataframes.items():
+        for row_index, row_data in rows.items():
+            output_path = output_folder / 'outputfile_{}_{}'.format(column_name, row_index)
+            realization.create_file(output_table = row_data, output_path = output_path, **kwargs)
+
+
+
+def create_data_files(output_table: pd.DataFrame, realizations: List[str or DataFileCreator]=[], output_folder_path: str or Path = None, **kwargs):
     """
     This function works as a factory method for the DataFileCreator component.
     It calls the create_file function of a specific implementation of the DataFileCreator and passes to it
@@ -119,31 +159,57 @@ def create_data_files(output_table: pd.DataFrame, realizations: List[str or Data
     """
 
     # set output path, create directory if it does not exist
-    output_folder = Path('.', 'output').resolve() 
+    if output_folder_path is not None:
+        output_folder = Path(output_folder_path).resolve()
+    else:
+        output_folder = Path('.', 'output').resolve() 
     if not output_folder.exists():
         output_folder.mkdir(parents = True)
     output_path = output_folder / 'outputfile'
+
+    print("OUTPUT PATH SET: ", output_folder)
+
+    # separate tickwise columns
+    columns = list(output_table.columns)
+    print("ALL COLUMNS ", columns)
+    tickwise_columns = [column for column in columns if column.startswith('Tickwise_')]
+    print("TICKWISE COLUMNS ", tickwise_columns)
+    tickwise_output_table = output_table.filter(tickwise_columns, axis = 'columns')
+    output_table = output_table.drop(tickwise_columns, axis = 'columns')
+
+    # unpack tickwise data
+    tickwise_dataframes = {}
+    for column in tickwise_columns:
+        tickwise_dataframes[column] = unpack_tickwise_column(tickwise_output_table[[column]])
+    print(tickwise_dataframes)
 
     # set all string realizations to lowercase, keep all non-strings
     realizations = [realization.lower() if isinstance(realization, str) else realization for realization in realizations]
 
     if "pickle" in realizations:
         PickleFileCreator().create_file(output_table = output_table, output_path = output_path, **kwargs)
+        create_tickwise_files(tickwise_dataframes = tickwise_dataframes, output_folder = output_folder, realization = PickleFileCreator(), **kwargs)
 
     if "csv" in realizations:
         CSVFileCreator().create_file(output_table = output_table, output_path = output_path, **kwargs)
+        create_tickwise_files(tickwise_dataframes = tickwise_dataframes, output_folder = output_folder, realization = CSVFileCreator(), **kwargs)
 
     if any([i in realizations for i in ["hdf", "hdf5"]]):
         HDF5FileCreator().create_file(output_table = output_table, output_path = output_path, **kwargs)
+        create_tickwise_files(tickwise_dataframes = tickwise_dataframes, output_folder = output_folder, realization = HDF5FileCreator(), **kwargs)
 
     if any([i in realizations for i in ["excel", "xlsx"]]):
         ExcelFileCreator().create_file(output_table = output_table, output_path = output_path, **kwargs)
+        create_tickwise_files(tickwise_dataframes = tickwise_dataframes, output_folder = output_folder, realization = ExcelFileCreator(), **kwargs)
 
     if "json" in realizations:
         JsonFileCreator().create_file(output_table = output_table, output_path = output_path, **kwargs)
+        create_tickwise_files(tickwise_dataframes = tickwise_dataframes, output_folder = output_folder, realization = JsonFileCreator(), **kwargs)
 
     if any([i in realizations for i in ["stata", "dta"]]):
         StataFileCreator().create_file(output_table = output_table, output_path = output_path, **kwargs)
+        create_tickwise_files(tickwise_dataframes = tickwise_dataframes, output_folder = output_folder, realization = StataFileCreator(), **kwargs)
 
     if any([i in realizations for i in ["markdown", "md"]]):
         MarkdownFileCreator().create_file(output_table = output_table, output_path = output_path, **kwargs)
+        create_tickwise_files(tickwise_dataframes = tickwise_dataframes, output_folder = output_folder, realization = MarkdownFileCreator(), **kwargs)

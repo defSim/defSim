@@ -19,6 +19,7 @@ from defSim.dissimilarity_component.dissimilarity_calculator import Dissimilarit
 from defSim.dissimilarity_component.dissimilarity_calculator import select_calculator
 from defSim.tools import OutputMeasures
 from defSim.tools import CreateOutputTable
+from defSim.tools.CreateDataFiles import DataFileCreator, create_data_files
 from defSim.tools.ConvergenceChecks import ConvergenceCheck, PragmaticConvergenceCheck, OpinionDistanceConvergenceCheck
 
 
@@ -46,6 +47,8 @@ class Simulation:
         parameter_dict: A dictionary with all parameters that will be passed to the specific component implementations.
         seed (str = None): A seed for stable replication
         output_realizations (list = [str or CreateOutputTable.OutputTableCreator]): This optional list should contain all output to generate at the end of each run, by name for defaults or as class inheriting from OutputTableCreator
+        output_folder_path (str or pathlib.Path): If not None, the output table is saved to file(s) in this location. 
+        output_file_types (List[str or DataFileCreator]): Determines which types of output files will be saved at output_folder_path. See tools.CreateDataFiles for options.
         tickwise (List = [str]):  A list of strings with the names of agent attributes that need to be recorded at every timestep
     """
 
@@ -69,6 +72,8 @@ class Simulation:
                  parameter_dict={},
                  seed=None,
                  output_realizations=[],
+                 output_folder_path: str or pathlib.Path = None,
+                 output_file_types: List[str or DataFileCreator] = [],
                  tickwise: List[str] = []
                  ):
         self.network = network
@@ -92,6 +97,8 @@ class Simulation:
         self.time_steps = 0
         self.influence_steps = 0  # counts the successful influence steps
         self.output_realizations = output_realizations
+        self.output_folder_path = output_folder_path
+        self.output_file_types = output_file_types
         self.tickwise = tickwise
         self.initialize_tickwise_output()
 
@@ -277,6 +284,8 @@ class Simulation:
             * SuccessfulInfluence: How often an agent was successfully influenced by another agent.
             * All basic columns included in :meth:`~defSim.tools.CreateOutputTable.create_output_table`
 
+        Saves the output table to file(s) indicated by self.output_file_types if self.output_folder_path is not None.
+
         :returns: A Pandas DataFrame with one row.
         """
 
@@ -297,7 +306,12 @@ class Simulation:
                                                         settings_dict=parameter_settings,
                                                         tickwise_output=self.tickwise_output)
 
-        return pd.DataFrame.from_dict({k:[results[k]] for k in results.keys()})
+        results_dataframe = pd.DataFrame.from_dict({k:[results[k]] for k in results.keys()})
+
+        if self.output_folder_path is not None:
+            create_data_files(output_table = results_dataframe, realizations = self.output_file_types, output_folder_path = self.output_folder_path)
+
+        return results_dataframe
 
 
     def _run_until_pragmatic_convergence(self):

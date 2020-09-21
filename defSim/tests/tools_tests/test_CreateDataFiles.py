@@ -49,4 +49,8 @@ class TestCreateDataFilesWithSimData(TestCase):
 
         # check that hdf is marked as not yet implemented
         with self.assertRaises(NotImplementedError):
-            create_data_files(output_table = output_data, realizations = ['hdf'])        
+            create_data_files(output_table = output_data, realizations = ['hdf'])
+
+    def test_file_creation_from_sim(self):
+        self.sim = Simulation(output_folder_path = "./output/fromsim", output_file_types = ['pickle', 'csv', 'json', 'stata'], tickwise = ['f01'])
+        self.sim.run_simulation()
