@@ -3,7 +3,7 @@ defSim
 
 *the discrete event framework for social influence models*
 
-New to defSim? `Learn how to use defSim in this quick introduction <https://marijnkeijzer.github.io/defSim/Introduction_to_defSim.html>`_
+New to defSim? `Learn how to use defSim in this quick introduction <https://marijnkeijzer.github.io/defSim/Introduction_to_defSim.html>`_ or inspect our example notebooks at https://github.com/marijnkeijzer/defSim-examples.
 
 For a description of all of defSim's functions, see the `documentation <https://marijnkeijzer.github.io/defSim>`_
 
