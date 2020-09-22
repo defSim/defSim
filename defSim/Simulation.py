@@ -199,8 +199,8 @@ class Simulation:
         # read or generate network if no nx.Graph was provided, apply network modifiers
         if self.network_provided:
             if self.network == 'list':
-                    self.network = self.parameter_dict['network']            
-            elif not isinstance(self.network, nx.Graph) and self.network is not None:
+                    self.network = self.parameter_dict.pop('network')
+            if not isinstance(self.network, nx.Graph) and self.network is not None:
                 self.network = network_init.read_network(self.network)
 
             ## apply network modifiers
