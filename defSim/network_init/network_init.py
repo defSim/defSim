@@ -2,6 +2,7 @@ import numpy as np
 import networkx as nx
 import random
 import warnings
+from defSim.network_evolution_sim.MaslovSneppenModifier import MaslovSneppenModifier
 
 
 def generate_network(name: str, network_modifiers = None, **kwargs) -> nx.Graph:
@@ -15,11 +16,21 @@ def generate_network(name: str, network_modifiers = None, **kwargs) -> nx.Graph:
     :param name: A string with the name of the network type.
         Possible options:
         "spatial_random_graph", "ring", "grid"
+    :param network_modifiers: A list of network modifiers to apply (in order) after network initialization
     :param kwargs: A dictionary containing the parameter names as keys and their respective values
         as values to be passed to the function that produces the network.
     :raises: ValueError if not one of the possible network topologies is selected.
     :returns: A NetworkX Graph object.
     """
+    ms_rewiring = kwargs.get('ms_rewiring', None)
+    if ms_rewiring is not None:
+        # if deprecated ms_rewiring parameter is set, replace with network modifier
+        warnings.warn("The ms_rewiring parameter is deprecated. Pass an instance of MaslovSneppenModifier in network_modifiers instead.", DeprecationWarning)
+        if network_modifiers is None:
+            network_modifiers = [MaslovSneppenModifier(rewiring_prop = ms_rewiring)]
+        else:
+            network_modifiers.append(MaslovSneppenModifier(rewiring_prop = ms_rewiring))        
+
     if name == "grid":
         network = _produce_grid_network(**kwargs)
     elif name == "spatial_random_graph":
