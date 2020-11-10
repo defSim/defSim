@@ -28,8 +28,8 @@ class OutputTableCreator(ABC):
         pass
 
 
-def create_output_table(network: nx.Graph, realizations: List[str or OutputTableCreator]=[], colnames: List[str]=[],
-                        agents: List[int]=[], settings_dict: dict={}, tickwise_output: dict={}, **kwargs):
+def create_output_table(network: nx.Graph, realizations=None, colnames=None,
+                        agents=None, settings_dict=None, tickwise_output=None, **kwargs):
     """
     This function works as a factory method for the OutputTableCreator component.
     It calls the create_output function of a specific implementation of the OutputTableCreator and passes to it
@@ -64,7 +64,21 @@ def create_output_table(network: nx.Graph, realizations: List[str or OutputTable
     :returns: A dictionary.
     """
 
-    if agents != []:
+    # work on a copy of the network, to avoid permanently altering anything
+    network = network.copy()
+
+    if colnames is None:
+        colnames = []
+    if realizations is None:
+        realizations = []
+    if tickwise_output is None:
+        tickwise_output = {}
+    if settings_dict is None:
+        settings_dict = {}
+    if agents is None:
+        agents = []
+
+    if len(agents) > 0:
         removenodes = list(set(list(network.nodes())) - set(agents))
         for i in removenodes:
             network.remove_node(i)
