@@ -114,6 +114,8 @@ class Simulation:
                 self.tickwise_output['defaults'] = []
             else:
                 if inspect.isclass(tickwise_realization) and issubclass(tickwise_realization, CreateOutputTable.OutputTableCreator):
+                    tickwise_realization = tickwise_realization()
+                if isinstance(tickwise_realization, CreateOutputTable.OutputTableCreator):
                     if tickwise_realization.label != "":
                         self.tickwise_output[tickwise_realization.label] = []
                     else:
@@ -264,7 +266,7 @@ class Simulation:
                 self.tickwise_output['defaults'].append(CreateOutputTable.create_output_table(network=self.network, realizations = defaults_selected))
             for i in self.tickwise:
                 if not i in defaults_selected:
-                    if (inspect.isclass(i) and issubclass(i, CreateOutputTable.OutputTableCreator)) or isinstance(i, CreateOutputTable.OutputTableCreator):
+                    if isinstance(i, CreateOutputTable.OutputTableCreator):
                         self.tickwise_output[i.label].append(i.create_output(network=self.network))
                     else:
                         self.tickwise_output[i].append(OutputMeasures.AttributeReporter(feature = i).create_output(self.network))

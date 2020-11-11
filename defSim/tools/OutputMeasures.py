@@ -4,6 +4,8 @@ from .CreateOutputTable import OutputTableCreator
 
 class ClusterFinder(OutputTableCreator):
 
+    label = "ClusterFinder"
+
     def __init__(self, cluster_dissimilarity_threshold: float = 0, strict_zones: bool = False):
         super().__init__()
         self.cluster_dissimilarity_threshold = cluster_dissimilarity_threshold
@@ -38,9 +40,12 @@ class ClusterFinder(OutputTableCreator):
 
 class AttributeReporter(OutputTableCreator):
 
+    label = "AttributeReporter"
+
     def __init__(self, feature: str = None):
         super().__init__()
-        self.feature = feature 
+        self.feature = feature
+        self.label = feature
 
     def create_output(self, network: nx.Graph, **kwargs):
         """
@@ -58,6 +63,8 @@ class AttributeReporter(OutputTableCreator):
 
 class AverageDistanceReporter(OutputTableCreator):
 
+    label = "AverageDistance"
+
     def create_output(self, network: nx.Graph, **kwargs):
         """
 
@@ -74,6 +81,8 @@ class AverageDistanceReporter(OutputTableCreator):
 
 
 class AverageOpinionReporter(OutputTableCreator):
+
+    label = "AverageOpinion"
 
     def __init__(self, feature: str = 'f01'):
         super().__init__()
