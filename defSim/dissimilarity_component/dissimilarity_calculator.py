@@ -43,7 +43,7 @@ def select_calculator(realization: str) -> DissimilarityCalculator:
     This function works as a factory method for the dissimilarity_component.
     It returns an instance of the Calculator that is asked for.
 
-    :param realization: The type of DissimilarityCalculator. Possible options are ["hamming", "euclidean"]
+    :param realization: The type of DissimilarityCalculator. Possible options are ["hamming", "euclidean", "manhatttan"]
     :return: An instance of a DissimilarityCalculator
     """
     from .HammingDistance import HammingDistance
