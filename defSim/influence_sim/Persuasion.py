@@ -34,7 +34,7 @@ class Persuasion(InfluenceOperator):
         try:
             self.convergence_rate = kwargs["convergence_rate"]
         except KeyError:
-            self.warnings.warn("convergence_rate not specified, using default value 0.5")
+            warnings.warn("convergence_rate not specified, using default value 0.5")
             self.convergence_rate = 0.5
 
         self.confidence_level = kwargs.get('confidence_level', 1)
