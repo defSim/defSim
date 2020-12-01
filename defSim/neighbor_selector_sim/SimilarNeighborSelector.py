@@ -13,8 +13,7 @@ class SimilarNeighborSelector(NeighborSelector):
     case of one-to-one communication.
     """
 
-    @staticmethod
-    def select_neighbors(network: nx.Graph, focal_agent: int, regime: str,
+    def select_neighbors(self, network: nx.Graph, focal_agent: int, regime: str,
                          confidence_level_neighbor_selector: float = .5, **kwargs) -> Iterable[int]:
         """
         Selects a random agent from the direct neighborhood of the focal agent that is within the specified cultural

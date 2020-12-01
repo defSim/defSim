@@ -231,11 +231,8 @@ class Simulation:
 
         selected_agent = focal_agent_sim.select_focal_agent(self.network, self.focal_agent_selector,
                                                                 self.agentIDs, **self.parameter_dict)
-        if isinstance(self.neighbor_selector, neighbor_selector_sim.NeighborSelector):
-            neighbors = self.neighbor_selector.select_neighbors(self.network, selected_agent,
-                                                                   self.communication_regime, **self.parameter_dict)
-        else:
-            neighbors = neighbor_selector_sim.select_neighbors(self.network, self.neighbor_selector,
+
+        neighbors = neighbor_selector_sim.select_neighbors(self.network, self.neighbor_selector,
                                                                   selected_agent,
                                                                   self.communication_regime, **self.parameter_dict)
         
