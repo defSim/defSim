@@ -35,6 +35,7 @@ class BoundedConfidence(InfluenceOperator):
             agents do not interact anymore. 1 means that even the most dissimilar agents still interact, 0 means no interaction.Passed as a kwargs argument.
         :param float=0.5 convergence_rate: A number between 0 and 1 determining how much an agent adopts other agents features. If
             it is one, the influenced agent takes the value of the influencing agent. Passed as a kwargs argument.
+        :param bool=False bi_directional: A boolean specifying whether influence is bi- or uni-directional.
         :returns: true if agent(s) were successfully influenced
         """
         try:
