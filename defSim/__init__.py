@@ -1,6 +1,7 @@
 __all__ = ["agents_init",
            "network_evolution_sim",
            "dissimilarity_component",
+           "extensions",
            "focal_agent_sim",
            "influence_sim",
            "neighbor_selector_sim",
