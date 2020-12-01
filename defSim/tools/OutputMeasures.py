@@ -35,7 +35,11 @@ class ClusterFinder(OutputTableCreator):
                       if dissimilarity > self.cluster_dissimilarity_threshold]
         networkcopy.remove_edges_from(remove)
 
-        return [len(c) for c in sorted(nx.connected_components(networkcopy), key=len, reverse=True)]
+        try:  # workaround for DiGraphs (nx.connected_components does not work on them)
+            return [len(c) for c in sorted(nx.connected_components(networkcopy), key=len, reverse=True)]
+        except:
+            return [9999999]
+        # todo: implement for DiGraph
 
 
 class AttributeReporter(OutputTableCreator):
