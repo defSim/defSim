@@ -8,9 +8,11 @@ class NetworkModifier(ABC):
     connected and what attributes they have.
     """
 
-    @staticmethod
+    def __init__(self, **kwargs):
+        pass
+
     @abstractmethod
-    def rewire_network(network: nx.Graph, **kwargs):
+    def rewire_network(self, network: nx.Graph, **kwargs):
         """
         Creates new connections or deletes existing ones. Can be used to implement coevolution of networks and model
         selection processes.
