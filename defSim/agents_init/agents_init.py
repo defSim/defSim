@@ -15,7 +15,7 @@ class AttributesInitializer(ABC):
     """
 
     @abstractmethod
-    def initialize_attributes(network: nx.Graph, **kwargs):
+    def initialize_attributes(self, network: nx.Graph, **kwargs):
         """
         Gives initial values to the nodes in the network. Values could e.g. be based on their position in the network.
 
