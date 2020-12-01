@@ -80,28 +80,28 @@ def spread_influence(network: nx.Graph,
 
     # if both functions get the same arguments?
     if realization in ["similarity_adoption", "axelrod"]:  # kept "axelrod" for backwards compatibility
-        return SimilarityAdoption(regime = regime).spread_influence(network,
-                                                   agent_i,
-                                                   agents_j,
-                                                   dissimilarity_measure,
-                                                   attributes,
-                                                   **kwargs)
+        return SimilarityAdoption(regime = regime, **kwargs).spread_influence(network,
+                                                                              agent_i,
+                                                                              agents_j,
+                                                                              dissimilarity_measure,
+                                                                              attributes,
+                                                                              **kwargs)
     elif realization == "bounded_confidence":
-        return BoundedConfidence(regime = regime).spread_influence(network,
-                                                  agent_i,
-                                                  agents_j,
-                                                  dissimilarity_measure,
-                                                  attributes,
-                                                  **kwargs)
+        return BoundedConfidence(regime = regime, **kwargs).spread_influence(network,
+                                                                             agent_i,
+                                                                             agents_j,
+                                                                             dissimilarity_measure,
+                                                                             attributes,
+                                                                             **kwargs)
     elif realization == "weighted_linear":
-        return WeightedLinear(regime = regime).spread_influence(network,
+        return WeightedLinear(regime = regime, **kwargs).spread_influence(network,
                                                agent_i,
                                                agents_j,
                                                dissimilarity_measure,
                                                attributes,
                                                **kwargs)
     elif realization == "persuasion":
-        return Persuasion(regime = regime).spread_influence(network,
+        return Persuasion(regime = regime, **kwargs).spread_influence(network,
                                            agent_i,
                                            agents_j,
                                            dissimilarity_measure,
@@ -115,7 +115,7 @@ def spread_influence(network: nx.Graph,
             warnings.warn("Regime for influence function is not equal to regime for simulation. Influence function: {}, simulation: {}".format(realization.regime, regime))
         except AttributeError:
           realization.regime = regime
-        return realization.spread_influence(network,
+        return realization(regime = regime, **kwargs).spread_influence(network,
                                             agent_i,
                                             agents_j,
                                             dissimilarity_measure,

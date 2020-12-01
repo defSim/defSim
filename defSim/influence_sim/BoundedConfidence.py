@@ -99,5 +99,4 @@ class BoundedConfidence(InfluenceOperator):
                 network.nodes[agent_i][influenced_feature] = network.nodes[agent_i][
                                                                 influenced_feature] + self.convergence_rate * feature_difference
                 update_dissimilarity(network, [agent_i], dissimilarity_measure)
-
         return success
