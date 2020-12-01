@@ -238,23 +238,15 @@ class Simulation:
             neighbors = neighbor_selector_sim.select_neighbors(self.network, self.neighbor_selector,
                                                                   selected_agent,
                                                                   self.communication_regime, **self.parameter_dict)
-        if isinstance(self.influence_function, influence_sim.InfluenceOperator):
-            success = self.influence_function.spread_influence(self.network,
-                                                               selected_agent,
-                                                               neighbors,
-                                                               self.communication_regime,
-                                                               self.dissimilarity_calculator,
-                                                               self.influenceable_attributes,
-                                                               **self.parameter_dict)
-        else:
-            success = influence_sim.spread_influence(self.network,
-                                                     self.influence_function,
-                                                     selected_agent,
-                                                     neighbors,
-                                                     self.communication_regime,
-                                                     self.dissimilarity_calculator,
-                                                     self.influenceable_attributes,
-                                                     **self.parameter_dict)
+        
+        success = influence_sim.spread_influence(self.network,
+                                                 self.influence_function,
+                                                 selected_agent,
+                                                 neighbors,
+                                                 self.communication_regime,
+                                                 self.dissimilarity_calculator,
+                                                 self.influenceable_attributes,
+                                                 **self.parameter_dict)
 
         if self.tickwise and self.time_steps % self.tickwise_output_step_size == 0: # list is not empty
             defaults_selected = [i for i in self.tickwise if i in CreateOutputTable._implemented_output_realizations]
