@@ -27,12 +27,12 @@ class BoundedConfidence(InfluenceOperator):
         try:
             self.confidence_level = kwargs["confidence_level"]
         except KeyError:
-            self.warnings.warn("confidence_level not specified, using default value 0.8")
+            warnings.warn("confidence_level not specified, using default value 0.8")
             self.confidence_level = 0.8
         try:
             self.convergence_rate = kwargs["convergence_rate"]
         except KeyError:
-            self.warnings.warn("convergence_rate not specified, using default value 0.5")
+            warnings.warn("convergence_rate not specified, using default value 0.5")
             self.convergence_rate = 0.5
 
         self.bi_directional = kwargs.get('bi_directional', False)       

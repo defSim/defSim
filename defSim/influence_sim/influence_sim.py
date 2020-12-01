@@ -107,7 +107,7 @@ def spread_influence(network: nx.Graph,
                                            dissimilarity_measure,
                                            attributes,
                                            **kwargs)
-    elif isinstance(realization):
+    elif isinstance(realization, InfluenceOperator):
         # if regime is set differently, raise warning
         # if regime is not set, set regime
         try:

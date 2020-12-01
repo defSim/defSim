@@ -110,7 +110,7 @@ def initialize_attributes(network: nx.Graph, realization: str, **kwargs):
     elif realization == 'correlated_continuous':
         CorrelatedContinuousInitializer.CorrelatedContinuousInitializer(**kwargs).initialize_attributes(network)  
     elif isinstance(realization, AttributesInitializer):
-        realization.initialize_attributes(network, kwargs)
+        realization.initialize_attributes(network)
     else:
         raise ValueError("Can only select from the options ['random_categorical', 'random_continuous', 'correlated_continuous'] or supply an instance of a class which inherits from the ABC")
 
