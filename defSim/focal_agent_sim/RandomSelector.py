@@ -10,8 +10,10 @@ class RandomSelector(FocalAgentSelector):
     Implements the FocalAgentSelector as a uniformly random process
     """
 
-    @staticmethod
-    def select_agent(network: nx.Graph, agents: List[int]=[], **kwargs) -> int:
+    def __init__(self, **kwargs):
+        pass
+    
+    def select_agent(self, network: nx.Graph, agents: List[int]=[]) -> int:
         """
         This method selects a random agent from a network for the influence process.
 

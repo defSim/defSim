@@ -228,11 +228,9 @@ class Simulation:
         If the user passed their own implementations of those components, they will be called to execute these steps,
         otherwise the respective factory functions will be called.
         """
-        if isinstance(self.focal_agent_selector, focal_agent_sim.FocalAgentSelector):
-            selected_agent = self.focal_agent_selector.select_agent(self.network, self.agentIDs, **self.parameter_dict)
-        else:
-            selected_agent = focal_agent_sim.select_focal_agent(self.network, self.focal_agent_selector,
-                                                                self.agentIDs)
+
+        selected_agent = focal_agent_sim.select_focal_agent(self.network, self.focal_agent_selector,
+                                                                self.agentIDs, **self.parameter_dict)
         if isinstance(self.neighbor_selector, neighbor_selector_sim.NeighborSelector):
             neighbors = self.neighbor_selector.select_neighbors(self.network, selected_agent,
                                                                    self.communication_regime, **self.parameter_dict)

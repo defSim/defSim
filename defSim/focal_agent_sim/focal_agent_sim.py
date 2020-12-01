@@ -8,7 +8,13 @@ class FocalAgentSelector(ABC):
     """
     This class is responsible for sampling the focal agent for the influence process.
     """
-    @staticmethod
+    
+    def __init__(self, **kwargs):
+        """
+        :param kwargs: This dictionary contains all the implementation-specific parameters.
+        """
+        pass
+
     @abstractmethod
     def select_agent(network: nx.Graph, agents: List[int]=[], **kwargs) -> int:
         """
@@ -22,7 +28,7 @@ class FocalAgentSelector(ABC):
         """
         pass
 
-def select_focal_agent(network: nx.Graph, realization: str, agents: List[int]=[], **kwargs) -> int:
+def select_focal_agent(network: nx.Graph, realization: str or FocalAgentSelector, agents: List[int]=[], **kwargs) -> int:
     """
     This function works as a factory method for the FocalAgentSelector component.
     It calls the select_agent function of a specific implementation of the FocalAgentSelector and passes to it
@@ -37,8 +43,8 @@ def select_focal_agent(network: nx.Graph, realization: str, agents: List[int]=[]
     from .RandomSelector import RandomSelector
 
     if realization == "random":
-        return RandomSelector.select_agent(network, agents, **kwargs)
-    elif inspect.isclass(realization):
+        return RandomSelector().select_agent(network, agents, **kwargs)
+    elif isinstance(realization, FocalAgentSelector):
         return realization.select_agent(network, agents, **kwargs)
     else:
-        raise ValueError("Can only select from the options ['random'] or input an own implementation of the FocalAgentSelector")
+        raise ValueError("Can only select from the options ['random'] or input an instance of a class which inherits from FocalAgentSelector")
