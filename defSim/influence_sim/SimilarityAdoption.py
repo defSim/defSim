@@ -1,4 +1,5 @@
 import random
+import warnings
 
 import networkx as nx
 from .influence_sim import InfluenceOperator

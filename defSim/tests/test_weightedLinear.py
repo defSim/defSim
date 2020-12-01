@@ -13,22 +13,20 @@ class TestWeightedLinear(TestCase):
         EuclideanDistance().calculate_dissimilarity_networkwide(network1)
 
         # run one instance to see if it doesn't break (most simple test)
-        WeightedLinear.WeightedLinear.spread_influence(network1,
+        WeightedLinear.WeightedLinear(regime="one-to-many").spread_influence(network1,
                                                        0,
                                                        [neighbor for neighbor in network1[0]],
                                                        attributes=None,
-                                                       regime="one-to-many",
                                                        dissimilarity_measure=EuclideanDistance(),
                                                        **{"convergence_rate": 0.5,
                                                           "homophily": 1,
                                                           "bi_directional": False})
 
         # with bi-directional influence, let two agents find agreement
-        WeightedLinear.WeightedLinear.spread_influence(network1,
+        WeightedLinear.WeightedLinear(regime="one-to-one").spread_influence(network1,
                                                        1, #sending agent
                                                        0, #receiving agent
                                                        attributes=None,
-                                                       regime="one-to-one",
                                                        dissimilarity_measure=EuclideanDistance(),
                                                        **{"convergence_rate": 0.5,
                                                           "homophily": 0,
@@ -43,22 +41,20 @@ class TestWeightedLinear(TestCase):
         EuclideanDistance().calculate_dissimilarity_networkwide(network1)
 
         # run one instance to see if it doesn't break (most simple test)
-        WeightedLinear.WeightedLinear.spread_influence(network1,
+        WeightedLinear.WeightedLinear(regime="one-to-many").spread_influence(network1,
                                                        0,
                                                        [neighbor for neighbor in network1[0]],
                                                        attributes=None,
-                                                       regime="one-to-many",
                                                        dissimilarity_measure=EuclideanDistance(),
                                                        **{"convergence_rate": 0.5,
                                                           "homophily": 1,
                                                           "bi_directional": False})
 
         # with bi-directional influence, let two agents find agreement
-        WeightedLinear.WeightedLinear.spread_influence(network1,
+        WeightedLinear.WeightedLinear(regime="one-to-one").spread_influence(network1,
                                                        1, #sending agent
                                                        0, #receiving agent
                                                        attributes=None,
-                                                       regime="one-to-one",
                                                        dissimilarity_measure=EuclideanDistance(),
                                                        **{"convergence_rate": 0.5,
                                                           "homophily": 0,
