@@ -118,4 +118,4 @@ def spread_influence(network: nx.Graph,
 
     else:
         raise ValueError("Can only select from the options ['similarity_adoption', 'bounded_confidence', 'weighted_linear', "
-                         "'persuasion], or supply an implementation of the abstract base class")
+                         "'persuasion'], or supply an implementation of the abstract base class")
