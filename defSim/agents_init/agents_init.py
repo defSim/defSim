@@ -14,7 +14,6 @@ class AttributesInitializer(ABC):
     Initializes and changes attributes of nodes in the network.
     """
 
-    @staticmethod
     @abstractmethod
     def initialize_attributes(network: nx.Graph, **kwargs):
         """
@@ -59,7 +58,7 @@ def generate_correlated_continuous_attributes(n_attributes: int, n_values: int, 
     :param kwargs: a dictionary containing additional parameter values
     """
     
-    if not distribution in ["uniform", "gaussian"]:
+    if not distribution in ["uniform", "normal"]:
         raise NotImplementedError("The selected distribution has not been implemented. Select from: ['uniform', 'gaussian'].")
 
     if not isinstance(covariances, np.ndarray):
@@ -100,15 +99,15 @@ def initialize_attributes(network: nx.Graph, realization: str, **kwargs):
     from . import CorrelatedContinuousInitializer
 
     if realization == "random_categorical":
-        RandomCategoricalInitializer.RandomCategoricalInitializer.initialize_attributes(network, **kwargs)
+        RandomCategoricalInitializer.RandomCategoricalInitializer().initialize_attributes(network, **kwargs)
     elif realization == "random_continuous":
-        RandomContinuousInitializer.RandomContinuousInitializer.initialize_attributes(network, **kwargs)
+        RandomContinuousInitializer.RandomContinuousInitializer().initialize_attributes(network, **kwargs)
     elif realization == 'correlated_continuous':
-        CorrelatedContinuousInitializer.CorrelatedContinuousInitializer.initialize_attributes(network, **kwargs)  
-    elif inspect.isclass(realization) or isinstance(realization, AttributesInitializer):
+        CorrelatedContinuousInitializer.CorrelatedContinuousInitializer().initialize_attributes(network, **kwargs)  
+    elif isinstance(realization, AttributesInitializer):
         realization.initialize_attributes(network, **kwargs)
     else:
-        raise ValueError("Can only select from the options ['random_categorical', 'random_continuous', 'correlated_continuous'] or supply a realization of the ABC")
+        raise ValueError("Can only select from the options ['random_categorical', 'random_continuous', 'correlated_continuous'] or supply an instance of a class which inherits from the ABC")
 
 
 def set_categorical_attribute(network: nx.Graph, name: str, values: list, distribution: str = "uniform", **kwargs):

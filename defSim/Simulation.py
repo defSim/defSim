@@ -215,10 +215,8 @@ class Simulation:
         # storing the indices of the agents to access them quicker
         self.agentIDs = list(self.network)
 
-        if isinstance(self.attributes_initializer, agents_init.AttributesInitializer):
-            self.attributes_initializer.initialize_attributes(self.network, **self.parameter_dict)
-        else:
-            agents_init.initialize_attributes(self.network, self.attributes_initializer, **self.parameter_dict)
+        # initialize agent attributes (accepts string realizations and instances of AttributesInitializer classes)
+        agents_init.initialize_attributes(self.network, self.attributes_initializer, **self.parameter_dict)
 
         # initialization of distances between neighbors
         self.dissimilarity_calculator.calculate_dissimilarity_networkwide(self.network)

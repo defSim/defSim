@@ -13,8 +13,74 @@ class CorrelatedContinuousInitializer(AttributesInitializer):
     Implements the AttributesInitializer as a random initialization of correlated random continuous features.
     """
 
-    @staticmethod
-    def initialize_attributes(network: nx.Graph, distribution: str = 'uniform', **kwargs):
+    def __init__(self, distribution: str = 'uniform', **kwargs):
+        """
+        :param str='uniform' distribution: Type of continuous distribution to draw feature values from.
+        :param bool=False neighbor_similarity: If set to True, a default application of neighbor similarity is used. Regardless of the value of this parameter, similarity options can always be customized individually
+        :param float=10 neighbor_similarity_concentration: How closely concentrated (peaked) the weight distribution is around the mean value of neighbors (minimum value > 2 required to maintain integrity of the distribution)
+        :param float=0 neighbor_similarity_strength: Strength of weighting by neighbor value. 0 = no influence of neighbors
+        :param int=1 num_features: How many different attributes each node has.
+        :param str='f01' neighbor_similarity_feature: Sets the feature on which neighbor similarity will be determined.
+        :param [list] or numpy.array covariances: Complete covariance matrix (see agents_init.generate_correlated_continuous_attributes)
+        :param float correlation: Single correlation value to apply to all pairs of attributes
+        :param bool allow_inverse_concentration: Use to allow concentrations below 2, which result in anticoordination with neighbors
+        :param str or int neighbor_similarity_postprocessing: Sets the number of postprocessing iterations (integer to set max number of iterations, 'convergence' to not set a maximum)
+        :param float neighbor_similarity_criterion: Maximum allowable dissimilarity to neighbors during postprocessing
+        """
+        
+        # Check inputs
+        if not distribution in ["uniform", "normal"]:
+            raise NotImplementedError("The selected distribution has not been implemented. Select from: [uniform, normal].")
+        self.distribution = distribution
+
+        try:
+            self.num_features = kwargs["num_features"]
+        except KeyError:
+            warnings.warn("Number of features not specified, using 1 as default")
+            self.num_features = 1
+
+        self.covariances = kwargs.get("covariances", None)
+        self.correlation = kwargs.get("correlation", None)    
+
+        self.neighbor_similarity = kwargs.get("neighbor_similarity", False)
+        if self.neighbor_similarity:
+            self.neighbor_similarity_concentration = kwargs.get("neighbor_similarity_concentration", 30)
+            self.allow_inverse_concentration = kwargs.get("allow_inverse_concentration", False)
+            if self.neighbor_similarity_concentration <= 2 and not self.allow_inverse_concentration:
+                raise ValueError(
+                    "neighbor_similarity_concentration must be greater than 2 to maintain single-peaked distribution. Set 'allow_inverse_concentration' to True to override.")
+            elif self.neighbor_similarity_concentration <= 0:
+                raise ValueError("neighbor_similarity_concentration must be greater than  0.")
+
+            self.neighbor_similarity_strength = kwargs.get("neighbor_similarity_strength", 0)
+            if self.neighbor_similarity_strength < 0:
+                raise ValueError(
+                    "neighbor_similarity_strength cannot be negative (to avoid negative choice weights). Try 0 < neighbor_similarity_concentration < 2 instead for anticoordination with neighbors.")
+
+            self.neighbor_similarity_feature = kwargs.get("neighbor_similarity_feature", "f01")
+
+            self.postprocessing_iterations = kwargs.get("neighbor_similarity_postprocessing", 30)
+        else:
+            self.neighbor_similarity_concentration = kwargs.get("neighbor_similarity_concentration", 30)
+            self.allow_inverse_concentration = kwargs.get("allow_inverse_concentration", False)
+            if self.neighbor_similarity_concentration <= 2 and not self.allow_inverse_concentration:
+                raise ValueError(
+                    "neighbor_similarity_concentration must be greater than 2 to maintain single-peaked distribution. Set 'allow_inverse_concentration' to True to override.")
+            elif self.neighbor_similarity_concentration <= 0:
+                raise ValueError("neighbor_similarity_concentration must be greater than  0.")
+
+            self.neighbor_similarity_strength = kwargs.get("neighbor_similarity_strength", 0)
+            if self.neighbor_similarity_strength < 0:
+                raise ValueError(
+                    "neighbor_similarity_strength cannot be negative (to avoid negative choice weights). Try 0 < neighbor_similarity_concentration < 2 instead for anticoordination with neighbors.")
+
+            self.neighbor_similarity_feature = kwargs.get("neighbor_similarity_feature", "f01")
+
+            self.postprocessing_iterations = kwargs.get("neighbor_similarity_postprocessing", 0)    
+
+        self.dissimilarity_criterion = kwargs.get("neighbor_similarity_criterion", 0.75)
+
+    def initialize_attributes(self, network: nx.Graph):
         """
         Randomly initializes a number of continuous features between 0 and 1 for each node.
         Specify either a covariance matrix or a single correlation value (which is then applied to all pairs of attributes).
@@ -38,88 +104,28 @@ class CorrelatedContinuousInitializer(AttributesInitializer):
         and postprocessing by setting the relevant parameters.
 
         :param network: The graph object whose nodes' attributes are modified.
-        :param str='uniform' distribution: Type of continuous distribution to draw feature values from.
-        :param bool=False neighbor_similarity: If set to True, a default application of neighbor similarity is used. Regardless of the value of this parameter, similarity options can always be customized individually
-        :param float=10 neighbor_similarity_concentration: How closely concentrated (peaked) the weight distribution is around the mean value of neighbors (minimum value > 2 required to maintain integrity of the distribution)
-        :param float=0 neighbor_similarity_strength: Strength of weighting by neighbor value. 0 = no influence of neighbors
-        :param int=1 num_features: How many different attributes each node has.
-        :param str='f01' neighbor_similarity_feature: Sets the feature on which neighbor similarity will be determined.
-        :param [list] or numpy.array covariances: Complete covariance matrix (see agents_init.generate_correlated_continuous_attributes)
-        :param float correlation: Single correlation value to apply to all pairs of attributes
-        :param bool allow_inverse_concentration: Use to allow concentrations below 2, which result in anticoordination with neighbors
-        :param str or int neighbor_similarity_postprocessing: Sets the number of postprocessing iterations (integer to set max number of iterations, 'convergence' to not set a maximum)
-        :param floag neighbor_similarity_criterion: Maximum allowable dissimilarity to neighbors during postprocessing
         """
 
-        # Check inputs
-        if not distribution in ["uniform", "gaussian"]:
-            raise NotImplementedError(
-                "The selected distribution has not been implemented. Select from: ['uniform', 'gaussian'].")
-
-        try:
-            num_features = kwargs["num_features"]
-        except KeyError:
-            warnings.warn("Number of features not specified, using 1 as default")
-            num_features = 1
-
-        covariances = kwargs.get("covariances", None)
-        correlation = kwargs.get("correlation", None)
-
-        if kwargs.get("neighbor_similarity", False):
-            neighbor_similarity_concentration = kwargs.get("neighbor_similarity_concentration", 30)
-            allow_inverse_concentration = kwargs.get("allow_inverse_concentration", False)
-            if neighbor_similarity_concentration <= 2 and not allow_inverse_concentration:
-                raise ValueError(
-                    "neighbor_similarity_concentration must be greater than 2 to maintain single-peaked distribution. Set 'allow_inverse_concentration' to True to override.")
-            elif neighbor_similarity_concentration <= 0:
-                raise ValueError("neighbor_similarity_concentration must be greater than  0.")
-
-            neighbor_similarity_strength = kwargs.get("neighbor_similarity_strength", 0)
-            if neighbor_similarity_strength < 0:
-                raise ValueError(
-                    "neighbor_similarity_strength cannot be negative (to avoid negative choice weights). Try 0 < neighbor_similarity_concentration < 2 instead for anticoordination with neighbors.")
-
-            neighbor_similarity_feature = kwargs.get("neighbor_similarity_feature", "f01")
-
-            postprocessing_iterations = kwargs.get("neighbor_similarity_postprocessing", 30)
-        else:
-            neighbor_similarity_concentration = kwargs.get("neighbor_similarity_concentration", 30)
-            allow_inverse_concentration = kwargs.get("allow_inverse_concentration", False)
-            if neighbor_similarity_concentration <= 2 and not allow_inverse_concentration:
-                raise ValueError(
-                    "neighbor_similarity_concentration must be greater than 2 to maintain single-peaked distribution. Set 'allow_inverse_concentration' to True to override.")
-            elif neighbor_similarity_concentration <= 0:
-                raise ValueError("neighbor_similarity_concentration must be greater than  0.")
-
-            neighbor_similarity_strength = kwargs.get("neighbor_similarity_strength", 0)
-            if neighbor_similarity_strength < 0:
-                raise ValueError(
-                    "neighbor_similarity_strength cannot be negative (to avoid negative choice weights). Try 0 < neighbor_similarity_concentration < 2 instead for anticoordination with neighbors.")
-
-            neighbor_similarity_feature = kwargs.get("neighbor_similarity_feature", "f01")
-
-            postprocessing_iterations = kwargs.get("neighbor_similarity_postprocessing", 0)
-
-            # Generate feature values
-        if covariances is None:
-            if correlation is None:
-                correlation = 0
-                if num_features > 0:
+        # Generate feature values
+        if self.covariances is None:
+            if self.correlation is None:
+                self.correlation = 0
+                if self.num_features > 0:
                     warnings.warn("Neither covariance matrix nor correlation specified, using r = 0 as default")
-            covariances = []
-            for i in range(num_features):
-                covariances.append([correlation if not i == j else 1 for j in range(num_features)])
+            self.covariances = []
+            for i in range(self.num_features):
+                self.covariances.append([self.correlation if not i == j else 1 for j in range(self.num_features)])
 
         n_agents = len(network.nodes)
 
-        feature_values = generate_correlated_continuous_attributes(num_features, (n_agents), covariances, distribution)
+        feature_values = generate_correlated_continuous_attributes(self.num_features, (n_agents), self.covariances, self.distribution)
 
         ## the code beyond this point only works with values ranging between 0 and 1
         if (np.amin(feature_values) < 0) or (np.amax(feature_values) > 1):
             raise ValueError('Attribute values outside range [0,1] not supported. Rescale first.')
 
             # Define feature names
-        feature_names = ['f' + str("%02d" % (feature_num + 1)) for feature_num in range(num_features)]
+        feature_names = ['f' + str("%02d" % (feature_num + 1)) for feature_num in range(self.num_features)]
 
         # Assign attribute values to agents
         for node_num, node in enumerate(network.nodes):
@@ -127,15 +133,14 @@ class CorrelatedContinuousInitializer(AttributesInitializer):
                 network.nodes[node][feature] = feature_values[node_num, feature_num]
 
         # If neighbor influence is greater than 0, add network similarity
-        if neighbor_similarity_strength > 0:
-            apply_neighbor_similarity_beta_weights(network, feature_values, feature_names, neighbor_similarity_feature,
-                                                   neighbor_similarity_concentration, neighbor_similarity_strength)
+        if self.neighbor_similarity_strength > 0:
+            apply_neighbor_similarity_beta_weights(network, feature_values, feature_names, self.neighbor_similarity_feature,
+                                                   self.neighbor_similarity_concentration, self.neighbor_similarity_strength)
 
-        if postprocessing_iterations == 'convergence' or postprocessing_iterations > 0:
-            dissimilarity_criterion = kwargs.get("neighbor_similarity_criterion", 0.75)
-            similarity_postprocessor = SimilarityPostprocessor(network, dissimilarity_criterion, feature_names,
+        if self.postprocessing_iterations == 'convergence' or self.postprocessing_iterations > 0:            
+            similarity_postprocessor = SimilarityPostprocessor(network, self.dissimilarity_criterion, feature_names,
                                                                neighbor_similarity_feature)
-            similarity_postprocessor.process(postprocessing_iterations)
+            similarity_postprocessor.process(self.postprocessing_iterations)
 
 
 def apply_neighbor_similarity_beta_weights(network, feature_values, feature_names, neighbor_similarity_feature,
