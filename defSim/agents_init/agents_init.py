@@ -14,13 +14,18 @@ class AttributesInitializer(ABC):
     Initializes and changes attributes of nodes in the network.
     """
 
+    def __init__(self, **kwargs):
+        """
+        :param kwargs: This dictionary contains all the implementation-specific parameters.
+        """
+        pass
+
     @abstractmethod
     def initialize_attributes(self, network: nx.Graph, **kwargs):
         """
         Gives initial values to the nodes in the network. Values could e.g. be based on their position in the network.
 
         :param network: The network that will be modified.
-        :param kwargs: This dictionary contains all the implementation-specific parameters.
         """
         pass
 
