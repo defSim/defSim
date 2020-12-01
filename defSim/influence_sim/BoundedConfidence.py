@@ -72,7 +72,6 @@ class BoundedConfidence(InfluenceOperator):
 
         if regime != "many-to-one":
             for neighbor in agents_j:
-                # todo: this will fail in a global communication regime
                 if network.edges[agent_i, neighbor]['dist'] < confidence_level:
                     success = True
                     # j - i
