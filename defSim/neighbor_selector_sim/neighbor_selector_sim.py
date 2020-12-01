@@ -13,9 +13,11 @@ class NeighborSelector(ABC):
     from news and polls), all neighbors in the immediate neighborhood, or only single neighbors.
     """
 
-    @staticmethod
+    def __init__(self, **kwargs):
+        pass    
+
     @abstractmethod
-    def select_neighbors(network: nx.Graph, focal_agent: int, regime: str, **kwargs) -> Iterable[int]:
+    def select_neighbors(self, network: nx.Graph, focal_agent: int, regime: str, **kwargs) -> Iterable[int]:
         """
         This method selects a subset of agents from the network that are in some way relevant for the
         influence process regarding the focal agent.
@@ -53,9 +55,11 @@ def select_neighbors(network: nx.Graph, realization: str, focal_agent: int, regi
     from .SimilarNeighborSelector import SimilarNeighborSelector
 
     if realization == "random":
-        return RandomNeighborSelector.select_neighbors(network, focal_agent, regime, **kwargs)
-    if realization == "similar":
-        return SimilarNeighborSelector.select_neighbors(network, focal_agent, regime, **kwargs)
+        return RandomNeighborSelector().select_neighbors(network, focal_agent, regime, **kwargs)
+    elif realization == "similar":
+        return SimilarNeighborSelector().select_neighbors(network, focal_agent, regime, **kwargs)
+    elif isinstance(realization, NeighborSelector):
+        return realization.select_neighbors(network, focal_agent, regime, **kwargs)
     else:
         raise ValueError("Can only select from the options ['random', 'similar']")
 

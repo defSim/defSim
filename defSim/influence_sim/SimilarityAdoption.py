@@ -1,4 +1,5 @@
 import random
+import warnings
 
 import networkx as nx
 from .influence_sim import InfluenceOperator
@@ -13,16 +14,35 @@ class SimilarityAdoption(InfluenceOperator):
     Implements the InfluenceOperator in a way that recreates the original Axelrod experiment.
     """
 
-    @staticmethod
-    def spread_influence(network: nx.Graph, agent_i: int, agents_j: List[int] or int,
-                         regime: str, dissimilarity_measure: DissimilarityCalculator, attributes: List[str] = None, **kwargs) -> bool:
+    def __init__(self, regime: str, **kwargs):
+        """
+        :param regime: Either "one-to-one", "one-to-many" or "many-to-one"
+        :param kwargs: Additional parameters specific to the implementation of the InfluenceOperator.
+            Possible parameters are the following:
+        :param float=0 homophily: A number :math:`>` 0 that controls the shape of the influence curve.
+            At 1, homophily is linear, like in Axelrod (1997)
+            When the value for homophily :math:`>` 1, agents prefer similar agents more and more.
+            When 0 :math:`<` homophily :math:`<` 1, agents have less of a preference for more similar neighbors.
+            However, the values for the probability of successful influence will always be the same at 0, .5, and 1
+            overlap. Respectively: 0, .5 and 1.       
+        """
+
+        self.regime = regime
+
+        try:
+            self.homophily = kwargs["homophily"]
+        except KeyError:
+            warnings.warn("homophily not specified, using default value 1")
+            self.homophily = 1
+    
+    def spread_influence(self, network: nx.Graph, agent_i: int, agents_j: List[int] or int,
+                         dissimilarity_measure: DissimilarityCalculator, attributes: List[str] = None, **kwargs) -> bool:
         """
         In the influence function as Axelrod modeled it
         agents are more likely to influence each other if they are more similar. If an agent successfully influences one
         or more agents, the influenced agents adopt one feature on which they disagreed from the influencing agent.
         In the case of many-to-one communication, the influenced agent adopts the mode value of a feature on which there 
         is no consensus among the influencing agents.
-
 
         :param network: The network in which the agents exist.
         :param agent_i: the index of the focal agent that is either the source or the target of the influence
@@ -31,16 +51,7 @@ class SimilarityAdoption(InfluenceOperator):
         :param attributes: A list of the names of all the attributes that are subject to influence. If an agent has
             e.g. the attributes "Sex" and "Music taste", only supply ["Music taste"] as a parameter for this function.
             The influence function itself can still be a function of the "Sex" attribute.
-        :param regime: Either "one-to-one", "one-to-many" or "many-to-one"
         :param dissimilarity_measure: An instance of a :class:`~defSim.dissimilarity_component.DissimilarityCalculator.DissimilarityCalculator`.
-        :param kwargs: Additional parameters specific to the implementation of the InfluenceOperator.
-            Possible parameters are the following:
-        :param float=0 homophily: A number :math:`>` 0 that controls the shape of the influence curve.
-            At 1, homophily is linear, like in Axelrod (1997)
-            When the value for homophily :math:`>` 1, agents prefer similar agents more and more.
-            When 0 :math:`<` homophily :math:`<` 1, agents have less of a preference for more similar neighbors.
-            However, the values for the probability of successful influence will always be the same at 0, .5, and 1
-            overlap. Respectively: 0, .5 and 1.
         :returns: true if agent(s) were successfully influenced
         """
         # todo: insert reference to Axelrod
@@ -48,7 +59,6 @@ class SimilarityAdoption(InfluenceOperator):
 
         if type(agents_j) != list:
             agents_j = [agents_j]
-        homophily = kwargs.get("homophily", 1)
 
         success = False
 
@@ -56,7 +66,7 @@ class SimilarityAdoption(InfluenceOperator):
             # if no specific attributes were given, take all of them
             attributes = list(network.nodes[agent_i].keys())
 
-        if regime != "many-to-one":
+        if self.regime != "many-to-one":
             incongruent_features = []
             for neighbor in agents_j:
                 #todo this will fail in a global communication regime
@@ -72,10 +82,10 @@ class SimilarityAdoption(InfluenceOperator):
                 for neighbor in agents_j:
                     if network.edges[agent_i, neighbor]['dist'] >= .5:
                         p_infl_success = (
-                                (1 / 2) ** (1 - homophily) * (1 - network.edges[agent_i, neighbor]['dist']) ** homophily)
+                                (1 / 2) ** (1 - self.homophily) * (1 - network.edges[agent_i, neighbor]['dist']) ** self.homophily)
                     else:
-                        p_infl_success = (1 - (1 / 2) ** (1 - homophily) * (
-                                1 - (1 - network.edges[agent_i, neighbor]['dist'])) ** homophily)
+                        p_infl_success = (1 - (1 / 2) ** (1 - self.homophily) * (
+                                1 - (1 - network.edges[agent_i, neighbor]['dist'])) ** self.homophily)
                     if random.uniform(0, 1) < p_infl_success:
                         success = True
                         network.nodes[neighbor][influenced_feature] = network.nodes[agent_i][influenced_feature]
@@ -85,10 +95,10 @@ class SimilarityAdoption(InfluenceOperator):
             for neighbor in agents_j:
                 if network.edges[agent_i, neighbor]['dist'] >= .5:
                     p_infl_success = (
-                                (1 / 2) ** (1 - homophily) * (1 - network.edges[agent_i, neighbor]['dist']) ** homophily)
+                                (1 / 2) ** (1 - self.homophily) * (1 - network.edges[agent_i, neighbor]['dist']) ** self.homophily)
                 else:
-                    p_infl_success = (1 - (1 / 2) ** (1 - homophily) * (
-                                1 - (1 - network.edges[agent_i, neighbor]['dist'])) ** homophily)
+                    p_infl_success = (1 - (1 / 2) ** (1 - self.homophily) * (
+                                1 - (1 - network.edges[agent_i, neighbor]['dist'])) ** self.homophily)
                 #todo comment and improve time
                 if random.uniform(0, 1) < p_infl_success:
                     close_neighbors.append(neighbor)

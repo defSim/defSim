@@ -12,8 +12,7 @@ class RandomNeighborSelector(NeighborSelector):
     one-to-many and many-to-one communication, or a random neighbor in the case of one-to-one communication.
     """
 
-    @staticmethod
-    def select_neighbors(network: nx.Graph, focal_agent: int, regime: str, **kwargs) -> Iterable[int]:
+    def select_neighbors(self, network: nx.Graph, focal_agent: int, regime: str, **kwargs) -> Iterable[int]:
         """
         Selects a random agent from the direct neighborhood of the focal agent in the case of one-to-one communication,
         and all direct neighbors otherwise.

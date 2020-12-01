@@ -1,4 +1,5 @@
 import random
+import warnings
 
 import networkx as nx
 from .influence_sim import InfluenceOperator
@@ -11,11 +12,46 @@ import numpy as np
 
 class WeightedLinear(InfluenceOperator):
 
-    @staticmethod
-    def spread_influence(network: nx.Graph,
+    def __init__(self, regime: str, **kwargs):
+        """
+        :param regime: This string determines the mode in which the agents influence each other.
+              In 'one-to-one' the focal agent influences one other agent, in 'one-to-many' multiple other
+              agents and in 'many-to-one' the focal agent is influenced by multiple other agents in the network.      
+        :param kwargs: Additional parameters specific to the implementation of the InfluenceOperator. Possible
+            parameters are the following:
+        :param float=0.5 convergence_rate: A number between 0 and 1 determining what proportion of the sending agent's
+            position the receiving agent will adopt. E.g. when set to 1, the receiving agent assimilates - adopting the
+            sending agent's position fully, but when set to 0.5, the receiving agent moves only half-way towards the
+            sending agent's position. Passed as a kwargs argument.
+        :param float=0 homophily: A number :math:`\geq` 0 that controls the shape of the influence curve. At 0, agents
+            do not show a preference for similar others (only positive influence). At 1, agents more strongly adjust
+            their opinion when confronted with similar others (moderated positive influence). At values > 1, there
+            exists a point at which influence becomes negative, making agents shift away from the sending agents
+            expressed opinion.
+        :param bool=False bi_directional: A boolean specifying whether influence is bi- or uni-directional.            
+        """
+
+        self.regime = regime
+
+        try:
+            self.convergence_rate = kwargs["convergence_rate"]
+        except KeyError:
+            warnings.warn("convergence_rate not specified, using default value 0.5")
+            self.convergence_rate = 0.5
+       
+        try:
+            self.homophily = kwargs["homophily"]
+        except KeyError:
+            warnings.warn("homophily not specified, using default value 0")
+            self.homophily = 0
+
+        self.bi_directional = kwargs.get('bi_directional', False)
+        
+
+    def spread_influence(self,
+                         network: nx.Graph,
                          agent_i: int,
                          agents_j: List[int] or int,
-                         regime: str,
                          dissimilarity_measure: DissimilarityCalculator,
                          attributes: List[str] = None,
                          **kwargs) -> bool:
@@ -48,40 +84,10 @@ class WeightedLinear(InfluenceOperator):
         :param attributes: A list of the names of all the attributes that are subject to influence. If an agent has
             e.g. the attributes "Sex" and "Music taste", only supply ["Music taste"] as a parameter for this function.
             The influence function itself can still be a function of the "Sex" attribute.
-        :param regime: Either "one-to-one", "one-to-many" or "many-to-one"
         :param dissimilarity_measure: An instance of
             a :class:`~defSim.dissimilarity_component.DissimilarityCalculator.DissimilarityCalculator`.
-        :param kwargs: Additional parameters specific to the implementation of the InfluenceOperator. Possible
-            parameters are the following:
-        :param float=0.5 convergence_rate: A number between 0 and 1 determining what proportion of the sending agent's
-            position the receiving agent will adopt. E.g. when set to 1, the receiving agent assimilates - adopting the
-            sending agent's position fully, but when set to 0.5, the receiving agent moves only half-way towards the
-            sending agent's position. Passed as a kwargs argument.
-        :param float=0 homophily: A number :math:`\geq` 0 that controls the shape of the influence curve. At 0, agents
-            do not show a preference for similar others (only positive influence). At 1, agents more strongly adjust
-            their opinion when confronted with similar others (moderated positive influence). At values > 1, there
-            exists a point at which influence becomes negative, making agents shift away from the sending agents
-            expressed opinion.
-        :param bool=False bi_directional: A boolean specifying whether influence is bi- or uni-directional.
         :returns: true if agent(s) were successfully influenced
         """
-
-        try:
-            convergence_rate = kwargs["convergence_rate"]
-        except KeyError:
-            convergence_rate = 0.5
-        try:
-            homophily = kwargs["homophily"]
-        except KeyError:
-            homophily = 0
-
-        try:
-            bi_directional = kwargs["bi_directional"]
-        except KeyError:
-            # show error message only in the relevant case
-            # if regime == "one-to-one":
-            # print("Bi-directionality was not specified, default value False is used.")
-            bi_directional = False
 
         # in case of one-to-one, j is only one agent, but we still want to iterate over it
         if type(agents_j) != list:
@@ -96,24 +102,24 @@ class WeightedLinear(InfluenceOperator):
 
         influenced_feature = random.choice(attributes)
 
-        if regime != "many-to-one": # it must be "one-to-one" or "one-to-many"
+        if self.regime != "many-to-one": # it must be "one-to-one" or "one-to-many"
             for neighbor in agents_j:
                 # calculate 'opinion' distance on the trait that will be changed
                 feature_difference = network.nodes[agent_i][influenced_feature] - \
                                      network.nodes[neighbor][influenced_feature]
                 # influence function
                 network.nodes[neighbor][influenced_feature] = network.nodes[neighbor][influenced_feature] + \
-                    convergence_rate * (1 - homophily * abs(network.edges[agent_i, neighbor]["dist"])) * \
+                    self.convergence_rate * (1 - self.homophily * abs(network.edges[agent_i, neighbor]["dist"])) * \
                     feature_difference
                 # bounding the opinions to the pre-supposed opinion scale [0,1]
                 if network.nodes[neighbor][influenced_feature] > 1: network.nodes[neighbor][influenced_feature] = 1
                 if network.nodes[neighbor][influenced_feature] < 0: network.nodes[neighbor][influenced_feature] = 0
 
-                if bi_directional == True and regime == "one-to-one":
+                if self.bi_directional == True and self.regime == "one-to-one":
                     # influence function applied again
                     # (note that feature_difference has not been updated after changing neighbor's feature)
                     network.nodes[agent_i][influenced_feature] = network.nodes[agent_i][influenced_feature] - \
-                        convergence_rate * (1 - homophily * abs(network.edges[agent_i, neighbor]["dist"])) * \
+                        self.convergence_rate * (1 - self.homophily * abs(network.edges[agent_i, neighbor]["dist"])) * \
                         feature_difference
                     if network.nodes[agent_i][influenced_feature] > 1: network.nodes[agent_i][influenced_feature] = 1
                     if network.nodes[agent_i][influenced_feature] < 0: network.nodes[agent_i][influenced_feature] = 0
@@ -134,7 +140,7 @@ class WeightedLinear(InfluenceOperator):
                                          network.nodes[agent_i][influenced_feature]
 
                     # calculate influence
-                    influence_values.append(convergence_rate * (1 - homophily * abs(network.edges[agent_i, neighbor]["dist"])) * \
+                    influence_values.append(self.convergence_rate * (1 - self.homophily * abs(network.edges[agent_i, neighbor]["dist"])) * \
                         feature_difference)
                 
                 overall_influence = sum(influence_values) / len(influence_values)

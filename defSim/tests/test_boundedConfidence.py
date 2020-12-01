@@ -15,32 +15,28 @@ class TestBoundedConfidence(TestCase):
         agents_init.initialize_attributes(network2, "random_continuous", **{"num_features": 2})
         EuclideanDistance().calculate_dissimilarity_networkwide(network2)
 
-        BoundedConfidence.BoundedConfidence.spread_influence(network1,
+        BoundedConfidence.BoundedConfidence(regime="one-to-many").spread_influence(network1,
                                                              0,
                                                              [neighbor for neighbor in network1[0]],
                                                              attributes=None,
-                                                             regime="one-to-many",
                                                              dissimilarity_measure=EuclideanDistance(),
                                                              **{"confidence_level": 0.9})
-        BoundedConfidence.BoundedConfidence.spread_influence(network1,
+        BoundedConfidence.BoundedConfidence(regime="many-to-one").spread_influence(network1,
                                                              0,
                                                              [neighbor for neighbor in network1[0]],
                                                              attributes=None,
-                                                             regime="many-to-one",
                                                              dissimilarity_measure=EuclideanDistance(),
                                                              **{"confidence_level": 0.9})
-        BoundedConfidence.BoundedConfidence.spread_influence(network2,
+        BoundedConfidence.BoundedConfidence(regime="one-to-many").spread_influence(network2,
                                                              0,
                                                              [neighbor for neighbor in network2[0]],
                                                              attributes=None,
-                                                             regime="one-to-many",
                                                              dissimilarity_measure=EuclideanDistance(),
                                                              **{"confidence_level": 0.9})
-        BoundedConfidence.BoundedConfidence.spread_influence(network2,
+        BoundedConfidence.BoundedConfidence(regime="many-to-one").spread_influence(network2,
                                                              0,
                                                              [neighbor for neighbor in network2[0]],
                                                              attributes=None,
-                                                             regime="many-to-one",
                                                              dissimilarity_measure=EuclideanDistance(),
                                                              **{"confidence_level": 0.9})
 
