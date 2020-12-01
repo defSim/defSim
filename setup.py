@@ -1,12 +1,12 @@
 from setuptools import setup
 
 setup(name='defSim',
-      version='1.0',
+      version='0.1',
       description='The Discrete Event Framework for Social Influence Models',
-      url='https://github.com/marijnkeijzer/defSim',
+      url='https://github.com/defSim/defSim',
       author='Laukemper, Keijzer, Bakker',
       author_email='m.a.keijzer@rug.nl',
-      license='MIT',
+      license='GNU GPLv3',
       packages=['defSim',
                 'defSim/agents_init',
                 'defSim/network_evolution_sim',
@@ -18,7 +18,7 @@ setup(name='defSim',
                 'defSim/dissimilarity_component'],
       install_requires=[
             'networkx>=2.4',
-            'numpy',
+            'numpy>=1.17',
             'pandas',
             'scipy>=1.1.0'
       ],
