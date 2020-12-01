@@ -6,6 +6,9 @@ class DissimilarityCalculator(ABC):
     This class is responsible for determining the distance between nodes, either from one node to another,
     or for every agent in the network to another. The distance could be based on their attributes or actual geodesic
     distance.
+
+    The class contains the attribute 'exclude' which accepts a list of strings with the names of agent features that
+    should not be used to calculate between agent similarity.
     """
 
     def __init__(self, exclude=None):

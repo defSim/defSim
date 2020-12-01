@@ -1,10 +1,7 @@
 {
-  "defSim/tests/experiment_tests/test_networkLists.py::TestNetworkList::test_network_list": true,
-  "defSim/tests/test_boundedConfidence.py::TestBoundedConfidence::test_spread_influence": true,
-  "defSim/tests/test_dissimilarityCalculator.py::TestDissimilarityCalculator::test_EuclideanDistance_calculate_dissimilarity": true,
-  "defSim/tests/test_dissimilarityCalculator.py::TestDissimilarityCalculator::test_EuclideanDistance_calculate_dissimilarity_networkwide": true,
-  "defSim/tests/test_dissimilarityCalculator.py::TestDissimilarityCalculator::test_HammingDistance_calculate_dissimilarity": true,
-  "defSim/tests/test_dissimilarityCalculator.py::TestDissimilarityCalculator::test_HammingDistance_calculate_dissimilarity_networkwide": true,
-  "defSim/tests/test_weightedLinear.py::TestWeightedLinear::test_setting_opinion_bounds": true,
-  "defSim/tests/test_weightedLinear.py::TestWeightedLinear::test_spread_influence": true
+  "defSim/tests/tools_tests/test_CreateDataFiles.py::TestCreateDataFilesWithExperimentData::test_file_creation": true,
+  "defSim/tests/tools_tests/test_CreateDataFiles.py::TestCreateDataFilesWithSimData::test_file_creation": true,
+  "defSim/tests/tools_tests/test_CreateDataFiles.py::TestCreateDataFilesWithSimData::test_file_creation_from_sim": true,
+  "defSim/tests/tools_tests/test_CreateDataFiles.py::TestCreatedataFiles::test_file_creation": true,
+  "defSim/tests/tools_tests/test_find_clusters.py": true
 }

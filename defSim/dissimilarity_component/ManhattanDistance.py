@@ -6,6 +6,9 @@ import networkx as nx
 class ManhattanDistance(DissimilarityCalculator):
     """
     Implements the DissimilarityCalculator as a calculator of the Manhattan distance
+
+    The class contains the attribute 'exclude' which accepts a list of strings with the names of agent features that
+    should not be used to calculate between agent similarity.
     """
 
     def __init__(self, exclude=[]):
