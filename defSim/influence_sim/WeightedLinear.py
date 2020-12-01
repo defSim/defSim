@@ -115,6 +115,8 @@ class WeightedLinear(InfluenceOperator):
                     network.nodes[agent_i][influenced_feature] = network.nodes[agent_i][influenced_feature] - \
                         convergence_rate * (1 - homophily * abs(network.edges[agent_i, neighbor]["dist"])) * \
                         feature_difference
+                    if network.nodes[agent_i][influenced_feature] > 1: network.nodes[agent_i][influenced_feature] = 1
+                    if network.nodes[agent_i][influenced_feature] < 0: network.nodes[agent_i][influenced_feature] = 0
                     update_dissimilarity(network, [agent_i, neighbor], dissimilarity_measure, **kwargs)
                 else:
                     update_dissimilarity(network, [neighbor], dissimilarity_measure, **kwargs)
