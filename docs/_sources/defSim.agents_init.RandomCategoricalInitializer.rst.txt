@@ -1,6 +1,5 @@
 RandomCategoricalInitializer
 ==========================================
->>>>>>> correlatedFeatures
 
 .. automodule:: defSim.agents_init.RandomCategoricalInitializer
     :members:

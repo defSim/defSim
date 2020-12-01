@@ -4,7 +4,7 @@ Credits
 
 If you use defSim, please use the following citation to refer to the software:
 
-    Laukemper, A.L., Keijzer, M.A., & Bakker, D.M. (2019). defSim (Version 1) [Computer Software]. Available from https://github.com/marijnkeijzer/defSim
+    Laukemper, A.L., Keijzer, M.A., & Bakker, D.M. (2020). defSim (v0.1) [Computer Software]. Available from https://github.com/defSim/defSim
 
 ---------------------------
 

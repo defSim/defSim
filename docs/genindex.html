@@ -89,6 +89,9 @@
 <li class="toctree-l2"><a class="reference internal" href="defSim.agents_init.RandomCategoricalInitializer.html">Random Categorical Initializer</a></li>
 <li class="toctree-l2"><a class="reference internal" href="defSim.agents_init.RandomContinuousInitializer.html">Random Continuous Initializer</a></li>
 <li class="toctree-l2"><a class="reference internal" href="defSim.agents_init.CorrelatedContinuousInitializer.html">Correlated Continuous Initializer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="defSim.agents_init.RandomCategoricalInitializer.html">Random Categorical Initializer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="defSim.agents_init.RandomContinuousInitializer.html">Random Continuous Initializer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="defSim.agents_init.CorrelatedContinuousInitializer.html">Correlated Continuous Initializer</a></li>
 <li class="toctree-l2"><a class="reference internal" href="defSim.agents_init.html#initialize-attributes">initialize_attributes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="defSim.agents_init.html#module-defSim.agents_init.agents_init">set_categorical_attribute</a></li>
 <li class="toctree-l2"><a class="reference internal" href="defSim.agents_init.html#module-defSim.agents_init.agents_init">set_continuous_attribute</a></li>
@@ -113,13 +116,14 @@
 <li class="toctree-l2"><a class="reference internal" href="defSim.influence_sim.Persuasion.html">Persuasion</a></li>
 <li class="toctree-l2"><a class="reference internal" href="defSim.influence_sim.SimilarityAdoption.html">Similarity Adoption</a></li>
 <li class="toctree-l2"><a class="reference internal" href="defSim.influence_sim.WeightedLinear.html">Weighted Linear Influence</a></li>
+<li class="toctree-l2"><a class="reference internal" href="defSim.extensions.influence_sim.Leviathan.html">Leviathan</a></li>
 <li class="toctree-l2"><a class="reference internal" href="defSim.influence_sim.html#module-defSim.influence_sim.influence_sim">influence_sim module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="defSim.influence_sim.html#module-defSim.influence_sim.influence_sim">Abstract Base Class (ABC)</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="defSim.network_evolution_sim.html">Network evolution</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="defSim.network_evolution_sim.html#module-defSim.network_evolution_sim.network_evolution_sim">network_evolution_sim module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="defSim.network_evolution_sim.html#module-defSim.network_evolution_sim.NetworkHomophily">NetworkHomophily</a></li>
+<li class="toctree-l2"><a class="reference internal" href="defSim.network_evolution_sim.html#networkhomophily">NetworkHomophily</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="defSim.dissimilarity_component.html">Dissimilarity updaters</a><ul>
@@ -135,6 +139,11 @@
 <li class="toctree-l2"><a class="reference internal" href="defSim.tools.html#module-defSim.tools.OutputMeasures">OutputMeasures</a></li>
 <li class="toctree-l2"><a class="reference internal" href="defSim.tools.html#module-defSim.tools.NetworkDistanceUpdater">NetworkDistanceUpdater</a></li>
 <li class="toctree-l2"><a class="reference internal" href="defSim.tools.html#module-defSim.tools.ClusterExecutionScript">ClusterExecutionScript</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="defSim.extensions.html">Extensions</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="defSim.extensions.influence_sim.Leviathan.html">Leviathan</a></li>
+<li class="toctree-l2"><a class="reference internal" href="defSim.extensions.html#submitting-a-module">Submitting a module</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="credits.html">Credits</a></li>
@@ -202,9 +211,11 @@
 </li>
       <li><a href="defSim.network_init.html#defSim.network_init.network_init._produce_ring_network">_produce_ring_network() (in module defSim.network_init.network_init)</a>
 </li>
+      <li><a href="defSim.network_init.html#defSim.network_init.network_init._produce_spatial_random_graph">_produce_spatial_random_graph() (in module defSim.network_init.network_init)</a>
+</li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="defSim.network_init.html#defSim.network_init.network_init._produce_spatial_random_graph">_produce_spatial_random_graph() (in module defSim.network_init.network_init)</a>
+      <li><a href="simulation.class.html#defSim.Simulation.Simulation._run_until_convergence">_run_until_convergence() (defSim.Simulation.Simulation method)</a>
 </li>
       <li><a href="simulation.class.html#defSim.Simulation.Simulation._run_until_max_iteration">_run_until_max_iteration() (defSim.Simulation.Simulation method)</a>
 </li>
@@ -247,17 +258,17 @@
       <li><a href="defSim.dissimilarity_component.html#defSim.dissimilarity_component.dissimilarity_calculator.DissimilarityCalculator.calculate_dissimilarity">calculate_dissimilarity() (defSim.dissimilarity_component.dissimilarity_calculator.DissimilarityCalculator method)</a>
 
       <ul>
-        <li><a href="defSim.dissimilarity_component.html#defSim.dissimilarity_component.EuclideanDistance.EuclideanDistance.calculate_dissimilarity">(defSim.dissimilarity_component.EuclideanDistance.EuclideanDistance method)</a>
+        <li><a href="defSim.dissimilarity_component.EuclideanDistance.html#defSim.dissimilarity_component.EuclideanDistance.EuclideanDistance.calculate_dissimilarity">(defSim.dissimilarity_component.EuclideanDistance.EuclideanDistance method)</a>
 </li>
-        <li><a href="defSim.dissimilarity_component.html#defSim.dissimilarity_component.HammingDistance.HammingDistance.calculate_dissimilarity">(defSim.dissimilarity_component.HammingDistance.HammingDistance method)</a>
+        <li><a href="defSim.dissimilarity_component.HammingDistance.html#defSim.dissimilarity_component.HammingDistance.HammingDistance.calculate_dissimilarity">(defSim.dissimilarity_component.HammingDistance.HammingDistance method)</a>
 </li>
       </ul></li>
       <li><a href="defSim.dissimilarity_component.html#defSim.dissimilarity_component.dissimilarity_calculator.DissimilarityCalculator.calculate_dissimilarity_networkwide">calculate_dissimilarity_networkwide() (defSim.dissimilarity_component.dissimilarity_calculator.DissimilarityCalculator method)</a>
 
       <ul>
-        <li><a href="defSim.dissimilarity_component.html#defSim.dissimilarity_component.EuclideanDistance.EuclideanDistance.calculate_dissimilarity_networkwide">(defSim.dissimilarity_component.EuclideanDistance.EuclideanDistance method)</a>
+        <li><a href="defSim.dissimilarity_component.EuclideanDistance.html#defSim.dissimilarity_component.EuclideanDistance.EuclideanDistance.calculate_dissimilarity_networkwide">(defSim.dissimilarity_component.EuclideanDistance.EuclideanDistance method)</a>
 </li>
-        <li><a href="defSim.dissimilarity_component.html#defSim.dissimilarity_component.HammingDistance.HammingDistance.calculate_dissimilarity_networkwide">(defSim.dissimilarity_component.HammingDistance.HammingDistance method)</a>
+        <li><a href="defSim.dissimilarity_component.HammingDistance.html#defSim.dissimilarity_component.HammingDistance.HammingDistance.calculate_dissimilarity_networkwide">(defSim.dissimilarity_component.HammingDistance.HammingDistance method)</a>
 </li>
       </ul></li>
       <li><a href="defSim.agents_init.CorrelatedContinuousInitializer.html#defSim.agents_init.CorrelatedContinuousInitializer.SimilarityPostprocessor.check_convergence">check_convergence() (defSim.agents_init.CorrelatedContinuousInitializer.SimilarityPostprocessor method)</a>
@@ -277,13 +288,13 @@
       <li><a href="defSim.tools.html#defSim.tools.CreateOutputTable.OutputTableCreator.create_output">create_output() (defSim.tools.CreateOutputTable.OutputTableCreator static method)</a>
 
       <ul>
-        <li><a href="defSim.tools.html#defSim.tools.OutputMeasures.AttributeReporter.create_output">(defSim.tools.OutputMeasures.AttributeReporter static method)</a>
+        <li><a href="defSim.tools.html#defSim.tools.OutputMeasures.AttributeReporter.create_output">(defSim.tools.OutputMeasures.AttributeReporter method)</a>
 </li>
-        <li><a href="defSim.tools.html#defSim.tools.OutputMeasures.AverageDistanceReporter.create_output">(defSim.tools.OutputMeasures.AverageDistanceReporter static method)</a>
+        <li><a href="defSim.tools.html#defSim.tools.OutputMeasures.AverageDistanceReporter.create_output">(defSim.tools.OutputMeasures.AverageDistanceReporter method)</a>
 </li>
-        <li><a href="defSim.tools.html#defSim.tools.OutputMeasures.AverageOpinionReporter.create_output">(defSim.tools.OutputMeasures.AverageOpinionReporter static method)</a>
+        <li><a href="defSim.tools.html#defSim.tools.OutputMeasures.AverageOpinionReporter.create_output">(defSim.tools.OutputMeasures.AverageOpinionReporter method)</a>
 </li>
-        <li><a href="defSim.tools.html#defSim.tools.OutputMeasures.ClusterFinder.create_output">(defSim.tools.OutputMeasures.ClusterFinder static method)</a>
+        <li><a href="defSim.tools.html#defSim.tools.OutputMeasures.ClusterFinder.create_output">(defSim.tools.OutputMeasures.ClusterFinder method)</a>
 </li>
       </ul></li>
       <li><a href="simulation.class.html#defSim.Simulation.Simulation.create_output_table">create_output_table() (defSim.Simulation.Simulation method)</a>
@@ -298,8 +309,6 @@
 <h2 id="D">D</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="defSim.agents_init.RandomContinuousInitializer.html#defSim.agents_init.RandomContinuousInitializer.RandomContinuousInitializer.default_feature_bounds">default_feature_bounds (defSim.agents_init.RandomContinuousInitializer.RandomContinuousInitializer attribute)</a>
-</li>
       <li><a href="defSim.agents_init.html#module-defSim.agents_init.agents_init">defSim.agents_init.agents_init (module)</a>, <a href="defSim.agents_init.html#module-defSim.agents_init.agents_init">[1]</a>, <a href="defSim.agents_init.html#module-defSim.agents_init.agents_init">[2]</a>, <a href="defSim.agents_init.html#module-defSim.agents_init.agents_init">[3]</a>
 </li>
       <li><a href="defSim.agents_init.CorrelatedContinuousInitializer.html#module-defSim.agents_init.CorrelatedContinuousInitializer">defSim.agents_init.CorrelatedContinuousInitializer (module)</a>
@@ -315,6 +324,8 @@
       <li><a href="defSim.dissimilarity_component.HammingDistance.html#module-defSim.dissimilarity_component.HammingDistance">defSim.dissimilarity_component.HammingDistance (module)</a>
 </li>
       <li><a href="experiment.class.html#module-defSim.Experiment">defSim.Experiment (module)</a>
+</li>
+      <li><a href="defSim.extensions.influence_sim.Leviathan.html#module-defSim.extensions.influence_sim.Leviathan">defSim.extensions.influence_sim.Leviathan (module)</a>
 </li>
       <li><a href="defSim.focal_agent_sim.html#module-defSim.focal_agent_sim.focal_agent_sim">defSim.focal_agent_sim.focal_agent_sim (module)</a>, <a href="defSim.focal_agent_sim.html#module-defSim.focal_agent_sim.focal_agent_sim">[1]</a>
 </li>
@@ -339,8 +350,6 @@
       <li><a href="defSim.neighbor_selector_sim.SimilarNeighborSelector.html#module-defSim.neighbor_selector_sim.SimilarNeighborSelector">defSim.neighbor_selector_sim.SimilarNeighborSelector (module)</a>
 </li>
       <li><a href="defSim.network_evolution_sim.html#module-defSim.network_evolution_sim.network_evolution_sim">defSim.network_evolution_sim.network_evolution_sim (module)</a>
-</li>
-      <li><a href="defSim.network_evolution_sim.html#module-defSim.network_evolution_sim.NetworkHomophily">defSim.network_evolution_sim.NetworkHomophily (module)</a>
 </li>
       <li><a href="defSim.network_init.html#module-defSim.network_init.network_init">defSim.network_init.network_init (module)</a>, <a href="defSim.network_init.html#module-defSim.network_init.network_init">[1]</a>, <a href="defSim.network_init.html#module-defSim.network_init.network_init">[2]</a>, <a href="defSim.network_init.html#module-defSim.network_init.network_init">[3]</a>
 </li>
@@ -406,6 +415,8 @@
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="defSim.agents_init.CorrelatedContinuousInitializer.html#defSim.agents_init.CorrelatedContinuousInitializer.SimilarityPostprocessor.improvement_if_swapped">improvement_if_swapped() (defSim.agents_init.CorrelatedContinuousInitializer.SimilarityPostprocessor method)</a>
 </li>
+      <li><a href="defSim.extensions.influence_sim.Leviathan.html#defSim.extensions.influence_sim.Leviathan.Leviathan.influence">influence() (defSim.extensions.influence_sim.Leviathan.Leviathan static method)</a>
+</li>
       <li><a href="defSim.influence_sim.html#defSim.influence_sim.influence_sim.InfluenceOperator">InfluenceOperator (class in defSim.influence_sim.influence_sim)</a>
 </li>
       <li><a href="defSim.agents_init.html#defSim.agents_init.agents_init.AttributesInitializer.initialize_attributes">initialize_attributes() (defSim.agents_init.agents_init.AttributesInitializer static method)</a>
@@ -424,6 +435,8 @@
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="simulation.class.html#defSim.Simulation.Simulation.initialize_simulation">initialize_simulation() (defSim.Simulation.Simulation method)</a>
 </li>
+      <li><a href="simulation.class.html#defSim.Simulation.Simulation.initialize_tickwise_output">initialize_tickwise_output() (defSim.Simulation.Simulation method)</a>
+</li>
   </ul></td>
 </tr></table>
 
@@ -431,6 +444,20 @@
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="defSim.tools.html#defSim.tools.CreateOutputTable.OutputTableCreator.label">label (defSim.tools.CreateOutputTable.OutputTableCreator attribute)</a>
+
+      <ul>
+        <li><a href="defSim.tools.html#defSim.tools.OutputMeasures.AttributeReporter.label">(defSim.tools.OutputMeasures.AttributeReporter attribute)</a>
+</li>
+        <li><a href="defSim.tools.html#defSim.tools.OutputMeasures.AverageDistanceReporter.label">(defSim.tools.OutputMeasures.AverageDistanceReporter attribute)</a>
+</li>
+        <li><a href="defSim.tools.html#defSim.tools.OutputMeasures.AverageOpinionReporter.label">(defSim.tools.OutputMeasures.AverageOpinionReporter attribute)</a>
+</li>
+        <li><a href="defSim.tools.html#defSim.tools.OutputMeasures.ClusterFinder.label">(defSim.tools.OutputMeasures.ClusterFinder attribute)</a>
+</li>
+      </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="defSim.extensions.influence_sim.Leviathan.html#defSim.extensions.influence_sim.Leviathan.Leviathan">Leviathan (class in defSim.extensions.influence_sim.Leviathan)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -439,10 +466,6 @@
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="defSim.tools.html#defSim.tools.ClusterExecutionScript.parallelSimulation.main">main() (defSim.tools.ClusterExecutionScript.parallelSimulation method)</a>
-</li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="defSim.network_evolution_sim.html#defSim.network_evolution_sim.NetworkHomophily.MaslovSneppen">MaslovSneppen (class in defSim.network_evolution_sim.NetworkHomophily)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -478,8 +501,6 @@
 </li>
       <li><a href="defSim.agents_init.CorrelatedContinuousInitializer.html#defSim.agents_init.CorrelatedContinuousInitializer.SimilarityPostprocessor.process">process() (defSim.agents_init.CorrelatedContinuousInitializer.SimilarityPostprocessor method)</a>
 </li>
-      <li><a href="defSim.agents_init.CorrelatedContinuousInitializer.html#defSim.agents_init.CorrelatedContinuousInitializer.SimilarityPostprocessor.process">process() (defSim.agents_init.CorrelatedContinuousInitializer.SimilarityPostprocessor method)</a>
-</li>
   </ul></td>
 </tr></table>
 
@@ -507,8 +528,6 @@
       <li><a href="defSim.network_evolution_sim.html#defSim.network_evolution_sim.network_evolution_sim.NetworkModifier.rewire_network">rewire_network() (defSim.network_evolution_sim.network_evolution_sim.NetworkModifier static method)</a>
 
       <ul>
-        <li><a href="defSim.network_evolution_sim.html#defSim.network_evolution_sim.NetworkHomophily.MaslovSneppen.rewire_network">(defSim.network_evolution_sim.NetworkHomophily.MaslovSneppen static method)</a>
-</li>
         <li><a href="defSim.network_evolution_sim.html#defSim.network_evolution_sim.network_evolution_sim.rewire_network">(in module defSim.network_evolution_sim.network_evolution_sim)</a>
 </li>
       </ul></li>
@@ -560,9 +579,11 @@
 </li>
       <li><a href="simulation.class.html#defSim.Simulation.Simulation">Simulation (class in defSim.Simulation)</a>
 </li>
-      <li><a href="defSim.influence_sim.BoundedConfidence.html#defSim.influence_sim.BoundedConfidence.BoundedConfidence.spread_influence">spread_influence() (defSim.influence_sim.BoundedConfidence.BoundedConfidence static method)</a>
+      <li><a href="defSim.extensions.influence_sim.Leviathan.html#defSim.extensions.influence_sim.Leviathan.Leviathan.spread_influence">spread_influence() (defSim.extensions.influence_sim.Leviathan.Leviathan static method)</a>
 
       <ul>
+        <li><a href="defSim.influence_sim.BoundedConfidence.html#defSim.influence_sim.BoundedConfidence.BoundedConfidence.spread_influence">(defSim.influence_sim.BoundedConfidence.BoundedConfidence static method)</a>
+</li>
         <li><a href="defSim.influence_sim.Persuasion.html#defSim.influence_sim.Persuasion.Persuasion.spread_influence">(defSim.influence_sim.Persuasion.Persuasion static method)</a>
 </li>
         <li><a href="defSim.influence_sim.SimilarityAdoption.html#defSim.influence_sim.SimilarityAdoption.SimilarityAdoption.spread_influence">(defSim.influence_sim.SimilarityAdoption.SimilarityAdoption static method)</a>

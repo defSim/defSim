@@ -71,15 +71,13 @@
           
             
             
-                <ul>
+                <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="Introduction_to_defSim.html">Introduction</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="Introduction_to_defSim.html#the-unified-way">1. The Unified Way</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Introduction_to_defSim.html#the-modular-way">2. The Modular Way</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Introduction_to_defSim.html#some-useful-resources">Some useful resources</a></li>
 </ul>
 </li>
-</ul>
-<ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="experiment.class.html">Experiment class</a></li>
 <li class="toctree-l1"><a class="reference internal" href="simulation.class.html">Simulation class</a></li>
 <li class="toctree-l1"><a class="reference internal" href="defSim.network_init.html">Networks</a><ul>
@@ -93,10 +91,13 @@
 <li class="toctree-l2"><a class="reference internal" href="defSim.agents_init.RandomCategoricalInitializer.html">Random Categorical Initializer</a></li>
 <li class="toctree-l2"><a class="reference internal" href="defSim.agents_init.RandomContinuousInitializer.html">Random Continuous Initializer</a></li>
 <li class="toctree-l2"><a class="reference internal" href="defSim.agents_init.CorrelatedContinuousInitializer.html">Correlated Continuous Initializer</a></li>
-<li class="toctree-l2"><a class="reference internal" href="defSim.agents_init.html#module-defSim.agents_init.agents_init">initialize_attributes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="defSim.agents_init.RandomCategoricalInitializer.html">Random Categorical Initializer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="defSim.agents_init.RandomContinuousInitializer.html">Random Continuous Initializer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="defSim.agents_init.CorrelatedContinuousInitializer.html">Correlated Continuous Initializer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="defSim.agents_init.html#initialize-attributes">initialize_attributes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="defSim.agents_init.html#module-defSim.agents_init.agents_init">set_categorical_attribute</a></li>
 <li class="toctree-l2"><a class="reference internal" href="defSim.agents_init.html#module-defSim.agents_init.agents_init">set_continuous_attribute</a></li>
-<li class="toctree-l2"><a class="reference internal" href="defSim.agents_init.html#abstract-base-class-abc">Abstract Base Class (ABC)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="defSim.agents_init.html#abstract-base-class">Abstract Base Class</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="defSim.focal_agent_sim.html">Focal agent selection</a><ul>
@@ -117,13 +118,14 @@
 <li class="toctree-l2"><a class="reference internal" href="defSim.influence_sim.Persuasion.html">Persuasion</a></li>
 <li class="toctree-l2"><a class="reference internal" href="defSim.influence_sim.SimilarityAdoption.html">Similarity Adoption</a></li>
 <li class="toctree-l2"><a class="reference internal" href="defSim.influence_sim.WeightedLinear.html">Weighted Linear Influence</a></li>
+<li class="toctree-l2"><a class="reference internal" href="defSim.extensions.influence_sim.Leviathan.html">Leviathan</a></li>
 <li class="toctree-l2"><a class="reference internal" href="defSim.influence_sim.html#module-defSim.influence_sim.influence_sim">influence_sim module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="defSim.influence_sim.html#module-defSim.influence_sim.influence_sim">Abstract Base Class (ABC)</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="defSim.network_evolution_sim.html">Network evolution</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="defSim.network_evolution_sim.html#module-defSim.network_evolution_sim.network_evolution_sim">network_evolution_sim module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="defSim.network_evolution_sim.html#module-defSim.network_evolution_sim.NetworkHomophily">NetworkHomophily</a></li>
+<li class="toctree-l2"><a class="reference internal" href="defSim.network_evolution_sim.html#networkhomophily">NetworkHomophily</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="defSim.dissimilarity_component.html">Dissimilarity updaters</a><ul>
@@ -139,6 +141,11 @@
 <li class="toctree-l2"><a class="reference internal" href="defSim.tools.html#module-defSim.tools.OutputMeasures">OutputMeasures</a></li>
 <li class="toctree-l2"><a class="reference internal" href="defSim.tools.html#module-defSim.tools.NetworkDistanceUpdater">NetworkDistanceUpdater</a></li>
 <li class="toctree-l2"><a class="reference internal" href="defSim.tools.html#module-defSim.tools.ClusterExecutionScript">ClusterExecutionScript</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="defSim.extensions.html">Extensions</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="defSim.extensions.influence_sim.Leviathan.html">Leviathan</a></li>
+<li class="toctree-l2"><a class="reference internal" href="defSim.extensions.html#submitting-a-module">Submitting a module</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="credits.html">Credits</a></li>
@@ -204,6 +211,7 @@ The influence function itself can still be a function of the “Sex” attribute
 agents do not interact anymore. 1 means that even the most dissimilar agents still interact, 0 means no interaction.Passed as a kwargs argument.</p></li>
 <li><p><strong>convergence_rate</strong> (<em>float=0.5</em>) – A number between 0 and 1 determining how much an agent adopts other agents features. If
 it is one, the influenced agent takes the value of the influencing agent. Passed as a kwargs argument.</p></li>
+<li><p><strong>bi_directional</strong> (<em>bool=False</em>) – A boolean specifying whether influence is bi- or uni-directional.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>

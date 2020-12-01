@@ -40,6 +40,7 @@ Contents of the documentation
    Network evolution <defSim.network_evolution_sim>
    Dissimilarity updaters <defSim.dissimilarity_component>
    defSim.tools
+   Extensions <defSim.extensions>
    Credits <credits>
 
 ................................................................................
