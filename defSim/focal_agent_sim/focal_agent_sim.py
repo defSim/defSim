@@ -16,7 +16,7 @@ class FocalAgentSelector(ABC):
         pass
 
     @abstractmethod
-    def select_agent(network: nx.Graph, agents: List[int]=[], **kwargs) -> int:
+    def select_agent(network: nx.Graph, agents: List[int]=[]) -> int:
         """
         This method selects an agent from a network for the influence process.
         Based on the communication regime, the selected agent is either the source or the target of influence.
@@ -43,8 +43,8 @@ def select_focal_agent(network: nx.Graph, realization: str or FocalAgentSelector
     from .RandomSelector import RandomSelector
 
     if realization == "random":
-        return RandomSelector().select_agent(network, agents, **kwargs)
+        return RandomSelector(**kwargs).select_agent(network, agents)
     elif isinstance(realization, FocalAgentSelector):
-        return realization.select_agent(network, agents, **kwargs)
+        return realization.select_agent(network, agents)
     else:
         raise ValueError("Can only select from the options ['random'] or input an instance of a class which inherits from FocalAgentSelector")

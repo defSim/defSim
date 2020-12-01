@@ -12,7 +12,7 @@ class TestSimulation(TestCase):
         attribute_component = RandomCategoricalInitializer.RandomCategoricalInitializer()
         focal_agent_component = RandomSelector.RandomSelector()
         neighbor_component = RandomNeighborSelector.RandomNeighborSelector()
-        influence_component = SimilarityAdoption.SimilarityAdoption()
+        influence_component = SimilarityAdoption.SimilarityAdoption(regime="one-to-many")
         dissimilarity_measure = dissimilarity_calculator.select_calculator("hamming")
         simulation = Simulation(attributes_initializer=attribute_component,
                                 focal_agent_selector=focal_agent_component,
