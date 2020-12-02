@@ -1,8 +1,6 @@
 from .dissimilarity_calculator import DissimilarityCalculator
 import networkx as nx
 
-# todo: documentation on exclude
-
 class ManhattanDistance(DissimilarityCalculator):
     """
     Implements the DissimilarityCalculator as a calculator of the Manhattan distance
