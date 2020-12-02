@@ -4,6 +4,7 @@ import random
 import warnings
 import time
 import pandas as pd
+import numpy as np
 import networkx as nx
 import networkx.algorithms.isomorphism as iso
 from defSim.network_init import network_init
@@ -189,6 +190,7 @@ class Simulation:
         if self.seed is None:
             self.seed = random.randint(10000,99999)
         random.seed(self.seed)
+        self.parameter_dict['np_random_generator'] = np.random.default_rng(self.seed)
 
         ## if deprecated ms_rewiring parameter is set in parameter dict, replace with network modifier
         if 'ms_rewiring' in list(self.parameter_dict.keys()):
