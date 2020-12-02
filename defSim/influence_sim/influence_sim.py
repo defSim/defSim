@@ -115,7 +115,7 @@ def spread_influence(network: nx.Graph,
             warnings.warn("Regime for influence function is not equal to regime for simulation. Influence function: {}, simulation: {}".format(realization.regime, regime))
         except AttributeError:
           realization.regime = regime
-        return realization(regime = regime, **kwargs).spread_influence(network,
+        return realization.spread_influence(network,
                                             agent_i,
                                             agents_j,
                                             dissimilarity_measure,
