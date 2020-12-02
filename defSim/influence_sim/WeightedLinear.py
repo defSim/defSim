@@ -28,6 +28,8 @@ class WeightedLinear(InfluenceOperator):
             their opinion when confronted with similar others (moderated positive influence). At values > 1, there
             exists a point at which influence becomes negative, making agents shift away from the sending agents
             expressed opinion.
+        :param List[str]=[] influence_modifiers: Modifiers to apply to weighted linear influence. Select from 
+            [smooth", "stubborn"]
         :param bool=False bi_directional: A boolean specifying whether influence is bi- or uni-directional.            
         """
 
@@ -44,6 +46,17 @@ class WeightedLinear(InfluenceOperator):
         except KeyError:
             warnings.warn("homophily not specified, using default value 0")
             self.homophily = 0
+
+        try:
+            self.modifiers = kwargs["influence_modifiers"]
+        except KeyError:
+            self.modifiers = []            
+
+        # check modifiers
+        if type(self.modifiers) != list:
+            self.modifiers = [self.modifiers]
+        if not all([modifier in ["bound", "smooth", "stubborn"] for modifier in self.modifiers]):
+            warnings.warn("Unrecognized modifier in __class__. Only 'smooth' and 'stubborn' are recognized.")
 
         self.bi_directional = kwargs.get('bi_directional', False)
         
@@ -108,19 +121,41 @@ class WeightedLinear(InfluenceOperator):
                 feature_difference = network.nodes[agent_i][influenced_feature] - \
                                      network.nodes[neighbor][influenced_feature]
                 # influence function
-                network.nodes[neighbor][influenced_feature] = network.nodes[neighbor][influenced_feature] + \
-                    self.convergence_rate * (1 - self.homophily * abs(network.edges[agent_i, neighbor]["dist"])) * \
+                influence = self.convergence_rate * (1 - self.homophily * abs(network.edges[agent_i, neighbor]["dist"])) * \
                     feature_difference
+                # apply smoothing
+                if "smooth" in self.modifiers:
+                    influence = self._apply_smoothing(base_influence = influence, target = neighbor, 
+                        influenced_feature = influenced_feature, network = network)
+                # apply stubbornness
+                if "stubborn" in self.modifiers:
+                    influence = self._apply_smoothing(base_influence = influence, target = neighbor, 
+                        influenced_feature = influenced_feature, network = network)
+
+                network.nodes[neighbor][influenced_feature] = network.nodes[neighbor][influenced_feature] + influence
+
                 # bounding the opinions to the pre-supposed opinion scale [0,1]
                 if network.nodes[neighbor][influenced_feature] > 1: network.nodes[neighbor][influenced_feature] = 1
                 if network.nodes[neighbor][influenced_feature] < 0: network.nodes[neighbor][influenced_feature] = 0
 
                 if self.bi_directional == True and self.regime == "one-to-one":
                     # influence function applied again
-                    # (note that feature_difference has not been updated after changing neighbor's feature)
-                    network.nodes[agent_i][influenced_feature] = network.nodes[agent_i][influenced_feature] - \
-                        self.convergence_rate * (1 - self.homophily * abs(network.edges[agent_i, neighbor]["dist"])) * \
-                        feature_difference
+                    # (note that feature_difference has not been updated after changing neighbor's feature
+                    # and feature_difference has to be reversed here)
+                    influence = self.convergence_rate * (1 - self.homophily * abs(network.edges[agent_i, neighbor]["dist"])) * \
+                    -feature_difference
+
+                    # apply smoothing
+                    if "smooth" in self.modifiers:
+                        influence = self._apply_smoothing(base_influence = influence, target = agent_i, 
+                            influenced_feature = influenced_feature, network = network)
+                    # apply stubbornness
+                    if "stubborn" in self.modifiers:
+                        influence = self._apply_smoothing(base_influence = influence, target = agent_i, 
+                            influenced_feature = influenced_feature, network = network)                    
+
+                    network.nodes[agent_i][influenced_feature] = network.nodes[agent_i][influenced_feature] + influence
+
                     if network.nodes[agent_i][influenced_feature] > 1: network.nodes[agent_i][influenced_feature] = 1
                     if network.nodes[agent_i][influenced_feature] < 0: network.nodes[agent_i][influenced_feature] = 0
                     update_dissimilarity(network, [agent_i, neighbor], dissimilarity_measure, **kwargs)
@@ -144,6 +179,16 @@ class WeightedLinear(InfluenceOperator):
                         feature_difference)
                 
                 overall_influence = sum(influence_values) / len(influence_values)
+
+                # apply smoothing to overall influence
+                if "smooth" in self.modifiers:
+                    influence = self._apply_smoothing(base_influence = overall_influence, target = agent_i, 
+                        influenced_feature = influenced_feature, network = network)
+                # apply stubbornness to overall influence
+                if "stubborn" in self.modifiers:
+                    influence = self._apply_smoothing(base_influence = overall_influence, target = agent_i, 
+                        influenced_feature = influenced_feature, network = network) 
+
                 network.nodes[agent_i][influenced_feature] = network.nodes[agent_i][influenced_feature] + overall_influence
                 
                 # bounding the opinions to the pre-supposed opinion scale [0, 1]
@@ -154,3 +199,59 @@ class WeightedLinear(InfluenceOperator):
                 success = True
 
         return success
+
+
+    def _apply_smoothing(self, 
+                        base_influence: float, 
+                        target: int, 
+                        influenced_feature: str, 
+                        network: nx.Graph):
+        '''
+        This function applies smoothing to the influence exerted on a target. The smoothing results in 
+        reduced change in the direction of the closest extreme. 
+        To illustrate: If the base influence is positive and the agent's opinion is at the lower bound of the
+        scale, full influence is exerted. If base influence is positive and the agent's opinion is at the upper
+        bound of the scale, no influence is exerted. Intermediate feature values lead to reduced but nonzero
+        influence.
+
+        Reference
+        Flache, A., & Macy, M. W. (2011). Small Worlds and Cultural Polarization. 
+            The Journal of Mathematical Sociology, 35(1–3), 146–176. https://doi.org/10.1080/0022250X.2010.532261
+        + Corrigendum
+
+        :param base_influence: Non-smoothed influence exerted on target
+        :param target: Agent to influence
+        :param influenced_feature: Feature to influence on agent
+        :param network: Network in which the agent exists
+        :returns: Influence value after smoothing has been applied
+        '''
+        if base_influence > 0:
+            smoothed_influence = base_influence * (1 - network.nodes[target][influenced_feature])
+        else:
+            smoothed_influence = base_influence * (0 + network.nodes[target][influenced_feature])
+        return smoothed_influence
+
+    def _apply_stubbornness(self,
+                        base_influence: float, 
+                        target: int, 
+                        influenced_feature: str, 
+                        network: nx.Graph):
+        '''
+        This function applies stubbornness to the influence exerted on a target. The stubbornness results in 
+        reduced change for agents with more extreme feature values. 
+        To illustrate: If the agent's feature value is exactly between the upper and lower bound, full
+        influence is exerted. If the agent's feature value is exactly at the upper or lower bound, no influence
+        is exerted.
+        :param base_influence: Non-smoothed influence exerted on target
+        :param target: Agent to influence
+        :param influenced_feature: Feature to influence on agent
+        :param network: Network in which the agent exists
+        :returns: Influence value after stubbornness has been applied
+        '''
+        # multiply base influence by 2 so that full influence is exerted for agents with feature value of 0.5
+        base_influence = base_influence * 2   
+        if network.nodes[target][influenced_feature] > 0.5:
+            stubborn_influence = base_influence * (1 - network.nodes[target][influenced_feature])
+        else:
+            stubborn_influence = base_influence * (0 + network.nodes[target][influenced_feature])
+        return stubborn_influence
