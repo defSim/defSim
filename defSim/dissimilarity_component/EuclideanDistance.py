@@ -2,8 +2,6 @@ from .dissimilarity_calculator import DissimilarityCalculator
 import numpy as np
 import networkx as nx
 
-# todo: documentation on 'exclude'
-
 class EuclideanDistance(DissimilarityCalculator):
     """
     Implements the DissimilarityCalculator as a calculator of the euclidean distance
