@@ -2,7 +2,6 @@ from unittest import TestCase
 from defSim.network_init import network_init
 import networkx as nx
 
-#todo: test properly
 def test_spatial_random_graph():
     graph = network_init.generate_network("spatial_random_graph", **{"num_agents": 16, "min_neighbors": 8})
 

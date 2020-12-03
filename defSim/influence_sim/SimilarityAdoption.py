@@ -55,7 +55,6 @@ class SimilarityAdoption(InfluenceOperator):
         :returns: true if agent(s) were successfully influenced
         """
         # todo: insert reference to Axelrod
-        # todo: explain the homophily parameter
 
         if type(agents_j) != list:
             agents_j = [agents_j]
@@ -69,7 +68,6 @@ class SimilarityAdoption(InfluenceOperator):
         if self.regime != "many-to-one":
             incongruent_features = []
             for neighbor in agents_j:
-                #todo this will fail in a global communication regime
                 if network.edges[agent_i, neighbor]['dist'] < 1:
                     for feature in attributes:
                         if network.nodes[agent_i][feature] != network.nodes[neighbor][feature]:

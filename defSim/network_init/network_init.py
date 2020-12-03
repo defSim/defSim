@@ -77,7 +77,6 @@ def _produce_grid_network(**kwargs) -> nx.Graph:
         An agent in a Moore neighborhood with radius 2 has 24 connections.
     :returns: A NetworkX Graph object.
     """
-    # todo: put in maslov sneppen rewiring here as well?
 
     # check the parameters or initialize default values
     try:
@@ -170,7 +169,6 @@ def _produce_ring_network(**kwargs) -> nx.Graph:
     :param int=2 num_neighbors: The number of neighbors per agent. Must be an even number.
     :returns: A NetworkX Graph object.
     """
-    #todo: properly cite MS
 
     # check the parameters or initialize default values
     try:
@@ -184,7 +182,6 @@ def _produce_ring_network(**kwargs) -> nx.Graph:
         # print("Number of neighbors was not specified, default value 2 is used.")
         num_neighbors = 2
 
-    # todo: decide about adding seed
     return nx.watts_strogatz_graph(num_agents, num_neighbors, 0)
 
 

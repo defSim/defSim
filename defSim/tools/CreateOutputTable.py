@@ -25,7 +25,7 @@ class OutputTableCreator(ABC):
 
         :param network: A NetworkX graph object.
 
-        :returns: #todo: a tuple?
+        :returns: 
         """
         pass
 
