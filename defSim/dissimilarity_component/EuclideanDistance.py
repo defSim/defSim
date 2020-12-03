@@ -19,6 +19,9 @@ class EuclideanDistance(DissimilarityCalculator):
         Calculates normalized euclidean distance of the agents' feature vectors where feature values do not exceed the
         [0,1] bounds.
 
+        The distances are adjusted by the square root of the number of features, so that maximally dissimilar agents
+        always have a distance of 1 regardless of the number of features.
+
         :param network: The network in which the agents exist.
         :param agent1_id: The index of the first agent.
         :param agent2_id: The index of the agent to compare with.
@@ -29,7 +32,7 @@ class EuclideanDistance(DissimilarityCalculator):
         agent1_attributes = [v for k, v in network.nodes[agent1_id].items() if k not in self.exclude]
         agent2_attributes = [v for k, v in network.nodes[agent2_id].items() if k not in self.exclude]
 
-        return np.linalg.norm(np.array(agent1_attributes) - np.array(agent2_attributes)) # / np.sqrt(len(agent1_attributes)) # todo: find out why this was added at some point
+        return np.linalg.norm(np.array(agent1_attributes) - np.array(agent2_attributes)) / np.sqrt(len(agent1_attributes))
 
     def calculate_dissimilarity_networkwide(self, network: nx.Graph, **kwargs):
         """
