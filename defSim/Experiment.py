@@ -10,6 +10,7 @@ from defSim.neighbor_selector_sim import neighbor_selector_sim
 from defSim.focal_agent_sim import focal_agent_sim
 from defSim.dissimilarity_component import dissimilarity_calculator
 from defSim.network_init import network_init
+from defSim.network_evolution_sim.network_evolution_sim import NetworkModifier
 from defSim.Simulation import Simulation
 from defSim.tools.CreateOutputTable import OutputTableCreator
 from defSim.tools.CreateDataFiles import DataFileCreator, create_data_files
@@ -78,7 +79,7 @@ class Experiment:
         influence_function (str = "similarity_adoption" or :class:`InfluenceOperator`): Either a custom influence function or a string that selects from the predefined options ["similarity_adoption", "bounded_confidence", "weighted_linear", ...}
         influence_parameters (dict = {}): Optional dictionary that includes the parameters for the InfluenceFunction.
         influenceable_attributes (list = []): With this list you select all attributes that are allowed to be changed by the influence function. If the list is empty, all attributes are affected by influence.
-        network_modifier: (String = "random" or :class:`NetworkModifier`) Either a custom NetworkModifier or a string selecting from the predefined options ["random", ...]
+        network_modifiers (NetworkModifier or List = None): A modifier or list of modifiers to apply to the network after initialization. Each modifier should be derived from the NetworkModifier base class.
         dissimilarity_measure (String = "hamming" or :class:`DissimilarityCalculator`): Either a custom DissimilarityCalculator or a string that selects from the predefined options ["hamming", "euclidean", ...}
         tickwise (List = []): A list containing the names of all agent attributes that should be recorded at every timestep.
         stop_condition (String = "pragmatic_convergence"): Determines at what point a simulation is supposed to stop. Options include "strict_convergence", which means that it is theoretically not possible anymore for any agent to influence another, "pragmatic_convergence", which means that it is assumed that little change is possible anymore, and "max_iteration" which just stops the simulation after a certain amount of time steps.
@@ -106,7 +107,7 @@ class Experiment:
                  influence_function: str = "similarity_adoption" or influence_sim.InfluenceOperator,
                  influence_parameters: dict = {},
                  influenceable_attributes: list = None,  # the list that is passed to the influence function
-                 network_modifier: str = "random" or network_evolution_sim.NetworkModifier,
+                 network_modifiers: List[NetworkModifier] = None,
                  network_modifier_parameters: dict = {},
                  dissimilarity_measure: str = "hamming" or dissimilarity_calculator.DissimilarityCalculator,
                  tickwise: list = [],
@@ -132,7 +133,7 @@ class Experiment:
         self.influence_function = influence_function
         self.influence_parameters = influence_parameters
         self.influenceable_attributes = influenceable_attributes
-        self.network_modifier = "random"  # todo: implement a dummy network modifier
+        self.network_modifiers = network_modifiers
         self.network_modifier_parameters = network_modifier_parameters
         self.dissimilarity_measure = dissimilarity_measure
         self.tickwise = tickwise
@@ -380,7 +381,7 @@ class Experiment:
                 "neighbor_selector": self.neighbor_selector,
                 "influence_function": self.influence_function,
                 "influenceable_attributes": self.influenceable_attributes,
-                "network_modifier": self.network_modifier,
+                "network_modifiers": self.network_modifiers,
                 "dissimilarity_measure": self.dissimilarity_measure,
                 "stop_condition": self.stop_condition,
                 "max_iterations": self.max_iterations,

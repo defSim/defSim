@@ -42,7 +42,6 @@ class Simulation:
         influence_function (str = "similarity_adoption" or :class:`InfluenceOperator`): Either a custom influence function or a string that selects from the predefined options ["similarity_adoption", "bounded_confidence", "weighted_linear", ...}
         influenceable_attributes (List = None): This is a list of the attribute names, that may be changed in the influence step
         dissimilarity_measure (String = "hamming" or :class:`DissimilarityCalculator`): Either a custom DissimilarityCalculator or a string that selects from the predefined options ["hamming", "euclidean", ...}
-        network_modifier: (String = "random" or :class:`NetworkModifier`) Either a custom NetworkModifier or a string selecting from the predefined options ["random", ...]
         stop_condition (str = "max_iteration"): Determines at what point a simulation is supposed to stop. Options include "strict_convergence", which means that it is theoretically not possible anymore for any agent to influence another, "pragmatic_convergence", which means that it is assumed that little change is possible anymore, and "max_iteration" which just stops the simulation after a certain amount of time steps.
         communication_regime (str = "one-to-one"): Options are "one-to-one", "one-to-many" and "many-to-one".
         parameter_dict: A dictionary with all parameters that will be passed to the specific component implementations.
@@ -66,7 +65,6 @@ class Simulation:
                  influence_function: str = "similarity_adoption" or influence_sim.InfluenceOperator,
                  influenceable_attributes: List = None,
                  dissimilarity_measure: str = "hamming" or DissimilarityCalculator,
-                 network_modifier: str = "random" or network_evolution_sim.NetworkModifier,
                  stop_condition: str = "max_iteration",
                  max_iterations: int = 100000,
                  communication_regime: str = "one-to-one",
