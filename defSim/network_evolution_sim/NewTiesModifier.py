@@ -28,8 +28,12 @@ class NewTiesModifier(NetworkModifier):
         
         if new_ties_probability is None:
             raise ValueError("No probability given for new tie creation. Pass argument new_ties_probability.")
-        
-        rng = np.random.default_rng()
+
+        try:
+            rng = kwargs["np_random_generator"]
+        except KeyError:
+            warnings.warn("No Numpy Generator in parameter dictionary, creating default")
+            rng = np.random.default_rng()
         
         edges_added = 0
         nodes = list(network.nodes)

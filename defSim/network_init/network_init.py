@@ -202,7 +202,13 @@ def _produce_spatial_random_graph(**kwargs) -> nx.Graph:
     proximity_weight = kwargs.get("proximity_weight", 1)
     return_positions = kwargs.get('return_positions', False)
 
-    xypos = np.column_stack((np.random.uniform(0, 100, num_agents), np.random.uniform(0, 100, num_agents)))
+    try:
+        rng = kwargs["np_random_generator"]
+    except KeyError:
+        warnings.warn("No Numpy Generator in parameter dictionary, creating default")
+        rng = np.random.default_rng()
+
+    xypos = np.column_stack((rng.uniform(0, 100, num_agents), rng.uniform(0, 100, num_agents)))
 
     def dist(posA, posB, proximity_weight):  # returns the probability as a function of distance
         return np.exp(-proximity_weight * np.sqrt(np.sum((posA - posB) ** 2)))
@@ -230,7 +236,7 @@ def _produce_spatial_random_graph(**kwargs) -> nx.Graph:
             # Does not prevent i (as j) from getting > min_neighbors links
 
             try:
-                alters = np.random.choice(num_agents, min_neighbors - degreelist.count(i), replace=False, p=distp)
+                alters = rng.choice(num_agents, min_neighbors - degreelist.count(i), replace=False, p=distp)
                 for j in alters:
                     edgelist.append([i, j])
                     degreelist.append(i)

@@ -68,6 +68,12 @@ def generate_correlated_continuous_attributes(n_attributes: int, n_values: int, 
 
     if not isinstance(covariances, np.ndarray):
         covariances = np.array(covariances)
+
+    try:
+        rng = kwargs["np_random_generator"]
+    except KeyError:
+        warnings.warn("No Numpy Generator in parameter dictionary, creating default")
+        rng = np.random.default_rng()
     
     means = [0 for _ in range(n_attributes)]
     
@@ -78,7 +84,7 @@ def generate_correlated_continuous_attributes(n_attributes: int, n_values: int, 
                 if not row_index == column_index:
                     covariances[row_index, column_index] = 2 * math.sin(math.pi * covariances[row_index, column_index] / 6)
 
-    base_data = np.random.multivariate_normal(mean = means, cov = covariances, size = n_values)
+    base_data = rng.multivariate_normal(mean = means, cov = covariances, size = n_values)
 
     if distribution == "gaussian":
         final_attributes = np.apply_along_axis(rescale_attribute, axis = 0, arr = base_data)    
@@ -153,7 +159,11 @@ def set_continuous_attribute(network: nx.Graph, name: str, shape: tuple = (1), d
     if not distribution in ["uniform", "normal", "beta", "triangular"]:
         raise NotImplementedError("The selected distribution has not been implemented. Select from: [uniform, normal, beta, triangular].")
 
-    rng = np.random.default_rng()
+    try:
+        rng = kwargs["np_random_generator"]
+    except KeyError:
+        warnings.warn("No Numpy Generator in parameter dictionary, creating default")
+        rng = np.random.default_rng()
 
     # NOTE: it would probably be faster to let numpy draw all random values at once, and then assign them
     # that's something we can do if this ever becomes a performance issue (which it likely won't)
