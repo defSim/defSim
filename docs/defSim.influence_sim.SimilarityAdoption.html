@@ -183,18 +183,24 @@
 <span id="similarity-adoption"></span><h1>Similarity Adoption<a class="headerlink" href="#module-defSim.influence_sim.SimilarityAdoption" title="Permalink to this headline">¶</a></h1>
 <dl class="class">
 <dt id="defSim.influence_sim.SimilarityAdoption.SimilarityAdoption">
-<em class="property">class </em><code class="sig-prename descclassname">defSim.influence_sim.SimilarityAdoption.</code><code class="sig-name descname">SimilarityAdoption</code><a class="headerlink" href="#defSim.influence_sim.SimilarityAdoption.SimilarityAdoption" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">defSim.influence_sim.SimilarityAdoption.</code><code class="sig-name descname">SimilarityAdoption</code><span class="sig-paren">(</span><em class="sig-param">regime: str</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#defSim.influence_sim.SimilarityAdoption.SimilarityAdoption" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="defSim.influence_sim.html#defSim.influence_sim.influence_sim.InfluenceOperator" title="defSim.influence_sim.influence_sim.InfluenceOperator"><code class="xref py py-class docutils literal notranslate"><span class="pre">defSim.influence_sim.influence_sim.InfluenceOperator</span></code></a></p>
-<p>Implements the InfluenceOperator in a way that recreates the original Axelrod experiment.</p>
+<p>The SimilarityAdoption influence operator implements a simple similarity-based probabilistic assimilation influence
+process much like Axelrod’s dissemination of culture model (1997). The sending agent selects a feature to
+communicate to the receiving agent. The receiving agent then adopts the trait of the sending agent with a
+probability ‘p’ proportional to the similarity between the agents. The functional relationship between similarity
+and p can be varied with the parameter ‘homophily’.</p>
+<p>In principle, it is possible to use the SimilarityAdoption module with continuous attributes, but it is designed
+with categorical attributes in mind.</p>
+<p>References:</p>
+<dl class="simple">
+<dt>Axelrod, R. (1997). The dissemination of culture: A model with local convergence and global polarization.</dt><dd><p>Journal of conflict resolution, 41(2), 203-226.</p>
+</dd>
+</dl>
 <dl class="method">
 <dt id="defSim.influence_sim.SimilarityAdoption.SimilarityAdoption.spread_influence">
-<em class="property">static </em><code class="sig-name descname">spread_influence</code><span class="sig-paren">(</span><em class="sig-param">network: networkx.classes.graph.Graph, agent_i: int, agents_j: List[int], regime: str, dissimilarity_measure: defSim.dissimilarity_component.dissimilarity_calculator.DissimilarityCalculator, attributes: List[str] = None, **kwargs</em><span class="sig-paren">)</span> &#x2192; bool<a class="headerlink" href="#defSim.influence_sim.SimilarityAdoption.SimilarityAdoption.spread_influence" title="Permalink to this definition">¶</a></dt>
-<dd><p>In the influence function as Axelrod modeled it
-agents are more likely to influence each other if they are more similar. If an agent successfully influences one
-or more agents, the influenced agents adopt one feature on which they disagreed from the influencing agent.
-In the case of many-to-one communication, the influenced agent adopts the mode value of a feature on which there
-is no consensus among the influencing agents.</p>
-<dl class="field-list simple">
+<code class="sig-name descname">spread_influence</code><span class="sig-paren">(</span><em class="sig-param">network: networkx.classes.graph.Graph, agent_i: int, agents_j: List[int], dissimilarity_measure: defSim.dissimilarity_component.dissimilarity_calculator.DissimilarityCalculator, attributes: List[str] = None, **kwargs</em><span class="sig-paren">)</span> &#x2192; bool<a class="headerlink" href="#defSim.influence_sim.SimilarityAdoption.SimilarityAdoption.spread_influence" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>network</strong> – The network in which the agents exist.</p></li>
@@ -204,16 +210,7 @@ single entry, implementing one-to-one communication.</p></li>
 <li><p><strong>attributes</strong> – A list of the names of all the attributes that are subject to influence. If an agent has
 e.g. the attributes “Sex” and “Music taste”, only supply [“Music taste”] as a parameter for this function.
 The influence function itself can still be a function of the “Sex” attribute.</p></li>
-<li><p><strong>regime</strong> – Either “one-to-one”, “one-to-many” or “many-to-one”</p></li>
 <li><p><strong>dissimilarity_measure</strong> – An instance of a <code class="xref py py-class docutils literal notranslate"><span class="pre">DissimilarityCalculator</span></code>.</p></li>
-<li><p><strong>kwargs</strong> – Additional parameters specific to the implementation of the InfluenceOperator.
-Possible parameters are the following:</p></li>
-<li><p><strong>homophily</strong> (<em>float=0</em>) – A number <span class="math notranslate nohighlight">\(&gt;\)</span> 0 that controls the shape of the influence curve.
-At 1, homophily is linear, like in Axelrod (1997)
-When the value for homophily <span class="math notranslate nohighlight">\(&gt;\)</span> 1, agents prefer similar agents more and more.
-When 0 <span class="math notranslate nohighlight">\(&lt;\)</span> homophily <span class="math notranslate nohighlight">\(&lt;\)</span> 1, agents have less of a preference for more similar neighbors.
-However, the values for the probability of successful influence will always be the same at 0, .5, and 1
-overlap. Respectively: 0, .5 and 1.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>

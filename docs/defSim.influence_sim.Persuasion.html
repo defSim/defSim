@@ -183,19 +183,22 @@
 <span id="persuasion"></span><h1>Persuasion<a class="headerlink" href="#module-defSim.influence_sim.Persuasion" title="Permalink to this headline">¶</a></h1>
 <dl class="class">
 <dt id="defSim.influence_sim.Persuasion.Persuasion">
-<em class="property">class </em><code class="sig-prename descclassname">defSim.influence_sim.Persuasion.</code><code class="sig-name descname">Persuasion</code><a class="headerlink" href="#defSim.influence_sim.Persuasion.Persuasion" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">defSim.influence_sim.Persuasion.</code><code class="sig-name descname">Persuasion</code><span class="sig-paren">(</span><em class="sig-param">regime: str</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#defSim.influence_sim.Persuasion.Persuasion" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="defSim.influence_sim.html#defSim.influence_sim.influence_sim.InfluenceOperator" title="defSim.influence_sim.influence_sim.InfluenceOperator"><code class="xref py py-class docutils literal notranslate"><span class="pre">defSim.influence_sim.influence_sim.InfluenceOperator</span></code></a></p>
-<dl class="method">
-<dt id="defSim.influence_sim.Persuasion.Persuasion.spread_influence">
-<em class="property">static </em><code class="sig-name descname">spread_influence</code><span class="sig-paren">(</span><em class="sig-param">network: networkx.classes.graph.Graph, agent_i: int, agents_j: List[int], regime: str, dissimilarity_measure: defSim.dissimilarity_component.dissimilarity_calculator.DissimilarityCalculator, attributes: List[str] = None, **kwargs</em><span class="sig-paren">)</span> &#x2192; bool<a class="headerlink" href="#defSim.influence_sim.Persuasion.Persuasion.spread_influence" title="Permalink to this definition">¶</a></dt>
-<dd><p>Motivation: Models with persuasive social influence can be grounded on the assumption that people are unable to
+<p>Models with persuasive social influence can be grounded on the assumption that people are unable to
 communicate their precise opinion position, but rather communicate an argument close to their opinion position.
 We take the opinion position op the sending agent in the model (between 0 and 1) as the probability that this
 agent will communicate argument 1. It is a special case of the opinion ‘urn’-model
 where a random argument is drawn from a collection of arguments <span class="math notranslate nohighlight">\(O\)</span> in the memory of agent <span class="math notranslate nohighlight">\(i\)</span>,
 containing either pro or con arguments as <span class="math notranslate nohighlight">\(\{0,1\}\)</span>. Such an ‘urn’-based opinion can be transformed to a
-continuous opinion by taking <span class="math notranslate nohighlight">\(\dfrac{\sum_{x \in O_i} x}{|O|}\)</span>.</p>
-<dl class="field-list simple">
+continuous opinion by taking <span class="math notranslate nohighlight">\(\dfrac{\sum_{x \in O_i} x}{|O|}\)</span>.
+Here, we make use of that relationship and implement an implicit argument communication model.
+agent_i communicates a pro (1) argument on a given topic with a probability equal to their current opinion on
+that topic.</p>
+<dl class="method">
+<dt id="defSim.influence_sim.Persuasion.Persuasion.spread_influence">
+<code class="sig-name descname">spread_influence</code><span class="sig-paren">(</span><em class="sig-param">network: networkx.classes.graph.Graph, agent_i: int, agents_j: List[int], dissimilarity_measure: defSim.dissimilarity_component.dissimilarity_calculator.DissimilarityCalculator, attributes: List[str] = None, **kwargs</em><span class="sig-paren">)</span> &#x2192; bool<a class="headerlink" href="#defSim.influence_sim.Persuasion.Persuasion.spread_influence" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>network</strong> – The network in which the agents exist.</p></li>
@@ -205,19 +208,8 @@ The list can have a single entry, implementing one-to-one communication.</p></li
 <li><p><strong>attributes</strong> – A list of the names of all the attributes that are subject to influence. If an agent has
 e.g. the attributes “Sex” and “Music taste”, only supply [“Music taste”] as a parameter for this function.
 The influence function itself can still be a function of the “Sex” attribute.</p></li>
-<li><p><strong>regime</strong> – Either “one-to-one”, “one-to-many” or “many-to-one”</p></li>
 <li><p><strong>dissimilarity_measure</strong> – An instance of
 a <code class="xref py py-class docutils literal notranslate"><span class="pre">DissimilarityCalculator</span></code>.</p></li>
-<li><p><strong>kwargs</strong> – Additional parameters specific to the implementation of the InfluenceOperator. Possible
-parameters are the following:</p></li>
-<li><p><strong>convergence_rate</strong> (<em>float=0.5</em>) – A number between 0 and 1 determining what proportion of the sending agent’s
-position the receiving agent will adopt. E.g. when set to 1, the receiving agent assimilates - adopting the
-sending agent’s position fully, but when set to 0.5, the receiving agent moves only half-way towards the
-sending agent’s position. Passed as a kwargs argument.</p></li>
-<li><p><strong>confidence_level</strong> (<em>float=1</em>) – A number between 0 and 1 determining the cutoff value for the dissimilarity
-at which agents do not interact anymore. 1 means that even the most dissimilar agents still interact, 0
-means no interaction. Passed as a kwargs argument.</p></li>
-<li><p><strong>bi_directional</strong> (<em>bool=False</em>) – A boolean specifying whether influence is bi- or uni-directional.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>

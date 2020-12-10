@@ -183,12 +183,9 @@
 <span id="weightedlinear"></span><h1>WeightedLinear<a class="headerlink" href="#module-defSim.influence_sim.WeightedLinear" title="Permalink to this headline">¶</a></h1>
 <dl class="class">
 <dt id="defSim.influence_sim.WeightedLinear.WeightedLinear">
-<em class="property">class </em><code class="sig-prename descclassname">defSim.influence_sim.WeightedLinear.</code><code class="sig-name descname">WeightedLinear</code><a class="headerlink" href="#defSim.influence_sim.WeightedLinear.WeightedLinear" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">defSim.influence_sim.WeightedLinear.</code><code class="sig-name descname">WeightedLinear</code><span class="sig-paren">(</span><em class="sig-param">regime: str</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#defSim.influence_sim.WeightedLinear.WeightedLinear" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="defSim.influence_sim.html#defSim.influence_sim.influence_sim.InfluenceOperator" title="defSim.influence_sim.influence_sim.InfluenceOperator"><code class="xref py py-class docutils literal notranslate"><span class="pre">defSim.influence_sim.influence_sim.InfluenceOperator</span></code></a></p>
-<dl class="method">
-<dt id="defSim.influence_sim.WeightedLinear.WeightedLinear.spread_influence">
-<em class="property">static </em><code class="sig-name descname">spread_influence</code><span class="sig-paren">(</span><em class="sig-param">network: networkx.classes.graph.Graph, agent_i: int, agents_j: List[int], regime: str, dissimilarity_measure: defSim.dissimilarity_component.dissimilarity_calculator.DissimilarityCalculator, attributes: List[str] = None, **kwargs</em><span class="sig-paren">)</span> &#x2192; bool<a class="headerlink" href="#defSim.influence_sim.WeightedLinear.WeightedLinear.spread_influence" title="Permalink to this definition">¶</a></dt>
-<dd><p>The weighted linear influence function implements the experienced opinion shift as a function of the
+<p>The weighted linear influence function implements the experienced opinion shift as a function of the
 pre-interaction cultural or opinional distance between the agents involved. The <code class="docutils literal notranslate"><span class="pre">homophily</span></code> parameter controls
 the steepness of the attraction/repulsion curve. Formally:</p>
 <div class="math notranslate nohighlight">
@@ -206,7 +203,10 @@ less towards the sender as their distance increases.</p></li>
 like-minded others and move less towards the sender as their distance increases, until distance
 <span class="math notranslate nohighlight">\(1 / \textrm{homophily}\)</span> where agents experience a push away from the sending agent.</p></li>
 </ul>
-<dl class="field-list simple">
+<dl class="method">
+<dt id="defSim.influence_sim.WeightedLinear.WeightedLinear.spread_influence">
+<code class="sig-name descname">spread_influence</code><span class="sig-paren">(</span><em class="sig-param">network: networkx.classes.graph.Graph, agent_i: int, agents_j: List[int], dissimilarity_measure: defSim.dissimilarity_component.dissimilarity_calculator.DissimilarityCalculator, attributes: List[str] = None, **kwargs</em><span class="sig-paren">)</span> &#x2192; bool<a class="headerlink" href="#defSim.influence_sim.WeightedLinear.WeightedLinear.spread_influence" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>network</strong> – The network in which the agents exist.</p></li>
@@ -216,21 +216,8 @@ The list can have a single entry, implementing one-to-one communication.</p></li
 <li><p><strong>attributes</strong> – A list of the names of all the attributes that are subject to influence. If an agent has
 e.g. the attributes “Sex” and “Music taste”, only supply [“Music taste”] as a parameter for this function.
 The influence function itself can still be a function of the “Sex” attribute.</p></li>
-<li><p><strong>regime</strong> – Either “one-to-one”, “one-to-many” or “many-to-one”</p></li>
 <li><p><strong>dissimilarity_measure</strong> – An instance of
 a <code class="xref py py-class docutils literal notranslate"><span class="pre">DissimilarityCalculator</span></code>.</p></li>
-<li><p><strong>kwargs</strong> – Additional parameters specific to the implementation of the InfluenceOperator. Possible
-parameters are the following:</p></li>
-<li><p><strong>convergence_rate</strong> (<em>float=0.5</em>) – A number between 0 and 1 determining what proportion of the sending agent’s
-position the receiving agent will adopt. E.g. when set to 1, the receiving agent assimilates - adopting the
-sending agent’s position fully, but when set to 0.5, the receiving agent moves only half-way towards the
-sending agent’s position. Passed as a kwargs argument.</p></li>
-<li><p><strong>homophily</strong> (<em>float=0</em>) – A number <span class="math notranslate nohighlight">\(\geq\)</span> 0 that controls the shape of the influence curve. At 0, agents
-do not show a preference for similar others (only positive influence). At 1, agents more strongly adjust
-their opinion when confronted with similar others (moderated positive influence). At values &gt; 1, there
-exists a point at which influence becomes negative, making agents shift away from the sending agents
-expressed opinion.</p></li>
-<li><p><strong>bi_directional</strong> (<em>bool=False</em>) – A boolean specifying whether influence is bi- or uni-directional.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>

@@ -186,11 +186,15 @@
 <em class="property">class </em><code class="sig-prename descclassname">defSim.dissimilarity_component.EuclideanDistance.</code><code class="sig-name descname">EuclideanDistance</code><span class="sig-paren">(</span><em class="sig-param">exclude=[]</em><span class="sig-paren">)</span><a class="headerlink" href="#defSim.dissimilarity_component.EuclideanDistance.EuclideanDistance" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="defSim.dissimilarity_component.html#defSim.dissimilarity_component.dissimilarity_calculator.DissimilarityCalculator" title="defSim.dissimilarity_component.dissimilarity_calculator.DissimilarityCalculator"><code class="xref py py-class docutils literal notranslate"><span class="pre">defSim.dissimilarity_component.dissimilarity_calculator.DissimilarityCalculator</span></code></a></p>
 <p>Implements the DissimilarityCalculator as a calculator of the euclidean distance</p>
+<p>The class contains the attribute ‘exclude’ which accepts a list of strings with the names of agent features that
+should not be used to calculate between agent similarity.</p>
 <dl class="method">
 <dt id="defSim.dissimilarity_component.EuclideanDistance.EuclideanDistance.calculate_dissimilarity">
 <code class="sig-name descname">calculate_dissimilarity</code><span class="sig-paren">(</span><em class="sig-param">network: networkx.classes.graph.Graph</em>, <em class="sig-param">agent1_id: int</em>, <em class="sig-param">agent2_id: int</em><span class="sig-paren">)</span> &#x2192; float<a class="headerlink" href="#defSim.dissimilarity_component.EuclideanDistance.EuclideanDistance.calculate_dissimilarity" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculates normalized euclidean distance of the agents’ feature vectors where feature values do not exceed the
 [0,1] bounds.</p>
+<p>The distances are adjusted by the square root of the number of features, so that maximally dissimilar agents
+always have a distance of 1 regardless of the number of features.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">

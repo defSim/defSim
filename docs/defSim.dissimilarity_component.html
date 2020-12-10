@@ -218,6 +218,8 @@ It returns an instance of the Calculator that is asked for.</p>
 <dd><p>This class is responsible for determining the distance between nodes, either from one node to another,
 or for every agent in the network to another. The distance could be based on their attributes or actual geodesic
 distance.</p>
+<p>The class contains the attribute ‘exclude’ which accepts a list of strings with the names of agent features that
+should not be used to calculate between agent similarity.</p>
 <dl class="method">
 <dt id="defSim.dissimilarity_component.dissimilarity_calculator.DissimilarityCalculator.calculate_dissimilarity">
 <em class="property">abstract </em><code class="sig-name descname">calculate_dissimilarity</code><span class="sig-paren">(</span><em class="sig-param">network: networkx.classes.graph.Graph</em>, <em class="sig-param">agent1_id: int</em>, <em class="sig-param">agent2_id: int</em><span class="sig-paren">)</span> &#x2192; float<a class="headerlink" href="#defSim.dissimilarity_component.dissimilarity_calculator.DissimilarityCalculator.calculate_dissimilarity" title="Permalink to this definition">¶</a></dt>

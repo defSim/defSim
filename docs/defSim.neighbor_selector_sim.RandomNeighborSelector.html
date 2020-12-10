@@ -183,13 +183,13 @@
 <span id="random-neighbor-selector"></span><h1>Random Neighbor Selector<a class="headerlink" href="#module-defSim.neighbor_selector_sim.RandomNeighborSelector" title="Permalink to this headline">¶</a></h1>
 <dl class="class">
 <dt id="defSim.neighbor_selector_sim.RandomNeighborSelector.RandomNeighborSelector">
-<em class="property">class </em><code class="sig-prename descclassname">defSim.neighbor_selector_sim.RandomNeighborSelector.</code><code class="sig-name descname">RandomNeighborSelector</code><a class="headerlink" href="#defSim.neighbor_selector_sim.RandomNeighborSelector.RandomNeighborSelector" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">defSim.neighbor_selector_sim.RandomNeighborSelector.</code><code class="sig-name descname">RandomNeighborSelector</code><span class="sig-paren">(</span><em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#defSim.neighbor_selector_sim.RandomNeighborSelector.RandomNeighborSelector" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="defSim.neighbor_selector_sim.html#defSim.neighbor_selector_sim.neighbor_selector_sim.NeighborSelector" title="defSim.neighbor_selector_sim.neighbor_selector_sim.NeighborSelector"><code class="xref py py-class docutils literal notranslate"><span class="pre">defSim.neighbor_selector_sim.neighbor_selector_sim.NeighborSelector</span></code></a></p>
 <p>Implements the neighborSelector in such a way that either all neighbors are selected in the case of
 one-to-many and many-to-one communication, or a random neighbor in the case of one-to-one communication.</p>
 <dl class="method">
 <dt id="defSim.neighbor_selector_sim.RandomNeighborSelector.RandomNeighborSelector.select_neighbors">
-<em class="property">static </em><code class="sig-name descname">select_neighbors</code><span class="sig-paren">(</span><em class="sig-param">network: networkx.classes.graph.Graph</em>, <em class="sig-param">focal_agent: int</em>, <em class="sig-param">regime: str</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span> &#x2192; Iterable[int]<a class="headerlink" href="#defSim.neighbor_selector_sim.RandomNeighborSelector.RandomNeighborSelector.select_neighbors" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">select_neighbors</code><span class="sig-paren">(</span><em class="sig-param">network: networkx.classes.graph.Graph</em>, <em class="sig-param">focal_agent: int</em>, <em class="sig-param">regime: str</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span> &#x2192; Iterable[int]<a class="headerlink" href="#defSim.neighbor_selector_sim.RandomNeighborSelector.RandomNeighborSelector.select_neighbors" title="Permalink to this definition">¶</a></dt>
 <dd><p>Selects a random agent from the direct neighborhood of the focal agent in the case of one-to-one communication,
 and all direct neighbors otherwise.</p>
 <dl class="field-list simple">

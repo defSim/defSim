@@ -183,22 +183,17 @@
 <span id="randomcontinuousinitializer"></span><h1>RandomContinuousInitializer<a class="headerlink" href="#module-defSim.agents_init.RandomContinuousInitializer" title="Permalink to this headline">¶</a></h1>
 <dl class="class">
 <dt id="defSim.agents_init.RandomContinuousInitializer.RandomContinuousInitializer">
-<em class="property">class </em><code class="sig-prename descclassname">defSim.agents_init.RandomContinuousInitializer.</code><code class="sig-name descname">RandomContinuousInitializer</code><a class="headerlink" href="#defSim.agents_init.RandomContinuousInitializer.RandomContinuousInitializer" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">defSim.agents_init.RandomContinuousInitializer.</code><code class="sig-name descname">RandomContinuousInitializer</code><span class="sig-paren">(</span><em class="sig-param">distribution: str = 'uniform'</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#defSim.agents_init.RandomContinuousInitializer.RandomContinuousInitializer" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="defSim.agents_init.html#defSim.agents_init.agents_init.AttributesInitializer" title="defSim.agents_init.agents_init.AttributesInitializer"><code class="xref py py-class docutils literal notranslate"><span class="pre">defSim.agents_init.agents_init.AttributesInitializer</span></code></a></p>
 <p>Implements the AttributesInitializer as a random initialization of arbitrary continuous features.</p>
 <dl class="method">
 <dt id="defSim.agents_init.RandomContinuousInitializer.RandomContinuousInitializer.initialize_attributes">
-<em class="property">static </em><code class="sig-name descname">initialize_attributes</code><span class="sig-paren">(</span><em class="sig-param">network: networkx.classes.graph.Graph</em>, <em class="sig-param">distribution: str = 'uniform'</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#defSim.agents_init.RandomContinuousInitializer.RandomContinuousInitializer.initialize_attributes" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">initialize_attributes</code><span class="sig-paren">(</span><em class="sig-param">network: networkx.classes.graph.Graph</em><span class="sig-paren">)</span><a class="headerlink" href="#defSim.agents_init.RandomContinuousInitializer.RandomContinuousInitializer.initialize_attributes" title="Permalink to this definition">¶</a></dt>
 <dd><p>Randomly initializes a number of continuous features between 0 and 1 for each node.
 Bounds default to min = 0, max = 1</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>network</strong> – The graph object whose nodes’ attributes are modified.</p></li>
-<li><p><strong>dict={'min'</strong> – 0, ‘max’: 1} feature_bounds: Dictionary containing minimum and maximum feature values.</p></li>
-<li><p><strong>distribution</strong> (<em>str='uniform'</em>) – Type of continuous distribution to draw feature values from.</p></li>
-<li><p><strong>num_features</strong> (<em>int=1</em>) – How many different attributes each node has.</p></li>
-</ul>
+<dd class="field-odd"><p><strong>network</strong> – The graph object whose nodes’ attributes are modified.</p>
 </dd>
 </dl>
 </dd></dl>

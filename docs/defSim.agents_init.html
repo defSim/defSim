@@ -274,18 +274,15 @@ Random values are drawn using the numpy.random module.</p>
 <p>The Abstract Base Class of the agent attribute initializer:</p>
 <span class="target" id="module-defSim.agents_init.agents_init"></span><dl class="class">
 <dt id="defSim.agents_init.agents_init.AttributesInitializer">
-<em class="property">class </em><code class="sig-prename descclassname">defSim.agents_init.agents_init.</code><code class="sig-name descname">AttributesInitializer</code><a class="headerlink" href="#defSim.agents_init.agents_init.AttributesInitializer" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">defSim.agents_init.agents_init.</code><code class="sig-name descname">AttributesInitializer</code><span class="sig-paren">(</span><em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#defSim.agents_init.agents_init.AttributesInitializer" title="Permalink to this definition">¶</a></dt>
 <dd><p>Initializes and changes attributes of nodes in the network.</p>
 <dl class="method">
 <dt id="defSim.agents_init.agents_init.AttributesInitializer.initialize_attributes">
-<em class="property">abstract static </em><code class="sig-name descname">initialize_attributes</code><span class="sig-paren">(</span><em class="sig-param">network: networkx.classes.graph.Graph</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#defSim.agents_init.agents_init.AttributesInitializer.initialize_attributes" title="Permalink to this definition">¶</a></dt>
+<em class="property">abstract </em><code class="sig-name descname">initialize_attributes</code><span class="sig-paren">(</span><em class="sig-param">network: networkx.classes.graph.Graph</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#defSim.agents_init.agents_init.AttributesInitializer.initialize_attributes" title="Permalink to this definition">¶</a></dt>
 <dd><p>Gives initial values to the nodes in the network. Values could e.g. be based on their position in the network.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>network</strong> – The network that will be modified.</p></li>
-<li><p><strong>kwargs</strong> – This dictionary contains all the implementation-specific parameters.</p></li>
-</ul>
+<dd class="field-odd"><p><strong>network</strong> – The network that will be modified.</p>
 </dd>
 </dl>
 </dd></dl>

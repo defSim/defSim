@@ -11,7 +11,19 @@ from defSim.dissimilarity_component.dissimilarity_calculator import Dissimilarit
 
 class SimilarityAdoption(InfluenceOperator):
     """
-    Implements the InfluenceOperator in a way that recreates the original Axelrod experiment.
+    The SimilarityAdoption influence operator implements a simple similarity-based probabilistic assimilation influence
+    process much like Axelrod's dissemination of culture model (1997). The sending agent selects a feature to
+    communicate to the receiving agent. The receiving agent then adopts the trait of the sending agent with a
+    probability 'p' proportional to the similarity between the agents. The functional relationship between similarity
+    and p can be varied with the parameter 'homophily'.
+
+    In principle, it is possible to use the SimilarityAdoption module with continuous attributes, but it is designed
+    with categorical attributes in mind.
+
+    References:
+
+    Axelrod, R. (1997). The dissemination of culture: A model with local convergence and global polarization.
+        Journal of conflict resolution, 41(2), 203-226.
     """
 
     def __init__(self, regime: str, **kwargs):
@@ -38,12 +50,6 @@ class SimilarityAdoption(InfluenceOperator):
     def spread_influence(self, network: nx.Graph, agent_i: int, agents_j: List[int] or int,
                          dissimilarity_measure: DissimilarityCalculator, attributes: List[str] = None, **kwargs) -> bool:
         """
-        In the influence function as Axelrod modeled it
-        agents are more likely to influence each other if they are more similar. If an agent successfully influences one
-        or more agents, the influenced agents adopt one feature on which they disagreed from the influencing agent.
-        In the case of many-to-one communication, the influenced agent adopts the mode value of a feature on which there 
-        is no consensus among the influencing agents.
-
         :param network: The network in which the agents exist.
         :param agent_i: the index of the focal agent that is either the source or the target of the influence
         :param agents_j: A list of indices of the agents who can be either the source or the targets of the influence. The list can have a
@@ -54,7 +60,6 @@ class SimilarityAdoption(InfluenceOperator):
         :param dissimilarity_measure: An instance of a :class:`~defSim.dissimilarity_component.DissimilarityCalculator.DissimilarityCalculator`.
         :returns: true if agent(s) were successfully influenced
         """
-        # todo: insert reference to Axelrod
 
         if type(agents_j) != list:
             agents_j = [agents_j]
@@ -97,7 +102,6 @@ class SimilarityAdoption(InfluenceOperator):
                 else:
                     p_infl_success = (1 - (1 / 2) ** (1 - self.homophily) * (
                                 1 - (1 - network.edges[agent_i, neighbor]['dist'])) ** self.homophily)
-                #todo comment and improve time
                 if random.uniform(0, 1) < p_infl_success:
                     close_neighbors.append(neighbor)
             incongruent_features = [] # [feature for feature in attributes if network.nodes[agent1]]

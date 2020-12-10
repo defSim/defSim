@@ -185,13 +185,13 @@
 <span id="network-evolution-sim-module"></span><h2>network_evolution_sim module<a class="headerlink" href="#module-defSim.network_evolution_sim.network_evolution_sim" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
 <dt id="defSim.network_evolution_sim.network_evolution_sim.NetworkModifier">
-<em class="property">class </em><code class="sig-prename descclassname">defSim.network_evolution_sim.network_evolution_sim.</code><code class="sig-name descname">NetworkModifier</code><a class="headerlink" href="#defSim.network_evolution_sim.network_evolution_sim.NetworkModifier" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">defSim.network_evolution_sim.network_evolution_sim.</code><code class="sig-name descname">NetworkModifier</code><span class="sig-paren">(</span><em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#defSim.network_evolution_sim.network_evolution_sim.NetworkModifier" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">abc.ABC</span></code></p>
 <p>The NetworkModifier changes the structure of the network. It can build or remove edges based on how agents are
 connected and what attributes they have.</p>
 <dl class="method">
 <dt id="defSim.network_evolution_sim.network_evolution_sim.NetworkModifier.rewire_network">
-<em class="property">abstract static </em><code class="sig-name descname">rewire_network</code><span class="sig-paren">(</span><em class="sig-param">network: networkx.classes.graph.Graph</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#defSim.network_evolution_sim.network_evolution_sim.NetworkModifier.rewire_network" title="Permalink to this definition">¶</a></dt>
+<em class="property">abstract </em><code class="sig-name descname">rewire_network</code><span class="sig-paren">(</span><em class="sig-param">network: networkx.classes.graph.Graph</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#defSim.network_evolution_sim.network_evolution_sim.NetworkModifier.rewire_network" title="Permalink to this definition">¶</a></dt>
 <dd><p>Creates new connections or deletes existing ones. Can be used to implement coevolution of networks and model
 selection processes.</p>
 <dl class="field-list simple">

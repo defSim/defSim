@@ -11,7 +11,19 @@ import numpy as np
 
 
 class Persuasion(InfluenceOperator):
+    """
+    Models with persuasive social influence can be grounded on the assumption that people are unable to
+    communicate their precise opinion position, but rather communicate an argument close to their opinion position.
+    We take the opinion position op the sending agent in the model (between 0 and 1) as the probability that this
+    agent will communicate argument 1. It is a special case of the opinion 'urn'-model
+    where a random argument is drawn from a collection of arguments :math:`O` in the memory of agent :math:`i`,
+    containing either pro or con arguments as :math:`\{0,1\}`. Such an 'urn'-based opinion can be transformed to a
+    continuous opinion by taking :math:`\dfrac{\sum_{x \in O_i} x}{|O|}`.
+    Here, we make use of that relationship and implement an implicit argument communication model.
+    agent_i communicates a pro (1) argument on a given topic with a probability equal to their current opinion on
+    that topic.
 
+    """
     def __init__(self, regime: str, **kwargs):
         """
         :param regime: This string determines the mode in which the agents influence each other.
@@ -46,17 +58,6 @@ class Persuasion(InfluenceOperator):
                          attributes: List[str] = None,
                          **kwargs) -> bool:
         """
-        Models with persuasive social influence can be grounded on the assumption that people are unable to
-        communicate their precise opinion position, but rather communicate an argument close to their opinion position.
-        We take the opinion position op the sending agent in the model (between 0 and 1) as the probability that this
-        agent will communicate argument 1. It is a special case of the opinion 'urn'-model
-        where a random argument is drawn from a collection of arguments :math:`O` in the memory of agent :math:`i`,
-        containing either pro or con arguments as :math:`\{0,1\}`. Such an 'urn'-based opinion can be transformed to a
-        continuous opinion by taking :math:`\dfrac{\sum_{x \in O_i} x}{|O|}`.
-        Here, we make use of that relationship and implement an implicit argument communication model.
-        agent_i communicates a pro (1) argument on a given topic with a probability equal to their current opinion on
-        that topic.
-
         :param network: The network in which the agents exist.
         :param agent_i: The index of the focal agent that is either the source or the target of the influence
         :param agents_j: A list of indices of the agents who can be either the source or the targets of the influence.

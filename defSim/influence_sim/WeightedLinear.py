@@ -11,6 +11,28 @@ import numpy as np
 
 
 class WeightedLinear(InfluenceOperator):
+    """
+    The weighted linear influence function implements the experienced opinion shift as a function of the
+    pre-interaction cultural or opinional distance between the agents involved. The ``homophily`` parameter controls
+    the steepness of the attraction/repulsion curve. Formally:
+
+    .. math:: o_{i,t+1} = o_{i,t} + \\textrm{convergence_rate} \\cdot (1 - \\textrm{homophily} | o_{j} - o_{it} |)
+
+    Thereafter, opinions are bounded such that they never fall outside the range :math:`[0,1]`
+
+    Crucial is the homophily parameter. The higher its value, the smaller the shift of the receiving
+    agent in the direction of the sending agent will be. With this parameter, we can integrate ideas of positive,
+    moderated positive, and negative influence into one functional model.
+
+    Three critical values for the ``homophily`` parameter:
+
+    * homophily == 0: only positive influence, the agents exhibit no preference for like-minded others.
+    * homophily > 0: moderated positive influence, the agents exhibit a preference for like-minded others and move
+      less towards the sender as their distance increases.
+    * homophily > 1: moderated postive influence AND negative influence, the agents exhibit a preference for
+      like-minded others and move less towards the sender as their distance increases, until distance
+      :math:`1 / \\textrm{homophily}` where agents experience a push away from the sending agent.
+    """
 
     def __init__(self, regime: str, **kwargs):
         """
@@ -69,27 +91,6 @@ class WeightedLinear(InfluenceOperator):
                          attributes: List[str] = None,
                          **kwargs) -> bool:
         """
-        The weighted linear influence function implements the experienced opinion shift as a function of the
-        pre-interaction cultural or opinional distance between the agents involved. The ``homophily`` parameter controls
-        the steepness of the attraction/repulsion curve. Formally:
-
-        .. math:: o_{i,t+1} = o_{i,t} + \\textrm{convergence_rate} \\cdot (1 - \\textrm{homophily} | o_{j} - o_{it} |)
-
-        Thereafter, opinions are bounded such that they never fall outside the range :math:`[0,1]`
-
-        Crucial is the homophily parameter. The higher its value, the smaller the shift of the receiving
-        agent in the direction of the sending agent will be. With this parameter, we can integrate ideas of positive,
-        moderated positive, and negative influence into one functional model.
-
-        Three critical values for the ``homophily`` parameter:
-
-        * homophily == 0: only positive influence, the agents exhibit no preference for like-minded others.
-        * homophily > 0: moderated positive influence, the agents exhibit a preference for like-minded others and move
-          less towards the sender as their distance increases.
-        * homophily > 1: moderated postive influence AND negative influence, the agents exhibit a preference for
-          like-minded others and move less towards the sender as their distance increases, until distance
-          :math:`1 / \\textrm{homophily}` where agents experience a push away from the sending agent.
-
         :param network: The network in which the agents exist.
         :param agent_i: The index of the focal agent that is either the source or the target of the influence
         :param agents_j: A list of indices of the agents who can be either the source or the targets of the influence.
@@ -214,7 +215,8 @@ class WeightedLinear(InfluenceOperator):
         bound of the scale, no influence is exerted. Intermediate feature values lead to reduced but nonzero
         influence.
 
-        Reference
+        References:
+        
         Flache, A., & Macy, M. W. (2011). Small Worlds and Cultural Polarization. 
             The Journal of Mathematical Sociology, 35(1–3), 146–176. https://doi.org/10.1080/0022250X.2010.532261
         + Corrigendum

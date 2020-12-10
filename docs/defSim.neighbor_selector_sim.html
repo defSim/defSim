@@ -219,7 +219,7 @@ focal agent and the communication regime.</p>
 <span id="abstract-base-class-abc"></span><h2>Abstract Base Class (ABC)<a class="headerlink" href="#module-defSim.neighbor_selector_sim.neighbor_selector_sim" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
 <dt id="defSim.neighbor_selector_sim.neighbor_selector_sim.NeighborSelector">
-<em class="property">class </em><code class="sig-prename descclassname">defSim.neighbor_selector_sim.neighbor_selector_sim.</code><code class="sig-name descname">NeighborSelector</code><a class="headerlink" href="#defSim.neighbor_selector_sim.neighbor_selector_sim.NeighborSelector" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">defSim.neighbor_selector_sim.neighbor_selector_sim.</code><code class="sig-name descname">NeighborSelector</code><span class="sig-paren">(</span><em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#defSim.neighbor_selector_sim.neighbor_selector_sim.NeighborSelector" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">abc.ABC</span></code></p>
 <p>The NeighborSelector is responsible for picking certain agents from the environment of the focal agent.
 These agents are then either the source or the target in the following influence step.
@@ -227,7 +227,7 @@ Possible ways to select neighbors is either by picking all other agents, i.e. gl
 from news and polls), all neighbors in the immediate neighborhood, or only single neighbors.</p>
 <dl class="method">
 <dt id="defSim.neighbor_selector_sim.neighbor_selector_sim.NeighborSelector.select_neighbors">
-<em class="property">abstract static </em><code class="sig-name descname">select_neighbors</code><span class="sig-paren">(</span><em class="sig-param">network: networkx.classes.graph.Graph</em>, <em class="sig-param">focal_agent: int</em>, <em class="sig-param">regime: str</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span> &#x2192; Iterable[int]<a class="headerlink" href="#defSim.neighbor_selector_sim.neighbor_selector_sim.NeighborSelector.select_neighbors" title="Permalink to this definition">¶</a></dt>
+<em class="property">abstract </em><code class="sig-name descname">select_neighbors</code><span class="sig-paren">(</span><em class="sig-param">network: networkx.classes.graph.Graph</em>, <em class="sig-param">focal_agent: int</em>, <em class="sig-param">regime: str</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span> &#x2192; Iterable[int]<a class="headerlink" href="#defSim.neighbor_selector_sim.neighbor_selector_sim.NeighborSelector.select_neighbors" title="Permalink to this definition">¶</a></dt>
 <dd><p>This method selects a subset of agents from the network that are in some way relevant for the
 influence process regarding the focal agent.
 This subset could be e.g. a single agent from the direct neighborhood, the whole neighborhood, or all

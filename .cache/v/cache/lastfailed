@@ -1,7 +1,1 @@
-{
-  "defSim/tests/tools_tests/test_CreateDataFiles.py::TestCreateDataFilesWithExperimentData::test_file_creation": true,
-  "defSim/tests/tools_tests/test_CreateDataFiles.py::TestCreateDataFilesWithSimData::test_file_creation": true,
-  "defSim/tests/tools_tests/test_CreateDataFiles.py::TestCreateDataFilesWithSimData::test_file_creation_from_sim": true,
-  "defSim/tests/tools_tests/test_CreateDataFiles.py::TestCreatedataFiles::test_file_creation": true,
-  "defSim/tests/tools_tests/test_find_clusters.py": true
-}
+{}

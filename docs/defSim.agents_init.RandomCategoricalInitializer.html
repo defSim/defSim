@@ -183,20 +183,16 @@
 <span id="randomcategoricalinitializer"></span><h1>RandomCategoricalInitializer<a class="headerlink" href="#module-defSim.agents_init.RandomCategoricalInitializer" title="Permalink to this headline">¶</a></h1>
 <dl class="class">
 <dt id="defSim.agents_init.RandomCategoricalInitializer.RandomCategoricalInitializer">
-<em class="property">class </em><code class="sig-prename descclassname">defSim.agents_init.RandomCategoricalInitializer.</code><code class="sig-name descname">RandomCategoricalInitializer</code><a class="headerlink" href="#defSim.agents_init.RandomCategoricalInitializer.RandomCategoricalInitializer" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">defSim.agents_init.RandomCategoricalInitializer.</code><code class="sig-name descname">RandomCategoricalInitializer</code><span class="sig-paren">(</span><em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#defSim.agents_init.RandomCategoricalInitializer.RandomCategoricalInitializer" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="defSim.agents_init.html#defSim.agents_init.agents_init.AttributesInitializer" title="defSim.agents_init.agents_init.AttributesInitializer"><code class="xref py py-class docutils literal notranslate"><span class="pre">defSim.agents_init.agents_init.AttributesInitializer</span></code></a></p>
 <p>Implements the AttributesInitializer as a random initialization of arbitrary discrete features.</p>
 <dl class="method">
 <dt id="defSim.agents_init.RandomCategoricalInitializer.RandomCategoricalInitializer.initialize_attributes">
-<em class="property">static </em><code class="sig-name descname">initialize_attributes</code><span class="sig-paren">(</span><em class="sig-param">network: networkx.classes.graph.Graph</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#defSim.agents_init.RandomCategoricalInitializer.RandomCategoricalInitializer.initialize_attributes" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">initialize_attributes</code><span class="sig-paren">(</span><em class="sig-param">network: networkx.classes.graph.Graph</em><span class="sig-paren">)</span><a class="headerlink" href="#defSim.agents_init.RandomCategoricalInitializer.RandomCategoricalInitializer.initialize_attributes" title="Permalink to this definition">¶</a></dt>
 <dd><p>Randomly initializes a number of discrete features for each node.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>network</strong> – The graph object whose nodes’ attributes are modified.</p></li>
-<li><p><strong>num_features</strong> (<em>int=5</em>) – How many different attributes each node has.</p></li>
-<li><p><strong>num_traits</strong> (<em>int=3</em>) – The range of values each attribute can take. 3 means that an attribute can be either 0, 1 or 2</p></li>
-</ul>
+<dd class="field-odd"><p><strong>network</strong> – The graph object whose nodes’ attributes are modified.</p>
 </dd>
 </dl>
 </dd></dl>
