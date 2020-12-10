@@ -32,7 +32,7 @@ class TestDissimilarityCalculator(TestCase):
         self.assertEqual(EuclideanDistance().calculate_dissimilarity(self.networkTest,0,1), 0.2)
         self.networkTest.nodes[0]["b"] = 0.2
         self.networkTest.nodes[1]["c"] = 0.8
-        self.assertEqual(EuclideanDistance().calculate_dissimilarity(self.networkTest,0,1), math.sqrt((0.5-0.3)**2+(0.2-0.8)**2))
+        self.assertEqual(EuclideanDistance().calculate_dissimilarity(self.networkTest,0,1), math.sqrt((0.5-0.3)**2+(0.2-0.8)**2) / math.sqrt(2))
 
 
     def test_EuclideanDistance_calculate_dissimilarity_networkwide(self):
