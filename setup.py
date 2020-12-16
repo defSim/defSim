@@ -1,7 +1,7 @@
 from setuptools import setup
 
 setup(name='defSim',
-      version='0.1.0',
+      version='0.1.0',  # update this version number together with number in __init__.py
       description='The Discrete Event Framework for Social Influence Models',
       url='https://github.com/defSim/defSim',
       author='Laukemper, Keijzer, Bakker',
@@ -9,6 +9,7 @@ setup(name='defSim',
       license='GNU GPLv3',
       packages=['defSim',
                 'defSim/agents_init',
+                'defSim/extensions',
                 'defSim/network_evolution_sim',
                 'defSim/focal_agent_sim',
                 'defSim/influence_sim',
