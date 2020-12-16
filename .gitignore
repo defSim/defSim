@@ -42,6 +42,7 @@
 # folders generated using testing
 batchscripts/
 pickles/
+defSim/tests/output
 
 # jupyter notebook checkpoints
 .ipynb_checkpoints
