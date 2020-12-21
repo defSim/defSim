@@ -1,7 +1,9 @@
 Network (network_init)
 ======================================
 
-This page lists all the functions involved in generating the NetworkX Graph object. Most notably 'generate_network' is the factory method that you should call to produce a network from scratch, and 'read_network' is the function you should call when you want to produce a network from an adjacency matrix or edgelist.
+This page lists all the functions involved in generating the NetworkX Graph object. Most notably 'generate_network' is
+the factory method that you should call to produce a network from scratch, and 'read_network' is the function you should
+call when you want to produce a network from an adjacency matrix or edgelist.
 
 generate_network
 ----------------------------------------------------

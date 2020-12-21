@@ -9,11 +9,12 @@ The following methods are available
    Similarity Adoption <defSim.influence_sim.SimilarityAdoption>
    Weighted Linear Influence <defSim.influence_sim.WeightedLinear>
 
-User-written extensions can be found in :ref:`defSim.extensions`..
+User-written extensions can be found in :doc:`Extensions <defSim.extensions>`..
 Currently, the following methods are available:
 
 .. toctree::
    Leviathan <defSim.extensions.influence_sim.Leviathan>
+   Acceptance, Non-commitment and Rejection <defSim.extensions.influence_sim.AcceptanceNoncommitmentRejection>
 
 influence_sim module
 -------------------------------------------------------

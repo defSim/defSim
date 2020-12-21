@@ -207,26 +207,21 @@ class WeightedLinear(InfluenceOperator):
                         target: int, 
                         influenced_feature: str, 
                         network: nx.Graph):
-        '''
+        """
         This function applies smoothing to the influence exerted on a target. The smoothing results in 
-        reduced change in the direction of the closest extreme. 
+        reduced change in the direction of the closest extreme [FlacheMacy2011]_.
         To illustrate: If the base influence is positive and the agent's opinion is at the lower bound of the
         scale, full influence is exerted. If base influence is positive and the agent's opinion is at the upper
         bound of the scale, no influence is exerted. Intermediate feature values lead to reduced but nonzero
         influence.
-
-        References:
-        
-        Flache, A., & Macy, M. W. (2011). Small Worlds and Cultural Polarization. 
-            The Journal of Mathematical Sociology, 35(1–3), 146–176. https://doi.org/10.1080/0022250X.2010.532261
-        + Corrigendum
 
         :param base_influence: Non-smoothed influence exerted on target
         :param target: Agent to influence
         :param influenced_feature: Feature to influence on agent
         :param network: Network in which the agent exists
         :returns: Influence value after smoothing has been applied
-        '''
+        """
+
         if base_influence > 0:
             smoothed_influence = base_influence * (1 - network.nodes[target][influenced_feature])
         else:

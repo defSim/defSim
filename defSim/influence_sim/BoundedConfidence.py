@@ -10,6 +10,9 @@ import numpy as np
 
 
 class BoundedConfidence(InfluenceOperator):
+    """
+    [Deffuant2000]_
+    """
 
     def __init__(self, regime: str, **kwargs):
         """

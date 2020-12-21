@@ -30,7 +30,8 @@ release = 'alpha'
 # Add any Sphinx extension module names here, as strings. They can be
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
-extensions = ['sphinx.ext.autodoc',
+extensions = ["sphinx_rtd_theme",
+              'sphinx.ext.autodoc',
               'sphinx.ext.napoleon',
               'sphinx.ext.mathjax'
               ]
@@ -49,9 +50,9 @@ exclude_patterns = []
 # a list of builtin themes.
 #
 
-html_theme = 'lsst_dd_rtd_theme'
-import lsst_dd_rtd_theme
-html_theme_path = [lsst_dd_rtd_theme.get_html_theme_path()]
+import sphinx_rtd_theme
+
+html_theme = "sphinx_rtd_theme"
 
 html_sidebars = {
    '**': ['globaltoc.html', 'searchbox.html'],
@@ -63,3 +64,21 @@ html_sidebars = {
 # relative to this directory. They are copied after the builtin static files,
 # so a file named "default.css" will overwrite the builtin "default.css".
 html_static_path = ['_static']
+
+html_favicon = "fig/favicon.ico"
+html_logo = "fig/defSim-logo.png"
+html_theme_options = {
+    'logo_only': True,
+    'display_version': True,
+    'style_nav_header_background': '#343131'
+}
+
+# To make sure the __init__ parts of the module implementations is included
+# in the docstring:
+def skip(app, what, name, obj, would_skip, options):
+    if name == "__init__":
+        return False
+    return would_skip
+
+def setup(app):
+    app.connect("autodoc-skip-member", skip)

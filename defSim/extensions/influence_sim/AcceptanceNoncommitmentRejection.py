@@ -1,6 +1,7 @@
-import defSim as ds
-from defSim.influence_sim import InfluenceOperator
-from defSim.tools.NetworkDistanceupdater import update_dissimilarity
+import networkx as nx
+
+from defSim.influence_sim.influence_sim import InfluenceOperator
+from defSim.tools.NetworkDistanceUpdater import update_dissimilarity
 from defSim.dissimilarity_component.dissimilarity_calculator import DissimilarityCalculator
 
 from typing import List
@@ -53,7 +54,7 @@ class AcceptanceNoncommitmentRejection(InfluenceOperator):
     def spread_influence(self, network: nx.Graph, agent_i: int, agents_j: List[int] or int,
                          dissimilarity_measure: DissimilarityCalculator, attributes: List[str] = None, **kwargs) -> bool:
         """
-        This influence function implements an influence function proposed by Jager & Amblard (2005). Under this influence function,
+        This influence function implements an influence function proposed by [JagerAmblard2005]_. Under this influence function,
         agents have a zone of acceptance, a zone of noncommitment and a zone of rejection.
         Agents are positively influenced by others whose dissimilarity falls in the zone of acceptance, not influenced by others whose 
         dissimilarity falls in the zone of non-commitment and negatively influenced by others whose dissimilarity falls in the
@@ -80,12 +81,7 @@ class AcceptanceNoncommitmentRejection(InfluenceOperator):
 
         Note: Jager & Amblard (2005) implement influence as uni-directional (agent j influences agent i). Implementation here also 
         allows bi-directional influence. In one-to-one influence, agent i influences agent j to be consistent with other influence
-        functions implemented in defSim. 
-
-        References
-        Jager, W., & Amblard, F. (2005). Uniformity, Bipolarization and Pluriformity Captured as Generic Stylized Behavior with 
-            an Agent-Based Simulation Model of Attitude Change. Computational & Mathematical Organization Theory, 10(4), 
-            295–303. https://doi.org/10.1007/s10588-005-6282-2
+        functions implemented in defSim.
 
         :param network: The network in which the agents exist.
         :param agent_i: the index of the focal agent that is either the source or the target of the influence

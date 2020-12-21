@@ -12,18 +12,13 @@ from defSim.dissimilarity_component.dissimilarity_calculator import Dissimilarit
 class SimilarityAdoption(InfluenceOperator):
     """
     The SimilarityAdoption influence operator implements a simple similarity-based probabilistic assimilation influence
-    process much like Axelrod's dissemination of culture model (1997). The sending agent selects a feature to
+    process much like Axelrod's dissemination of culture model [Axelrod1997]_. The sending agent selects a feature to
     communicate to the receiving agent. The receiving agent then adopts the trait of the sending agent with a
     probability 'p' proportional to the similarity between the agents. The functional relationship between similarity
     and p can be varied with the parameter 'homophily'.
 
     In principle, it is possible to use the SimilarityAdoption module with continuous attributes, but it is designed
     with categorical attributes in mind.
-
-    References:
-
-    Axelrod, R. (1997). The dissemination of culture: A model with local convergence and global polarization.
-        Journal of conflict resolution, 41(2), 203-226.
     """
 
     def __init__(self, regime: str, **kwargs):

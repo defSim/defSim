@@ -1,139 +1,103 @@
 
 
 <!DOCTYPE html>
-<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8">
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>defSim</title>
-  
-
-  <link rel="shortcut icon" href="favicon.ico"/>
-
+  <title>Tools &mdash; defSim alpha documentation</title>
   
 
   
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+
+  
+  
+    <link rel="shortcut icon" href="_static/favicon.ico"/>
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
   
     
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
 
-  
-
-  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
-
-  
-
-  
-        <link rel="index" title="Index"
-              href="genindex.html"/>
-        <link rel="search" title="Search" href="search.html"/>
-    <link rel="top" title="defSim alpha documentation" href="index.html"/>
-        <link rel="next" title="Extensions (user-written defSim modules)" href="defSim.extensions.html"/>
-        <link rel="prev" title="Hamming Distance" href="defSim.dissimilarity_component.HammingDistance.html"/> 
-
-  
-  <script src="_static/js/modernizr.min.js"></script>
-
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Extensions (user-written defSim modules)" href="defSim.extensions.html" />
+    <link rel="prev" title="Hamming Distance" href="defSim.dissimilarity_component.HammingDistance.html" /> 
 </head>
 
-<body class="wy-body-for-nav" role="document">
+<body class="wy-body-for-nav">
 
+   
   <div class="wy-grid-for-nav">
-
     
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
-      <div class="wy-side-scroll"  style="background-color: #252625">
-        <div class="wy-side-nav-search"  style="background-color: #252625">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #343131" >
           
+
           
-          <br> <!-- MK -->
-          <a href="index.html">
-            <img src="_static/lsst-logo-dark.svg" class="logo" />
+            <a href="index.html">
+          
+
+          
             
-            <!-- <span class="project-title">defSim</span> MK-->
+            <img src="_static/defSim-logo.png" class="logo" alt="Logo"/>
+          
           </a>
 
-          <!-- <ul class="edition-switcher">
-            <li>Edition: </li>
-            <li><a href="../v">Switch editions</a></li>
+          
             
-          </ul> MK-->
+            
+          
 
           
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
 
           
         </div>
 
-        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation" style="background-color: #252625">
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
           
             
             
-                <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="Introduction_to_defSim.html">Introduction</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="Introduction_to_defSim.html#the-unified-way">1. The Unified Way</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Introduction_to_defSim.html#the-modular-way">2. The Modular Way</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Introduction_to_defSim.html#some-useful-resources">Some useful resources</a></li>
-</ul>
-</li>
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="Introduction_to_defSim.html">Introduction</a></li>
 <li class="toctree-l1"><a class="reference internal" href="experiment.class.html">Experiment class</a></li>
 <li class="toctree-l1"><a class="reference internal" href="simulation.class.html">Simulation class</a></li>
-<li class="toctree-l1"><a class="reference internal" href="defSim.network_init.html">Networks</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="defSim.network_init.html#module-defSim.network_init.network_init">generate_network</a></li>
-<li class="toctree-l2"><a class="reference internal" href="defSim.network_init.html#module-defSim.network_init.network_init">read_network</a></li>
-<li class="toctree-l2"><a class="reference internal" href="defSim.network_init.html#module-defSim.network_init.network_init">network_generators</a></li>
-<li class="toctree-l2"><a class="reference internal" href="defSim.network_init.html#module-defSim.network_init.network_init">execute_ms_rewiring</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="defSim.agents_init.html">Agent features</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="defSim.agents_init.RandomCategoricalInitializer.html">Random Categorical Initializer</a></li>
-<li class="toctree-l2"><a class="reference internal" href="defSim.agents_init.RandomContinuousInitializer.html">Random Continuous Initializer</a></li>
-<li class="toctree-l2"><a class="reference internal" href="defSim.agents_init.CorrelatedContinuousInitializer.html">Correlated Continuous Initializer</a></li>
-<li class="toctree-l2"><a class="reference internal" href="defSim.agents_init.RandomCategoricalInitializer.html">Random Categorical Initializer</a></li>
-<li class="toctree-l2"><a class="reference internal" href="defSim.agents_init.RandomContinuousInitializer.html">Random Continuous Initializer</a></li>
-<li class="toctree-l2"><a class="reference internal" href="defSim.agents_init.CorrelatedContinuousInitializer.html">Correlated Continuous Initializer</a></li>
-<li class="toctree-l2"><a class="reference internal" href="defSim.agents_init.html#initialize-attributes">initialize_attributes</a></li>
-<li class="toctree-l2"><a class="reference internal" href="defSim.agents_init.html#module-defSim.agents_init.agents_init">set_categorical_attribute</a></li>
-<li class="toctree-l2"><a class="reference internal" href="defSim.agents_init.html#module-defSim.agents_init.agents_init">set_continuous_attribute</a></li>
-<li class="toctree-l2"><a class="reference internal" href="defSim.agents_init.html#abstract-base-class">Abstract Base Class</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="defSim.focal_agent_sim.html">Focal agent selection</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="defSim.focal_agent_sim.RandomSelector.html">Random Selector</a></li>
-<li class="toctree-l2"><a class="reference internal" href="defSim.focal_agent_sim.html#module-defSim.focal_agent_sim.focal_agent_sim">focal_agent_sim module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="defSim.focal_agent_sim.html#module-defSim.focal_agent_sim.focal_agent_sim">Abstract Base Class (ABC)</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="defSim.neighbor_selector_sim.html">Neighbor selector</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="defSim.neighbor_selector_sim.RandomNeighborSelector.html">Random Neighbor Selector</a></li>
-<li class="toctree-l2"><a class="reference internal" href="defSim.neighbor_selector_sim.SimilarNeighborSelector.html">Similar Neighbor Selector</a></li>
-<li class="toctree-l2"><a class="reference internal" href="defSim.neighbor_selector_sim.html#module-defSim.neighbor_selector_sim.neighbor_selector_sim">neighbor_selector_sim module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="defSim.neighbor_selector_sim.html#module-defSim.neighbor_selector_sim.neighbor_selector_sim">Abstract Base Class (ABC)</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="defSim.influence_sim.html">Influence</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="defSim.influence_sim.BoundedConfidence.html">Bounded Confidence</a></li>
-<li class="toctree-l2"><a class="reference internal" href="defSim.influence_sim.Persuasion.html">Persuasion</a></li>
-<li class="toctree-l2"><a class="reference internal" href="defSim.influence_sim.SimilarityAdoption.html">Similarity Adoption</a></li>
-<li class="toctree-l2"><a class="reference internal" href="defSim.influence_sim.WeightedLinear.html">Weighted Linear Influence</a></li>
-<li class="toctree-l2"><a class="reference internal" href="defSim.extensions.influence_sim.Leviathan.html">Leviathan</a></li>
-<li class="toctree-l2"><a class="reference internal" href="defSim.influence_sim.html#module-defSim.influence_sim.influence_sim">influence_sim module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="defSim.influence_sim.html#module-defSim.influence_sim.influence_sim">Abstract Base Class (ABC)</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="defSim.network_evolution_sim.html">Network evolution</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="defSim.network_evolution_sim.html#module-defSim.network_evolution_sim.network_evolution_sim">network_evolution_sim module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="defSim.network_evolution_sim.html#networkhomophily">NetworkHomophily</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="defSim.dissimilarity_component.html">Dissimilarity updaters</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="defSim.dissimilarity_component.EuclideanDistance.html">Euclidean Distance</a></li>
-<li class="toctree-l2"><a class="reference internal" href="defSim.dissimilarity_component.HammingDistance.html">Hamming Distance</a></li>
-<li class="toctree-l2"><a class="reference internal" href="defSim.dissimilarity_component.html#module-defSim.dissimilarity_component.dissimilarity_calculator">select_calculator</a></li>
-<li class="toctree-l2"><a class="reference internal" href="defSim.dissimilarity_component.html#abstract-base-class-abc">Abstract Base Class (ABC)</a></li>
-</ul>
-</li>
+<li class="toctree-l1"><a class="reference internal" href="defSim.network_init.html">Networks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="defSim.agents_init.html">Agent features</a></li>
+<li class="toctree-l1"><a class="reference internal" href="defSim.focal_agent_sim.html">Focal agent selection</a></li>
+<li class="toctree-l1"><a class="reference internal" href="defSim.neighbor_selector_sim.html">Neighbor selector</a></li>
+<li class="toctree-l1"><a class="reference internal" href="defSim.influence_sim.html">Influence</a></li>
+<li class="toctree-l1"><a class="reference internal" href="defSim.network_evolution_sim.html">Network evolution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="defSim.dissimilarity_component.html">Dissimilarity updaters</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Tools</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#module-defSim.tools.CreateOutputTable">CreateOutputTable</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#abc-of-createoutputtable">ABC of CreateOutputTable</a></li>
@@ -142,49 +106,80 @@
 <li class="toctree-l2"><a class="reference internal" href="#module-defSim.tools.ClusterExecutionScript">ClusterExecutionScript</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="defSim.extensions.html">Extensions</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="defSim.extensions.influence_sim.Leviathan.html">Leviathan</a></li>
-<li class="toctree-l2"><a class="reference internal" href="defSim.extensions.html#submitting-a-module">Submitting a module</a></li>
-</ul>
-</li>
+<li class="toctree-l1"><a class="reference internal" href="defSim.extensions.html">Extensions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="credits.html">Credits</a></li>
 </ul>
 
             
           
         </div>
+        
       </div>
     </nav>
 
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
 
       
-      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
-        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-        <a href="index.html">defSim</a>
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">defSim</a>
+        
       </nav>
 
 
-      
       <div class="wy-nav-content">
+        
         <div class="rst-content">
-          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
-            <!-- <div class="dd-masthead">
-  <h1 class="dd-title">defSim</h1>
-  <ul class="dd-authors">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>Tools</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/defSim.tools.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
     
   </ul>
-  <p>Latest Revision: <a href="#change-record"></a></p>
-</div> --> <!-- turned off on 21/10/2019 -->
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
   <div class="section" id="tools">
 <h1>Tools<a class="headerlink" href="#tools" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="module-defSim.tools.CreateOutputTable">
 <span id="createoutputtable"></span><h2>CreateOutputTable<a class="headerlink" href="#module-defSim.tools.CreateOutputTable" title="Permalink to this headline">¶</a></h2>
-<dl class="function">
+<dl class="py function">
 <dt id="defSim.tools.CreateOutputTable.create_output_table">
-<code class="sig-prename descclassname">defSim.tools.CreateOutputTable.</code><code class="sig-name descname">create_output_table</code><span class="sig-paren">(</span><em class="sig-param">network: networkx.classes.graph.Graph</em>, <em class="sig-param">realizations=None</em>, <em class="sig-param">colnames=None</em>, <em class="sig-param">agents=None</em>, <em class="sig-param">settings_dict=None</em>, <em class="sig-param">tickwise_output=None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#defSim.tools.CreateOutputTable.create_output_table" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">defSim.tools.CreateOutputTable.</code><code class="sig-name descname">create_output_table</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">network</span><span class="p">:</span> <span class="n">networkx.classes.graph.Graph</span></em>, <em class="sig-param"><span class="n">realizations</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">colnames</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">agents</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">settings_dict</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">tickwise_output</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#defSim.tools.CreateOutputTable.create_output_table" title="Permalink to this definition">¶</a></dt>
 <dd><p>This function works as a factory method for the OutputTableCreator component.
 It calls the create_output function of a specific implementation of the OutputTableCreator and passes to it
 the kwargs dictionary.</p>
@@ -229,17 +224,17 @@ during the simulation run. This function will create a column for each key in th
 <div class="section" id="abc-of-createoutputtable">
 <h2>ABC of CreateOutputTable<a class="headerlink" href="#abc-of-createoutputtable" title="Permalink to this headline">¶</a></h2>
 <p>The Abstract Base Class of the CreateOutputTable method:</p>
-<span class="target" id="module-defSim.tools.CreateOutputTable"></span><dl class="class">
+<span class="target" id="module-0"></span><dl class="py class">
 <dt id="defSim.tools.CreateOutputTable.OutputTableCreator">
-<em class="property">class </em><code class="sig-prename descclassname">defSim.tools.CreateOutputTable.</code><code class="sig-name descname">OutputTableCreator</code><span class="sig-paren">(</span><em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#defSim.tools.CreateOutputTable.OutputTableCreator" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">defSim.tools.CreateOutputTable.</code><code class="sig-name descname">OutputTableCreator</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#defSim.tools.CreateOutputTable.OutputTableCreator" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">abc.ABC</span></code></p>
 <p>This class is responsible for creating output for the output table.
 Inherit from this class and implement the create_output method to generate the desired output cell for the output table.
 If you want the output cell to have a descriptive column name, overwrite the class variable ‘label’. Otherwise,
 column names are autogenerated.</p>
-<dl class="method">
+<dl class="py method">
 <dt id="defSim.tools.CreateOutputTable.OutputTableCreator.create_output">
-<em class="property">abstract </em><code class="sig-name descname">create_output</code><span class="sig-paren">(</span><em class="sig-param">network: networkx.classes.graph.Graph</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#defSim.tools.CreateOutputTable.OutputTableCreator.create_output" title="Permalink to this definition">¶</a></dt>
+<em class="property">abstract </em><code class="sig-name descname">create_output</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">network</span><span class="p">:</span> <span class="n">networkx.classes.graph.Graph</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#defSim.tools.CreateOutputTable.OutputTableCreator.create_output" title="Permalink to this definition">¶</a></dt>
 <dd><p>This method receives a NetworkX object, performs some calculation, and outputs a cell for the output table.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -251,7 +246,7 @@ column names are autogenerated.</p>
 </dl>
 </dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="defSim.tools.CreateOutputTable.OutputTableCreator.label">
 <code class="sig-name descname">label</code><em class="property"> = ''</em><a class="headerlink" href="#defSim.tools.CreateOutputTable.OutputTableCreator.label" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
@@ -261,13 +256,13 @@ column names are autogenerated.</p>
 </div>
 <div class="section" id="module-defSim.tools.OutputMeasures">
 <span id="outputmeasures"></span><h2>OutputMeasures<a class="headerlink" href="#module-defSim.tools.OutputMeasures" title="Permalink to this headline">¶</a></h2>
-<dl class="class">
+<dl class="py class">
 <dt id="defSim.tools.OutputMeasures.AttributeReporter">
-<em class="property">class </em><code class="sig-prename descclassname">defSim.tools.OutputMeasures.</code><code class="sig-name descname">AttributeReporter</code><span class="sig-paren">(</span><em class="sig-param">feature: str = None</em><span class="sig-paren">)</span><a class="headerlink" href="#defSim.tools.OutputMeasures.AttributeReporter" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">defSim.tools.OutputMeasures.</code><code class="sig-name descname">AttributeReporter</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">feature</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span>str<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#defSim.tools.OutputMeasures.AttributeReporter" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#defSim.tools.CreateOutputTable.OutputTableCreator" title="defSim.tools.CreateOutputTable.OutputTableCreator"><code class="xref py py-class docutils literal notranslate"><span class="pre">defSim.tools.CreateOutputTable.OutputTableCreator</span></code></a></p>
-<dl class="method">
+<dl class="py method">
 <dt id="defSim.tools.OutputMeasures.AttributeReporter.create_output">
-<code class="sig-name descname">create_output</code><span class="sig-paren">(</span><em class="sig-param">network: networkx.classes.graph.Graph</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#defSim.tools.OutputMeasures.AttributeReporter.create_output" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">create_output</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">network</span><span class="p">:</span> <span class="n">networkx.classes.graph.Graph</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#defSim.tools.OutputMeasures.AttributeReporter.create_output" title="Permalink to this definition">¶</a></dt>
 <dd><p>This function will output a single row of a dataframe where the columns are user-given agent-features and column
 values contain a list of all the agents’  values on the given feature.</p>
 <dl class="field-list simple">
@@ -283,20 +278,20 @@ values contain a list of all the agents’  values on the given feature.</p>
 </dl>
 </dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="defSim.tools.OutputMeasures.AttributeReporter.label">
 <code class="sig-name descname">label</code><em class="property"> = 'AttributeReporter'</em><a class="headerlink" href="#defSim.tools.OutputMeasures.AttributeReporter.label" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
 
-<dl class="class">
+<dl class="py class">
 <dt id="defSim.tools.OutputMeasures.AverageDistanceReporter">
-<em class="property">class </em><code class="sig-prename descclassname">defSim.tools.OutputMeasures.</code><code class="sig-name descname">AverageDistanceReporter</code><span class="sig-paren">(</span><em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#defSim.tools.OutputMeasures.AverageDistanceReporter" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">defSim.tools.OutputMeasures.</code><code class="sig-name descname">AverageDistanceReporter</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#defSim.tools.OutputMeasures.AverageDistanceReporter" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#defSim.tools.CreateOutputTable.OutputTableCreator" title="defSim.tools.CreateOutputTable.OutputTableCreator"><code class="xref py py-class docutils literal notranslate"><span class="pre">defSim.tools.CreateOutputTable.OutputTableCreator</span></code></a></p>
-<dl class="method">
+<dl class="py method">
 <dt id="defSim.tools.OutputMeasures.AverageDistanceReporter.create_output">
-<code class="sig-name descname">create_output</code><span class="sig-paren">(</span><em class="sig-param">network: networkx.classes.graph.Graph</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#defSim.tools.OutputMeasures.AverageDistanceReporter.create_output" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">create_output</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">network</span><span class="p">:</span> <span class="n">networkx.classes.graph.Graph</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#defSim.tools.OutputMeasures.AverageDistanceReporter.create_output" title="Permalink to this definition">¶</a></dt>
 <dd><p>Output the average feature distance across all edges. Based on
 calculated distances in the network (so based on whatever
 distance measure was specified in the simulation).</p>
@@ -310,20 +305,20 @@ distance measure was specified in the simulation).</p>
 </dl>
 </dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="defSim.tools.OutputMeasures.AverageDistanceReporter.label">
 <code class="sig-name descname">label</code><em class="property"> = 'AverageDistance'</em><a class="headerlink" href="#defSim.tools.OutputMeasures.AverageDistanceReporter.label" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
 
-<dl class="class">
+<dl class="py class">
 <dt id="defSim.tools.OutputMeasures.AverageOpinionReporter">
-<em class="property">class </em><code class="sig-prename descclassname">defSim.tools.OutputMeasures.</code><code class="sig-name descname">AverageOpinionReporter</code><span class="sig-paren">(</span><em class="sig-param">feature: str = 'f01'</em><span class="sig-paren">)</span><a class="headerlink" href="#defSim.tools.OutputMeasures.AverageOpinionReporter" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">defSim.tools.OutputMeasures.</code><code class="sig-name descname">AverageOpinionReporter</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">feature</span><span class="p">:</span> <span class="n">str</span> <span class="o">=</span> <span class="default_value">'f01'</span></em><span class="sig-paren">)</span><a class="headerlink" href="#defSim.tools.OutputMeasures.AverageOpinionReporter" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#defSim.tools.CreateOutputTable.OutputTableCreator" title="defSim.tools.CreateOutputTable.OutputTableCreator"><code class="xref py py-class docutils literal notranslate"><span class="pre">defSim.tools.CreateOutputTable.OutputTableCreator</span></code></a></p>
-<dl class="method">
+<dl class="py method">
 <dt id="defSim.tools.OutputMeasures.AverageOpinionReporter.create_output">
-<code class="sig-name descname">create_output</code><span class="sig-paren">(</span><em class="sig-param">network: networkx.classes.graph.Graph</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#defSim.tools.OutputMeasures.AverageOpinionReporter.create_output" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">create_output</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">network</span><span class="p">:</span> <span class="n">networkx.classes.graph.Graph</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#defSim.tools.OutputMeasures.AverageOpinionReporter.create_output" title="Permalink to this definition">¶</a></dt>
 <dd><p>Output the average opinion on a feature across all agents.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -335,20 +330,20 @@ distance measure was specified in the simulation).</p>
 </dl>
 </dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="defSim.tools.OutputMeasures.AverageOpinionReporter.label">
 <code class="sig-name descname">label</code><em class="property"> = 'AverageOpinion'</em><a class="headerlink" href="#defSim.tools.OutputMeasures.AverageOpinionReporter.label" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
 
-<dl class="class">
+<dl class="py class">
 <dt id="defSim.tools.OutputMeasures.ClusterFinder">
-<em class="property">class </em><code class="sig-prename descclassname">defSim.tools.OutputMeasures.</code><code class="sig-name descname">ClusterFinder</code><span class="sig-paren">(</span><em class="sig-param">cluster_dissimilarity_threshold: float = 0</em>, <em class="sig-param">strict_zones: bool = False</em><span class="sig-paren">)</span><a class="headerlink" href="#defSim.tools.OutputMeasures.ClusterFinder" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">defSim.tools.OutputMeasures.</code><code class="sig-name descname">ClusterFinder</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">cluster_dissimilarity_threshold</span><span class="p">:</span> <span class="n">float</span> <span class="o">=</span> <span class="default_value">0</span></em>, <em class="sig-param"><span class="n">strict_zones</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">False</span></em><span class="sig-paren">)</span><a class="headerlink" href="#defSim.tools.OutputMeasures.ClusterFinder" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#defSim.tools.CreateOutputTable.OutputTableCreator" title="defSim.tools.CreateOutputTable.OutputTableCreator"><code class="xref py py-class docutils literal notranslate"><span class="pre">defSim.tools.CreateOutputTable.OutputTableCreator</span></code></a></p>
-<dl class="method">
+<dl class="py method">
 <dt id="defSim.tools.OutputMeasures.ClusterFinder.create_output">
-<code class="sig-name descname">create_output</code><span class="sig-paren">(</span><em class="sig-param">network: networkx.classes.graph.Graph</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#defSim.tools.OutputMeasures.ClusterFinder.create_output" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">create_output</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">network</span><span class="p">:</span> <span class="n">networkx.classes.graph.Graph</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#defSim.tools.OutputMeasures.ClusterFinder.create_output" title="Permalink to this definition">¶</a></dt>
 <dd><p>Finds the size and number of cultural regions, zones, or clusters present in the graph. Following Axelrod (1997)
 <em>regions</em> are defined as a set of connected nodes with an identical attribute profile.
 <em>Zones</em> are sets of connected nodes that have some attribute overlap, such that change is still possible.</p>
@@ -369,7 +364,7 @@ the links with dissimilarity != 1 are preserved)</p></li>
 </dl>
 </dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="defSim.tools.OutputMeasures.ClusterFinder.label">
 <code class="sig-name descname">label</code><em class="property"> = 'ClusterFinder'</em><a class="headerlink" href="#defSim.tools.OutputMeasures.ClusterFinder.label" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
@@ -379,9 +374,9 @@ the links with dissimilarity != 1 are preserved)</p></li>
 </div>
 <div class="section" id="module-defSim.tools.NetworkDistanceUpdater">
 <span id="networkdistanceupdater"></span><h2>NetworkDistanceUpdater<a class="headerlink" href="#module-defSim.tools.NetworkDistanceUpdater" title="Permalink to this headline">¶</a></h2>
-<dl class="function">
+<dl class="py function">
 <dt id="defSim.tools.NetworkDistanceUpdater.check_dissimilarity">
-<code class="sig-prename descclassname">defSim.tools.NetworkDistanceUpdater.</code><code class="sig-name descname">check_dissimilarity</code><span class="sig-paren">(</span><em class="sig-param">network: networkx.classes.graph.Graph</em>, <em class="sig-param">threshold: float</em><span class="sig-paren">)</span><a class="headerlink" href="#defSim.tools.NetworkDistanceUpdater.check_dissimilarity" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">defSim.tools.NetworkDistanceUpdater.</code><code class="sig-name descname">check_dissimilarity</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">network</span><span class="p">:</span> <span class="n">networkx.classes.graph.Graph</span></em>, <em class="sig-param"><span class="n">threshold</span><span class="p">:</span> <span class="n">float</span></em><span class="sig-paren">)</span><a class="headerlink" href="#defSim.tools.NetworkDistanceUpdater.check_dissimilarity" title="Permalink to this definition">¶</a></dt>
 <dd><p>This function is used to check whether influence is theoretically still possible. For that is checked whether
 any edge has a dissimilarity value inbetween a certain range of possible values that allow for further influence
 steps. This range has 1 as the upper limit and a given threshold as lower limit.</p>
@@ -398,9 +393,9 @@ steps. This range has 1 as the upper limit and a given threshold as lower limit.
 </dl>
 </dd></dl>
 
-<dl class="function">
+<dl class="py function">
 <dt id="defSim.tools.NetworkDistanceUpdater.update_dissimilarity">
-<code class="sig-prename descclassname">defSim.tools.NetworkDistanceUpdater.</code><code class="sig-name descname">update_dissimilarity</code><span class="sig-paren">(</span><em class="sig-param">network: networkx.classes.graph.Graph, agents: List[int], calculator: defSim.dissimilarity_component.dissimilarity_calculator.DissimilarityCalculator, **kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#defSim.tools.NetworkDistanceUpdater.update_dissimilarity" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">defSim.tools.NetworkDistanceUpdater.</code><code class="sig-name descname">update_dissimilarity</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">network</span><span class="p">:</span> <span class="n">networkx.classes.graph.Graph</span></em>, <em class="sig-param"><span class="n">agents</span><span class="p">:</span> <span class="n">List<span class="p">[</span>int<span class="p">]</span></span></em>, <em class="sig-param"><span class="n">calculator</span><span class="p">:</span> <span class="n"><a class="reference internal" href="defSim.dissimilarity_component.html#defSim.dissimilarity_component.dissimilarity_calculator.DissimilarityCalculator" title="defSim.dissimilarity_component.dissimilarity_calculator.DissimilarityCalculator">defSim.dissimilarity_component.dissimilarity_calculator.DissimilarityCalculator</a></span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#defSim.tools.NetworkDistanceUpdater.update_dissimilarity" title="Permalink to this definition">¶</a></dt>
 <dd><p>This method recomputes the edges between a certain set of agents and all their neighbors and then modifies
 the edges between them respectively.</p>
 <dl class="field-list simple">
@@ -417,7 +412,7 @@ the edges between them respectively.</p>
 </div>
 <div class="section" id="module-defSim.tools.ClusterExecutionScript">
 <span id="clusterexecutionscript"></span><h2>ClusterExecutionScript<a class="headerlink" href="#module-defSim.tools.ClusterExecutionScript" title="Permalink to this headline">¶</a></h2>
-<dl class="class">
+<dl class="py class">
 <dt id="defSim.tools.ClusterExecutionScript.parallelSimulation">
 <em class="property">class </em><code class="sig-prename descclassname">defSim.tools.ClusterExecutionScript.</code><code class="sig-name descname">parallelSimulation</code><a class="headerlink" href="#defSim.tools.ClusterExecutionScript.parallelSimulation" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
@@ -432,12 +427,12 @@ one machine. This script is called from the command line with 3 arguments.</p>
 </ul>
 </dd>
 </dl>
-<dl class="method">
+<dl class="py method">
 <dt id="defSim.tools.ClusterExecutionScript.parallelSimulation.create_and_run_simulation">
-<code class="sig-name descname">create_and_run_simulation</code><span class="sig-paren">(</span><em class="sig-param">parameter_dict</em><span class="sig-paren">)</span><a class="headerlink" href="#defSim.tools.ClusterExecutionScript.parallelSimulation.create_and_run_simulation" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">create_and_run_simulation</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">parameter_dict</span></em><span class="sig-paren">)</span><a class="headerlink" href="#defSim.tools.ClusterExecutionScript.parallelSimulation.create_and_run_simulation" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="defSim.tools.ClusterExecutionScript.parallelSimulation.main">
 <code class="sig-name descname">main</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#defSim.tools.ClusterExecutionScript.parallelSimulation.main" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
@@ -449,15 +444,16 @@ one machine. This script is called from the command line with 3 arguments.</p>
 
 
            </div>
+           
           </div>
           <footer>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="defSim.extensions.html" class="btn btn-neutral float-right" title="Extensions (user-written defSim modules)" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="defSim.extensions.html" class="btn btn-neutral float-right" title="Extensions (user-written defSim modules)" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="defSim.dissimilarity_component.HammingDistance.html" class="btn btn-neutral" title="Hamming Distance" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="defSim.dissimilarity_component.HammingDistance.html" class="btn btn-neutral float-left" title="Hamming Distance" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -466,11 +462,19 @@ one machine. This script is called from the command line with 3 arguments.</p>
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2019-2020, Laukemper, Keijzer &amp; Bakker.
+        
+        &copy; Copyright 2019-2020, Laukemper, Keijzer &amp; Bakker
 
     </p>
   </div>
-  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
 
@@ -482,35 +486,15 @@ one machine. This script is called from the command line with 3 arguments.</p>
   </div>
   
 
-
-  
-
-    <script type="text/javascript">
-        var DOCUMENTATION_OPTIONS = {
-            URL_ROOT:'./',
-            VERSION:'alpha',
-            COLLAPSE_INDEX:false,
-            FILE_SUFFIX:'.html',
-            HAS_SOURCE:  true
-        };
-    </script>
-      <script type="text/javascript" src="_static/jquery.js"></script>
-      <script type="text/javascript" src="_static/underscore.js"></script>
-      <script type="text/javascript" src="_static/doctools.js"></script>
-      <script type="text/javascript" src="_static/language_data.js"></script>
-      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
-
-  
-
-   <script type="text/javascript" src="_static/js/theme.js"></script>
-
-  
-  
   <script type="text/javascript">
       jQuery(function () {
-          SphinxRtdTheme.StickyNav.enable();
+          SphinxRtdTheme.Navigation.enable(true);
       });
   </script>
+
+  
+  
+    
    
 
 </body>

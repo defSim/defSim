@@ -14,7 +14,7 @@ class MaslovSneppenModifier(NetworkModifier):
 
     def rewire_network(self, network: nx.Graph, rewiring_prop: float = None, rewiring_exact = None, **kwargs):
         """
-        This method executes Maslov Sneppen rewiring (Maslov & Sneppen, 2002). Until a given proportion of the network
+        This method executes Maslov Sneppen rewiring [MaslovSneppen2002]_. Until a given proportion of the network
         edges is rewired, the algorithm will pick two edges at random, remove them, and construct an edge between a
         different combination of nodes that have just lost an edge. Effectively, this introduces randomization of network
         structure, while leaving the degree distribution unchanged. Because the parameter `rewiring_prop` functions as a

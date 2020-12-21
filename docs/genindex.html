@@ -1,180 +1,165 @@
 
 
-
 <!DOCTYPE html>
-<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8">
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>defSim</title>
-  
-
-  <link rel="shortcut icon" href="favicon.ico"/>
-
+  <title>Index &mdash; defSim alpha documentation</title>
   
 
   
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+
+  
+  
+    <link rel="shortcut icon" href="_static/favicon.ico"/>
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
   
     
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
 
-  
-
-  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
-
-  
-
-  
-        <link rel="index" title="Index"
-              href="#"/>
-        <link rel="search" title="Search" href="search.html"/>
-    <link rel="top" title="defSim alpha documentation" href="index.html"/> 
-
-  
-  <script src="_static/js/modernizr.min.js"></script>
-
+    
+    <link rel="index" title="Index" href="#" />
+    <link rel="search" title="Search" href="search.html" /> 
 </head>
 
-<body class="wy-body-for-nav" role="document">
+<body class="wy-body-for-nav">
 
+   
   <div class="wy-grid-for-nav">
-
     
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
-      <div class="wy-side-scroll"  style="background-color: #252625">
-        <div class="wy-side-nav-search"  style="background-color: #252625">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #343131" >
           
+
           
-          <br> <!-- MK -->
-          <a href="index.html">
-            <img src="_static/lsst-logo-dark.svg" class="logo" />
+            <a href="index.html">
+          
+
+          
             
-            <!-- <span class="project-title">defSim</span> MK-->
+            <img src="_static/defSim-logo.png" class="logo" alt="Logo"/>
+          
           </a>
 
-          <!-- <ul class="edition-switcher">
-            <li>Edition: </li>
-            <li><a href="../v">Switch editions</a></li>
+          
             
-          </ul> MK-->
+            
+          
 
           
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
 
           
         </div>
 
-        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation" style="background-color: #252625">
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
           
             
             
-                <ul>
-<li class="toctree-l1"><a class="reference internal" href="Introduction_to_defSim.html">Introduction</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="Introduction_to_defSim.html#the-unified-way">1. The Unified Way</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Introduction_to_defSim.html#the-modular-way">2. The Modular Way</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Introduction_to_defSim.html#some-useful-resources">Some useful resources</a></li>
-</ul>
-</li>
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="Introduction_to_defSim.html">Introduction</a></li>
 <li class="toctree-l1"><a class="reference internal" href="experiment.class.html">Experiment class</a></li>
 <li class="toctree-l1"><a class="reference internal" href="simulation.class.html">Simulation class</a></li>
-<li class="toctree-l1"><a class="reference internal" href="defSim.network_init.html">Networks</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="defSim.network_init.html#module-defSim.network_init.network_init">generate_network</a></li>
-<li class="toctree-l2"><a class="reference internal" href="defSim.network_init.html#module-defSim.network_init.network_init">read_network</a></li>
-<li class="toctree-l2"><a class="reference internal" href="defSim.network_init.html#module-defSim.network_init.network_init">network_generators</a></li>
-<li class="toctree-l2"><a class="reference internal" href="defSim.network_init.html#module-defSim.network_init.network_init">execute_ms_rewiring</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="defSim.agents_init.html">Agent features</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="defSim.agents_init.RandomCategoricalInitializer.html">Random Categorical Initializer</a></li>
-<li class="toctree-l2"><a class="reference internal" href="defSim.agents_init.RandomContinuousInitializer.html">Random Continuous Initializer</a></li>
-<li class="toctree-l2"><a class="reference internal" href="defSim.agents_init.CorrelatedContinuousInitializer.html">Correlated Continuous Initializer</a></li>
-<li class="toctree-l2"><a class="reference internal" href="defSim.agents_init.RandomCategoricalInitializer.html">Random Categorical Initializer</a></li>
-<li class="toctree-l2"><a class="reference internal" href="defSim.agents_init.RandomContinuousInitializer.html">Random Continuous Initializer</a></li>
-<li class="toctree-l2"><a class="reference internal" href="defSim.agents_init.CorrelatedContinuousInitializer.html">Correlated Continuous Initializer</a></li>
-<li class="toctree-l2"><a class="reference internal" href="defSim.agents_init.html#initialize-attributes">initialize_attributes</a></li>
-<li class="toctree-l2"><a class="reference internal" href="defSim.agents_init.html#module-defSim.agents_init.agents_init">set_categorical_attribute</a></li>
-<li class="toctree-l2"><a class="reference internal" href="defSim.agents_init.html#module-defSim.agents_init.agents_init">set_continuous_attribute</a></li>
-<li class="toctree-l2"><a class="reference internal" href="defSim.agents_init.html#abstract-base-class">Abstract Base Class</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="defSim.focal_agent_sim.html">Focal agent selection</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="defSim.focal_agent_sim.RandomSelector.html">Random Selector</a></li>
-<li class="toctree-l2"><a class="reference internal" href="defSim.focal_agent_sim.html#module-defSim.focal_agent_sim.focal_agent_sim">focal_agent_sim module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="defSim.focal_agent_sim.html#module-defSim.focal_agent_sim.focal_agent_sim">Abstract Base Class (ABC)</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="defSim.neighbor_selector_sim.html">Neighbor selector</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="defSim.neighbor_selector_sim.RandomNeighborSelector.html">Random Neighbor Selector</a></li>
-<li class="toctree-l2"><a class="reference internal" href="defSim.neighbor_selector_sim.SimilarNeighborSelector.html">Similar Neighbor Selector</a></li>
-<li class="toctree-l2"><a class="reference internal" href="defSim.neighbor_selector_sim.html#module-defSim.neighbor_selector_sim.neighbor_selector_sim">neighbor_selector_sim module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="defSim.neighbor_selector_sim.html#module-defSim.neighbor_selector_sim.neighbor_selector_sim">Abstract Base Class (ABC)</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="defSim.influence_sim.html">Influence</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="defSim.influence_sim.BoundedConfidence.html">Bounded Confidence</a></li>
-<li class="toctree-l2"><a class="reference internal" href="defSim.influence_sim.Persuasion.html">Persuasion</a></li>
-<li class="toctree-l2"><a class="reference internal" href="defSim.influence_sim.SimilarityAdoption.html">Similarity Adoption</a></li>
-<li class="toctree-l2"><a class="reference internal" href="defSim.influence_sim.WeightedLinear.html">Weighted Linear Influence</a></li>
-<li class="toctree-l2"><a class="reference internal" href="defSim.extensions.influence_sim.Leviathan.html">Leviathan</a></li>
-<li class="toctree-l2"><a class="reference internal" href="defSim.influence_sim.html#module-defSim.influence_sim.influence_sim">influence_sim module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="defSim.influence_sim.html#module-defSim.influence_sim.influence_sim">Abstract Base Class (ABC)</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="defSim.network_evolution_sim.html">Network evolution</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="defSim.network_evolution_sim.html#module-defSim.network_evolution_sim.network_evolution_sim">network_evolution_sim module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="defSim.network_evolution_sim.html#networkhomophily">NetworkHomophily</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="defSim.dissimilarity_component.html">Dissimilarity updaters</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="defSim.dissimilarity_component.EuclideanDistance.html">Euclidean Distance</a></li>
-<li class="toctree-l2"><a class="reference internal" href="defSim.dissimilarity_component.HammingDistance.html">Hamming Distance</a></li>
-<li class="toctree-l2"><a class="reference internal" href="defSim.dissimilarity_component.html#module-defSim.dissimilarity_component.dissimilarity_calculator">select_calculator</a></li>
-<li class="toctree-l2"><a class="reference internal" href="defSim.dissimilarity_component.html#abstract-base-class-abc">Abstract Base Class (ABC)</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="defSim.tools.html">Tools</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="defSim.tools.html#module-defSim.tools.CreateOutputTable">CreateOutputTable</a></li>
-<li class="toctree-l2"><a class="reference internal" href="defSim.tools.html#abc-of-createoutputtable">ABC of CreateOutputTable</a></li>
-<li class="toctree-l2"><a class="reference internal" href="defSim.tools.html#module-defSim.tools.OutputMeasures">OutputMeasures</a></li>
-<li class="toctree-l2"><a class="reference internal" href="defSim.tools.html#module-defSim.tools.NetworkDistanceUpdater">NetworkDistanceUpdater</a></li>
-<li class="toctree-l2"><a class="reference internal" href="defSim.tools.html#module-defSim.tools.ClusterExecutionScript">ClusterExecutionScript</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="defSim.extensions.html">Extensions</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="defSim.extensions.influence_sim.Leviathan.html">Leviathan</a></li>
-<li class="toctree-l2"><a class="reference internal" href="defSim.extensions.html#submitting-a-module">Submitting a module</a></li>
-</ul>
-</li>
+<li class="toctree-l1"><a class="reference internal" href="defSim.network_init.html">Networks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="defSim.agents_init.html">Agent features</a></li>
+<li class="toctree-l1"><a class="reference internal" href="defSim.focal_agent_sim.html">Focal agent selection</a></li>
+<li class="toctree-l1"><a class="reference internal" href="defSim.neighbor_selector_sim.html">Neighbor selector</a></li>
+<li class="toctree-l1"><a class="reference internal" href="defSim.influence_sim.html">Influence</a></li>
+<li class="toctree-l1"><a class="reference internal" href="defSim.network_evolution_sim.html">Network evolution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="defSim.dissimilarity_component.html">Dissimilarity updaters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="defSim.tools.html">Tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="defSim.extensions.html">Extensions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="credits.html">Credits</a></li>
 </ul>
 
             
           
         </div>
+        
       </div>
     </nav>
 
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
 
       
-      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
-        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-        <a href="index.html">defSim</a>
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">defSim</a>
+        
       </nav>
 
 
-      
       <div class="wy-nav-content">
+        
         <div class="rst-content">
-          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
-            <!-- <div class="dd-masthead">
-  <h1 class="dd-title">defSim</h1>
-  <ul class="dd-authors">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>Index</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+        
+      </li>
     
   </ul>
-  <p>Latest Revision: <a href="#change-record"></a></p>
-</div> --> <!-- turned off on 21/10/2019 -->
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
 
@@ -205,6 +190,42 @@
 <h2 id="_">_</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="defSim.agents_init.html#defSim.agents_init.agents_init.AttributesInitializer.__init__">__init__() (defSim.agents_init.agents_init.AttributesInitializer method)</a>
+
+      <ul>
+        <li><a href="defSim.extensions.influence_sim.AcceptanceNoncommitmentRejection.html#defSim.extensions.influence_sim.AcceptanceNoncommitmentRejection.AcceptanceNoncommitmentRejection.__init__">(defSim.extensions.influence_sim.AcceptanceNoncommitmentRejection.AcceptanceNoncommitmentRejection method)</a>
+</li>
+        <li><a href="defSim.focal_agent_sim.html#defSim.focal_agent_sim.focal_agent_sim.FocalAgentSelector.__init__">(defSim.focal_agent_sim.focal_agent_sim.FocalAgentSelector method)</a>
+</li>
+        <li><a href="defSim.influence_sim.BoundedConfidence.html#defSim.influence_sim.BoundedConfidence.BoundedConfidence.__init__">(defSim.influence_sim.BoundedConfidence.BoundedConfidence method)</a>
+</li>
+        <li><a href="defSim.influence_sim.html#defSim.influence_sim.influence_sim.InfluenceOperator.__init__">(defSim.influence_sim.influence_sim.InfluenceOperator method)</a>
+</li>
+        <li><a href="defSim.influence_sim.SimilarityAdoption.html#defSim.influence_sim.SimilarityAdoption.SimilarityAdoption.__init__">(defSim.influence_sim.SimilarityAdoption.SimilarityAdoption method)</a>
+</li>
+        <li><a href="defSim.influence_sim.WeightedLinear.html#defSim.influence_sim.WeightedLinear.WeightedLinear.__init__">(defSim.influence_sim.WeightedLinear.WeightedLinear method)</a>
+</li>
+        <li><a href="defSim.network_evolution_sim.html#defSim.network_evolution_sim.MaslovSneppenModifier.MaslovSneppenModifier.__init__">(defSim.network_evolution_sim.MaslovSneppenModifier.MaslovSneppenModifier method)</a>
+</li>
+        <li><a href="defSim.network_evolution_sim.html#defSim.network_evolution_sim.network_evolution_sim.NetworkModifier.__init__">(defSim.network_evolution_sim.network_evolution_sim.NetworkModifier method)</a>
+</li>
+        <li><a href="defSim.network_evolution_sim.html#defSim.network_evolution_sim.NewTiesModifier.NewTiesModifier.__init__">(defSim.network_evolution_sim.NewTiesModifier.NewTiesModifier method)</a>
+</li>
+        <li><a href="simulation.class.html#defSim.Simulation.Simulation.__init__">(defSim.Simulation.Simulation method)</a>
+</li>
+      </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="defSim.influence_sim.SimilarityAdoption.html#defSim.influence_sim.SimilarityAdoption.SimilarityAdoption._abc_impl">_abc_impl (defSim.influence_sim.SimilarityAdoption.SimilarityAdoption attribute)</a>
+
+      <ul>
+        <li><a href="defSim.influence_sim.WeightedLinear.html#defSim.influence_sim.WeightedLinear.WeightedLinear._abc_impl">(defSim.influence_sim.WeightedLinear.WeightedLinear attribute)</a>
+</li>
+      </ul></li>
+      <li><a href="defSim.influence_sim.WeightedLinear.html#defSim.influence_sim.WeightedLinear.WeightedLinear._apply_smoothing">_apply_smoothing() (defSim.influence_sim.WeightedLinear.WeightedLinear method)</a>
+</li>
+      <li><a href="defSim.influence_sim.WeightedLinear.html#defSim.influence_sim.WeightedLinear.WeightedLinear._apply_stubbornness">_apply_stubbornness() (defSim.influence_sim.WeightedLinear.WeightedLinear method)</a>
+</li>
       <li><a href="defSim.network_init.html#defSim.network_init.network_init._produce_grid_network">_produce_grid_network() (in module defSim.network_init.network_init)</a>
 </li>
       <li><a href="defSim.network_init.html#defSim.network_init.network_init._produce_networkx_graph">_produce_networkx_graph() (in module defSim.network_init.network_init)</a>
@@ -213,8 +234,6 @@
 </li>
       <li><a href="defSim.network_init.html#defSim.network_init.network_init._produce_spatial_random_graph">_produce_spatial_random_graph() (in module defSim.network_init.network_init)</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="simulation.class.html#defSim.Simulation.Simulation._run_until_convergence">_run_until_convergence() (defSim.Simulation.Simulation method)</a>
 </li>
       <li><a href="simulation.class.html#defSim.Simulation.Simulation._run_until_max_iteration">_run_until_max_iteration() (defSim.Simulation.Simulation method)</a>
@@ -229,6 +248,8 @@
 <h2 id="A">A</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="defSim.extensions.influence_sim.AcceptanceNoncommitmentRejection.html#defSim.extensions.influence_sim.AcceptanceNoncommitmentRejection.AcceptanceNoncommitmentRejection">AcceptanceNoncommitmentRejection (class in defSim.extensions.influence_sim.AcceptanceNoncommitmentRejection)</a>
+</li>
       <li><a href="defSim.agents_init.CorrelatedContinuousInitializer.html#defSim.agents_init.CorrelatedContinuousInitializer.apply_neighbor_similarity_beta_weights">apply_neighbor_similarity_beta_weights() (in module defSim.agents_init.CorrelatedContinuousInitializer)</a>
 </li>
       <li><a href="defSim.tools.html#defSim.tools.OutputMeasures.AttributeReporter">AttributeReporter (class in defSim.tools.OutputMeasures)</a>
@@ -309,60 +330,211 @@
 <h2 id="D">D</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="defSim.agents_init.html#module-defSim.agents_init.agents_init">defSim.agents_init.agents_init (module)</a>, <a href="defSim.agents_init.html#module-defSim.agents_init.agents_init">[1]</a>, <a href="defSim.agents_init.html#module-defSim.agents_init.agents_init">[2]</a>, <a href="defSim.agents_init.html#module-defSim.agents_init.agents_init">[3]</a>
+      <li>
+    defSim.agents_init.agents_init
+
+      <ul>
+        <li><a href="defSim.agents_init.html#module-0">module</a>, <a href="defSim.agents_init.html#module-1">[1]</a>, <a href="defSim.agents_init.html#module-2">[2]</a>, <a href="defSim.agents_init.html#module-defSim.agents_init.agents_init">[3]</a>
 </li>
-      <li><a href="defSim.agents_init.CorrelatedContinuousInitializer.html#module-defSim.agents_init.CorrelatedContinuousInitializer">defSim.agents_init.CorrelatedContinuousInitializer (module)</a>
+      </ul></li>
+      <li>
+    defSim.agents_init.CorrelatedContinuousInitializer
+
+      <ul>
+        <li><a href="defSim.agents_init.CorrelatedContinuousInitializer.html#module-defSim.agents_init.CorrelatedContinuousInitializer">module</a>
 </li>
-      <li><a href="defSim.agents_init.RandomCategoricalInitializer.html#module-defSim.agents_init.RandomCategoricalInitializer">defSim.agents_init.RandomCategoricalInitializer (module)</a>
+      </ul></li>
+      <li>
+    defSim.agents_init.RandomCategoricalInitializer
+
+      <ul>
+        <li><a href="defSim.agents_init.RandomCategoricalInitializer.html#module-defSim.agents_init.RandomCategoricalInitializer">module</a>
 </li>
-      <li><a href="defSim.agents_init.RandomContinuousInitializer.html#module-defSim.agents_init.RandomContinuousInitializer">defSim.agents_init.RandomContinuousInitializer (module)</a>
+      </ul></li>
+      <li>
+    defSim.agents_init.RandomContinuousInitializer
+
+      <ul>
+        <li><a href="defSim.agents_init.RandomContinuousInitializer.html#module-defSim.agents_init.RandomContinuousInitializer">module</a>
 </li>
-      <li><a href="defSim.dissimilarity_component.html#module-defSim.dissimilarity_component.dissimilarity_calculator">defSim.dissimilarity_component.dissimilarity_calculator (module)</a>, <a href="defSim.dissimilarity_component.html#module-defSim.dissimilarity_component.dissimilarity_calculator">[1]</a>
+      </ul></li>
+      <li>
+    defSim.dissimilarity_component.dissimilarity_calculator
+
+      <ul>
+        <li><a href="defSim.dissimilarity_component.html#module-0">module</a>, <a href="defSim.dissimilarity_component.html#module-defSim.dissimilarity_component.dissimilarity_calculator">[1]</a>
 </li>
-      <li><a href="defSim.dissimilarity_component.EuclideanDistance.html#module-defSim.dissimilarity_component.EuclideanDistance">defSim.dissimilarity_component.EuclideanDistance (module)</a>
+      </ul></li>
+      <li>
+    defSim.dissimilarity_component.EuclideanDistance
+
+      <ul>
+        <li><a href="defSim.dissimilarity_component.EuclideanDistance.html#module-defSim.dissimilarity_component.EuclideanDistance">module</a>
 </li>
-      <li><a href="defSim.dissimilarity_component.HammingDistance.html#module-defSim.dissimilarity_component.HammingDistance">defSim.dissimilarity_component.HammingDistance (module)</a>
+      </ul></li>
+      <li>
+    defSim.dissimilarity_component.HammingDistance
+
+      <ul>
+        <li><a href="defSim.dissimilarity_component.HammingDistance.html#module-defSim.dissimilarity_component.HammingDistance">module</a>
 </li>
-      <li><a href="experiment.class.html#module-defSim.Experiment">defSim.Experiment (module)</a>
+      </ul></li>
+      <li>
+    defSim.Experiment
+
+      <ul>
+        <li><a href="experiment.class.html#module-defSim.Experiment">module</a>
 </li>
-      <li><a href="defSim.extensions.influence_sim.Leviathan.html#module-defSim.extensions.influence_sim.Leviathan">defSim.extensions.influence_sim.Leviathan (module)</a>
+      </ul></li>
+      <li>
+    defSim.extensions.influence_sim.AcceptanceNoncommitmentRejection
+
+      <ul>
+        <li><a href="defSim.extensions.influence_sim.AcceptanceNoncommitmentRejection.html#module-defSim.extensions.influence_sim.AcceptanceNoncommitmentRejection">module</a>
 </li>
-      <li><a href="defSim.focal_agent_sim.html#module-defSim.focal_agent_sim.focal_agent_sim">defSim.focal_agent_sim.focal_agent_sim (module)</a>, <a href="defSim.focal_agent_sim.html#module-defSim.focal_agent_sim.focal_agent_sim">[1]</a>
+      </ul></li>
+      <li>
+    defSim.extensions.influence_sim.Leviathan
+
+      <ul>
+        <li><a href="defSim.extensions.influence_sim.Leviathan.html#module-defSim.extensions.influence_sim.Leviathan">module</a>
 </li>
-      <li><a href="defSim.focal_agent_sim.RandomSelector.html#module-defSim.focal_agent_sim.RandomSelector">defSim.focal_agent_sim.RandomSelector (module)</a>
+      </ul></li>
+      <li>
+    defSim.focal_agent_sim.focal_agent_sim
+
+      <ul>
+        <li><a href="defSim.focal_agent_sim.html#module-0">module</a>, <a href="defSim.focal_agent_sim.html#module-defSim.focal_agent_sim.focal_agent_sim">[1]</a>
 </li>
-      <li><a href="defSim.influence_sim.BoundedConfidence.html#module-defSim.influence_sim.BoundedConfidence">defSim.influence_sim.BoundedConfidence (module)</a>
+      </ul></li>
+      <li>
+    defSim.focal_agent_sim.RandomSelector
+
+      <ul>
+        <li><a href="defSim.focal_agent_sim.RandomSelector.html#module-defSim.focal_agent_sim.RandomSelector">module</a>
 </li>
-      <li><a href="defSim.influence_sim.html#module-defSim.influence_sim.influence_sim">defSim.influence_sim.influence_sim (module)</a>, <a href="defSim.influence_sim.html#module-defSim.influence_sim.influence_sim">[1]</a>
+      </ul></li>
+      <li>
+    defSim.influence_sim.BoundedConfidence
+
+      <ul>
+        <li><a href="defSim.influence_sim.BoundedConfidence.html#module-defSim.influence_sim.BoundedConfidence">module</a>
 </li>
-      <li><a href="defSim.influence_sim.Persuasion.html#module-defSim.influence_sim.Persuasion">defSim.influence_sim.Persuasion (module)</a>
+      </ul></li>
+      <li>
+    defSim.influence_sim.influence_sim
+
+      <ul>
+        <li><a href="defSim.influence_sim.html#module-0">module</a>, <a href="defSim.influence_sim.html#module-defSim.influence_sim.influence_sim">[1]</a>
 </li>
+      </ul></li>
+      <li>
+    defSim.influence_sim.Persuasion
+
+      <ul>
+        <li><a href="defSim.influence_sim.Persuasion.html#module-defSim.influence_sim.Persuasion">module</a>
+</li>
+      </ul></li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="defSim.influence_sim.SimilarityAdoption.html#module-defSim.influence_sim.SimilarityAdoption">defSim.influence_sim.SimilarityAdoption (module)</a>
+      <li>
+    defSim.influence_sim.SimilarityAdoption
+
+      <ul>
+        <li><a href="defSim.influence_sim.SimilarityAdoption.html#module-defSim.influence_sim.SimilarityAdoption">module</a>
 </li>
-      <li><a href="defSim.influence_sim.WeightedLinear.html#module-defSim.influence_sim.WeightedLinear">defSim.influence_sim.WeightedLinear (module)</a>
+      </ul></li>
+      <li>
+    defSim.influence_sim.WeightedLinear
+
+      <ul>
+        <li><a href="defSim.influence_sim.WeightedLinear.html#module-defSim.influence_sim.WeightedLinear">module</a>
 </li>
-      <li><a href="defSim.neighbor_selector_sim.html#module-defSim.neighbor_selector_sim.neighbor_selector_sim">defSim.neighbor_selector_sim.neighbor_selector_sim (module)</a>, <a href="defSim.neighbor_selector_sim.html#module-defSim.neighbor_selector_sim.neighbor_selector_sim">[1]</a>
+      </ul></li>
+      <li>
+    defSim.neighbor_selector_sim.neighbor_selector_sim
+
+      <ul>
+        <li><a href="defSim.neighbor_selector_sim.html#module-0">module</a>, <a href="defSim.neighbor_selector_sim.html#module-defSim.neighbor_selector_sim.neighbor_selector_sim">[1]</a>
 </li>
-      <li><a href="defSim.neighbor_selector_sim.RandomNeighborSelector.html#module-defSim.neighbor_selector_sim.RandomNeighborSelector">defSim.neighbor_selector_sim.RandomNeighborSelector (module)</a>
+      </ul></li>
+      <li>
+    defSim.neighbor_selector_sim.RandomNeighborSelector
+
+      <ul>
+        <li><a href="defSim.neighbor_selector_sim.RandomNeighborSelector.html#module-defSim.neighbor_selector_sim.RandomNeighborSelector">module</a>
 </li>
-      <li><a href="defSim.neighbor_selector_sim.SimilarNeighborSelector.html#module-defSim.neighbor_selector_sim.SimilarNeighborSelector">defSim.neighbor_selector_sim.SimilarNeighborSelector (module)</a>
+      </ul></li>
+      <li>
+    defSim.neighbor_selector_sim.SimilarNeighborSelector
+
+      <ul>
+        <li><a href="defSim.neighbor_selector_sim.SimilarNeighborSelector.html#module-defSim.neighbor_selector_sim.SimilarNeighborSelector">module</a>
 </li>
-      <li><a href="defSim.network_evolution_sim.html#module-defSim.network_evolution_sim.network_evolution_sim">defSim.network_evolution_sim.network_evolution_sim (module)</a>
+      </ul></li>
+      <li>
+    defSim.network_evolution_sim.MaslovSneppenModifier
+
+      <ul>
+        <li><a href="defSim.network_evolution_sim.html#module-defSim.network_evolution_sim.MaslovSneppenModifier">module</a>
 </li>
-      <li><a href="defSim.network_init.html#module-defSim.network_init.network_init">defSim.network_init.network_init (module)</a>, <a href="defSim.network_init.html#module-defSim.network_init.network_init">[1]</a>, <a href="defSim.network_init.html#module-defSim.network_init.network_init">[2]</a>, <a href="defSim.network_init.html#module-defSim.network_init.network_init">[3]</a>
+      </ul></li>
+      <li>
+    defSim.network_evolution_sim.network_evolution_sim
+
+      <ul>
+        <li><a href="defSim.network_evolution_sim.html#module-defSim.network_evolution_sim.network_evolution_sim">module</a>
 </li>
-      <li><a href="simulation.class.html#module-defSim.Simulation">defSim.Simulation (module)</a>
+      </ul></li>
+      <li>
+    defSim.network_evolution_sim.NewTiesModifier
+
+      <ul>
+        <li><a href="defSim.network_evolution_sim.html#module-defSim.network_evolution_sim.NewTiesModifier">module</a>
 </li>
-      <li><a href="defSim.tools.html#module-defSim.tools.ClusterExecutionScript">defSim.tools.ClusterExecutionScript (module)</a>
+      </ul></li>
+      <li>
+    defSim.network_init.network_init
+
+      <ul>
+        <li><a href="defSim.network_init.html#module-0">module</a>, <a href="defSim.network_init.html#module-1">[1]</a>, <a href="defSim.network_init.html#module-2">[2]</a>, <a href="defSim.network_init.html#module-defSim.network_init.network_init">[3]</a>
 </li>
-      <li><a href="defSim.tools.html#module-defSim.tools.CreateOutputTable">defSim.tools.CreateOutputTable (module)</a>, <a href="defSim.tools.html#module-defSim.tools.CreateOutputTable">[1]</a>
+      </ul></li>
+      <li>
+    defSim.Simulation
+
+      <ul>
+        <li><a href="simulation.class.html#module-defSim.Simulation">module</a>
 </li>
-      <li><a href="defSim.tools.html#module-defSim.tools.NetworkDistanceUpdater">defSim.tools.NetworkDistanceUpdater (module)</a>
+      </ul></li>
+      <li>
+    defSim.tools.ClusterExecutionScript
+
+      <ul>
+        <li><a href="defSim.tools.html#module-defSim.tools.ClusterExecutionScript">module</a>
 </li>
-      <li><a href="defSim.tools.html#module-defSim.tools.OutputMeasures">defSim.tools.OutputMeasures (module)</a>
+      </ul></li>
+      <li>
+    defSim.tools.CreateOutputTable
+
+      <ul>
+        <li><a href="defSim.tools.html#module-0">module</a>, <a href="defSim.tools.html#module-defSim.tools.CreateOutputTable">[1]</a>
 </li>
+      </ul></li>
+      <li>
+    defSim.tools.NetworkDistanceUpdater
+
+      <ul>
+        <li><a href="defSim.tools.html#module-defSim.tools.NetworkDistanceUpdater">module</a>
+</li>
+      </ul></li>
+      <li>
+    defSim.tools.OutputMeasures
+
+      <ul>
+        <li><a href="defSim.tools.html#module-defSim.tools.OutputMeasures">module</a>
+</li>
+      </ul></li>
       <li><a href="defSim.agents_init.CorrelatedContinuousInitializer.html#defSim.agents_init.CorrelatedContinuousInitializer.SimilarityPostprocessor.dissimilarity_data_for_node">dissimilarity_data_for_node() (defSim.agents_init.CorrelatedContinuousInitializer.SimilarityPostprocessor method)</a>
 </li>
       <li><a href="defSim.dissimilarity_component.html#defSim.dissimilarity_component.dissimilarity_calculator.DissimilarityCalculator">DissimilarityCalculator (class in defSim.dissimilarity_component.dissimilarity_calculator)</a>
@@ -467,6 +639,71 @@
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="defSim.tools.html#defSim.tools.ClusterExecutionScript.parallelSimulation.main">main() (defSim.tools.ClusterExecutionScript.parallelSimulation method)</a>
 </li>
+      <li><a href="defSim.network_evolution_sim.html#defSim.network_evolution_sim.MaslovSneppenModifier.MaslovSneppenModifier">MaslovSneppenModifier (class in defSim.network_evolution_sim.MaslovSneppenModifier)</a>
+</li>
+      <li>
+    module
+
+      <ul>
+        <li><a href="defSim.agents_init.html#module-0">defSim.agents_init.agents_init</a>, <a href="defSim.agents_init.html#module-1">[1]</a>, <a href="defSim.agents_init.html#module-2">[2]</a>, <a href="defSim.agents_init.html#module-defSim.agents_init.agents_init">[3]</a>
+</li>
+        <li><a href="defSim.agents_init.CorrelatedContinuousInitializer.html#module-defSim.agents_init.CorrelatedContinuousInitializer">defSim.agents_init.CorrelatedContinuousInitializer</a>
+</li>
+        <li><a href="defSim.agents_init.RandomCategoricalInitializer.html#module-defSim.agents_init.RandomCategoricalInitializer">defSim.agents_init.RandomCategoricalInitializer</a>
+</li>
+        <li><a href="defSim.agents_init.RandomContinuousInitializer.html#module-defSim.agents_init.RandomContinuousInitializer">defSim.agents_init.RandomContinuousInitializer</a>
+</li>
+        <li><a href="defSim.dissimilarity_component.html#module-0">defSim.dissimilarity_component.dissimilarity_calculator</a>, <a href="defSim.dissimilarity_component.html#module-defSim.dissimilarity_component.dissimilarity_calculator">[1]</a>
+</li>
+        <li><a href="defSim.dissimilarity_component.EuclideanDistance.html#module-defSim.dissimilarity_component.EuclideanDistance">defSim.dissimilarity_component.EuclideanDistance</a>
+</li>
+        <li><a href="defSim.dissimilarity_component.HammingDistance.html#module-defSim.dissimilarity_component.HammingDistance">defSim.dissimilarity_component.HammingDistance</a>
+</li>
+        <li><a href="experiment.class.html#module-defSim.Experiment">defSim.Experiment</a>
+</li>
+        <li><a href="defSim.extensions.influence_sim.AcceptanceNoncommitmentRejection.html#module-defSim.extensions.influence_sim.AcceptanceNoncommitmentRejection">defSim.extensions.influence_sim.AcceptanceNoncommitmentRejection</a>
+</li>
+        <li><a href="defSim.extensions.influence_sim.Leviathan.html#module-defSim.extensions.influence_sim.Leviathan">defSim.extensions.influence_sim.Leviathan</a>
+</li>
+        <li><a href="defSim.focal_agent_sim.html#module-0">defSim.focal_agent_sim.focal_agent_sim</a>, <a href="defSim.focal_agent_sim.html#module-defSim.focal_agent_sim.focal_agent_sim">[1]</a>
+</li>
+        <li><a href="defSim.focal_agent_sim.RandomSelector.html#module-defSim.focal_agent_sim.RandomSelector">defSim.focal_agent_sim.RandomSelector</a>
+</li>
+        <li><a href="defSim.influence_sim.BoundedConfidence.html#module-defSim.influence_sim.BoundedConfidence">defSim.influence_sim.BoundedConfidence</a>
+</li>
+        <li><a href="defSim.influence_sim.html#module-0">defSim.influence_sim.influence_sim</a>, <a href="defSim.influence_sim.html#module-defSim.influence_sim.influence_sim">[1]</a>
+</li>
+        <li><a href="defSim.influence_sim.Persuasion.html#module-defSim.influence_sim.Persuasion">defSim.influence_sim.Persuasion</a>
+</li>
+        <li><a href="defSim.influence_sim.SimilarityAdoption.html#module-defSim.influence_sim.SimilarityAdoption">defSim.influence_sim.SimilarityAdoption</a>
+</li>
+        <li><a href="defSim.influence_sim.WeightedLinear.html#module-defSim.influence_sim.WeightedLinear">defSim.influence_sim.WeightedLinear</a>
+</li>
+        <li><a href="defSim.neighbor_selector_sim.html#module-0">defSim.neighbor_selector_sim.neighbor_selector_sim</a>, <a href="defSim.neighbor_selector_sim.html#module-defSim.neighbor_selector_sim.neighbor_selector_sim">[1]</a>
+</li>
+        <li><a href="defSim.neighbor_selector_sim.RandomNeighborSelector.html#module-defSim.neighbor_selector_sim.RandomNeighborSelector">defSim.neighbor_selector_sim.RandomNeighborSelector</a>
+</li>
+        <li><a href="defSim.neighbor_selector_sim.SimilarNeighborSelector.html#module-defSim.neighbor_selector_sim.SimilarNeighborSelector">defSim.neighbor_selector_sim.SimilarNeighborSelector</a>
+</li>
+        <li><a href="defSim.network_evolution_sim.html#module-defSim.network_evolution_sim.MaslovSneppenModifier">defSim.network_evolution_sim.MaslovSneppenModifier</a>
+</li>
+        <li><a href="defSim.network_evolution_sim.html#module-defSim.network_evolution_sim.network_evolution_sim">defSim.network_evolution_sim.network_evolution_sim</a>
+</li>
+        <li><a href="defSim.network_evolution_sim.html#module-defSim.network_evolution_sim.NewTiesModifier">defSim.network_evolution_sim.NewTiesModifier</a>
+</li>
+        <li><a href="defSim.network_init.html#module-0">defSim.network_init.network_init</a>, <a href="defSim.network_init.html#module-1">[1]</a>, <a href="defSim.network_init.html#module-2">[2]</a>, <a href="defSim.network_init.html#module-defSim.network_init.network_init">[3]</a>
+</li>
+        <li><a href="simulation.class.html#module-defSim.Simulation">defSim.Simulation</a>
+</li>
+        <li><a href="defSim.tools.html#module-defSim.tools.ClusterExecutionScript">defSim.tools.ClusterExecutionScript</a>
+</li>
+        <li><a href="defSim.tools.html#module-0">defSim.tools.CreateOutputTable</a>, <a href="defSim.tools.html#module-defSim.tools.CreateOutputTable">[1]</a>
+</li>
+        <li><a href="defSim.tools.html#module-defSim.tools.NetworkDistanceUpdater">defSim.tools.NetworkDistanceUpdater</a>
+</li>
+        <li><a href="defSim.tools.html#module-defSim.tools.OutputMeasures">defSim.tools.OutputMeasures</a>
+</li>
+      </ul></li>
   </ul></td>
 </tr></table>
 
@@ -478,6 +715,8 @@
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="defSim.network_evolution_sim.html#defSim.network_evolution_sim.network_evolution_sim.NetworkModifier">NetworkModifier (class in defSim.network_evolution_sim.network_evolution_sim)</a>
+</li>
+      <li><a href="defSim.network_evolution_sim.html#defSim.network_evolution_sim.NewTiesModifier.NewTiesModifier">NewTiesModifier (class in defSim.network_evolution_sim.NewTiesModifier)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -525,9 +764,13 @@
       </ul></li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="defSim.network_evolution_sim.html#defSim.network_evolution_sim.network_evolution_sim.NetworkModifier.rewire_network">rewire_network() (defSim.network_evolution_sim.network_evolution_sim.NetworkModifier method)</a>
+      <li><a href="defSim.network_evolution_sim.html#defSim.network_evolution_sim.MaslovSneppenModifier.MaslovSneppenModifier.rewire_network">rewire_network() (defSim.network_evolution_sim.MaslovSneppenModifier.MaslovSneppenModifier method)</a>
 
       <ul>
+        <li><a href="defSim.network_evolution_sim.html#defSim.network_evolution_sim.network_evolution_sim.NetworkModifier.rewire_network">(defSim.network_evolution_sim.network_evolution_sim.NetworkModifier method)</a>
+</li>
+        <li><a href="defSim.network_evolution_sim.html#defSim.network_evolution_sim.NewTiesModifier.NewTiesModifier.rewire_network">(defSim.network_evolution_sim.NewTiesModifier.NewTiesModifier method)</a>
+</li>
         <li><a href="defSim.network_evolution_sim.html#defSim.network_evolution_sim.network_evolution_sim.rewire_network">(in module defSim.network_evolution_sim.network_evolution_sim)</a>
 </li>
       </ul></li>
@@ -571,26 +814,28 @@
 </li>
       <li><a href="defSim.influence_sim.SimilarityAdoption.html#defSim.influence_sim.SimilarityAdoption.SimilarityAdoption">SimilarityAdoption (class in defSim.influence_sim.SimilarityAdoption)</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="defSim.agents_init.CorrelatedContinuousInitializer.html#defSim.agents_init.CorrelatedContinuousInitializer.SimilarityPostprocessor">SimilarityPostprocessor (class in defSim.agents_init.CorrelatedContinuousInitializer)</a>
 </li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="defSim.neighbor_selector_sim.SimilarNeighborSelector.html#defSim.neighbor_selector_sim.SimilarNeighborSelector.SimilarNeighborSelector">SimilarNeighborSelector (class in defSim.neighbor_selector_sim.SimilarNeighborSelector)</a>
 </li>
       <li><a href="simulation.class.html#defSim.Simulation.Simulation">Simulation (class in defSim.Simulation)</a>
 </li>
-      <li><a href="defSim.extensions.influence_sim.Leviathan.html#defSim.extensions.influence_sim.Leviathan.Leviathan.spread_influence">spread_influence() (defSim.extensions.influence_sim.Leviathan.Leviathan static method)</a>
+      <li><a href="defSim.extensions.influence_sim.AcceptanceNoncommitmentRejection.html#defSim.extensions.influence_sim.AcceptanceNoncommitmentRejection.AcceptanceNoncommitmentRejection.spread_influence">spread_influence() (defSim.extensions.influence_sim.AcceptanceNoncommitmentRejection.AcceptanceNoncommitmentRejection method)</a>
 
       <ul>
+        <li><a href="defSim.extensions.influence_sim.Leviathan.html#defSim.extensions.influence_sim.Leviathan.Leviathan.spread_influence">(defSim.extensions.influence_sim.Leviathan.Leviathan static method)</a>
+</li>
         <li><a href="defSim.influence_sim.BoundedConfidence.html#defSim.influence_sim.BoundedConfidence.BoundedConfidence.spread_influence">(defSim.influence_sim.BoundedConfidence.BoundedConfidence method)</a>
+</li>
+        <li><a href="defSim.influence_sim.html#defSim.influence_sim.influence_sim.InfluenceOperator.spread_influence">(defSim.influence_sim.influence_sim.InfluenceOperator method)</a>
 </li>
         <li><a href="defSim.influence_sim.Persuasion.html#defSim.influence_sim.Persuasion.Persuasion.spread_influence">(defSim.influence_sim.Persuasion.Persuasion method)</a>
 </li>
         <li><a href="defSim.influence_sim.SimilarityAdoption.html#defSim.influence_sim.SimilarityAdoption.SimilarityAdoption.spread_influence">(defSim.influence_sim.SimilarityAdoption.SimilarityAdoption method)</a>
 </li>
         <li><a href="defSim.influence_sim.WeightedLinear.html#defSim.influence_sim.WeightedLinear.WeightedLinear.spread_influence">(defSim.influence_sim.WeightedLinear.WeightedLinear method)</a>
-</li>
-        <li><a href="defSim.influence_sim.html#defSim.influence_sim.influence_sim.InfluenceOperator.spread_influence">(defSim.influence_sim.influence_sim.InfluenceOperator method)</a>
 </li>
         <li><a href="defSim.influence_sim.html#defSim.influence_sim.influence_sim.spread_influence">(in module defSim.influence_sim.influence_sim)</a>
 </li>
@@ -625,6 +870,7 @@
 
 
            </div>
+           
           </div>
           <footer>
   
@@ -633,11 +879,19 @@
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2019-2020, Laukemper, Keijzer &amp; Bakker.
+        
+        &copy; Copyright 2019-2020, Laukemper, Keijzer &amp; Bakker
 
     </p>
   </div>
-  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
 
@@ -649,35 +903,15 @@
   </div>
   
 
-
-  
-
-    <script type="text/javascript">
-        var DOCUMENTATION_OPTIONS = {
-            URL_ROOT:'./',
-            VERSION:'alpha',
-            COLLAPSE_INDEX:false,
-            FILE_SUFFIX:'.html',
-            HAS_SOURCE:  true
-        };
-    </script>
-      <script type="text/javascript" src="_static/jquery.js"></script>
-      <script type="text/javascript" src="_static/underscore.js"></script>
-      <script type="text/javascript" src="_static/doctools.js"></script>
-      <script type="text/javascript" src="_static/language_data.js"></script>
-      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
-
-  
-
-   <script type="text/javascript" src="_static/js/theme.js"></script>
-
-  
-  
   <script type="text/javascript">
       jQuery(function () {
-          SphinxRtdTheme.StickyNav.enable();
+          SphinxRtdTheme.Navigation.enable(true);
       });
   </script>
+
+  
+  
+    
    
 
 </body>

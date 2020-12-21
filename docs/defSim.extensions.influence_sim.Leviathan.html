@@ -1,150 +1,107 @@
 
 
 <!DOCTYPE html>
-<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8">
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>defSim</title>
-  
-
-  <link rel="shortcut icon" href="favicon.ico"/>
-
+  <title>Leviathan &mdash; defSim alpha documentation</title>
   
 
   
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+
+  
+  
+    <link rel="shortcut icon" href="_static/favicon.ico"/>
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
   
     
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
 
-  
-
-  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
-
-  
-
-  
-        <link rel="index" title="Index"
-              href="genindex.html"/>
-        <link rel="search" title="Search" href="search.html"/>
-    <link rel="top" title="defSim alpha documentation" href="index.html"/>
-        <link rel="up" title="Influence (simulation component)" href="defSim.influence_sim.html"/>
-        <link rel="next" title="Network evolution (simulation component)" href="defSim.network_evolution_sim.html"/>
-        <link rel="prev" title="WeightedLinear" href="defSim.influence_sim.WeightedLinear.html"/> 
-
-  
-  <script src="_static/js/modernizr.min.js"></script>
-
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Acceptance, Non-commitment and Rejection" href="defSim.extensions.influence_sim.AcceptanceNoncommitmentRejection.html" />
+    <link rel="prev" title="WeightedLinear" href="defSim.influence_sim.WeightedLinear.html" /> 
 </head>
 
-<body class="wy-body-for-nav" role="document">
+<body class="wy-body-for-nav">
 
+   
   <div class="wy-grid-for-nav">
-
     
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
-      <div class="wy-side-scroll"  style="background-color: #252625">
-        <div class="wy-side-nav-search"  style="background-color: #252625">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #343131" >
           
+
           
-          <br> <!-- MK -->
-          <a href="index.html">
-            <img src="_static/lsst-logo-dark.svg" class="logo" />
+            <a href="index.html">
+          
+
+          
             
-            <!-- <span class="project-title">defSim</span> MK-->
+            <img src="_static/defSim-logo.png" class="logo" alt="Logo"/>
+          
           </a>
 
-          <!-- <ul class="edition-switcher">
-            <li>Edition: </li>
-            <li><a href="../v">Switch editions</a></li>
+          
             
-          </ul> MK-->
+            
+          
 
           
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
 
           
         </div>
 
-        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation" style="background-color: #252625">
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
           
             
             
-                <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="Introduction_to_defSim.html">Introduction</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="Introduction_to_defSim.html#the-unified-way">1. The Unified Way</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Introduction_to_defSim.html#the-modular-way">2. The Modular Way</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Introduction_to_defSim.html#some-useful-resources">Some useful resources</a></li>
-</ul>
-</li>
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="Introduction_to_defSim.html">Introduction</a></li>
 <li class="toctree-l1"><a class="reference internal" href="experiment.class.html">Experiment class</a></li>
 <li class="toctree-l1"><a class="reference internal" href="simulation.class.html">Simulation class</a></li>
-<li class="toctree-l1"><a class="reference internal" href="defSim.network_init.html">Networks</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="defSim.network_init.html#module-defSim.network_init.network_init">generate_network</a></li>
-<li class="toctree-l2"><a class="reference internal" href="defSim.network_init.html#module-defSim.network_init.network_init">read_network</a></li>
-<li class="toctree-l2"><a class="reference internal" href="defSim.network_init.html#module-defSim.network_init.network_init">network_generators</a></li>
-<li class="toctree-l2"><a class="reference internal" href="defSim.network_init.html#module-defSim.network_init.network_init">execute_ms_rewiring</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="defSim.agents_init.html">Agent features</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="defSim.agents_init.RandomCategoricalInitializer.html">Random Categorical Initializer</a></li>
-<li class="toctree-l2"><a class="reference internal" href="defSim.agents_init.RandomContinuousInitializer.html">Random Continuous Initializer</a></li>
-<li class="toctree-l2"><a class="reference internal" href="defSim.agents_init.CorrelatedContinuousInitializer.html">Correlated Continuous Initializer</a></li>
-<li class="toctree-l2"><a class="reference internal" href="defSim.agents_init.RandomCategoricalInitializer.html">Random Categorical Initializer</a></li>
-<li class="toctree-l2"><a class="reference internal" href="defSim.agents_init.RandomContinuousInitializer.html">Random Continuous Initializer</a></li>
-<li class="toctree-l2"><a class="reference internal" href="defSim.agents_init.CorrelatedContinuousInitializer.html">Correlated Continuous Initializer</a></li>
-<li class="toctree-l2"><a class="reference internal" href="defSim.agents_init.html#initialize-attributes">initialize_attributes</a></li>
-<li class="toctree-l2"><a class="reference internal" href="defSim.agents_init.html#module-defSim.agents_init.agents_init">set_categorical_attribute</a></li>
-<li class="toctree-l2"><a class="reference internal" href="defSim.agents_init.html#module-defSim.agents_init.agents_init">set_continuous_attribute</a></li>
-<li class="toctree-l2"><a class="reference internal" href="defSim.agents_init.html#abstract-base-class">Abstract Base Class</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="defSim.focal_agent_sim.html">Focal agent selection</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="defSim.focal_agent_sim.RandomSelector.html">Random Selector</a></li>
-<li class="toctree-l2"><a class="reference internal" href="defSim.focal_agent_sim.html#module-defSim.focal_agent_sim.focal_agent_sim">focal_agent_sim module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="defSim.focal_agent_sim.html#module-defSim.focal_agent_sim.focal_agent_sim">Abstract Base Class (ABC)</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="defSim.neighbor_selector_sim.html">Neighbor selector</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="defSim.neighbor_selector_sim.RandomNeighborSelector.html">Random Neighbor Selector</a></li>
-<li class="toctree-l2"><a class="reference internal" href="defSim.neighbor_selector_sim.SimilarNeighborSelector.html">Similar Neighbor Selector</a></li>
-<li class="toctree-l2"><a class="reference internal" href="defSim.neighbor_selector_sim.html#module-defSim.neighbor_selector_sim.neighbor_selector_sim">neighbor_selector_sim module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="defSim.neighbor_selector_sim.html#module-defSim.neighbor_selector_sim.neighbor_selector_sim">Abstract Base Class (ABC)</a></li>
-</ul>
-</li>
-<li class="toctree-l1 current"><a class="reference internal" href="defSim.influence_sim.html">Influence</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="defSim.influence_sim.BoundedConfidence.html">Bounded Confidence</a></li>
-<li class="toctree-l2"><a class="reference internal" href="defSim.influence_sim.Persuasion.html">Persuasion</a></li>
-<li class="toctree-l2"><a class="reference internal" href="defSim.influence_sim.SimilarityAdoption.html">Similarity Adoption</a></li>
-<li class="toctree-l2"><a class="reference internal" href="defSim.influence_sim.WeightedLinear.html">Weighted Linear Influence</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">Leviathan</a></li>
-<li class="toctree-l2"><a class="reference internal" href="defSim.influence_sim.html#module-defSim.influence_sim.influence_sim">influence_sim module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="defSim.influence_sim.html#module-defSim.influence_sim.influence_sim">Abstract Base Class (ABC)</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="defSim.network_evolution_sim.html">Network evolution</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="defSim.network_evolution_sim.html#module-defSim.network_evolution_sim.network_evolution_sim">network_evolution_sim module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="defSim.network_evolution_sim.html#networkhomophily">NetworkHomophily</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="defSim.dissimilarity_component.html">Dissimilarity updaters</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="defSim.dissimilarity_component.EuclideanDistance.html">Euclidean Distance</a></li>
-<li class="toctree-l2"><a class="reference internal" href="defSim.dissimilarity_component.HammingDistance.html">Hamming Distance</a></li>
-<li class="toctree-l2"><a class="reference internal" href="defSim.dissimilarity_component.html#module-defSim.dissimilarity_component.dissimilarity_calculator">select_calculator</a></li>
-<li class="toctree-l2"><a class="reference internal" href="defSim.dissimilarity_component.html#abstract-base-class-abc">Abstract Base Class (ABC)</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="defSim.tools.html">Tools</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="defSim.tools.html#module-defSim.tools.CreateOutputTable">CreateOutputTable</a></li>
-<li class="toctree-l2"><a class="reference internal" href="defSim.tools.html#abc-of-createoutputtable">ABC of CreateOutputTable</a></li>
-<li class="toctree-l2"><a class="reference internal" href="defSim.tools.html#module-defSim.tools.OutputMeasures">OutputMeasures</a></li>
-<li class="toctree-l2"><a class="reference internal" href="defSim.tools.html#module-defSim.tools.NetworkDistanceUpdater">NetworkDistanceUpdater</a></li>
-<li class="toctree-l2"><a class="reference internal" href="defSim.tools.html#module-defSim.tools.ClusterExecutionScript">ClusterExecutionScript</a></li>
-</ul>
-</li>
+<li class="toctree-l1"><a class="reference internal" href="defSim.network_init.html">Networks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="defSim.agents_init.html">Agent features</a></li>
+<li class="toctree-l1"><a class="reference internal" href="defSim.focal_agent_sim.html">Focal agent selection</a></li>
+<li class="toctree-l1"><a class="reference internal" href="defSim.neighbor_selector_sim.html">Neighbor selector</a></li>
+<li class="toctree-l1"><a class="reference internal" href="defSim.influence_sim.html">Influence</a></li>
+<li class="toctree-l1"><a class="reference internal" href="defSim.network_evolution_sim.html">Network evolution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="defSim.dissimilarity_component.html">Dissimilarity updaters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="defSim.tools.html">Tools</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="defSim.extensions.html">Extensions</a><ul class="current">
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Leviathan</a></li>
+<li class="toctree-l2"><a class="reference internal" href="defSim.extensions.influence_sim.AcceptanceNoncommitmentRejection.html">AcceptanceNoncommitmentRejection</a></li>
 <li class="toctree-l2"><a class="reference internal" href="defSim.extensions.html#submitting-a-module">Submitting a module</a></li>
 </ul>
 </li>
@@ -154,42 +111,79 @@
             
           
         </div>
+        
       </div>
     </nav>
 
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
 
       
-      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
-        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-        <a href="index.html">defSim</a>
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">defSim</a>
+        
       </nav>
 
 
-      
       <div class="wy-nav-content">
+        
         <div class="rst-content">
-          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
-            <!-- <div class="dd-masthead">
-  <h1 class="dd-title">defSim</h1>
-  <ul class="dd-authors">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="defSim.influence_sim.html">Influence (simulation component)</a> &raquo;</li>
+        
+      <li>Leviathan</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/defSim.extensions.influence_sim.Leviathan.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
     
   </ul>
-  <p>Latest Revision: <a href="#change-record"></a></p>
-</div> --> <!-- turned off on 21/10/2019 -->
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
   <div class="section" id="leviathan">
 <h1>Leviathan<a class="headerlink" href="#leviathan" title="Permalink to this headline">¶</a></h1>
 <p>An example of the Leviathan function can be found here:
 <a class="reference external" href="https://github.com/defSim/defSim-examples/blob/master/Leviathan.ipynb">Leviathan Example</a></p>
-<span class="target" id="module-defSim.extensions.influence_sim.Leviathan"></span><dl class="class">
+<span class="target" id="module-defSim.extensions.influence_sim.Leviathan"></span><dl class="py class">
 <dt id="defSim.extensions.influence_sim.Leviathan.Leviathan">
-<em class="property">class </em><code class="sig-prename descclassname">defSim.extensions.influence_sim.Leviathan.</code><code class="sig-name descname">Leviathan</code><span class="sig-paren">(</span><em class="sig-param">regime: str</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#defSim.extensions.influence_sim.Leviathan.Leviathan" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">defSim.extensions.influence_sim.Leviathan.</code><code class="sig-name descname">Leviathan</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">regime</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#defSim.extensions.influence_sim.Leviathan.Leviathan" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="defSim.influence_sim.html#defSim.influence_sim.influence_sim.InfluenceOperator" title="defSim.influence_sim.influence_sim.InfluenceOperator"><code class="xref py py-class docutils literal notranslate"><span class="pre">defSim.influence_sim.influence_sim.InfluenceOperator</span></code></a></p>
-<dl class="method">
+<dl class="py method">
 <dt id="defSim.extensions.influence_sim.Leviathan.Leviathan.influence">
-<em class="property">static </em><code class="sig-name descname">influence</code><span class="sig-paren">(</span><em class="sig-param">network: networkx.classes.graph.Graph</em>, <em class="sig-param">ai: int</em>, <em class="sig-param">aj: int</em>, <em class="sig-param">noise: float</em>, <em class="sig-param">gossip: int</em>, <em class="sig-param">sigma: float</em>, <em class="sig-param">vanity: float</em>, <em class="sig-param">propagation: float</em><span class="sig-paren">)</span><a class="headerlink" href="#defSim.extensions.influence_sim.Leviathan.Leviathan.influence" title="Permalink to this definition">¶</a></dt>
+<em class="property">static </em><code class="sig-name descname">influence</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">network</span><span class="p">:</span> <span class="n">networkx.classes.graph.Graph</span></em>, <em class="sig-param"><span class="n">ai</span><span class="p">:</span> <span class="n">int</span></em>, <em class="sig-param"><span class="n">aj</span><span class="p">:</span> <span class="n">int</span></em>, <em class="sig-param"><span class="n">noise</span><span class="p">:</span> <span class="n">float</span></em>, <em class="sig-param"><span class="n">gossip</span><span class="p">:</span> <span class="n">int</span></em>, <em class="sig-param"><span class="n">sigma</span><span class="p">:</span> <span class="n">float</span></em>, <em class="sig-param"><span class="n">vanity</span><span class="p">:</span> <span class="n">float</span></em>, <em class="sig-param"><span class="n">propagation</span><span class="p">:</span> <span class="n">float</span></em><span class="sig-paren">)</span><a class="headerlink" href="#defSim.extensions.influence_sim.Leviathan.Leviathan.influence" title="Permalink to this definition">¶</a></dt>
 <dd><p>The method of influence of the Leviathan model, called in spread_influence. The agent aj influence the opinion of ai.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -210,9 +204,9 @@ The influence function itself can still be a function of the “Sex” attribute
 </dl>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="defSim.extensions.influence_sim.Leviathan.Leviathan.spread_influence">
-<em class="property">static </em><code class="sig-name descname">spread_influence</code><span class="sig-paren">(</span><em class="sig-param">network: networkx.classes.graph.Graph, agent_i: int, agents_j: List[int], regime: str, dissimilarity_measure: defSim.dissimilarity_component.dissimilarity_calculator.DissimilarityCalculator, attributes: List[str] = None, **kwargs</em><span class="sig-paren">)</span> &#x2192; bool<a class="headerlink" href="#defSim.extensions.influence_sim.Leviathan.Leviathan.spread_influence" title="Permalink to this definition">¶</a></dt>
+<em class="property">static </em><code class="sig-name descname">spread_influence</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">network</span><span class="p">:</span> <span class="n">networkx.classes.graph.Graph</span></em>, <em class="sig-param"><span class="n">agent_i</span><span class="p">:</span> <span class="n">int</span></em>, <em class="sig-param"><span class="n">agents_j</span><span class="p">:</span> <span class="n">List<span class="p">[</span>int<span class="p">]</span></span></em>, <em class="sig-param"><span class="n">regime</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="n">dissimilarity_measure</span><span class="p">:</span> <span class="n"><a class="reference internal" href="defSim.dissimilarity_component.html#defSim.dissimilarity_component.dissimilarity_calculator.DissimilarityCalculator" title="defSim.dissimilarity_component.dissimilarity_calculator.DissimilarityCalculator">defSim.dissimilarity_component.dissimilarity_calculator.DissimilarityCalculator</a></span></em>, <em class="sig-param"><span class="n">attributes</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span>List<span class="p">[</span>str<span class="p">]</span><span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span> &#x2192; bool<a class="headerlink" href="#defSim.extensions.influence_sim.Leviathan.Leviathan.spread_influence" title="Permalink to this definition">¶</a></dt>
 <dd><p>The Leviathan model combines processes of vanity and opinion propagation.
 Each agent has an opinion about herself and about each other agent.
 The model assume that how strongly agents influence each other is dependent on the hierarchy between them.
@@ -221,7 +215,7 @@ Moreover, each individual is subject to vanity : if her interlocutor seems to va
 then she increases her opinion about this interlocutor. On the contrary she tends to decrease her opinion
 about those who seem to undervalue her.
 The model only exist in the one-to-one communication regime, with a bi-directional influence.</p>
-<p>Based on: Deffuant, G., Carletti, T., &amp; Huet, S. (2013). The Leviathan Model: Absolute dominance, generalised distrust, small worlds and other patterns emerging from combining vanity with opinion propagation. JASSS-The Journal of Artificial Societies and Social Simulation, 16(1), 32.</p>
+<p>Based on <a class="reference internal" href="#deffuant2013" id="id1"><span>[Deffuant2013]</span></a></p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
@@ -245,19 +239,28 @@ single entry, implementing one-to-one communication.</p></li>
 
 </dd></dl>
 
+<p><strong>References</strong></p>
+<dl class="citation">
+<dt class="label" id="deffuant2013"><span class="brackets"><a class="fn-backref" href="#id1">Deffuant2013</a></span></dt>
+<dd><p>Deffuant, G., Carletti, T., &amp; Huet, S. (2013). The Leviathan Model: Absolute dominance, generalised
+distrust, small worlds and other patterns emerging from combining vanity with opinion propagation. The Journal of
+Artificial Societies and Social Simulation, 16(1), 32.</p>
+</dd>
+</dl>
 </div>
 
 
            </div>
+           
           </div>
           <footer>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="defSim.network_evolution_sim.html" class="btn btn-neutral float-right" title="Network evolution (simulation component)" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="defSim.extensions.influence_sim.AcceptanceNoncommitmentRejection.html" class="btn btn-neutral float-right" title="Acceptance, Non-commitment and Rejection" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="defSim.influence_sim.WeightedLinear.html" class="btn btn-neutral" title="WeightedLinear" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="defSim.influence_sim.WeightedLinear.html" class="btn btn-neutral float-left" title="WeightedLinear" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -266,11 +269,19 @@ single entry, implementing one-to-one communication.</p></li>
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2019-2020, Laukemper, Keijzer &amp; Bakker.
+        
+        &copy; Copyright 2019-2020, Laukemper, Keijzer &amp; Bakker
 
     </p>
   </div>
-  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
 
@@ -282,35 +293,15 @@ single entry, implementing one-to-one communication.</p></li>
   </div>
   
 
-
-  
-
-    <script type="text/javascript">
-        var DOCUMENTATION_OPTIONS = {
-            URL_ROOT:'./',
-            VERSION:'alpha',
-            COLLAPSE_INDEX:false,
-            FILE_SUFFIX:'.html',
-            HAS_SOURCE:  true
-        };
-    </script>
-      <script type="text/javascript" src="_static/jquery.js"></script>
-      <script type="text/javascript" src="_static/underscore.js"></script>
-      <script type="text/javascript" src="_static/doctools.js"></script>
-      <script type="text/javascript" src="_static/language_data.js"></script>
-      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
-
-  
-
-   <script type="text/javascript" src="_static/js/theme.js"></script>
-
-  
-  
   <script type="text/javascript">
       jQuery(function () {
-          SphinxRtdTheme.StickyNav.enable();
+          SphinxRtdTheme.Navigation.enable(true);
       });
   </script>
+
+  
+  
+    
    
 
 </body>
