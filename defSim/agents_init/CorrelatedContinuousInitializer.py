@@ -139,7 +139,7 @@ class CorrelatedContinuousInitializer(AttributesInitializer):
 
         if self.postprocessing_iterations == 'convergence' or self.postprocessing_iterations > 0:            
             similarity_postprocessor = SimilarityPostprocessor(network, self.dissimilarity_criterion, feature_names,
-                                                               neighbor_similarity_feature)
+                                                               self.neighbor_similarity_feature)
             similarity_postprocessor.process(self.postprocessing_iterations)
 
 
