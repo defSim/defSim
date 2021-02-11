@@ -69,7 +69,7 @@ class parallelSimulation:
                                 communication_regime=parameter_dict["communication_regime"],
                                 parameter_dict=parameter_dict
                                 )
-        return simulation.run_simulation()
+        return simulation.run()
 
 
 if __name__ == '__main__':

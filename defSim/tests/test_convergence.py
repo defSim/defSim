@@ -13,13 +13,13 @@ class TestConvergence(TestCase):
         self.simulation.max_iterations = 10
         self.simulation.stop_condition = 'max_iteration'
 
-        results = self.simulation.run_simulation()
+        results = self.simulation.run()
         print(results)
 
     def test_pragmatic_convergence(self):
         self.simulation.max_iterations = 4000
         self.simulation.stop_condition = 'pragmatic_convergence'
-        results = self.simulation.run_simulation()
+        results = self.simulation.run()
         print(results)
         assert(results['Ticks'][0] < self.simulation.max_iterations)
 
@@ -27,7 +27,7 @@ class TestConvergence(TestCase):
         self.simulation.max_iterations = 4000
         self.simulation.stop_condition = 'strict_convergence'
         self.simulation.parameter_dict['threshold'] = 0.5
-        results = self.simulation.run_simulation()
+        results = self.simulation.run()
         print(results)
         assert(results['Ticks'][0] < self.simulation.max_iterations)
 
@@ -35,7 +35,7 @@ class TestConvergence(TestCase):
         self.simulation.max_iterations = 4000
         self.simulation.stop_condition = OpinionDistanceConvergenceCheck(threshold = 0.5)
         self.simulation.parameter_dict = {'confidence_bound': 0.5}
-        results = self.simulation.run_simulation()
+        results = self.simulation.run()
         print(results)
         assert(results['Ticks'][0] < self.simulation.max_iterations)                    
 

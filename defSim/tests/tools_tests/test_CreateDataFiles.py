@@ -35,7 +35,7 @@ class TestCreateDataFilesWithSimData(TestCase):
 
     def test_file_creation(self):
         # run simulation
-        output_data = self.sim.run_simulation()
+        output_data = self.sim.run()
 
         # create (if no excel writer is installed, skip excel)
         try:
@@ -53,7 +53,7 @@ class TestCreateDataFilesWithSimData(TestCase):
 
     def test_file_creation_from_sim(self):
         self.sim = Simulation(output_folder_path = "./output/fromsim", output_file_types = ['pickle', 'csv', 'json', 'stata'], tickwise = ['f01'])
-        self.sim.run_simulation()
+        self.sim.run()
 
 class TestCreateDataFilesWithExperimentData(TestCase):
     def test_file_creation(self):

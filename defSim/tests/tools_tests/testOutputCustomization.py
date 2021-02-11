@@ -48,7 +48,7 @@ simulation = Simulation(
                     output_realizations = [PolarizationReporter]
                     )
 
-print(simulation.run_simulation())
+print(simulation.run())
 
 experiment = Experiment(
                     topology = 'grid',

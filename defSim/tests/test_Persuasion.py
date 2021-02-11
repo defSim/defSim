@@ -7,4 +7,4 @@ class TestPersuasion(TestCase):
         simulation = Simulation(influence_function="persuasion",
                                 max_iterations=100,
                                 communication_regime="one-to-one")
-        simulation.run_simulation()
+        simulation.run()

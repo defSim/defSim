@@ -141,7 +141,7 @@ class Simulation:
 
         return parameter_df
 
-    def run_simulation(self, initialize: bool = True) -> pd.DataFrame:
+    def run(self, initialize: bool = True) -> pd.DataFrame:
         """
         This method initializes the network if none is given, initializes the attributes of the agents, and also
         computes and sets the distances between each neighbor.
@@ -154,7 +154,7 @@ class Simulation:
 
         """
         if initialize:
-            self.initialize_simulation()
+            self.initialize()
 
         if self.influence_function == 'list':
             self.influence_function = self.parameter_dict['influence_function']
@@ -172,7 +172,16 @@ class Simulation:
 
         return self.create_output_table()
 
-    def initialize_simulation(self):
+    def run_simulation(self, initialize: bool = True) -> pd.DataFrame:
+        """
+        Will be deprecated in favor of Simulation.run().
+        Replace in code, will be removed at or before v1.0.0
+        """
+
+        warnings.warn("Simulation.run_simulation() is replaced by Simulation.run() and will be deprecated at or before defSim v1.0.0", category=FutureWarning)
+        return self.run(initialize=initialize)
+
+    def initialize(self):
         """
         This method initializes the network if none is given, applies network modifiers, initializes the attributes of the agents, 
         and also computes and sets the distances between each neighbor.
@@ -221,7 +230,17 @@ class Simulation:
         # initialization of distances between neighbors
         self.dissimilarity_calculator.calculate_dissimilarity_networkwide(self.network)
 
-    def run_simulation_step(self):
+    def initialize_simulation(self):
+        """
+        Will be deprecated in favor of Simulation.initialize().
+        Replace in code, will be removed at or before v1.0.0
+        """
+
+        warnings.warn("Simulation.initialize_simulation() is replaced by Simulation.initialize() and will be deprecated at or before defSim v1.0.0", category=FutureWarning)
+        return self.initialize()
+
+
+    def run_step(self):
         """
         Executes one iteration of the simulation step which includes the selection of a focal agent, the selection
         of the neighbors and the influence step.
@@ -259,6 +278,15 @@ class Simulation:
         self.time_steps += 1
         if success:
             self.influence_steps += 1
+            
+    def run_simulation_step(self):
+        """
+        Will be deprecated in favor of Simulation.run_step().
+        Replace in code, will be removed at or before v1.0.0
+        """
+
+        warnings.warn("Simulation.run_simulation_step() is replaced by Simulation.run_step() and will be deprecated at or before defSim v1.0.0", category=FutureWarning)
+        return self.run_step()
 
     def create_output_table(self) -> pd.DataFrame:
         """
@@ -316,7 +344,7 @@ class Simulation:
         stop_condition = PragmaticConvergenceCheck(initial_network = self.network.copy())
 
         while 1:
-            self.run_simulation_step()
+            self.run_step()
             if self.time_steps >= self.max_iterations:
                 break
             if self.time_steps % step_size == 0:
@@ -344,7 +372,7 @@ class Simulation:
         stop_condition = OpinionDistanceConvergenceCheck(threshold = threshold)
         
         while 1:
-            self.run_simulation_step()
+            self.run_step()
             if self.time_steps >= self.max_iterations:
                 break
             if self.time_steps % step_size == 0:
@@ -366,7 +394,7 @@ class Simulation:
             step_size = 100
 
         while 1:
-            self.run_simulation_step()
+            self.run_step()
             if self.time_steps >= self.max_iterations:
                 break
             if self.time_steps % step_size == 0:
@@ -375,4 +403,4 @@ class Simulation:
 
     def _run_until_max_iteration(self):
         for iteration in range(self.max_iterations):
-            self.run_simulation_step()
+            self.run_step()

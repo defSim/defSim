@@ -10,8 +10,8 @@ simulationB = Simulation(topology="grid",
                                     influence_function="axelrod",
                                     stop_condition="strict_convergence",
                                     seed = 888888)
-print(simulationA.run_simulation())
-print(simulationB.run_simulation())
+print(simulationA.run())
+print(simulationB.run())
 
 print("### two simulations with strict convergence and random seed ###")
 simulation1 = Simulation(topology="grid",
@@ -22,8 +22,8 @@ simulation2 = Simulation(topology="grid",
                                     influence_function="axelrod",
                                     stop_condition="strict_convergence",
                                     seed=None)
-print(simulation1.run_simulation())
-print(simulation2.run_simulation())
+print(simulation1.run())
+print(simulation2.run())
 
 print("### two simulations with pragmatic convergence and random seed, to test whether the two methods actually produce"
       " the same result ### ")
@@ -35,8 +35,8 @@ simulation4 = Simulation(topology="grid",
                                     influence_function="axelrod",
                                     stop_condition="pragmatic_convergence",
                                     seed=None)
-print(simulation3.run_simulation())
-print(simulation4.run_simulation())
+print(simulation3.run())
+print(simulation4.run())
 
 print("### Two experiments, each three repetitions, without seed ###")
 experiment1 = Experiment(stop_condition="strict_convergence", repetitions=3)

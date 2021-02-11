@@ -18,7 +18,7 @@ simulation = Simulation(topology="grid", influence_function="axelrod", stop_cond
                                                                            "num_features": 7,
                                                                            "num_traits": 15},
                         max_iterations=100)
-results = simulation.run_simulation()
+results = simulation.run()
 with open("output_test.csv", "w+") as output_file:
     results.to_csv(output_file, sep=";", index=False)
 print("results written to: %s" % os.path.abspath("output_test.csv"))
@@ -31,7 +31,7 @@ simulation = Simulation(topology="grid", influence_function="axelrod", stop_cond
                                                                            "num_traits": 15},
                         tickwise = ['Isolates', TestCustomOutput, 'f02'],
                         max_iterations=100)
-results = simulation.run_simulation()
+results = simulation.run()
 with open("tickwise_output_test.csv", "w+") as output_file:
     results.to_csv(output_file, sep=";", index=False)
 print("results written to: %s" % os.path.abspath("output_test.csv"))

@@ -90,12 +90,12 @@ simulation49 = Simulation(topology="grid",influence_function="axelrod",stop_cond
 random.seed("random")
 def timeSimulationOneToOne49():
     for i in range(100):
-        simulation49.run_simulation()
+        simulation49.run()
 
 simulation5000 = Simulation(topology="grid", influence_function="axelrod",stop_condition="max_iteration", parameter_dict={"num_agents":5000})
 def timeSimulationOneToOne5000():
     for i in range(1):
-        simulation5000.run_simulation()
+        simulation5000.run()
 
 
 #print("100 full simulation with a network with 49 agents and one-to-one communication take %f seconds" %(timeit.timeit(timeSimulationOneToOne49, number=1)))
@@ -105,12 +105,12 @@ simulation49 = Simulation(topology="grid", influence_function="stochasticOverlap
 random.seed("random")
 def timeSimulationOneToOne49():
     for i in range(100):
-        simulation49.run_simulation()
+        simulation49.run()
 random.seed("random")
 simulation5000 = Simulation(topology="grid", influence_function="stochasticOverlap", stop_condition="strict_convergence", parameter_dict={"num_agents":5000})
 def timeSimulationOneToOne5000():
     for i in range(1):
-        simulation5000.run_simulation()
+        simulation5000.run()
 
 #print("100 full simulation with a network with 49 agents and one-to-one communication take %f seconds" %(timeit.timeit(timeSimulationOneToOne49, number=1)))
 #print("1 full simulation with a network with 5000 agents and one-to-one communication take %f seconds" %(timeit.timeit(timeSimulationOneToOne5000, number=1)))
@@ -143,14 +143,14 @@ simulation49 = Simulation(topology="grid", influence_function="stochasticOverlap
 random.seed("random")
 def timeSimulationOneToMany49():
     for i in range(100):
-        simulation49.run_simulation()
+        simulation49.run()
 
 
 
 simulation5000 = Simulation(topology="grid", influence_function="stochasticOverlap", stop_condition="strict_convergence", parameter_dict={"num_agents":5000},communication_regime="one-to-many")
 def timeSimulationOneToMany5000():
     for i in range(1):
-        simulation5000.run_simulation()
+        simulation5000.run()
 
 #print("100 full simulation with a network with 49 agents and one-to-many communication take %f seconds" %(timeit.timeit(timeSimulationOneToMany49, number=1)))
 #print("1 full simulation with a network with 5000 agents and one-to-many communication take %f seconds" %(timeit.timeit(timeSimulationOneToMany5000, number=1)))

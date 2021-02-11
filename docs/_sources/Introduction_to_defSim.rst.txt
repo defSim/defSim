@@ -141,7 +141,7 @@ complete graph network.
                            max_iterations=1000,
                            parameter_dict={'n':20,
                            'confidence_level':.8})
-    simrun.run_simulation()
+    simrun.run()
 
 
 

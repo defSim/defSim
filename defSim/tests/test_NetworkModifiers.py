@@ -54,4 +54,4 @@ class TestNetworkInitializationModifiers(TestCase):
                 'ms_rewiring': 0.1
                 }
                 )
-            sim.initialize_simulation()                    
+            sim.initialize()

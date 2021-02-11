@@ -17,7 +17,7 @@ print(results)
 
 #creating a Simulation
 simulation = defSim.Simulation()
-results = simulation.run_simulation()
+results = simulation.run()
 print(results)
 
 # creating a Simulation with your own influence function and running it step by step
@@ -30,9 +30,9 @@ class my_influence_function(defSim.InfluenceOperator):
         pass
 
 simulation = defSim.Simulation(influence_function=my_influence_function())
-simulation.initialize_simulation()
+simulation.initialize()
 for i in range(100):
-    simulation.run_simulation_step()
+    simulation.run_step()
 results = simulation.create_output_table()
 
 # using the building blocks manually with the respective factory methods

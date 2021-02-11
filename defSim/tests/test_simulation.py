@@ -20,5 +20,5 @@ class TestSimulation(TestCase):
                                 influence_function=influence_component,
                                 dissimilarity_measure=dissimilarity_measure,
                                 communication_regime="one-to-many")
-        pdf = simulation.run_simulation()
+        pdf = simulation.run()
         print(pdf)

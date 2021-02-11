@@ -32,7 +32,7 @@ def call_simulation_run(simulation):
     Utility function to enable running predefined simulations
     using multiprocessing.
     """
-    return simulation.run_simulation()
+    return simulation.run()
 
 
 class Experiment:
@@ -216,12 +216,12 @@ class Experiment:
                                ))
 
         # Setup each simulation and record mean setup time
-        sampled_setup_times = [timeit.timeit(lambda: sim.initialize_simulation(), number=1) for sim in
+        sampled_setup_times = [timeit.timeit(lambda: sim.initialize(), number=1) for sim in
                                simulations_to_run]
         mean_setup_time = np.mean(sampled_setup_times)
 
         # Execute single steps of each simulation (sample_steps times per simulation) and record mean time per step
-        sampled_execution_times = [timeit.timeit(lambda: sim.run_simulation_step(), number=sample_steps) for sim in
+        sampled_execution_times = [timeit.timeit(lambda: sim.run_step(), number=sample_steps) for sim in
                                    simulations_to_run]
         mean_execution_time = np.mean(sampled_execution_times) / sample_steps
 
@@ -297,7 +297,7 @@ class Experiment:
                     create_data_files(output_table = results_dataframe, realizations = self.output_file_types, output_folder_path = self.output_folder_path)                
                 return results_dataframe
             else:  # if NOT parallel
-                result_list = [sim.run_simulation() for sim in self.simulations]
+                result_list = [sim.run() for sim in self.simulations]
                 results_dataframe = pd.concat(result_list).reset_index()
                 if self.output_folder_path is not None:
                     create_data_files(output_table = results_dataframe, realizations = self.output_file_types, output_folder_path = self.output_folder_path)                
@@ -426,7 +426,7 @@ class Experiment:
                                 tickwise=self.tickwise,
                                 seed=parameter_dict['seed']
                                 )
-        return simulation.run_simulation()
+        return simulation.run()
 
     def _create_parameter_dictionaries(self) -> List[dict]:
         """
