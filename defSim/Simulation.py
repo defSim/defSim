@@ -278,7 +278,7 @@ class Simulation:
         self.time_steps += 1
         if success:
             self.influence_steps += 1
-            
+
     def run_simulation_step(self):
         """
         Will be deprecated in favor of Simulation.run_step().

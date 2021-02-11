@@ -2,6 +2,7 @@ import numpy as np
 import networkx as nx
 import random
 import warnings
+import defSim as ds
 from defSim.network_evolution_sim.MaslovSneppenModifier import MaslovSneppenModifier
 
 
@@ -44,7 +45,7 @@ def generate_network(name: str, network_modifiers = None, **kwargs) -> nx.Graph:
 
     if network_modifiers is not None:
         for modifier in network_modifiers:
-            modifier.rewire_network(network)
+            ds.network_evolution_sim.rewire_network(network, realization=modifier)
 
     return network
 

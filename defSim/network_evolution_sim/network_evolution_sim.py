@@ -42,5 +42,7 @@ def rewire_network(network: nx.Graph, realization: str, **kwargs):
     elif realization == "new_ties":
         new_ties_probability = kwargs.get('new_ties_probability', None)
         NewTiesModifier(new_ties_probability = new_ties_probability).rewire_network(network, **kwargs)
+    elif isinstance(realization, NetworkModifier):
+        realization.rewire_network(network)
     else:
-        raise ValueError("Can only select from the options ['maslov_sneppen']")
+        raise ValueError("Can only select from the options ['maslov_sneppen', 'new_ties'] or provide an instance of NetworkModifier")
