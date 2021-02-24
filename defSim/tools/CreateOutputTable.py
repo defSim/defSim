@@ -50,7 +50,7 @@ def create_output_table(network: nx.Graph, realizations=None, colnames=None,
         * Isolates: Reports the number of isolates as found in the ClusterFinder method, based on minimal allowed
           distance between network network neighbors as defined by the user in the kwargs dictionary. Default is to
           return the same output as the Regions realization
-        * Homogeneity:
+        * Homogeneity: Size of the largest cluster divided by the number of agents
         * AverageDistance: Reports average distance between connected agents, based on dissimilarity calculated during
           simulation.
         * AverageOpinion: Reports average opinion (requires a list of features for which this needs to be calculated if
@@ -94,14 +94,14 @@ def create_output_table(network: nx.Graph, realizations=None, colnames=None,
     ## workaround to call the ClusterFinder method only once
     cluster_dissimilarity_threshold = kwargs.get('cluster_dissimilarity_threshold', 0)
     strict_zones = kwargs.get('strict_zones', False)
-    if any([i in realizations for i in ["ClusterFinder", "ClusterFinderList", "Basic", "Isolates", "Homogeneity"]]):
+    if any([i in realizations for i in ["Clusters", "ClusterList", "Basic", "Isolates", "Homogeneity"]]):
         clusterlist = ClusterFinder(cluster_dissimilarity_threshold=cluster_dissimilarity_threshold, strict_zones=strict_zones).create_output(network, **kwargs)
 
     # Output related to clustering
-    if "ClusterFinderList" in realizations:
-        output['ClusterFinderList'] = clusterlist
+    if "ClusterList" in realizations:
+        output['ClusterList'] = clusterlist
     if "ClusterFinder" in realizations:
-        output['ClusterFinder'] = len(clusterlist)
+        output['Clusters'] = len(clusterlist)
     if "RegionsList" in realizations:
         output['RegionsList'] = ClusterFinder().create_output(network)
     if any([i in realizations for i in ["Regions", "Basic"]]):
