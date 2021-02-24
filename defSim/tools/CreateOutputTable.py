@@ -92,8 +92,10 @@ def create_output_table(network: nx.Graph, realizations=None, colnames=None,
 
     # Create default outputs (called by name)
     ## workaround to call the ClusterFinder method only once
+    cluster_dissimilarity_threshold = kwargs.get('cluster_dissimilarity_threshold', 0)
+    strict_zones = kwargs.get('strict_zones', False)
     if any([i in realizations for i in ["ClusterFinder", "ClusterFinderList", "Basic", "Isolates", "Homogeneity"]]):
-        clusterlist = ClusterFinder().create_output(network, **kwargs)
+        clusterlist = ClusterFinder(cluster_dissimilarity_threshold=cluster_dissimilarity_threshold, strict_zones=strict_zones).create_output(network, **kwargs)
 
     # Output related to clustering
     if "ClusterFinderList" in realizations:
