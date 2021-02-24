@@ -33,7 +33,7 @@ class TestConvergence(TestCase):
 
     def test_convergence_instance(self):
         self.simulation.max_iterations = 4000
-        self.simulation.stop_condition = OpinionDistanceConvergenceCheck(threshold = 0.5)
+        self.simulation.stop_condition = OpinionDistanceConvergenceCheck(maximum= 0.5)
         self.simulation.parameter_dict = {'confidence_bound': 0.5}
         results = self.simulation.run()
         print(results)

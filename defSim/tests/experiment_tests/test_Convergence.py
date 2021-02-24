@@ -22,7 +22,7 @@ print("Time: "+str(timeit.timeit(test_isomorphic, number=1)))
 
 def test_dissimilarity_check():
     for i in range(10000):
-        NetworkDistanceUpdater.check_dissimilarity(network,0)
+        NetworkDistanceUpdater.check_dissimilarity(network,1)
 
 print("10000 dissimilarity checks")
 print("Time: "+str(timeit.timeit(test_dissimilarity_check, number=1)))

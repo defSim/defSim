@@ -58,15 +58,17 @@ class OpinionDistanceConvergenceCheck(ConvergenceCheck):
     in the network. Unless there is no single pair left that can theoretically influence each other, the simulation
     continues.
 
-    :param float=0.0 threshold: A value between 0 and 1 that determines at what distance two agents can't influence each other anymore.
+    :param float maximum: A value that determines above what maximum distance two agents can't influence each other anymore.
+    :param float=0.0 minimum: A value that determines below what minimum distance two agents can't influence each other anymore.
     """
 
-    def __init__(self, threshold):
-        self.threshold = threshold   
+    def __init__(self, maximum: float, minimum: float = 0):
+        self.maximum = maximum
+        self.minimum = minimum
 
     def check_convergence(self, network: nx.Graph, **kwargs) -> bool:
         """
-        This method receives a NetworkX object checks whether any pair of agents is within the specified
+        This method receives a NetworkX object and checks whether any pair of agents is within the specified
         opinion distance from each other, indicating that they could theoretically be influenced.
 
         :param network: A NetworkX graph object.
@@ -74,5 +76,7 @@ class OpinionDistanceConvergenceCheck(ConvergenceCheck):
         :returns: True if converged according to specified criteria, else False. 
         """
 
-        return not NetworkDistanceUpdater.check_dissimilarity(network, self.threshold)
+        # check_dissimilarity returns True if any agents can be influenced
+        # invert to return True if no agents can be influenced
+        return not NetworkDistanceUpdater.check_dissimilarity(network, maximum=self.maximum, minimum=self.minimum)
                      
