@@ -333,7 +333,8 @@ class Simulation:
         results = CreateOutputTable.create_output_table(network=self.network,
                                                         realizations=self.output_realizations,
                                                         settings_dict=parameter_settings,
-                                                        tickwise_output=self.tickwise_output)
+                                                        tickwise_output=self.tickwise_output,
+                                                        **self.parameter_dict)
 
         results_dataframe = pd.DataFrame.from_dict({k: [results[k]] for k in results.keys()})
 
