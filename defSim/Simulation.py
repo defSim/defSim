@@ -1,6 +1,9 @@
 from typing import List, Union
 import inspect
 import random
+# math.inf imported here rather than explicit references to math.inf because it will be called repeatedly
+# and having inf imported already is significantly faster
+from math import inf
 import warnings
 import time
 import pandas as pd
@@ -53,7 +56,6 @@ class Simulation:
     """
 
     # todo: allow stopping rules to be added as functions
-
 
     def __init__(self,
                  network=None,
@@ -112,16 +114,17 @@ class Simulation:
             if tickwise_realization in CreateOutputTable._implemented_output_realizations:
                 self.tickwise_output['defaults'] = []
             else:
-                if inspect.isclass(tickwise_realization) and issubclass(tickwise_realization, CreateOutputTable.OutputTableCreator):
+                if inspect.isclass(tickwise_realization) and issubclass(tickwise_realization,
+                                                                        CreateOutputTable.OutputTableCreator):
                     tickwise_realization = tickwise_realization()
                 if isinstance(tickwise_realization, CreateOutputTable.OutputTableCreator):
                     if tickwise_realization.label != "":
                         self.tickwise_output[tickwise_realization.label] = []
                     else:
-                        tickwise_realization.label = "CustomOutput{}".format(random.randint(1000,9999))
+                        tickwise_realization.label = "CustomOutput{}".format(random.randint(1000, 9999))
                         self.tickwise_output[tickwise_realization.label] = []
                 else:
-                    self.tickwise_output[tickwise_realization] = []        
+                    self.tickwise_output[tickwise_realization] = []
 
     def return_values(self) -> pd.DataFrame:
         """
@@ -168,7 +171,8 @@ class Simulation:
         elif self.stop_condition == "max_iteration":
             self._run_until_max_iteration()
         else:
-            raise ValueError("Can only select from the options ['pragmatic_convergence', 'strict_convergence', 'max_iteration']")
+            raise ValueError(
+                "Can only select from the options ['pragmatic_convergence', 'strict_convergence', 'max_iteration']")
 
         return self.create_output_table()
 
@@ -178,7 +182,9 @@ class Simulation:
         Replace in code, will be removed at or before v1.0.0
         """
 
-        warnings.warn("Simulation.run_simulation() is replaced by Simulation.run() and will be deprecated at or before defSim v1.0.0", category=FutureWarning)
+        warnings.warn(
+            "Simulation.run_simulation() is replaced by Simulation.run() and will be deprecated at or before defSim v1.0.0",
+            category=FutureWarning)
         return self.run(initialize=initialize)
 
     def initialize(self):
@@ -195,33 +201,36 @@ class Simulation:
         self.initialize_tickwise_output()
 
         if self.seed is None:
-            self.seed = random.randint(10000,99999)
+            self.seed = random.randint(10000, 99999)
         random.seed(self.seed)
         self.parameter_dict['np_random_generator'] = np.random.default_rng(self.seed)
 
         ## if deprecated ms_rewiring parameter is set in parameter dict, replace with network modifier
         if 'ms_rewiring' in list(self.parameter_dict.keys()):
-            warnings.warn("Setting ms_rewiring in parameter dict is deprecated. Pass an instance of MaslovSneppenModifier in network_modifiers instead.", DeprecationWarning)
+            warnings.warn(
+                "Setting ms_rewiring in parameter dict is deprecated. Pass an instance of MaslovSneppenModifier in network_modifiers instead.",
+                DeprecationWarning)
             if self.network_modifiers is None:
-                self.network_modifiers = [MaslovSneppenModifier(rewiring_prop = self.parameter_dict['ms_rewiring'])]
+                self.network_modifiers = [MaslovSneppenModifier(rewiring_prop=self.parameter_dict['ms_rewiring'])]
             else:
-                self.network_modifiers.append(MaslovSneppenModifier(rewiring_prop = self.parameter_dict['ms_rewiring']))        
+                self.network_modifiers.append(MaslovSneppenModifier(rewiring_prop=self.parameter_dict['ms_rewiring']))
 
-        # read or generate network if no nx.Graph was provided, apply network modifiers
+                # read or generate network if no nx.Graph was provided, apply network modifiers
         if self.network_provided:
             if self.network == 'list':
-                    self.network = self.parameter_dict.pop('network')
+                self.network = self.parameter_dict.pop('network')
             if not isinstance(self.network, nx.Graph) and self.network is not None:
                 self.network = network_init.read_network(self.network)
 
             ## apply network modifiers
             if self.network_modifiers is not None:
                 for modifier in self.network_modifiers:
-                    modifier.rewire_network(network)            
-        else:           
-            self.network = network_init.generate_network(self.topology, network_modifiers = self.network_modifiers, **self.parameter_dict)                          
+                    modifier.rewire_network(network)
+        else:
+            self.network = network_init.generate_network(self.topology, network_modifiers=self.network_modifiers,
+                                                         **self.parameter_dict)
 
-        # storing the indices of the agents to access them quicker
+            # storing the indices of the agents to access them quicker
         self.agentIDs = list(self.network)
 
         # initialize agent attributes (accepts string realizations and instances of AttributesInitializer classes)
@@ -236,9 +245,10 @@ class Simulation:
         Replace in code, will be removed at or before v1.0.0
         """
 
-        warnings.warn("Simulation.initialize_simulation() is replaced by Simulation.initialize() and will be deprecated at or before defSim v1.0.0", category=FutureWarning)
+        warnings.warn(
+            "Simulation.initialize_simulation() is replaced by Simulation.initialize() and will be deprecated at or before defSim v1.0.0",
+            category=FutureWarning)
         return self.initialize()
-
 
     def run_step(self):
         """
@@ -249,12 +259,12 @@ class Simulation:
         """
 
         selected_agent = focal_agent_sim.select_focal_agent(self.network, self.focal_agent_selector,
-                                                                self.agentIDs, **self.parameter_dict)
+                                                            self.agentIDs, **self.parameter_dict)
 
         neighbors = neighbor_selector_sim.select_neighbors(self.network, self.neighbor_selector,
-                                                                  selected_agent,
-                                                                  self.communication_regime, **self.parameter_dict)
-        
+                                                           selected_agent,
+                                                           self.communication_regime, **self.parameter_dict)
+
         success = influence_sim.spread_influence(self.network,
                                                  self.influence_function,
                                                  selected_agent,
@@ -264,16 +274,18 @@ class Simulation:
                                                  self.influenceable_attributes,
                                                  **self.parameter_dict)
 
-        if self.tickwise and self.time_steps % self.tickwise_output_step_size == 0: # list is not empty
+        if self.tickwise and self.time_steps % self.tickwise_output_step_size == 0:  # list is not empty
             defaults_selected = [i for i in self.tickwise if i in CreateOutputTable._implemented_output_realizations]
             if len(defaults_selected) > 0:
-                self.tickwise_output['defaults'].append(CreateOutputTable.create_output_table(network=self.network, realizations = defaults_selected))
+                self.tickwise_output['defaults'].append(
+                    CreateOutputTable.create_output_table(network=self.network, realizations=defaults_selected))
             for i in self.tickwise:
                 if not i in defaults_selected:
                     if isinstance(i, CreateOutputTable.OutputTableCreator):
                         self.tickwise_output[i.label].append(i.create_output(network=self.network))
                     else:
-                        self.tickwise_output[i].append(OutputMeasures.AttributeReporter(feature = i).create_output(self.network))
+                        self.tickwise_output[i].append(
+                            OutputMeasures.AttributeReporter(feature=i).create_output(self.network))
 
         self.time_steps += 1
         if success:
@@ -285,7 +297,9 @@ class Simulation:
         Replace in code, will be removed at or before v1.0.0
         """
 
-        warnings.warn("Simulation.run_simulation_step() is replaced by Simulation.run_step() and will be deprecated at or before defSim v1.0.0", category=FutureWarning)
+        warnings.warn(
+            "Simulation.run_simulation_step() is replaced by Simulation.run_step() and will be deprecated at or before defSim v1.0.0",
+            category=FutureWarning)
         return self.run_step()
 
     def create_output_table(self) -> pd.DataFrame:
@@ -304,9 +318,9 @@ class Simulation:
         :returns: A Pandas DataFrame with one row.
         """
 
-        parameter_settings = {'Seed':self.seed,
-                              'Ticks':self.time_steps,
-                              'SuccessfulInfluence':self.influence_steps}
+        parameter_settings = {'Seed': self.seed,
+                              'Ticks': self.time_steps,
+                              'SuccessfulInfluence': self.influence_steps}
         if self.network_provided:
             parameter_settings['Topology'] = "pre-loaded"
         else:
@@ -321,13 +335,13 @@ class Simulation:
                                                         settings_dict=parameter_settings,
                                                         tickwise_output=self.tickwise_output)
 
-        results_dataframe = pd.DataFrame.from_dict({k:[results[k]] for k in results.keys()})
+        results_dataframe = pd.DataFrame.from_dict({k: [results[k]] for k in results.keys()})
 
         if self.output_folder_path is not None:
-            create_data_files(output_table = results_dataframe, realizations = self.output_file_types, output_folder_path = self.output_folder_path)
+            create_data_files(output_table=results_dataframe, realizations=self.output_file_types,
+                              output_folder_path=self.output_folder_path)
 
         return results_dataframe
-
 
     def _run_until_pragmatic_convergence(self):
         """
@@ -341,7 +355,7 @@ class Simulation:
         except KeyError:
             step_size = 100
 
-        stop_condition = PragmaticConvergenceCheck(initial_network = self.network.copy())
+        stop_condition = PragmaticConvergenceCheck(initial_network=self.network.copy())
 
         while 1:
             self.run_step()
@@ -357,20 +371,25 @@ class Simulation:
         in the network. Unless there is no single pair left that can theoretically influence each other, the simulation
         continues.
 
-        :param float=0.0 threshold: A value between 0 and 1 that determines at what distance two agents can't influence each other anymore.
+        :param float=inf maximum: A value that determines above what maximum distance two agents can't influence each other anymore.
+        :param float=inf minimum: A value that determines below what minimum distance two agents can't influence each other anymore.
         :param int=100 step_size: determines how often it should be checked for a change in the network.
         """
         try:
-            threshold = self.parameter_dict["threshold"]
+            maximum = self.parameter_dict["convergence_dissimilarity_maximum"]
         except KeyError:
-            threshold = 0.0
+            maximum = inf
+        try:
+            minimum = self.parameter_dict["convergence_dissimilarity_minimum"]
+        except KeyError:
+            minimum = 0.0
         try:
             step_size = self.parameter_dict["step_size"]
         except KeyError:
             step_size = 100
 
-        stop_condition = OpinionDistanceConvergenceCheck(threshold = threshold)
-        
+        stop_condition = OpinionDistanceConvergenceCheck(maximum=maximum, minimum=minimum)
+
         while 1:
             self.run_step()
             if self.time_steps >= self.max_iterations:

@@ -26,16 +26,19 @@ def update_dissimilarity(network: nx.Graph, agents: List[int], calculator: Dissi
             pass
 
 
-def check_dissimilarity(network: nx.Graph, threshold: float):
+def check_dissimilarity(network: nx.Graph, maximum: float, minimum: float = 0):
     """
     This function is used to check whether influence is theoretically still possible. For that is checked whether
     any edge has a dissimilarity value inbetween a certain range of possible values that allow for further influence
     steps. This range has 1 as the upper limit and a given threshold as lower limit.
 
     :param network: The network that is checked.
-    :param threshold: The lower limit of dissimilarity that makes it possible for agents to influence each other.
+    :param maximum: The upper limit of dissimilarity that makes it possible for agents to influence each other.
+        Only edges with dissimilarity strictly lower than this value allow influence.
+    :param minimum: The lower limit of dissimilarity that makes it possible for agents to influence each other.
+        Only edges with dissimilarity strictly greater than this value allow influence.
     :returns: True if there is still change possible, False otherwise
 
     """
 
-    return any(threshold < val < 1 for key, val in nx.get_edge_attributes(network, 'dist').items())
+    return any(minimum < val < maximum for key, val in nx.get_edge_attributes(network, 'dist').items())
