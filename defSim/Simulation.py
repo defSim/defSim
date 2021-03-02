@@ -56,8 +56,6 @@ class Simulation:
         tickwise (List = [str]):  A list of strings with the names of agent attributes that need to be recorded at every timestep
     """
 
-    # todo: allow stopping rules to be added as functions
-
     def __init__(self,
                  network=None,
                  topology: str = "grid",
@@ -68,7 +66,7 @@ class Simulation:
                  influence_function: str = "similarity_adoption" or influence_sim.InfluenceOperator,
                  influenceable_attributes: List = None,
                  dissimilarity_measure: str = "hamming" or DissimilarityCalculator,
-                 stop_condition: str = "max_iteration",
+                 stop_condition: str = "max_iteration" or ConvergenceCheck,
                  max_iterations: int = 100000,
                  communication_regime: str = "one-to-one",
                  parameter_dict={},
