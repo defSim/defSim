@@ -21,7 +21,9 @@ setup(name='defSim',
             'networkx>=2.4',
             'numpy>=1.17',
             'pandas',
-            'scipy>=1.1.0'
+            'scipy>=1.1.0',
+            'pathos>=0.2.7',
+            'tqdm>=4.58.0'
       ],
       include_package_data=True,
       test_suite="pytest-runner",
