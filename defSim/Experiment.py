@@ -33,10 +33,10 @@ def call_simulation_run(simulation):
     Utility function to enable running predefined simulations
     using multiprocessing.
     """
-    return simulation.run()
+    return simulation.run(show_progress=False)
 
 def yield_parallel_with_progress_bar(function, iterable, pool):
-    for item in tqdm(pool.uimap(function, iterable), total=len(iterable)):
+    for item in tqdm(pool.uimap(function, iterable), total=len(iterable), mininterval=1):
         yield item
 
 
@@ -300,7 +300,7 @@ class Experiment:
                     create_data_files(output_table = results_dataframe, realizations = self.output_file_types, output_folder_path = self.output_folder_path)                
                 return results_dataframe
             else:  # if NOT parallel
-                result_list = [sim.run() for sim in tqdm(self.simulations)] if show_progress else [sim.run() for sim in self.simulations]
+                result_list = [sim.run(show_progress=False) for sim in tqdm(self.simulations, mininterval=1)] if show_progress else [sim.run(show_progress=False) for sim in self.simulations]
                 results_dataframe = pd.concat(result_list).reset_index()
                 if self.output_folder_path is not None:
                     create_data_files(output_table = results_dataframe, realizations = self.output_file_types, output_folder_path = self.output_folder_path)                
@@ -331,7 +331,7 @@ class Experiment:
             else:  # if NOT parallel
                 if show_progress:
                     result_list = [self._create_and_run_simulation(parameter_dict) for parameter_dict in
-                               tqdm(self.parameter_dict_list)]
+                               tqdm(self.parameter_dict_list, mininterval=1)]
                 else:
                     result_list = [self._create_and_run_simulation(parameter_dict) for parameter_dict in
                                self.parameter_dict_list]
@@ -430,7 +430,7 @@ class Experiment:
                                 tickwise=self.tickwise,
                                 seed=parameter_dict['seed']
                                 )
-        return simulation.run()
+        return simulation.run(show_progress=False)
 
     def _create_parameter_dictionaries(self) -> List[dict]:
         """

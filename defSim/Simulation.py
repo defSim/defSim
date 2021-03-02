@@ -1,3 +1,4 @@
+from tqdm import tqdm
 from typing import List, Union
 import inspect
 import random
@@ -144,7 +145,7 @@ class Simulation:
 
         return parameter_df
 
-    def run(self, initialize: bool = True) -> pd.DataFrame:
+    def run(self, initialize: bool = True, show_progress: bool = True) -> pd.DataFrame:
         """
         This method initializes the network if none is given, initializes the attributes of the agents, and also
         computes and sets the distances between each neighbor.
@@ -152,6 +153,7 @@ class Simulation:
         
         :param bool=True initialize: Initialize the simulation before running (disable if initialization was
             done separately)
+        :param bool=True show_progress: Whether to show progress bar
         :returns: A Pandas DataFrame that contains one row of data. To see what output the output contains see
             :func:`~create_output_table`
 
@@ -163,16 +165,16 @@ class Simulation:
             self.influence_function = self.parameter_dict['influence_function']
 
         if self.stop_condition == "pragmatic_convergence":
-            self._run_until_pragmatic_convergence()
+            self._run_until_pragmatic_convergence(show_progress)
         elif self.stop_condition == "strict_convergence":
-            self._run_until_strict_convergence()
+            self._run_until_strict_convergence(show_progress)
         elif isinstance(self.stop_condition, ConvergenceCheck):
-            self._run_until_convergence()
+            self._run_until_convergence(show_progress)
         elif self.stop_condition == "max_iteration":
-            self._run_until_max_iteration()
+            self._run_until_max_iteration(show_progress)
         else:
             raise ValueError(
-                "Can only select from the options ['pragmatic_convergence', 'strict_convergence', 'max_iteration']")
+                "Can only select from the options ['pragmatic_convergence', 'strict_convergence', 'max_iteration'] or pass custom stop condition")
 
         return self.create_output_table()
 
@@ -344,12 +346,13 @@ class Simulation:
 
         return results_dataframe
 
-    def _run_until_pragmatic_convergence(self):
+    def _run_until_pragmatic_convergence(self, show_progress: bool = False):
         """
         Pragmatic convergence means that each "step_size" time steps it is checked whether the structure of the network
         and all attributes are still the same. If thats the case, it is assumed that the simulation converged and it stops.
 
         :param int=100 step_size: determines how often it should be checked for a change in the network.
+        :param bool show_progress: bool determines whether to show progress bar
         """
         try:
             step_size = self.parameter_dict["step_size"]
@@ -358,15 +361,21 @@ class Simulation:
 
         stop_condition = PragmaticConvergenceCheck(initial_network=self.network.copy())
 
-        while 1:
-            self.run_step()
-            if self.time_steps >= self.max_iterations:
-                break
-            if self.time_steps % step_size == 0:
-                if stop_condition.check_convergence(self.network):
-                    break
+        if show_progress:
+            for _ in tqdm(range(self.max_iterations), mininterval=1):
+                self.run_step()
+                if self.time_steps % step_size == 0:
+                    if stop_condition.check_convergence(self.network):
+                        break
+        else:
+            for _ in range(self.max_iterations):
+                self.run_step()
+                if self.time_steps % step_size == 0:
+                    if stop_condition.check_convergence(self.network):
+                        break
 
-    def _run_until_strict_convergence(self):
+
+    def _run_until_strict_convergence(self, show_progress: bool = False):
         """
         Here the convergence of the simulation is periodically checked by assessing the distance between each neighbor
         in the network. Unless there is no single pair left that can theoretically influence each other, the simulation
@@ -375,6 +384,7 @@ class Simulation:
         :param float=inf maximum: A value that determines above what maximum distance two agents can't influence each other anymore.
         :param float=inf minimum: A value that determines below what minimum distance two agents can't influence each other anymore.
         :param int=100 step_size: determines how often it should be checked for a change in the network.
+        :param bool show_progress: bool determines whether to show progress bar
         """
         try:
             maximum = self.parameter_dict["convergence_dissimilarity_maximum"]
@@ -391,15 +401,20 @@ class Simulation:
 
         stop_condition = OpinionDistanceConvergenceCheck(maximum=maximum, minimum=minimum)
 
-        while 1:
-            self.run_step()
-            if self.time_steps >= self.max_iterations:
-                break
-            if self.time_steps % step_size == 0:
-                if stop_condition.check_convergence(self.network):
-                    break
+        if show_progress:
+            for _ in tqdm(range(self.max_iterations), mininterval=1):
+                self.run_step()
+                if self.time_steps % step_size == 0:
+                    if stop_condition.check_convergence(self.network):
+                        break
+        else:
+            for _ in range(self.max_iterations):
+                self.run_step()
+                if self.time_steps % step_size == 0:
+                    if stop_condition.check_convergence(self.network):
+                        break
 
-    def _run_until_convergence(self):
+    def _run_until_convergence(self, show_progress: bool = False):
         """
         The convergence of the simulation is periodically checked using a custom convergence check 
         set in self.stop_condition. Every step_size steps (defaults to 100), the check_convergence
@@ -407,20 +422,33 @@ class Simulation:
         returns true or self.max_iterations is reached.
 
         :param int=100 step_size: determines how often it should be checked for a change in the network.
+        :param bool show_progress: bool determines whether to show progress bar
         """
         try:
             step_size = self.parameter_dict["step_size"]
         except KeyError:
             step_size = 100
 
-        while 1:
-            self.run_step()
-            if self.time_steps >= self.max_iterations:
-                break
-            if self.time_steps % step_size == 0:
-                if self.stop_condition.check_convergence(self.network, **self.parameter_dict):
-                    break
+        if show_progress:
+            for _ in tqdm(range(self.max_iterations), mininterval=1):
+                self.run_step()
+                if self.time_steps % step_size == 0:
+                    if self.stop_condition.check_convergence(self.network, **self.parameter_dict):
+                        break
+        else:
+            for _ in range(self.max_iterations):
+                self.run_step()
+                if self.time_steps % step_size == 0:
+                    if self.stop_condition.check_convergence(self.network, **self.parameter_dict):
+                        break
 
-    def _run_until_max_iteration(self):
-        for iteration in range(self.max_iterations):
-            self.run_step()
+    def _run_until_max_iteration(self, show_progress: bool = False):
+        """
+        :param bool show_progress: bool determines whether to show progress bar
+        """
+        if show_progress:
+            for _ in tqdm(range(self.max_iterations), mininterval=1):
+                self.run_step()
+        else:
+            for _ in range(self.max_iterations):
+                self.run_step()
