@@ -14,7 +14,8 @@ from defSim.network_evolution_sim.network_evolution_sim import NetworkModifier
 from defSim.Simulation import Simulation
 from defSim.tools.CreateOutputTable import OutputTableCreator
 from defSim.tools.CreateDataFiles import DataFileCreator, create_data_files
-import multiprocessing as mp
+import pathos
+from tqdm import tqdm
 import random
 import timeit
 import warnings
@@ -33,6 +34,10 @@ def call_simulation_run(simulation):
     using multiprocessing.
     """
     return simulation.run()
+
+def yield_parallel_with_progress_bar(function, iterable, pool):
+    for item in tqdm(pool.uimap(function, iterable), total=len(iterable)):
+        yield item
 
 
 class Experiment:
@@ -259,7 +264,7 @@ class Experiment:
 
         return True
 
-    def run(self, parallel: bool = False, num_cores=mp.cpu_count()) -> pd.DataFrame:
+    def run(self, parallel: bool = False, num_cores=pathos.helpers.cpu_count(), show_progress: bool = True) -> pd.DataFrame:
         """
 
         If the experiment is defined by a list of simulations:
@@ -273,6 +278,7 @@ class Experiment:
 
         :param parallel: Boolean that determines in which mode the simulations will run.
         :param num_cores: Determines the number of cores in the machine that will be utilized for the execution.
+        :param show_progress: Boolean that determines whether to show a progress bar.
         :returns: A dataframe that contains one row per Simulation.
 
         """
@@ -281,23 +287,20 @@ class Experiment:
         if self.simulations is not None:
             print("%d simulations specified" % len(self.simulations))
             if parallel:
-                pool = mp.Pool(num_cores)
-                results = pool.map_async(call_simulation_run, self.simulations)
-                pool.close()
-                while 1:
-                    if results.ready():
-                        break
-                    remaining = results._number_left
-#                    print("\rWaiting for", remaining, "tasks to complete...", end="")
-                    time.sleep(2)
-                    pool.join()
+                pool = pathos.pools.ProcessPool(nodes=num_cores)
 
-                results_dataframe = pd.concat(results.get()).reset_index()
+                if show_progress:
+                    results = list(yield_parallel_with_progress_bar(function=call_simulation_run, iterable=self.simulations, pool=pool))
+                else:
+                    results = pool.uimap(call_simulation_run, self.simulations)
+                pool.clear()
+
+                results_dataframe = pd.concat(results).reset_index()
                 if self.output_folder_path is not None:
                     create_data_files(output_table = results_dataframe, realizations = self.output_file_types, output_folder_path = self.output_folder_path)                
                 return results_dataframe
             else:  # if NOT parallel
-                result_list = [sim.run() for sim in self.simulations]
+                result_list = [sim.run() for sim in tqdm(self.simulations)] if show_progress else [sim.run() for sim in self.simulations]
                 results_dataframe = pd.concat(result_list).reset_index()
                 if self.output_folder_path is not None:
                     create_data_files(output_table = results_dataframe, realizations = self.output_file_types, output_folder_path = self.output_folder_path)                
@@ -314,22 +317,23 @@ class Experiment:
                 self.parameter_dict_list = self._create_parameter_dictionaries()
             print("%d different parameter combinations" % len(self.parameter_dict_list))
             if parallel:
-                pool = mp.Pool(num_cores)
-                results = pool.map_async(self._create_and_run_simulation, self.parameter_dict_list)
-                pool.close()
-                while 1:
-                    if results.ready():
-                        break
-                    remaining = results._number_left
-#                    print("\rWaiting for", remaining, "tasks to complete...", end="")
-                    time.sleep(2)
-                pool.join()
-                results_dataframe = pd.concat(results.get()).reset_index()
+                pool = pathos.pools.ProcessPool(nodes=num_cores)
+
+                if show_progress:
+                    results = list(yield_parallel_with_progress_bar(function=self._create_and_run_simulation, iterable=self.parameter_dict_list, pool=pool))
+                else:
+                    results = pool.uimap(self._create_and_run_simulation, self.parameter_dict_list)
+
+                results_dataframe = pd.concat(results).reset_index()
                 if self.output_folder_path is not None:
                     create_data_files(output_table = results_dataframe, realizations = self.output_file_types, output_folder_path = self.output_folder_path)                
                 return results_dataframe
             else:  # if NOT parallel
-                result_list = [self._create_and_run_simulation(parameter_dict) for parameter_dict in
+                if show_progress:
+                    result_list = [self._create_and_run_simulation(parameter_dict) for parameter_dict in
+                               tqdm(self.parameter_dict_list)]
+                else:
+                    result_list = [self._create_and_run_simulation(parameter_dict) for parameter_dict in
                                self.parameter_dict_list]
                 results_dataframe = pd.concat(result_list).reset_index()
                 if self.output_folder_path is not None:
