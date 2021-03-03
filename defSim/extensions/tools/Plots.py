@@ -26,9 +26,9 @@ class dsPlot():
         raise NotImplementedError
 
     def show(self):
+        # required when not in interactive session
         plt.show()
 
-# 1: plot network, colored by a feature
 
 class NetworkPlot(dsPlot):
     """
@@ -109,13 +109,14 @@ class DynamicsPlot(dsPlot):
             colors are set based on the palette.
     :param palette: Seaborn palette or matplotlib colormap to use.
     :param float linewidth=3: Width of lines drawn.
-
+    :param bool fast=False: If True, show plain (but fast) plot. If False, show plot with customizable markup (slow).
     """
-    def __init__(self, colors=None, palette="deep", linewidth=3):
+    def __init__(self, colors=None, palette="deep", linewidth=3, fast: bool = False):
         super().__init__()
         self.colors = colors
         self.palette = palette
         self.linewidth = linewidth
+        self.fast = fast
 
     def plot(self, tickwise_feature, xlab: str = None, ylab: str = None, ylim=None, xlim=None):
         """
@@ -129,30 +130,34 @@ class DynamicsPlot(dsPlot):
         :param ylim: Iterable with 2 values, which gives (ymin, ymax)
         :param xlim: Iterable with 2 values, which gives (xmin, xmax)
         """
-        listvals = np.array(tickwise_feature[0]).transpose()
-        vals = []
-        for i in range(len(listvals)):
-            nsteps = len(listvals[i])
-            for j in range(nsteps):
-                vals.append({'agent': i, 'step': j, 'value': listvals[i][j]})
-        df = pd.DataFrame(vals)
 
-        if self.colors is not None:
-            palette = sns.color_palette(self.colors)
+        if self.fast:
+            plt.plot(tickwise_feature[0])
         else:
-            n_unique_hues = len(set(df['agent']))
-            palette = sns.color_palette(self.palette, n_colors=n_unique_hues)
+            listvals = np.array(tickwise_feature[0]).transpose()
+            vals = []
+            for i in range(len(listvals)):
+                nsteps = len(listvals[i])
+                for j in range(nsteps):
+                    vals.append({'agent': i, 'step': j, 'value': listvals[i][j]})
+            df = pd.DataFrame(vals)
 
-        ax = sns.relplot(data=df, x='step', y='value',
-                         hue='agent', palette=palette, kind='line',
-                         linewidth=self.linewidth, legend=False)
+            if self.colors is not None:
+                palette = sns.color_palette(self.colors)
+            else:
+                n_unique_hues = len(set(df['agent']))
+                palette = sns.color_palette(self.palette, n_colors=n_unique_hues)
 
-        if xlab is None:
-            xlab = 'step'
-        if ylab is None:
-            ylab = 'value'
+            ax = sns.relplot(data=df, x='step', y='value',
+                             hue='agent', palette=palette, kind='line',
+                             linewidth=self.linewidth, legend=False)
 
-        ax.set(ylim=ylim, xlim=xlim, xlabel=xlab, ylabel=ylab)
+            if xlab is None:
+                xlab = 'step'
+            if ylab is None:
+                ylab = 'value'
+
+            ax.set(ylim=ylim, xlim=xlim, xlabel=xlab, ylabel=ylab)
 
 class RelPlot(dsPlot):
     """
@@ -165,18 +170,22 @@ class RelPlot(dsPlot):
     :param bool palette_as_cmap=False: If True, the palette is used as a matplotlib colormap, suitable for continuous
         variables. If False, the palette is used to generate distinct hues, equal in number to the number of unique
         values in the hue parameter when calling plot(). This is suitable for categorical variables.
+    :param ylim: Iterable with 2 values, which gives (ymin, ymax)
+    :param xlim: Iterable with 2 values, which gives (xmin, xmax)
     :param float linewidth=3: Width of lines drawn.
     :param kind: Determines type of plot. Select from 'line' or 'scatter'.
     """
-    def __init__(self, colors=None, palette="rocket", palette_as_cmap: bool = False, linewidth=3, kind='line'):
+    def __init__(self, colors=None, palette="rocket", palette_as_cmap: bool = False, ylim=None, xlim=None, linewidth=3, kind='line'):
         super().__init__()
         self.colors=colors
         self.palette = palette
         self.palette_as_cmap = palette_as_cmap
+        self.ylim = ylim
+        self.xlim = xlim
         self.linewidth = linewidth
         self.kind = kind
 
-    def plot(self, data, x: str, y: str, hue: str = None, xlab: str = None, ylab: str = None, ylim=None, xlim=None):
+    def plot(self, data, x: str, y: str, hue: str = None, xlab: str = None, ylab: str = None):
         """
         Creates a plot showing the relationship between X and Y, separately for all values of hue. Hue is used to
         create multiple lines with distinct colors.
@@ -186,8 +195,6 @@ class RelPlot(dsPlot):
         :param str hue: Name of the variable on which to split into lines with different colors (optional)
         :param str xlab: Label for X-axis. If None, name of the X-variable is used
         :param str ylab: Label for Y-axis. If None, name of the Y-variable is used
-        :param ylim: Iterable with 2 values, which gives (ymin, ymax)
-        :param xlim: Iterable with 2 values, which gives (xmin, xmax)
         """
         if self.colors is not None:
             palette = sns.color_palette(self.colors)
@@ -206,7 +213,7 @@ class RelPlot(dsPlot):
         if ylab is None:
             ylab = y
 
-        ax.set(ylim=ylim, xlim=xlim, xlabel=xlab, ylabel=ylab)
+        ax.set(ylim=self.ylim, xlim=self.xlim, xlabel=xlab, ylabel=ylab)
 
 
 class LinePlot(RelPlot):
@@ -220,8 +227,8 @@ class LinePlot(RelPlot):
         values in the hue parameter when calling plot(). This is suitable for categorical variables.
     :param float linewidth=3: Width of lines drawn.
     """
-    def __init__(self, colors=None, palette="rocket", palette_as_cmap=False, linewidth=3):
-        super().__init__(colors=colors, palette=palette, palette_as_cmap=palette_as_cmap, linewidth=linewidth, kind='line')
+    def __init__(self, colors=None, palette="rocket", palette_as_cmap=False, ylim=None, xlim=None, linewidth=3):
+        super().__init__(colors=colors, palette=palette, palette_as_cmap=palette_as_cmap, ylim=ylim, xlim=xlim, linewidth=linewidth, kind='line')
 
 
 class ScatterPlot(RelPlot):
@@ -235,5 +242,67 @@ class ScatterPlot(RelPlot):
         values in the hue parameter when calling plot(). This is suitable for categorical variables.
     :param float linewidth=3: Width of lines drawn.
     """
-    def __init__(self, colors=None, palette="rocket", palette_as_cmap=False, linewidth=3):
-        super().__init__(colors=colors, palette=palette, palette_as_cmap=palette_as_cmap, linewidth=linewidth, kind='scatter')
+    def __init__(self, colors=None, palette="rocket", palette_as_cmap=False, ylim=None, xlim=None, linewidth=3):
+        super().__init__(colors=colors, palette=palette, palette_as_cmap=palette_as_cmap, ylim=ylim, xlim=xlim, linewidth=linewidth, kind='scatter')
+
+
+class HeatMap(dsPlot):
+    def __init__(self,
+                 colors=None,
+                 palette="rocket",
+                 vmin=None, vmax=None,
+                 annot=False,
+                 fmt=None,
+                 annot_kws=None,
+                 linewidths=None,
+                 linecolor=None,
+                 square=False,
+                 cbar=True,
+                 cbar_kws=None):
+
+        self.colors = colors
+        self.palette = palette
+        self.vmin = vmin
+        self.vmax = vmax
+        self.annot = annot
+        self.fmt = fmt
+        self.annot_kws = annot_kws
+        self.linewidths = linewidths
+        self.linecolor = linecolor
+        self.square = square
+        self.cbar = cbar
+        self.cbar_kws = cbar_kws
+
+
+    def plot(self, data, x, y, hue,
+             sort_y_ascending=False,
+             summary='mean',
+             center=None,
+             robust=False,
+             xticklabels="auto",
+             yticklabels="auto",
+             mask=None,
+             ax=None,
+             cbar_ax=None,
+             **kwargs):
+
+        if self.colors is None:
+            cmap = sns.color_palette(self.palette, as_cmap=True)
+        else:
+            cmap = self.colors
+
+        data = getattr(data.groupby([x, y]), summary)().reset_index()
+        data = data.pivot(y, x, hue).sort_values(y, ascending=sort_y_ascending)
+        sns.heatmap(data,
+                    vmin=self.vmin, vmax=self.vmax,
+                    cmap=cmap,
+                    center=center,
+                    robust=robust,
+                    annot=self.annot, fmt=self.fmt, annot_kws=self.annot_kws,
+                    linewidths=self.linewidths, linecolor=self.linecolor,
+                    cbar=self.cbar, cbar_kws=self.cbar_kws, cbar_ax=cbar_ax,
+                    square=self.square,
+                    xticklabels=xticklabels, yticklabels=yticklabels,
+                    mask=mask,
+                    ax=ax,
+                    **kwargs)
