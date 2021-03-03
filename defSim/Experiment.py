@@ -36,7 +36,7 @@ def call_simulation_run(simulation):
     return simulation.run(show_progress=False)
 
 def yield_parallel_with_progress_bar(function, iterable, pool):
-    for item in tqdm(pool.uimap(function, iterable), total=len(iterable), mininterval=1):
+    for item in tqdm(pool.imap(function, iterable), total=len(iterable), mininterval=1):
         yield item
 
 
@@ -322,7 +322,7 @@ class Experiment:
                 if show_progress:
                     results = list(yield_parallel_with_progress_bar(function=self._create_and_run_simulation, iterable=self.parameter_dict_list, pool=pool))
                 else:
-                    results = pool.uimap(self._create_and_run_simulation, self.parameter_dict_list)
+                    results = pool.map(self._create_and_run_simulation, self.parameter_dict_list)
 
                 results_dataframe = pd.concat(results).reset_index()
                 if self.output_folder_path is not None:
