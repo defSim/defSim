@@ -12,6 +12,7 @@ import seaborn as sns
 import networkx as nx
 import numpy as np
 import pandas as pd
+import itertools
 
 class dsPlot():
     """
@@ -134,13 +135,16 @@ class DynamicsPlot(dsPlot):
         if self.fast:
             plt.plot(tickwise_feature[0])
         else:
-            listvals = np.array(tickwise_feature[0]).transpose()
-            vals = []
-            for i in range(len(listvals)):
-                nsteps = len(listvals[i])
-                for j in range(nsteps):
-                    vals.append({'agent': i, 'step': j, 'value': listvals[i][j]})
-            df = pd.DataFrame(vals)
+            listvals = tickwise_feature[0]
+            n_steps = len(listvals)
+            n_agents = len(listvals[0])
+
+            # set format: the first n_agents values are step 1, then the next n_agents values are step 2, etc...
+            data = list(itertools.chain(*listvals))
+            agents = [i + 1 for i in range(n_agents)] * n_steps
+            steps = np.repeat([i + 1 for i in range(n_steps)], repeats=n_agents)
+            records = list(zip(steps, agents, data))
+            df = pd.DataFrame.from_records(records, columns=['step', 'agent', 'value'])
 
             if self.colors is not None:
                 palette = sns.color_palette(self.colors)
