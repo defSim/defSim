@@ -106,54 +106,78 @@ class DynamicsPlot(dsPlot):
     """
     Facilitates plotting the dynamics of opinion changes for a feature.
     Uses seaborn relplot behind the scenes.
-    :param colors: List of colors equal in length to the number of agents, used to color the lines. If None,
-            colors are set based on the palette.
+    :param colors: List of colors, used to color the lines. If None,
+            colors are set based on the palette. Usually, the number of hues should equal the number of agents
+            (showing the opinions for each agent at each step). However, it is possible to specify another variable
+            (see 'hue' in DynamicsPlot.plot()) on which to color. Then, the list of colors should be equal in length
+            to the number of unique values of that variable.
     :param palette: Seaborn palette or matplotlib colormap to use.
     :param float linewidth=3: Width of lines drawn.
+    :param ylim: Iterable with 2 values, which gives (ymin, ymax)
+    :param xlim: Iterable with 2 values, which gives (xmin, xmax)
     :param bool fast=False: If True, show plain (but fast) plot. If False, show plot with customizable markup (slow).
     """
-    def __init__(self, colors=None, palette="deep", linewidth=3, fast: bool = False):
+    def __init__(self, colors=None, palette="deep", linewidth=3, ylim=None, xlim=None, fast: bool = False):
         super().__init__()
         self.colors = colors
         self.palette = palette
         self.linewidth = linewidth
+        self.ylim = ylim
+        self.xlim = xlim
         self.fast = fast
 
-    def plot(self, tickwise_feature, xlab: str = None, ylab: str = None, ylim=None, xlim=None):
+    def plot(self, data, y: str, hue=None, xlab: str = None, ylab: str = None, ylim=None, xlim=None):
         """
         Creates a plot showing one line for each agent, indicating their value on a chosen feature at a
         specific step.
-        :param tickwise_feature: The feature to plot, based on stored tickwise data.
+        :param values: Pandas dataframe containing all variables to use in the plot.
+        :param str y: The feature to plot, by name of the column in dataframe.
             If the pandas DataFrame in which results of the simulation are stored is named 'results', and the tickwise
-            feature is named 'f01', values should be selected as results['Tickwise_f01']
+            feature is named 'f01', the column name is 'Tickwise_f01'
+        :param hue: Variable on which to group by color. To show all agents separately, leave this set to None.
+            One line wil be drawn for each group.
+            To color agents based on a variable but show lines for all agents individually, use a list of colors
+            in DynamicsPlot.colors instead (equal in length to nr of agents).
         :param str xlab: Label for x-axis
         :param str ylab: Label for y-axis
-        :param ylim: Iterable with 2 values, which gives (ymin, ymax)
-        :param xlim: Iterable with 2 values, which gives (xmin, xmax)
+        :param ylim: Iterable with 2 values, which gives (ymin, ymax). Overrides self.ylim if present
+        :param xlim: Iterable with 2 values, which gives (xmin, xmax). Overrides self.xlim if present
         """
 
+        if ylim is None:
+            ylim = self.ylim
+        if xlim is None:
+            xlim = self.xlim
+
         if self.fast:
-            plt.plot(tickwise_feature[0])
+            plt.plot(data[y][0])
         else:
-            listvals = tickwise_feature[0]
+            listvals = data[y][0]
             n_steps = len(listvals)
             n_agents = len(listvals[0])
 
             # set format: the first n_agents values are step 1, then the next n_agents values are step 2, etc...
-            data = list(itertools.chain(*listvals))
+            values = list(itertools.chain(*listvals))
             agents = [i + 1 for i in range(n_agents)] * n_steps
             steps = np.repeat([i + 1 for i in range(n_steps)], repeats=n_agents)
-            records = list(zip(steps, agents, data))
+            records = list(zip(steps, agents, values))
             df = pd.DataFrame.from_records(records, columns=['step', 'agent', 'value'])
+
+            if hue is None:
+                hue = 'agent'
+            else:
+                hue = list(hue) * n_steps
+
+            df['hue'] = df['agent'] if hue == 'agent' else hue
 
             if self.colors is not None:
                 palette = sns.color_palette(self.colors)
             else:
-                n_unique_hues = len(set(df['agent']))
+                n_unique_hues = len(set(df['hue']))
                 palette = sns.color_palette(self.palette, n_colors=n_unique_hues)
 
             ax = sns.relplot(data=df, x='step', y='value',
-                             hue='agent', palette=palette, kind='line',
+                             hue='hue', palette=palette, kind='line',
                              linewidth=self.linewidth, legend=False)
 
             if xlab is None:
