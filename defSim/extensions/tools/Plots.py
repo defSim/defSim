@@ -275,6 +275,24 @@ class ScatterPlot(RelPlot):
 
 
 class HeatMap(dsPlot):
+    """
+    Facilitates creation of a heatmap. X and Y are variables which determine the coordinates on the heatmap, while
+    hue determines the 'heat' value.
+    :param colors: List of colors to use (if 'hue' is set on calling plot()).If None,
+            colors are set based on the palette.
+    :param palette: Seaborn palette or matplotlib colormap to use.
+    :param float vmin: Minimum value for hue.
+    :param float vmax: Maximum value for hue.
+    :param annot: True, False or dataset. If true, writes data value in each cell.  If array with same shape as data
+        then this is used to annotate the heatmap.
+    :param str fmt: String formatting code to use when adding annotations.
+    :param annot_kws: Dictionary of keyword arguments for drawing annotation text
+    :param float linewidths=3: Width of lines drawn.
+    :param linecolor: Color to use for lines between cells.
+    :param bool square: If True, axes are adjusted so that each cell is square.
+    :param bool cbar: Whether to draw a color bar.
+    :param cbar_kws: Dictionary of keyword arguments to draw colorbar.
+    """
     def __init__(self,
                  colors=None,
                  palette="rocket",
@@ -313,6 +331,25 @@ class HeatMap(dsPlot):
              ax=None,
              cbar_ax=None,
              **kwargs):
+
+        """
+        Creates a heatmap showing the relationship between X, Y and some outcome represented by hue.
+        :param data: Pandas dataframe containing all variables to use in the plot.
+        :param str x: Name of the X-variable
+        :param str y: Name of the Y-variable
+        :param str hue: Name of the variable on which to color the cells ('heat')
+        :param bool sort_y_ascending: Whether to sort Y ascending (True) or descending (False)
+        :param str summary: Type of summary to prsent in the heatmap. Default is mean. The hue presented in each cell
+            is the result of the summary function applied to all cases with a particular combination of X and Y
+        :param float center: Value at which to center the colormap
+        :param bool robust: If True and vmin, vmax are None, colormap range is computed with robust quantiles instead
+            of extreme values.
+        :param xticklabels: Labels for ticks on X-axis
+        :param yticklabels: Labels for tick on Y-axis
+        :param mask: If set, data is not shown in cells where mask is True.
+        :param ax: Matplotlib axes in which to draw the plot (currently-active axes used if not specified)
+        :param cbar_ax: Matplotlib axes in which to draw the colorbar (takes space from main axes if not specified)
+        """
 
         if self.colors is None:
             cmap = sns.color_palette(self.palette, as_cmap=True)
