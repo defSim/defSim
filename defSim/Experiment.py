@@ -317,7 +317,7 @@ class Experiment:
                 self.parameter_dict_list = self._create_parameter_dictionaries()
             print("%d different parameter combinations" % len(self.parameter_dict_list))
             if parallel:
-                pool = pathos.pools.ProcessPool(nodes=num_cores)
+                pool = mp.Pool(processes=num_cores)
 
                 if show_progress:
                     results = list(yield_parallel_with_progress_bar(function=self._create_and_run_simulation, iterable=self.parameter_dict_list, pool=pool))
@@ -326,7 +326,7 @@ class Experiment:
 
                 results_dataframe = pd.concat(results).reset_index()
                 if self.output_folder_path is not None:
-                    create_data_files(output_table = results_dataframe, realizations = self.output_file_types, output_folder_path = self.output_folder_path)                
+                    create_data_files(output_table=results_dataframe, realizations=self.output_file_types, output_folder_path=self.output_folder_path)
                 return results_dataframe
             else:  # if NOT parallel
                 if show_progress:
