@@ -24,7 +24,9 @@ setup(name='defSim',
             'numpy>=1.17',
             'pandas',
             'scipy>=1.1.0',
-            'tqdm>=4.58.0'
+            'tqdm>=4.58.0',
+            'matplotlib>=3.3.4',
+            'seaborn>=0.11.1'
       ],
       include_package_data=True,
       test_suite="pytest-runner",
