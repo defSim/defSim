@@ -80,7 +80,7 @@ class CorrelatedContinuousInitializer(AttributesInitializer):
 
         self.dissimilarity_criterion = kwargs.get("neighbor_similarity_criterion", 0.75)
 
-    def initialize_attributes(self, network: nx.Graph):
+    def initialize_attributes(self, network: nx.Graph, **kwargs):
         """
         Randomly initializes a number of continuous features between 0 and 1 for each node.
         Specify either a covariance matrix or a single correlation value (which is then applied to all pairs of attributes).
