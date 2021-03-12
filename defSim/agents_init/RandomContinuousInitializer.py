@@ -27,7 +27,7 @@ class RandomContinuousInitializer(AttributesInitializer):
             self.num_features = 1     
 
 
-    def initialize_attributes(self, network: nx.Graph):
+    def initialize_attributes(self, network: nx.Graph, **kwargs):
         """
 
         Randomly initializes a number of continuous features between 0 and 1 for each node.

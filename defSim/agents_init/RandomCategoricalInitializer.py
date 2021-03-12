@@ -25,7 +25,7 @@ class RandomCategoricalInitializer(AttributesInitializer):
             #print("Number of traits was not specified, default value 3 is used.")
             self.num_traits = 3        
 
-    def initialize_attributes(self, network: nx.Graph):
+    def initialize_attributes(self, network: nx.Graph, **kwargs):
         """
         Randomly initializes a number of discrete features for each node.
 

@@ -14,7 +14,7 @@ from defSim.network_evolution_sim.network_evolution_sim import NetworkModifier
 from defSim.Simulation import Simulation
 from defSim.tools.CreateOutputTable import OutputTableCreator
 from defSim.tools.CreateDataFiles import DataFileCreator, create_data_files
-import pathos
+import multiprocessing as mp
 from tqdm import tqdm
 import random
 import timeit
@@ -264,7 +264,7 @@ class Experiment:
 
         return True
 
-    def run(self, parallel: bool = False, num_cores=pathos.helpers.cpu_count(), show_progress: bool = True) -> pd.DataFrame:
+    def run(self, parallel: bool = False, num_cores=mp.cpu_count(), show_progress: bool = True) -> pd.DataFrame:
         """
 
         If the experiment is defined by a list of simulations:
@@ -287,23 +287,23 @@ class Experiment:
         if self.simulations is not None:
             print("%d simulations specified" % len(self.simulations))
             if parallel:
-                pool = pathos.pools.ProcessPool(nodes=num_cores)
+                pool = mp.Pool(processes=num_cores)
 
                 if show_progress:
                     results = list(yield_parallel_with_progress_bar(function=call_simulation_run, iterable=self.simulations, pool=pool))
                 else:
-                    results = pool.uimap(call_simulation_run, self.simulations)
-                pool.clear()
+                    results = pool.imap(call_simulation_run, self.simulations)
+                pool.close()
 
                 results_dataframe = pd.concat(results).reset_index()
                 if self.output_folder_path is not None:
-                    create_data_files(output_table = results_dataframe, realizations = self.output_file_types, output_folder_path = self.output_folder_path)                
+                    create_data_files(output_table=results_dataframe, realizations=self.output_file_types, output_folder_path=self.output_folder_path)
                 return results_dataframe
             else:  # if NOT parallel
                 result_list = [sim.run(show_progress=False) for sim in tqdm(self.simulations, mininterval=1)] if show_progress else [sim.run(show_progress=False) for sim in self.simulations]
                 results_dataframe = pd.concat(result_list).reset_index()
                 if self.output_folder_path is not None:
-                    create_data_files(output_table = results_dataframe, realizations = self.output_file_types, output_folder_path = self.output_folder_path)                
+                    create_data_files(output_table=results_dataframe, realizations=self.output_file_types, output_folder_path=self.output_folder_path)
                 return results_dataframe
         # if simulations are to be created based on parameter combinations
         else:              
