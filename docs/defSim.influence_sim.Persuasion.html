@@ -195,6 +195,28 @@ Here, we make use of that relationship and implement an implicit argument commun
 agent_i communicates a pro (1) argument on a given topic with a probability equal to their current opinion on
 that topic.</p>
 <dl class="py method">
+<dt id="defSim.influence_sim.Persuasion.Persuasion.__init__">
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">regime</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#defSim.influence_sim.Persuasion.Persuasion.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>regime</strong> – This string determines the mode in which the agents influence each other.
+In ‘one-to-one’ the focal agent influences one other agent, in ‘one-to-many’ multiple other
+agents and in ‘many-to-one’ the focal agent is influenced by multiple other agents in the network.</p></li>
+<li><p><strong>kwargs</strong> – Additional parameters specific to the implementation of the InfluenceOperator. Possible
+parameters are the following:</p></li>
+<li><p><strong>convergence_rate</strong> (<em>float=0.2</em>) – A number between 0 and 1 determining the share of the opinion scale the
+receiving agent will move in either direction after interaction.</p></li>
+<li><p><strong>bi_directional</strong> (<em>bool=False</em>) – A boolean specifying whether influence is bi- or uni-directional.</p></li>
+<li><p><strong>confidence_level</strong> (<em>float=1</em>) – A number between 0 and 1 determining the cutoff value for the dissimilarity at
+which agents do not interact anymore. 1 means that only strictly dissimilar agents do not interact, 0 means
+no agents will interact. Passed as a kwargs argument.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
 <dt id="defSim.influence_sim.Persuasion.Persuasion.spread_influence">
 <code class="sig-name descname">spread_influence</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">network</span><span class="p">:</span> <span class="n">networkx.classes.graph.Graph</span></em>, <em class="sig-param"><span class="n">agent_i</span><span class="p">:</span> <span class="n">int</span></em>, <em class="sig-param"><span class="n">agents_j</span><span class="p">:</span> <span class="n">List<span class="p">[</span>int<span class="p">]</span></span></em>, <em class="sig-param"><span class="n">dissimilarity_measure</span><span class="p">:</span> <span class="n"><a class="reference internal" href="defSim.dissimilarity_component.html#defSim.dissimilarity_component.dissimilarity_calculator.DissimilarityCalculator" title="defSim.dissimilarity_component.dissimilarity_calculator.DissimilarityCalculator">defSim.dissimilarity_component.dissimilarity_calculator.DissimilarityCalculator</a></span></em>, <em class="sig-param"><span class="n">attributes</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span>List<span class="p">[</span>str<span class="p">]</span><span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span> &#x2192; bool<a class="headerlink" href="#defSim.influence_sim.Persuasion.Persuasion.spread_influence" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">

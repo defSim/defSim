@@ -24,13 +24,11 @@ class Leviathan(InfluenceOperator):
         then she increases her opinion about this interlocutor. On the contrary she tends to decrease her opinion
         about those who seem to undervalue her.
         The model only exist in the one-to-one communication regime, with a bi-directional influence.
-
         Based on [Deffuant2013]_
 
         :param network: The network in which the agents exist.
         :param agent_i: the index of the focal agent that is either the source or the target of the influence
-        :param agents_j: A list of indices of the agents who can be either the source or the targets of the influence. The list can have a
-            single entry, implementing one-to-one communication.
+        :param agents_j: A list of indices of the agents who can be either the source or the targets of the influence. The list can have a single entry, implementing one-to-one communication.
         :param regime: only "one-to-one" is managed.
         :param dissimilarity_measure: An instance of a :class:`~defSim.dissimilarity_component.DissimilarityCalculator.DissimilarityCalculator`.
         :param kwargs: Additional parameters specific to the implementation of the InfluenceOperator. Possible parameters are the following:
@@ -140,3 +138,4 @@ class Leviathan(InfluenceOperator):
                     network.nodes[aj]["opinions"][ai] - network.nodes[ai]["opinions"][ai] + random.uniform(-noise,
                                                                                                            noise))
         network.nodes[ai]["opinions"][aj] = min(max(-1, network.nodes[ai]["opinions"][aj]), 1)
+

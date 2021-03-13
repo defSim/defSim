@@ -208,46 +208,59 @@ values per parameter and also all optional parameters are passed in one combined
 
 <dl class="py method">
 <dt id="defSim.Simulation.Simulation._run_until_convergence">
-<code class="sig-name descname">_run_until_convergence</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#defSim.Simulation.Simulation._run_until_convergence" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">_run_until_convergence</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">show_progress</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">False</span></em><span class="sig-paren">)</span><a class="headerlink" href="#defSim.Simulation.Simulation._run_until_convergence" title="Permalink to this definition">¶</a></dt>
 <dd><p>The convergence of the simulation is periodically checked using a custom convergence check
 set in self.stop_condition. Every step_size steps (defaults to 100), the check_convergence
 method of this custom stop condition is called. The simulation terminates if this method
 returns true or self.max_iterations is reached.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>step_size</strong> (<em>int=100</em>) – determines how often it should be checked for a change in the network.</p>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>step_size</strong> (<em>int=100</em>) – determines how often it should be checked for a change in the network.</p></li>
+<li><p><strong>show_progress</strong> (<em>bool</em>) – bool determines whether to show progress bar</p></li>
+</ul>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py method">
 <dt id="defSim.Simulation.Simulation._run_until_max_iteration">
-<code class="sig-name descname">_run_until_max_iteration</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#defSim.Simulation.Simulation._run_until_max_iteration" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<code class="sig-name descname">_run_until_max_iteration</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">show_progress</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">False</span></em><span class="sig-paren">)</span><a class="headerlink" href="#defSim.Simulation.Simulation._run_until_max_iteration" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>show_progress</strong> (<em>bool</em>) – bool determines whether to show progress bar</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py method">
 <dt id="defSim.Simulation.Simulation._run_until_pragmatic_convergence">
-<code class="sig-name descname">_run_until_pragmatic_convergence</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#defSim.Simulation.Simulation._run_until_pragmatic_convergence" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">_run_until_pragmatic_convergence</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">show_progress</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">False</span></em><span class="sig-paren">)</span><a class="headerlink" href="#defSim.Simulation.Simulation._run_until_pragmatic_convergence" title="Permalink to this definition">¶</a></dt>
 <dd><p>Pragmatic convergence means that each “step_size” time steps it is checked whether the structure of the network
 and all attributes are still the same. If thats the case, it is assumed that the simulation converged and it stops.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>step_size</strong> (<em>int=100</em>) – determines how often it should be checked for a change in the network.</p>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>step_size</strong> (<em>int=100</em>) – determines how often it should be checked for a change in the network.</p></li>
+<li><p><strong>show_progress</strong> (<em>bool</em>) – bool determines whether to show progress bar</p></li>
+</ul>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py method">
 <dt id="defSim.Simulation.Simulation._run_until_strict_convergence">
-<code class="sig-name descname">_run_until_strict_convergence</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#defSim.Simulation.Simulation._run_until_strict_convergence" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">_run_until_strict_convergence</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">show_progress</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">False</span></em><span class="sig-paren">)</span><a class="headerlink" href="#defSim.Simulation.Simulation._run_until_strict_convergence" title="Permalink to this definition">¶</a></dt>
 <dd><p>Here the convergence of the simulation is periodically checked by assessing the distance between each neighbor
 in the network. Unless there is no single pair left that can theoretically influence each other, the simulation
 continues.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>threshold</strong> (<em>float=0.0</em>) – A value between 0 and 1 that determines at what distance two agents can’t influence each other anymore.</p></li>
+<li><p><strong>maximum</strong> (<em>float=inf</em>) – A value that determines above what maximum distance two agents can’t influence each other anymore.</p></li>
+<li><p><strong>minimum</strong> (<em>float=inf</em>) – A value that determines below what minimum distance two agents can’t influence each other anymore.</p></li>
 <li><p><strong>step_size</strong> (<em>int=100</em>) – determines how often it should be checked for a change in the network.</p></li>
+<li><p><strong>show_progress</strong> (<em>bool</em>) – bool determines whether to show progress bar</p></li>
 </ul>
 </dd>
 </dl>
@@ -276,10 +289,17 @@ DataFrame. It contains the following columns:</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="defSim.Simulation.Simulation.initialize_simulation">
-<code class="sig-name descname">initialize</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#defSim.Simulation.Simulation.initialize_simulation" title="Permalink to this definition">¶</a></dt>
+<dt id="defSim.Simulation.Simulation.initialize">
+<code class="sig-name descname">initialize</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#defSim.Simulation.Simulation.initialize" title="Permalink to this definition">¶</a></dt>
 <dd><p>This method initializes the network if none is given, applies network modifiers, initializes the attributes of the agents,
 and also computes and sets the distances between each neighbor.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="defSim.Simulation.Simulation.initialize_simulation">
+<code class="sig-name descname">initialize_simulation</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#defSim.Simulation.Simulation.initialize_simulation" title="Permalink to this definition">¶</a></dt>
+<dd><p>Will be deprecated in favor of Simulation.initialize().
+Replace in code, will be removed at or before v1.0.0</p>
 </dd></dl>
 
 <dl class="py method">
@@ -300,15 +320,18 @@ returned to the console to make the Simulation object more transparent.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="defSim.Simulation.Simulation.run_simulation">
-<code class="sig-name descname">run</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">initialize</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">True</span></em><span class="sig-paren">)</span> &#x2192; pandas.core.frame.DataFrame<a class="headerlink" href="#defSim.Simulation.Simulation.run_simulation" title="Permalink to this definition">¶</a></dt>
+<dt id="defSim.Simulation.Simulation.run">
+<code class="sig-name descname">run</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">initialize</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">True</span></em>, <em class="sig-param"><span class="n">show_progress</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">True</span></em><span class="sig-paren">)</span> &#x2192; pandas.core.frame.DataFrame<a class="headerlink" href="#defSim.Simulation.Simulation.run" title="Permalink to this definition">¶</a></dt>
 <dd><p>This method initializes the network if none is given, initializes the attributes of the agents, and also
 computes and sets the distances between each neighbor.
 It then calls different functions that execute the simulation based on which stop criterion was selected.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>initialize</strong> (<em>bool=True</em>) – Initialize the simulation before running (disable if initialization was
-done separately)</p>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>initialize</strong> (<em>bool=True</em>) – Initialize the simulation before running (disable if initialization was
+done separately)</p></li>
+<li><p><strong>show_progress</strong> (<em>bool=True</em>) – Whether to show progress bar</p></li>
+</ul>
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><p>A Pandas DataFrame that contains one row of data. To see what output the output contains see
@@ -318,8 +341,22 @@ done separately)</p>
 </dd></dl>
 
 <dl class="py method">
+<dt id="defSim.Simulation.Simulation.run_simulation">
+<code class="sig-name descname">run_simulation</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">initialize</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">True</span></em><span class="sig-paren">)</span> &#x2192; pandas.core.frame.DataFrame<a class="headerlink" href="#defSim.Simulation.Simulation.run_simulation" title="Permalink to this definition">¶</a></dt>
+<dd><p>Will be deprecated in favor of Simulation.run().
+Replace in code, will be removed at or before v1.0.0</p>
+</dd></dl>
+
+<dl class="py method">
 <dt id="defSim.Simulation.Simulation.run_simulation_step">
-<code class="sig-name descname">run_step</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#defSim.Simulation.Simulation.run_simulation_step" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">run_simulation_step</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#defSim.Simulation.Simulation.run_simulation_step" title="Permalink to this definition">¶</a></dt>
+<dd><p>Will be deprecated in favor of Simulation.run_step().
+Replace in code, will be removed at or before v1.0.0</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="defSim.Simulation.Simulation.run_step">
+<code class="sig-name descname">run_step</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#defSim.Simulation.Simulation.run_step" title="Permalink to this definition">¶</a></dt>
 <dd><p>Executes one iteration of the simulation step which includes the selection of a focal agent, the selection
 of the neighbors and the influence step.
 If the user passed their own implementations of those components, they will be called to execute these steps,

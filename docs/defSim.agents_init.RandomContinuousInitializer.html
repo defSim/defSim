@@ -96,9 +96,6 @@
 <li class="toctree-l2"><a class="reference internal" href="defSim.agents_init.RandomCategoricalInitializer.html">Random Categorical Initializer</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Random Continuous Initializer</a></li>
 <li class="toctree-l2"><a class="reference internal" href="defSim.agents_init.CorrelatedContinuousInitializer.html">Correlated Continuous Initializer</a></li>
-<li class="toctree-l2"><a class="reference internal" href="defSim.agents_init.RandomCategoricalInitializer.html">Random Categorical Initializer</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">Random Continuous Initializer</a></li>
-<li class="toctree-l2"><a class="reference internal" href="defSim.agents_init.CorrelatedContinuousInitializer.html">Correlated Continuous Initializer</a></li>
 <li class="toctree-l2"><a class="reference internal" href="defSim.agents_init.html#initialize-attributes">initialize_attributes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="defSim.agents_init.html#module-0">set_categorical_attribute</a></li>
 <li class="toctree-l2"><a class="reference internal" href="defSim.agents_init.html#module-1">set_continuous_attribute</a></li>
@@ -188,8 +185,21 @@
 <dd><p>Bases: <a class="reference internal" href="defSim.agents_init.html#defSim.agents_init.agents_init.AttributesInitializer" title="defSim.agents_init.agents_init.AttributesInitializer"><code class="xref py py-class docutils literal notranslate"><span class="pre">defSim.agents_init.agents_init.AttributesInitializer</span></code></a></p>
 <p>Implements the AttributesInitializer as a random initialization of arbitrary continuous features.</p>
 <dl class="py method">
+<dt id="defSim.agents_init.RandomContinuousInitializer.RandomContinuousInitializer.__init__">
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">distribution</span><span class="p">:</span> <span class="n">str</span> <span class="o">=</span> <span class="default_value">'uniform'</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#defSim.agents_init.RandomContinuousInitializer.RandomContinuousInitializer.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>distribution</strong> (<em>str='uniform'</em>) – Type of continuous distribution to draw feature values from.</p></li>
+<li><p><strong>num_features</strong> (<em>int=1</em>) – How many different attributes each node has.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
 <dt id="defSim.agents_init.RandomContinuousInitializer.RandomContinuousInitializer.initialize_attributes">
-<code class="sig-name descname">initialize_attributes</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">network</span><span class="p">:</span> <span class="n">networkx.classes.graph.Graph</span></em><span class="sig-paren">)</span><a class="headerlink" href="#defSim.agents_init.RandomContinuousInitializer.RandomContinuousInitializer.initialize_attributes" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">initialize_attributes</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">network</span><span class="p">:</span> <span class="n">networkx.classes.graph.Graph</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#defSim.agents_init.RandomContinuousInitializer.RandomContinuousInitializer.initialize_attributes" title="Permalink to this definition">¶</a></dt>
 <dd><p>Randomly initializes a number of continuous features between 0 and 1 for each node.
 Bounds default to min = 0, max = 1</p>
 <dl class="field-list simple">

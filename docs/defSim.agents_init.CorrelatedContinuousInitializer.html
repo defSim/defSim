@@ -96,9 +96,6 @@
 <li class="toctree-l2"><a class="reference internal" href="defSim.agents_init.RandomCategoricalInitializer.html">Random Categorical Initializer</a></li>
 <li class="toctree-l2"><a class="reference internal" href="defSim.agents_init.RandomContinuousInitializer.html">Random Continuous Initializer</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Correlated Continuous Initializer</a></li>
-<li class="toctree-l2"><a class="reference internal" href="defSim.agents_init.RandomCategoricalInitializer.html">Random Categorical Initializer</a></li>
-<li class="toctree-l2"><a class="reference internal" href="defSim.agents_init.RandomContinuousInitializer.html">Random Continuous Initializer</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">Correlated Continuous Initializer</a></li>
 <li class="toctree-l2"><a class="reference internal" href="defSim.agents_init.html#initialize-attributes">initialize_attributes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="defSim.agents_init.html#module-0">set_categorical_attribute</a></li>
 <li class="toctree-l2"><a class="reference internal" href="defSim.agents_init.html#module-1">set_continuous_attribute</a></li>
@@ -188,8 +185,30 @@
 <dd><p>Bases: <a class="reference internal" href="defSim.agents_init.html#defSim.agents_init.agents_init.AttributesInitializer" title="defSim.agents_init.agents_init.AttributesInitializer"><code class="xref py py-class docutils literal notranslate"><span class="pre">defSim.agents_init.agents_init.AttributesInitializer</span></code></a></p>
 <p>Implements the AttributesInitializer as a random initialization of correlated random continuous features.</p>
 <dl class="py method">
+<dt id="defSim.agents_init.CorrelatedContinuousInitializer.CorrelatedContinuousInitializer.__init__">
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">distribution</span><span class="p">:</span> <span class="n">str</span> <span class="o">=</span> <span class="default_value">'uniform'</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#defSim.agents_init.CorrelatedContinuousInitializer.CorrelatedContinuousInitializer.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>distribution</strong> (<em>str='uniform'</em>) – Type of continuous distribution to draw feature values from.</p></li>
+<li><p><strong>neighbor_similarity</strong> (<em>bool=False</em>) – If set to True, a default application of neighbor similarity is used. Regardless of the value of this parameter, similarity options can always be customized individually</p></li>
+<li><p><strong>neighbor_similarity_concentration</strong> (<em>float=10</em>) – How closely concentrated (peaked) the weight distribution is around the mean value of neighbors (minimum value &gt; 2 required to maintain integrity of the distribution)</p></li>
+<li><p><strong>neighbor_similarity_strength</strong> (<em>float=0</em>) – Strength of weighting by neighbor value. 0 = no influence of neighbors</p></li>
+<li><p><strong>num_features</strong> (<em>int=1</em>) – How many different attributes each node has.</p></li>
+<li><p><strong>neighbor_similarity_feature</strong> (<em>str='f01'</em>) – Sets the feature on which neighbor similarity will be determined.</p></li>
+<li><p><strong>or numpy.array covariances</strong> (<em>[</em><em>list</em><em>]</em>) – Complete covariance matrix (see agents_init.generate_correlated_continuous_attributes)</p></li>
+<li><p><strong>correlation</strong> (<em>float</em>) – Single correlation value to apply to all pairs of attributes</p></li>
+<li><p><strong>allow_inverse_concentration</strong> (<em>bool</em>) – Use to allow concentrations below 2, which result in anticoordination with neighbors</p></li>
+<li><p><strong>or int neighbor_similarity_postprocessing</strong> (<em>str</em>) – Sets the number of postprocessing iterations (integer to set max number of iterations, ‘convergence’ to not set a maximum)</p></li>
+<li><p><strong>neighbor_similarity_criterion</strong> (<em>float</em>) – Maximum allowable dissimilarity to neighbors during postprocessing</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
 <dt id="defSim.agents_init.CorrelatedContinuousInitializer.CorrelatedContinuousInitializer.initialize_attributes">
-<code class="sig-name descname">initialize_attributes</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">network</span><span class="p">:</span> <span class="n">networkx.classes.graph.Graph</span></em><span class="sig-paren">)</span><a class="headerlink" href="#defSim.agents_init.CorrelatedContinuousInitializer.CorrelatedContinuousInitializer.initialize_attributes" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">initialize_attributes</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">network</span><span class="p">:</span> <span class="n">networkx.classes.graph.Graph</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#defSim.agents_init.CorrelatedContinuousInitializer.CorrelatedContinuousInitializer.initialize_attributes" title="Permalink to this definition">¶</a></dt>
 <dd><p>Randomly initializes a number of continuous features between 0 and 1 for each node.
 Specify either a covariance matrix or a single correlation value (which is then applied to all pairs of attributes).
 Correlation values can  be used in the covariance matrix as the base data generated will always be N(0, 1) regardless of the
@@ -224,6 +243,21 @@ and postprocessing by setting the relevant parameters.</p>
 enforcing a minimum level of similarity among neighbors. The main parameter to set here is the
 dissimilarity criterion. The dissimilarity cirterion works by setting a limit on the maximum
 dissimilarity between neighbors on the neighbor_similarity_feature.</p>
+<dl class="py method">
+<dt id="defSim.agents_init.CorrelatedContinuousInitializer.SimilarityPostprocessor.__init__">
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">network</span><span class="p">:</span> <span class="n">networkx.classes.graph.Graph</span></em>, <em class="sig-param"><span class="n">dissimilarity_criterion</span><span class="p">:</span> <span class="n">float</span></em>, <em class="sig-param"><span class="n">feature_names</span><span class="p">:</span> <span class="n">list</span></em>, <em class="sig-param"><span class="n">neighbor_similarity_feature</span><span class="p">:</span> <span class="n">str</span></em><span class="sig-paren">)</span><a class="headerlink" href="#defSim.agents_init.CorrelatedContinuousInitializer.SimilarityPostprocessor.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>network</strong> (<em>nx.Graph</em>) – The graph object whose nodes’ attributes are modified.</p></li>
+<li><p><strong>dissimilarity_criterion</strong> (<em>float</em>) – maximum allowable attribute value distance between neighbors.</p></li>
+<li><p><strong>feature_names</strong> (<em>list</em>) – List of all feature names as strings</p></li>
+<li><p><strong>neighbor_similarity_feature</strong> (<em>str</em>) – Name of feature on which neighbor similarity is to be enforced</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
 <dl class="py method">
 <dt id="defSim.agents_init.CorrelatedContinuousInitializer.SimilarityPostprocessor.check_convergence">
 <code class="sig-name descname">check_convergence</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">swaps</span></em>, <em class="sig-param"><span class="n">current_dissimilar_nodes</span></em>, <em class="sig-param"><span class="n">nodes_involved_previous</span></em>, <em class="sig-param"><span class="n">num_dissimilar_previous</span></em><span class="sig-paren">)</span><a class="headerlink" href="#defSim.agents_init.CorrelatedContinuousInitializer.SimilarityPostprocessor.check_convergence" title="Permalink to this definition">¶</a></dt>

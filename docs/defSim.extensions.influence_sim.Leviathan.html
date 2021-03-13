@@ -214,15 +214,14 @@ During an interaction, the agents propagate their opinions about themselves and 
 Moreover, each individual is subject to vanity : if her interlocutor seems to value her highly,
 then she increases her opinion about this interlocutor. On the contrary she tends to decrease her opinion
 about those who seem to undervalue her.
-The model only exist in the one-to-one communication regime, with a bi-directional influence.</p>
-<p>Based on <a class="reference internal" href="#deffuant2013" id="id1"><span>[Deffuant2013]</span></a></p>
+The model only exist in the one-to-one communication regime, with a bi-directional influence.
+Based on <a class="reference internal" href="#deffuant2013" id="id1"><span>[Deffuant2013]</span></a></p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>network</strong> – The network in which the agents exist.</p></li>
 <li><p><strong>agent_i</strong> – the index of the focal agent that is either the source or the target of the influence</p></li>
-<li><p><strong>agents_j</strong> – A list of indices of the agents who can be either the source or the targets of the influence. The list can have a
-single entry, implementing one-to-one communication.</p></li>
+<li><p><strong>agents_j</strong> – A list of indices of the agents who can be either the source or the targets of the influence. The list can have a single entry, implementing one-to-one communication.</p></li>
 <li><p><strong>regime</strong> – only “one-to-one” is managed.</p></li>
 <li><p><strong>dissimilarity_measure</strong> – An instance of a <code class="xref py py-class docutils literal notranslate"><span class="pre">DissimilarityCalculator</span></code>.</p></li>
 <li><p><strong>kwargs</strong> – Additional parameters specific to the implementation of the InfluenceOperator. Possible parameters are the following:</p></li>

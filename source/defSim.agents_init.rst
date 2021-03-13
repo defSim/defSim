@@ -11,15 +11,6 @@ This component is concerned with initializing the attributes of the agents at th
 
 Initializing the attributes can be done using the following function:
 
-This component is concerned with initializing agent attributes at the start of the simulation. The following methods are available:
-
-.. toctree ::
-   
-   Random Categorical Initializer <defSim.agents_init.RandomCategoricalInitializer>
-   Random Continuous Initializer <defSim.agents_init.RandomContinuousInitializer>
-   Correlated Continuous Initializer <defSim.agents_init.CorrelatedContinuousInitializer>
-
-
 initialize_attributes
 -------------------------------------------------------
 
