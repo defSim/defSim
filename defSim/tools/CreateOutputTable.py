@@ -3,7 +3,9 @@ from abc import ABC, abstractmethod
 import networkx as nx
 from typing import List
 
-_implemented_output_realizations = ["Basic", "ClusterFinderList", "ClusterFinder", "RegionsList", "Regions", "ZonesList", "Zones", "Isolates", "AverageDistance", "AverageOpinion", "Graph"]
+_implemented_output_realizations = ["Basic", "ClusterFinderList", "ClusterFinder", "RegionsList", "Regions",
+                                    "ZonesList", "Zones", "Isolates", "AverageDistance", "AverageOpinion",
+                                    "Spread", "Dispersion", "Coverage", "Graph"]
 
 class OutputTableCreator(ABC):
     """
@@ -43,10 +45,14 @@ def create_output_table(network: nx.Graph, realizations=None, colnames=None,
         * Basic: Returns the realizations Regions, Zones, Isolates, Homogeneity, AverageDistance
         * ClusterFinder: Method to find clusters based on minimal allowed distance between network neighbors as
           defined by the user in the kwargs dictionary. Default is to return the same output as the Regions realization
-        * RegionsList:
-        * Regions:
-        * ZonesList:
-        * Zones:
+        * Regions: Returns the number of regions (i.e. the number of connected components in the graph after preserving
+          only the links with perfect similarity)
+        * RegionsList: Returns a list with the sizes of all regions (i.e. the number of agents in each connected
+          component in the graph after preserving only the links with perfect similarity)
+        * Zones: Returns the number of zones (i.e. the number of connected components in the graph after preserving
+          only the links with dissimilarity != 1)
+        * ZonesList: Returns a list with the sizes of all zones (i.e. the number of agents in each connected component
+          in the graph after preserving only the links with dissimilarity != 1)
         * Isolates: Reports the number of isolates as found in the ClusterFinder method, based on minimal allowed
           distance between network network neighbors as defined by the user in the kwargs dictionary. Default is to
           return the same output as the Regions realization
@@ -55,6 +61,10 @@ def create_output_table(network: nx.Graph, realizations=None, colnames=None,
           simulation.
         * AverageOpinion: Reports average opinion (requires a list of features for which this needs to be calculated if
           number of features > 1. Pass this list in the kwargs dictionary as AverageOpinionFeatures.)
+        * Spread: Reports the spread (distance between maximum and minimum opinion)
+        * Dispersion: Returns the amount of dispersion defined as the average absolute deviation from the mean on a
+          given feature [Bramson2016]_
+        * Coverage: Report coverage for nondiscrete features, following [Bramson2016]_
         * Graph: Returns the entire NetworkX Graph
 
     :param agents: A list of the indices of all agents that will be considered by the output table.
@@ -85,7 +95,7 @@ def create_output_table(network: nx.Graph, realizations=None, colnames=None,
         for i in removenodes:
             network.remove_node(i)
 
-    from .OutputMeasures import ClusterFinder, AverageDistanceReporter, AverageOpinionReporter
+    from .OutputMeasures import ClusterFinder, AverageDistanceReporter, AverageOpinionReporter, SpreadReporter, DispersionReporter, CoverageReporter
 
     # Initialize output dictionary by including settings for the simulation run
     output = settings_dict
@@ -122,6 +132,18 @@ def create_output_table(network: nx.Graph, realizations=None, colnames=None,
         opinionfeatures = kwargs.get("AverageOpinionFeatures", ['f01'])
         for i in opinionfeatures:
             output['AverageOpinion{}'.format(i)] = AverageOpinionReporter(feature = i).create_output(network)
+    if "Spread" in realizations:
+        opinionfeatures = kwargs.get("SpreadOpinionFeatures", ['f01'])
+        for i in opinionfeatures:
+            output['Spread{}'.format(i)] = SpreadReporter(feature=i).create_output(network)
+    if "Dispersion" in realizations:
+        opinionfeatures = kwargs.get("DispersionOpinionFeatures", ['f01'])
+        for i in opinionfeatures:
+            output['Dispersion{}'.format(i)] = DispersionReporter(feature=i).create_output(network)
+    if "Coverage" in realizations:
+        opinionfeatures = kwargs.get("CoverageOpinionFeatures", ['f01'])
+        for i in opinionfeatures:
+            output['Coverage{}'.format(i)] = CoverageReporter(feature=i).create_output(network)
 
     # Output the entire networkX Graph object
     if "Graph" in realizations:
