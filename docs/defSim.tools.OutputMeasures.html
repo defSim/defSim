@@ -1,0 +1,478 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>OutputMeasures &mdash; defSim alpha documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+
+  
+  
+    <link rel="shortcut icon" href="_static/favicon.ico"/>
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Plots" href="defSim.tools.Plots.html" />
+    <link rel="prev" title="Tools" href="defSim.tools.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #343131" >
+          
+
+          
+            <a href="index.html">
+          
+
+          
+            
+            <img src="_static/defSim-logo.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="Introduction_to_defSim.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="experiment.class.html">Experiment class</a></li>
+<li class="toctree-l1"><a class="reference internal" href="simulation.class.html">Simulation class</a></li>
+<li class="toctree-l1"><a class="reference internal" href="defSim.network_init.html">Networks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="defSim.agents_init.html">Agent features</a></li>
+<li class="toctree-l1"><a class="reference internal" href="defSim.focal_agent_sim.html">Focal agent selection</a></li>
+<li class="toctree-l1"><a class="reference internal" href="defSim.neighbor_selector_sim.html">Neighbor selector</a></li>
+<li class="toctree-l1"><a class="reference internal" href="defSim.influence_sim.html">Influence</a></li>
+<li class="toctree-l1"><a class="reference internal" href="defSim.network_evolution_sim.html">Network evolution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="defSim.dissimilarity_component.html">Dissimilarity updaters</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="defSim.tools.html">Tools</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Output Measures</a></li>
+<li class="toctree-l2"><a class="reference internal" href="defSim.tools.Plots.html">Plots</a></li>
+<li class="toctree-l2"><a class="reference internal" href="defSim.tools.NetworkDistanceUpdater.html">Network Distance Updater</a></li>
+<li class="toctree-l2"><a class="reference internal" href="defSim.tools.ClusterExecutionScript.html">Cluster Execution Script</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="defSim.extensions.html">Extensions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="credits.html">Credits</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">defSim</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="defSim.tools.html">Tools</a> &raquo;</li>
+        
+      <li>OutputMeasures</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/defSim.tools.OutputMeasures.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="module-defSim.tools.OutputMeasures">
+<span id="outputmeasures"></span><h1>OutputMeasures<a class="headerlink" href="#module-defSim.tools.OutputMeasures" title="Permalink to this headline">¶</a></h1>
+<dl class="py class">
+<dt id="defSim.tools.OutputMeasures.AttributeReporter">
+<em class="property">class </em><code class="sig-prename descclassname">defSim.tools.OutputMeasures.</code><code class="sig-name descname">AttributeReporter</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">feature</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span>str<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#defSim.tools.OutputMeasures.AttributeReporter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="defSim.tools.CreateOutputTable.html#defSim.tools.CreateOutputTable.OutputTableCreator" title="defSim.tools.CreateOutputTable.OutputTableCreator"><code class="xref py py-class docutils literal notranslate"><span class="pre">defSim.tools.CreateOutputTable.OutputTableCreator</span></code></a></p>
+<dl class="py method">
+<dt id="defSim.tools.OutputMeasures.AttributeReporter.__init__">
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">feature</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span>str<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#defSim.tools.OutputMeasures.AttributeReporter.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initialize self.  See help(type(self)) for accurate signature.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="defSim.tools.OutputMeasures.AttributeReporter.create_output">
+<code class="sig-name descname">create_output</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">network</span><span class="p">:</span> <span class="n">networkx.classes.graph.Graph</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#defSim.tools.OutputMeasures.AttributeReporter.create_output" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function will output a single row of a dataframe where the columns are user-given agent-features and column
+values contain a list of all the agents’  values on the given feature.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>network</strong> – A NetworkX object</p></li>
+<li><p><strong>feature</strong> – The name of the feature to output</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A list of feature values for each agent</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="defSim.tools.OutputMeasures.AttributeReporter.label">
+<code class="sig-name descname">label</code><em class="property"> = 'AttributeReporter'</em><a class="headerlink" href="#defSim.tools.OutputMeasures.AttributeReporter.label" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="defSim.tools.OutputMeasures.AverageDistanceReporter">
+<em class="property">class </em><code class="sig-prename descclassname">defSim.tools.OutputMeasures.</code><code class="sig-name descname">AverageDistanceReporter</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#defSim.tools.OutputMeasures.AverageDistanceReporter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="defSim.tools.CreateOutputTable.html#defSim.tools.CreateOutputTable.OutputTableCreator" title="defSim.tools.CreateOutputTable.OutputTableCreator"><code class="xref py py-class docutils literal notranslate"><span class="pre">defSim.tools.CreateOutputTable.OutputTableCreator</span></code></a></p>
+<dl class="py method">
+<dt id="defSim.tools.OutputMeasures.AverageDistanceReporter.create_output">
+<code class="sig-name descname">create_output</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">network</span><span class="p">:</span> <span class="n">networkx.classes.graph.Graph</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#defSim.tools.OutputMeasures.AverageDistanceReporter.create_output" title="Permalink to this definition">¶</a></dt>
+<dd><p>Output the average feature distance across all edges. Based on
+calculated distances in the network (so based on whatever
+distance measure was specified in the simulation).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>network</strong> – A NetworkX object</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Average distance (float)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="defSim.tools.OutputMeasures.AverageDistanceReporter.label">
+<code class="sig-name descname">label</code><em class="property"> = 'AverageDistance'</em><a class="headerlink" href="#defSim.tools.OutputMeasures.AverageDistanceReporter.label" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="defSim.tools.OutputMeasures.AverageOpinionReporter">
+<em class="property">class </em><code class="sig-prename descclassname">defSim.tools.OutputMeasures.</code><code class="sig-name descname">AverageOpinionReporter</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">feature</span><span class="p">:</span> <span class="n">str</span> <span class="o">=</span> <span class="default_value">'f01'</span></em><span class="sig-paren">)</span><a class="headerlink" href="#defSim.tools.OutputMeasures.AverageOpinionReporter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="defSim.tools.CreateOutputTable.html#defSim.tools.CreateOutputTable.OutputTableCreator" title="defSim.tools.CreateOutputTable.OutputTableCreator"><code class="xref py py-class docutils literal notranslate"><span class="pre">defSim.tools.CreateOutputTable.OutputTableCreator</span></code></a></p>
+<dl class="py method">
+<dt id="defSim.tools.OutputMeasures.AverageOpinionReporter.__init__">
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">feature</span><span class="p">:</span> <span class="n">str</span> <span class="o">=</span> <span class="default_value">'f01'</span></em><span class="sig-paren">)</span><a class="headerlink" href="#defSim.tools.OutputMeasures.AverageOpinionReporter.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initialize self.  See help(type(self)) for accurate signature.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="defSim.tools.OutputMeasures.AverageOpinionReporter.create_output">
+<code class="sig-name descname">create_output</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">network</span><span class="p">:</span> <span class="n">networkx.classes.graph.Graph</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#defSim.tools.OutputMeasures.AverageOpinionReporter.create_output" title="Permalink to this definition">¶</a></dt>
+<dd><p>Output the average opinion on a feature across all agents.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>network</strong> – A NetworkX object</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Average opinion (float)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="defSim.tools.OutputMeasures.AverageOpinionReporter.label">
+<code class="sig-name descname">label</code><em class="property"> = 'AverageOpinion'</em><a class="headerlink" href="#defSim.tools.OutputMeasures.AverageOpinionReporter.label" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="defSim.tools.OutputMeasures.ClusterFinder">
+<em class="property">class </em><code class="sig-prename descclassname">defSim.tools.OutputMeasures.</code><code class="sig-name descname">ClusterFinder</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">cluster_dissimilarity_threshold</span><span class="p">:</span> <span class="n">float</span> <span class="o">=</span> <span class="default_value">0</span></em>, <em class="sig-param"><span class="n">strict_zones</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">False</span></em><span class="sig-paren">)</span><a class="headerlink" href="#defSim.tools.OutputMeasures.ClusterFinder" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="defSim.tools.CreateOutputTable.html#defSim.tools.CreateOutputTable.OutputTableCreator" title="defSim.tools.CreateOutputTable.OutputTableCreator"><code class="xref py py-class docutils literal notranslate"><span class="pre">defSim.tools.CreateOutputTable.OutputTableCreator</span></code></a></p>
+<dl class="py method">
+<dt id="defSim.tools.OutputMeasures.ClusterFinder.__init__">
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">cluster_dissimilarity_threshold</span><span class="p">:</span> <span class="n">float</span> <span class="o">=</span> <span class="default_value">0</span></em>, <em class="sig-param"><span class="n">strict_zones</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">False</span></em><span class="sig-paren">)</span><a class="headerlink" href="#defSim.tools.OutputMeasures.ClusterFinder.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initialize self.  See help(type(self)) for accurate signature.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="defSim.tools.OutputMeasures.ClusterFinder.create_output">
+<code class="sig-name descname">create_output</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">network</span><span class="p">:</span> <span class="n">networkx.classes.graph.Graph</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#defSim.tools.OutputMeasures.ClusterFinder.create_output" title="Permalink to this definition">¶</a></dt>
+<dd><p>Finds the size and number of cultural regions, zones, or clusters present in the graph. Following Axelrod (1997)
+<em>regions</em> are defined as a set of connected nodes with an identical attribute profile.
+<em>Zones</em> are sets of connected nodes that have some attribute overlap, such that change is still possible.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>network</strong> – A NetworkX object</p></li>
+<li><p><strong>cluster_dissimilarity_threshold</strong> (<em>float=0</em>) – Threshold <span class="math notranslate nohighlight">\(\in [0,1]\)</span> that defines the maximal allowed
+dissimilarity between two agents for them to be considered to belong to the same cluster. A value of 0
+returns the strict number of regions</p></li>
+<li><p><strong>strict_zones</strong> – If true, cluster_dissimilarity_threshold is neglected and strict zones are returned (only
+the links with dissimilarity != 1 are preserved)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A list with sizes of the retrieved clusters</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="defSim.tools.OutputMeasures.ClusterFinder.label">
+<code class="sig-name descname">label</code><em class="property"> = 'ClusterFinder'</em><a class="headerlink" href="#defSim.tools.OutputMeasures.ClusterFinder.label" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="defSim.tools.OutputMeasures.CoverageReporter">
+<em class="property">class </em><code class="sig-prename descclassname">defSim.tools.OutputMeasures.</code><code class="sig-name descname">CoverageReporter</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">feature</span><span class="p">:</span> <span class="n">str</span> <span class="o">=</span> <span class="default_value">'f01'</span></em><span class="sig-paren">)</span><a class="headerlink" href="#defSim.tools.OutputMeasures.CoverageReporter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="defSim.tools.CreateOutputTable.html#defSim.tools.CreateOutputTable.OutputTableCreator" title="defSim.tools.CreateOutputTable.OutputTableCreator"><code class="xref py py-class docutils literal notranslate"><span class="pre">defSim.tools.CreateOutputTable.OutputTableCreator</span></code></a></p>
+<dl class="py method">
+<dt id="defSim.tools.OutputMeasures.CoverageReporter.__init__">
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">feature</span><span class="p">:</span> <span class="n">str</span> <span class="o">=</span> <span class="default_value">'f01'</span></em><span class="sig-paren">)</span><a class="headerlink" href="#defSim.tools.OutputMeasures.CoverageReporter.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initialize self.  See help(type(self)) for accurate signature.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="defSim.tools.OutputMeasures.CoverageReporter.create_output">
+<code class="sig-name descname">create_output</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">network</span><span class="p">:</span> <span class="n">networkx.classes.graph.Graph</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#defSim.tools.OutputMeasures.CoverageReporter.create_output" title="Permalink to this definition">¶</a></dt>
+<dd><p>Report coverage for nondiscrete features, following <a class="reference internal" href="#bramson2016" id="id1"><span>[Bramson2016]</span></a>.
+Its goal is to report the proportion of distinct opinion positions held by the agents in the model.
+To find this proportion, each opinion position receives a bin (or ‘halo’) around the position of size 1 over
+the number of agents in the network.
+Coverage is then defined as proportion of the total area that is covered by the bins.
+Coverage is maximized if all agents hold unique positions and bins have zero overlap.
+The minimum coverage value is equal to 1 divided by the number of agents in the network.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>network</strong> – A NetworkX object</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Coverage (float)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="defSim.tools.OutputMeasures.CoverageReporter.label">
+<code class="sig-name descname">label</code><em class="property"> = 'Coverage'</em><a class="headerlink" href="#defSim.tools.OutputMeasures.CoverageReporter.label" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="defSim.tools.OutputMeasures.DispersionReporter">
+<em class="property">class </em><code class="sig-prename descclassname">defSim.tools.OutputMeasures.</code><code class="sig-name descname">DispersionReporter</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">feature</span><span class="p">:</span> <span class="n">str</span> <span class="o">=</span> <span class="default_value">'f01'</span></em><span class="sig-paren">)</span><a class="headerlink" href="#defSim.tools.OutputMeasures.DispersionReporter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="defSim.tools.CreateOutputTable.html#defSim.tools.CreateOutputTable.OutputTableCreator" title="defSim.tools.CreateOutputTable.OutputTableCreator"><code class="xref py py-class docutils literal notranslate"><span class="pre">defSim.tools.CreateOutputTable.OutputTableCreator</span></code></a></p>
+<dl class="py method">
+<dt id="defSim.tools.OutputMeasures.DispersionReporter.__init__">
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">feature</span><span class="p">:</span> <span class="n">str</span> <span class="o">=</span> <span class="default_value">'f01'</span></em><span class="sig-paren">)</span><a class="headerlink" href="#defSim.tools.OutputMeasures.DispersionReporter.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initialize self.  See help(type(self)) for accurate signature.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="defSim.tools.OutputMeasures.DispersionReporter.create_output">
+<code class="sig-name descname">create_output</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">network</span><span class="p">:</span> <span class="n">networkx.classes.graph.Graph</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#defSim.tools.OutputMeasures.DispersionReporter.create_output" title="Permalink to this definition">¶</a></dt>
+<dd><p>Report the amount of dispersion defined as the average absolute deviation from the mean on a given feature.
+The implementation mirrors that from <a class="reference internal" href="#bramson2016" id="id2"><span>[Bramson2016]</span></a></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>network</strong> – A NetworkX object</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Dispersion (float)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="defSim.tools.OutputMeasures.DispersionReporter.label">
+<code class="sig-name descname">label</code><em class="property"> = 'Dispersion'</em><a class="headerlink" href="#defSim.tools.OutputMeasures.DispersionReporter.label" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="defSim.tools.OutputMeasures.SpreadReporter">
+<em class="property">class </em><code class="sig-prename descclassname">defSim.tools.OutputMeasures.</code><code class="sig-name descname">SpreadReporter</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">feature</span><span class="p">:</span> <span class="n">str</span> <span class="o">=</span> <span class="default_value">'f01'</span></em><span class="sig-paren">)</span><a class="headerlink" href="#defSim.tools.OutputMeasures.SpreadReporter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="defSim.tools.CreateOutputTable.html#defSim.tools.CreateOutputTable.OutputTableCreator" title="defSim.tools.CreateOutputTable.OutputTableCreator"><code class="xref py py-class docutils literal notranslate"><span class="pre">defSim.tools.CreateOutputTable.OutputTableCreator</span></code></a></p>
+<dl class="py method">
+<dt id="defSim.tools.OutputMeasures.SpreadReporter.__init__">
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">feature</span><span class="p">:</span> <span class="n">str</span> <span class="o">=</span> <span class="default_value">'f01'</span></em><span class="sig-paren">)</span><a class="headerlink" href="#defSim.tools.OutputMeasures.SpreadReporter.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initialize self.  See help(type(self)) for accurate signature.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="defSim.tools.OutputMeasures.SpreadReporter.create_output">
+<code class="sig-name descname">create_output</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">network</span><span class="p">:</span> <span class="n">networkx.classes.graph.Graph</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#defSim.tools.OutputMeasures.SpreadReporter.create_output" title="Permalink to this definition">¶</a></dt>
+<dd><p>Report the spread defined as the difference between the maximum and minimum value on a given feature.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>network</strong> – A NetworkX object</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Spread (float)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="defSim.tools.OutputMeasures.SpreadReporter.label">
+<code class="sig-name descname">label</code><em class="property"> = 'Spread'</em><a class="headerlink" href="#defSim.tools.OutputMeasures.SpreadReporter.label" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<p><strong>References</strong></p>
+<dl class="citation">
+<dt class="label" id="bramson2016"><span class="brackets">Bramson2016</span><span class="fn-backref">(<a href="#id1">1</a>,<a href="#id2">2</a>)</span></dt>
+<dd><p>Bramson, A., Grim, P., Singer, D. J., Fisher, S., Berger, W., Sack, G., &amp; Flocken, C. (2016).
+Disambiguation of social polarization concepts and measures.
+<a href="#id3"><span class="problematic" id="id4">*</span></a>The Journal of Mathematical Sociology, 40*(2), 80–111. <a class="reference external" href="https://doi.org/10.1080/0022250X.2016.1147443">https://doi.org/10.1080/0022250X.2016.1147443</a></p>
+</dd>
+</dl>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="defSim.tools.Plots.html" class="btn btn-neutral float-right" title="Plots" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="defSim.tools.html" class="btn btn-neutral float-left" title="Tools" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2019-2021, Laukemper, Keijzer &amp; Bakker
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

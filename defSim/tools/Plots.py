@@ -17,7 +17,7 @@ import itertools
 class dsPlot():
     """
     This class is responsible for generating plots.
-    Inheirt from this class and implement at least the plot method for each type of plot.
+    Inherit from this class and implement at least the plot method for each type of plot.
     """
 
     def __init__(self):

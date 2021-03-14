@@ -1,0 +1,473 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Plots &mdash; defSim alpha documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+
+  
+  
+    <link rel="shortcut icon" href="_static/favicon.ico"/>
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="NetworkDistanceUpdater" href="defSim.tools.NetworkDistanceUpdater.html" />
+    <link rel="prev" title="OutputMeasures" href="defSim.tools.OutputMeasures.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #343131" >
+          
+
+          
+            <a href="index.html">
+          
+
+          
+            
+            <img src="_static/defSim-logo.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="Introduction_to_defSim.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="experiment.class.html">Experiment class</a></li>
+<li class="toctree-l1"><a class="reference internal" href="simulation.class.html">Simulation class</a></li>
+<li class="toctree-l1"><a class="reference internal" href="defSim.network_init.html">Networks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="defSim.agents_init.html">Agent features</a></li>
+<li class="toctree-l1"><a class="reference internal" href="defSim.focal_agent_sim.html">Focal agent selection</a></li>
+<li class="toctree-l1"><a class="reference internal" href="defSim.neighbor_selector_sim.html">Neighbor selector</a></li>
+<li class="toctree-l1"><a class="reference internal" href="defSim.influence_sim.html">Influence</a></li>
+<li class="toctree-l1"><a class="reference internal" href="defSim.network_evolution_sim.html">Network evolution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="defSim.dissimilarity_component.html">Dissimilarity updaters</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="defSim.tools.html">Tools</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="defSim.tools.OutputMeasures.html">Output Measures</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Plots</a></li>
+<li class="toctree-l2"><a class="reference internal" href="defSim.tools.NetworkDistanceUpdater.html">Network Distance Updater</a></li>
+<li class="toctree-l2"><a class="reference internal" href="defSim.tools.ClusterExecutionScript.html">Cluster Execution Script</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="defSim.extensions.html">Extensions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="credits.html">Credits</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">defSim</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="defSim.tools.html">Tools</a> &raquo;</li>
+        
+      <li>Plots</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/defSim.tools.Plots.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="module-defSim.tools.Plots">
+<span id="plots"></span><h1>Plots<a class="headerlink" href="#module-defSim.tools.Plots" title="Permalink to this headline">¶</a></h1>
+<p>Requires:
+- matplotlib &gt;= 3.3.4
+- seaborn &gt;= 0.11.1</p>
+<dl class="py class">
+<dt id="defSim.tools.Plots.DynamicsPlot">
+<em class="property">class </em><code class="sig-prename descclassname">defSim.tools.Plots.</code><code class="sig-name descname">DynamicsPlot</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">colors</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">palette</span><span class="o">=</span><span class="default_value">'deep'</span></em>, <em class="sig-param"><span class="n">linewidth</span><span class="o">=</span><span class="default_value">3</span></em>, <em class="sig-param"><span class="n">ylim</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">xlim</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">fast</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">False</span></em><span class="sig-paren">)</span><a class="headerlink" href="#defSim.tools.Plots.DynamicsPlot" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#defSim.tools.Plots.dsPlot" title="defSim.tools.Plots.dsPlot"><code class="xref py py-class docutils literal notranslate"><span class="pre">defSim.tools.Plots.dsPlot</span></code></a></p>
+<p>Facilitates plotting the dynamics of opinion changes for a feature.
+Uses seaborn relplot behind the scenes.
+:param colors: List of colors, used to color the lines. If None,
+colors are set based on the palette. Usually, the number of hues should equal the number of agents
+(showing the opinions for each agent at each step). However, it is possible to specify another variable
+(see ‘hue’ in DynamicsPlot.plot()) on which to color. Then, the list of colors should be equal in length
+to the number of unique values of that variable.
+:param palette: Seaborn palette or matplotlib colormap to use.
+:param float linewidth=3: Width of lines drawn.
+:param ylim: Iterable with 2 values, which gives (ymin, ymax)
+:param xlim: Iterable with 2 values, which gives (xmin, xmax)
+:param bool fast=False: If True, show plain (but fast) plot. If False, show plot with customizable markup (slow).</p>
+<dl class="py method">
+<dt id="defSim.tools.Plots.DynamicsPlot.__init__">
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">colors</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">palette</span><span class="o">=</span><span class="default_value">'deep'</span></em>, <em class="sig-param"><span class="n">linewidth</span><span class="o">=</span><span class="default_value">3</span></em>, <em class="sig-param"><span class="n">ylim</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">xlim</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">fast</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">False</span></em><span class="sig-paren">)</span><a class="headerlink" href="#defSim.tools.Plots.DynamicsPlot.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initialize self.  See help(type(self)) for accurate signature.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="defSim.tools.Plots.DynamicsPlot.plot">
+<code class="sig-name descname">plot</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">data</span></em>, <em class="sig-param"><span class="n">y</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="n">hue</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">xlab</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span>str<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">ylab</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span>str<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">ylim</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">xlim</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#defSim.tools.Plots.DynamicsPlot.plot" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates a plot showing one line for each agent, indicating their value on a chosen feature at a
+specific step.
+:param values: Pandas dataframe containing all variables to use in the plot.
+:param str y: The feature to plot, by name of the column in dataframe.
+If the pandas DataFrame in which results of the simulation are stored is named ‘results’, and the tickwise
+feature is named ‘f01’, the column name is ‘Tickwise_f01’
+:param hue: Variable on which to group by color. To show all agents separately, leave this set to None.
+One line wil be drawn for each group.
+To color agents based on a variable but show lines for all agents individually, use a list of colors
+in DynamicsPlot.colors instead (equal in length to nr of agents).
+:param str xlab: Label for x-axis
+:param str ylab: Label for y-axis
+:param ylim: Iterable with 2 values, which gives (ymin, ymax). Overrides self.ylim if present
+:param xlim: Iterable with 2 values, which gives (xmin, xmax). Overrides self.xlim if present</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="defSim.tools.Plots.HeatMap">
+<em class="property">class </em><code class="sig-prename descclassname">defSim.tools.Plots.</code><code class="sig-name descname">HeatMap</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">colors</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">palette</span><span class="o">=</span><span class="default_value">'rocket'</span></em>, <em class="sig-param"><span class="n">vmin</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">vmax</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">annot</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">fmt</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">annot_kws</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">linewidths</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">linecolor</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">square</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">cbar</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="n">cbar_kws</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#defSim.tools.Plots.HeatMap" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#defSim.tools.Plots.dsPlot" title="defSim.tools.Plots.dsPlot"><code class="xref py py-class docutils literal notranslate"><span class="pre">defSim.tools.Plots.dsPlot</span></code></a></p>
+<p>Facilitates creation of a heatmap. X and Y are variables which determine the coordinates on the heatmap, while
+hue determines the ‘heat’ value.
+:param colors: List of colors to use (if ‘hue’ is set on calling plot()).If None,
+colors are set based on the palette.
+:param palette: Seaborn palette or matplotlib colormap to use.
+:param float vmin: Minimum value for hue.
+:param float vmax: Maximum value for hue.
+:param annot: True, False or dataset. If true, writes data value in each cell.  If array with same shape as data
+then this is used to annotate the heatmap.
+:param str fmt: String formatting code to use when adding annotations.
+:param annot_kws: Dictionary of keyword arguments for drawing annotation text
+:param float linewidths=3: Width of lines drawn.
+:param linecolor: Color to use for lines between cells.
+:param bool square: If True, axes are adjusted so that each cell is square.
+:param bool cbar: Whether to draw a color bar.
+:param cbar_kws: Dictionary of keyword arguments to draw colorbar.</p>
+<dl class="py method">
+<dt id="defSim.tools.Plots.HeatMap.__init__">
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">colors</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">palette</span><span class="o">=</span><span class="default_value">'rocket'</span></em>, <em class="sig-param"><span class="n">vmin</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">vmax</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">annot</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">fmt</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">annot_kws</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">linewidths</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">linecolor</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">square</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">cbar</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="n">cbar_kws</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#defSim.tools.Plots.HeatMap.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initialize self.  See help(type(self)) for accurate signature.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="defSim.tools.Plots.HeatMap.plot">
+<code class="sig-name descname">plot</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">data</span></em>, <em class="sig-param"><span class="n">x</span></em>, <em class="sig-param"><span class="n">y</span></em>, <em class="sig-param"><span class="n">hue</span></em>, <em class="sig-param"><span class="n">sort_y_ascending</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">summary</span><span class="o">=</span><span class="default_value">'mean'</span></em>, <em class="sig-param"><span class="n">center</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">robust</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">xticklabels</span><span class="o">=</span><span class="default_value">'auto'</span></em>, <em class="sig-param"><span class="n">yticklabels</span><span class="o">=</span><span class="default_value">'auto'</span></em>, <em class="sig-param"><span class="n">mask</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">ax</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">cbar_ax</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#defSim.tools.Plots.HeatMap.plot" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates a heatmap showing the relationship between X, Y and some outcome represented by hue.
+:param data: Pandas dataframe containing all variables to use in the plot.
+:param str x: Name of the X-variable
+:param str y: Name of the Y-variable
+:param str hue: Name of the variable on which to color the cells (‘heat’)
+:param bool sort_y_ascending: Whether to sort Y ascending (True) or descending (False)
+:param str summary: Type of summary to prsent in the heatmap. Default is mean. The hue presented in each cell
+is the result of the summary function applied to all cases with a particular combination of X and Y
+:param float center: Value at which to center the colormap
+:param bool robust: If True and vmin, vmax are None, colormap range is computed with robust quantiles instead
+of extreme values.
+:param xticklabels: Labels for ticks on X-axis
+:param yticklabels: Labels for tick on Y-axis
+:param mask: If set, data is not shown in cells where mask is True.
+:param ax: Matplotlib axes in which to draw the plot (currently-active axes used if not specified)
+:param cbar_ax: Matplotlib axes in which to draw the colorbar (takes space from main axes if not specified)</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="defSim.tools.Plots.LinePlot">
+<em class="property">class </em><code class="sig-prename descclassname">defSim.tools.Plots.</code><code class="sig-name descname">LinePlot</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">colors</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">palette</span><span class="o">=</span><span class="default_value">'rocket'</span></em>, <em class="sig-param"><span class="n">palette_as_cmap</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">ylim</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">xlim</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">linewidth</span><span class="o">=</span><span class="default_value">3</span></em><span class="sig-paren">)</span><a class="headerlink" href="#defSim.tools.Plots.LinePlot" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#defSim.tools.Plots.RelPlot" title="defSim.tools.Plots.RelPlot"><code class="xref py py-class docutils literal notranslate"><span class="pre">defSim.tools.Plots.RelPlot</span></code></a></p>
+<p>Shorthand for using RelPlot with kind=’line’.
+:param colors: List of colors to use (if ‘hue’ is set on calling plot()).If None,
+colors are set based on the palette.
+:param palette: Seaborn palette or matplotlib colormap to use.
+:param bool palette_as_cmap=False: If True, the palette is used as a matplotlib colormap, suitable for continuous
+variables. If False, the palette is used to generate distinct hues, equal in number to the number of unique
+values in the hue parameter when calling plot(). This is suitable for categorical variables.
+:param float linewidth=3: Width of lines drawn.</p>
+<dl class="py method">
+<dt id="defSim.tools.Plots.LinePlot.__init__">
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">colors</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">palette</span><span class="o">=</span><span class="default_value">'rocket'</span></em>, <em class="sig-param"><span class="n">palette_as_cmap</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">ylim</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">xlim</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">linewidth</span><span class="o">=</span><span class="default_value">3</span></em><span class="sig-paren">)</span><a class="headerlink" href="#defSim.tools.Plots.LinePlot.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initialize self.  See help(type(self)) for accurate signature.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="defSim.tools.Plots.NetworkPlot">
+<em class="property">class </em><code class="sig-prename descclassname">defSim.tools.Plots.</code><code class="sig-name descname">NetworkPlot</code><span class="sig-paren">(</span><em class="sig-param">node_size: float = 100</em>, <em class="sig-param">cmap=&lt;matplotlib.colors.LinearSegmentedColormap object&gt;</em>, <em class="sig-param">edge_alpha: float = 0.2</em><span class="sig-paren">)</span><a class="headerlink" href="#defSim.tools.Plots.NetworkPlot" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#defSim.tools.Plots.dsPlot" title="defSim.tools.Plots.dsPlot"><code class="xref py py-class docutils literal notranslate"><span class="pre">defSim.tools.Plots.dsPlot</span></code></a></p>
+<p>Facilitates creating network plots, using networkx plot functions. These functions
+use matplotlib behind the scenes.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>node_size=100</strong> (<em>float</em>) – Sets the size of nodes in the plot.</p></li>
+<li><p><strong>cmap</strong> – Matplotlib color map to apply to the network nodes.</p></li>
+<li><p><strong>edge_alpha=0.2</strong> (<em>float</em>) – Sets opacity of edges.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt id="defSim.tools.Plots.NetworkPlot.__init__">
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param">node_size: float = 100</em>, <em class="sig-param">cmap=&lt;matplotlib.colors.LinearSegmentedColormap object&gt;</em>, <em class="sig-param">edge_alpha: float = 0.2</em><span class="sig-paren">)</span><a class="headerlink" href="#defSim.tools.Plots.NetworkPlot.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initialize self.  See help(type(self)) for accurate signature.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="defSim.tools.Plots.NetworkPlot.plot">
+<code class="sig-name descname">plot</code><span class="sig-paren">(</span><em class="sig-param">network</em>, <em class="sig-param">feature: Optional[str] = None</em>, <em class="sig-param">colors=None</em>, <em class="sig-param">title=None</em>, <em class="sig-param">pos=None</em>, <em class="sig-param">layout=&lt;function fruchterman_reingold_layout&gt;</em><span class="sig-paren">)</span><a class="headerlink" href="#defSim.tools.Plots.NetworkPlot.plot" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates the network plot.
+:param network: Network to draw
+:param str feature: Feature (by name) on which colors should be based. If none is given all nodes are colored
+the same.
+:param colors: List of colors equal in length to the number of nodes, used to color the nodes. If None,
+colors are set based on the colormap.
+:param str title: Title for the plot
+:param pos: (Optional) representation of network position for each node, can be used to keep the network
+layout exactly the same between plots. If pos is not given, network positions are generated using
+layout function.
+:param layout=networkx.spring_layout: Function to use to generate the network layout.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="defSim.tools.Plots.RelPlot">
+<em class="property">class </em><code class="sig-prename descclassname">defSim.tools.Plots.</code><code class="sig-name descname">RelPlot</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">colors</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">palette</span><span class="o">=</span><span class="default_value">'rocket'</span></em>, <em class="sig-param"><span class="n">palette_as_cmap</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">False</span></em>, <em class="sig-param"><span class="n">ylim</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">xlim</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">linewidth</span><span class="o">=</span><span class="default_value">3</span></em>, <em class="sig-param"><span class="n">kind</span><span class="o">=</span><span class="default_value">'line'</span></em><span class="sig-paren">)</span><a class="headerlink" href="#defSim.tools.Plots.RelPlot" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#defSim.tools.Plots.dsPlot" title="defSim.tools.Plots.dsPlot"><code class="xref py py-class docutils literal notranslate"><span class="pre">defSim.tools.Plots.dsPlot</span></code></a></p>
+<p>Facilitates plotting the relationship between two variables, most commonly from an experiment.
+Has two variants (LinePlot and ScatterPlot) which can both be accessed through RelPlot by
+specifying kind. Alternatively, use dsPlots.LinePlot or dsPlots.ScatterPlot.
+:param colors: List of colors to use (if ‘hue’ is set on calling plot()).If None,
+colors are set based on the palette.
+:param palette: Seaborn palette or matplotlib colormap to use.
+:param bool palette_as_cmap=False: If True, the palette is used as a matplotlib colormap, suitable for continuous
+variables. If False, the palette is used to generate distinct hues, equal in number to the number of unique
+values in the hue parameter when calling plot(). This is suitable for categorical variables.
+:param ylim: Iterable with 2 values, which gives (ymin, ymax)
+:param xlim: Iterable with 2 values, which gives (xmin, xmax)
+:param float linewidth=3: Width of lines drawn.
+:param kind: Determines type of plot. Select from ‘line’ or ‘scatter’.</p>
+<dl class="py method">
+<dt id="defSim.tools.Plots.RelPlot.__init__">
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">colors</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">palette</span><span class="o">=</span><span class="default_value">'rocket'</span></em>, <em class="sig-param"><span class="n">palette_as_cmap</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">False</span></em>, <em class="sig-param"><span class="n">ylim</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">xlim</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">linewidth</span><span class="o">=</span><span class="default_value">3</span></em>, <em class="sig-param"><span class="n">kind</span><span class="o">=</span><span class="default_value">'line'</span></em><span class="sig-paren">)</span><a class="headerlink" href="#defSim.tools.Plots.RelPlot.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initialize self.  See help(type(self)) for accurate signature.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="defSim.tools.Plots.RelPlot.plot">
+<code class="sig-name descname">plot</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">data</span></em>, <em class="sig-param"><span class="n">x</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="n">y</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="n">hue</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span>str<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">xlab</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span>str<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">ylab</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span>str<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#defSim.tools.Plots.RelPlot.plot" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates a plot showing the relationship between X and Y, separately for all values of hue. Hue is used to
+create multiple lines with distinct colors.
+:param data: Pandas dataframe containing all variables to use in the plot.
+:param str x: Name of the X-variable
+:param str y: Name of the Y-variable
+:param str hue: Name of the variable on which to split into lines with different colors (optional)
+:param str xlab: Label for X-axis. If None, name of the X-variable is used
+:param str ylab: Label for Y-axis. If None, name of the Y-variable is used</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="defSim.tools.Plots.ScatterPlot">
+<em class="property">class </em><code class="sig-prename descclassname">defSim.tools.Plots.</code><code class="sig-name descname">ScatterPlot</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">colors</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">palette</span><span class="o">=</span><span class="default_value">'rocket'</span></em>, <em class="sig-param"><span class="n">palette_as_cmap</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">ylim</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">xlim</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">linewidth</span><span class="o">=</span><span class="default_value">3</span></em><span class="sig-paren">)</span><a class="headerlink" href="#defSim.tools.Plots.ScatterPlot" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#defSim.tools.Plots.RelPlot" title="defSim.tools.Plots.RelPlot"><code class="xref py py-class docutils literal notranslate"><span class="pre">defSim.tools.Plots.RelPlot</span></code></a></p>
+<p>Shorthand for using RelPlot with kind=’scatter’.
+:param colors: List of colors to use (if ‘hue’ is set on calling plot()).If None,
+colors are set based on the palette.
+:param palette: Seaborn palette or matplotlib colormap to use.
+:param bool palette_as_cmap=False: If True, the palette is used as a matplotlib colormap, suitable for continuous
+variables. If False, the palette is used to generate distinct hues, equal in number to the number of unique
+values in the hue parameter when calling plot(). This is suitable for categorical variables.
+:param float linewidth=3: Width of lines drawn.</p>
+<dl class="py method">
+<dt id="defSim.tools.Plots.ScatterPlot.__init__">
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">colors</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">palette</span><span class="o">=</span><span class="default_value">'rocket'</span></em>, <em class="sig-param"><span class="n">palette_as_cmap</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">ylim</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">xlim</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">linewidth</span><span class="o">=</span><span class="default_value">3</span></em><span class="sig-paren">)</span><a class="headerlink" href="#defSim.tools.Plots.ScatterPlot.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initialize self.  See help(type(self)) for accurate signature.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="defSim.tools.Plots.dsPlot">
+<em class="property">class </em><code class="sig-prename descclassname">defSim.tools.Plots.</code><code class="sig-name descname">dsPlot</code><a class="headerlink" href="#defSim.tools.Plots.dsPlot" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>This class is responsible for generating plots.
+Inheirt from this class and implement at least the plot method for each type of plot.</p>
+<dl class="py method">
+<dt id="defSim.tools.Plots.dsPlot.__init__">
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#defSim.tools.Plots.dsPlot.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initialize self.  See help(type(self)) for accurate signature.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="defSim.tools.Plots.dsPlot.plot">
+<code class="sig-name descname">plot</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#defSim.tools.Plots.dsPlot.plot" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="defSim.tools.Plots.dsPlot.show">
+<code class="sig-name descname">show</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#defSim.tools.Plots.dsPlot.show" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="defSim.tools.NetworkDistanceUpdater.html" class="btn btn-neutral float-right" title="NetworkDistanceUpdater" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="defSim.tools.OutputMeasures.html" class="btn btn-neutral float-left" title="OutputMeasures" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2019-2021, Laukemper, Keijzer &amp; Bakker
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
