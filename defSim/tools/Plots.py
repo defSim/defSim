@@ -59,7 +59,8 @@ class NetworkPlot(dsPlot):
         :param pos: (Optional) representation of network position for each node, can be used to keep the network
         layout exactly the same between plots. If pos is not given, network positions are generated using
         layout function.
-        :param layout=networkx.spring_layout: Function to use to generate the network layout.
+        :param layout=networkx.spring_layout: Function to use to generate the network layout. Can also be set to
+            'grid' to plot grid networks accurately, as there is no standard networkx layout for this.
         """
 
         # Get all nodes in the network
@@ -77,7 +78,13 @@ class NetworkPlot(dsPlot):
 
         # Determine network layout if pos is not set
         if pos is None:
-            pos = layout(network)
+            if isinstance(layout, str) and layout.lower() == 'grid':
+                # we infer the positions of the nodes from their index
+                pos = dict()
+                for i in network.nodes():
+                    pos[i] = [int(i / 10), i % 10]
+            else:
+                pos = layout(network)
 
         # Draw edges
         ec = nx.draw_networkx_edges(network, pos, alpha=self.edge_alpha)
