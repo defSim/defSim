@@ -52,13 +52,13 @@ class NetworkPlot(dsPlot):
         Creates the network plot.
         :param network: Network to draw
         :param str feature: Feature (by name) on which colors should be based. If none is given all nodes are colored
-            the same.
+        the same.
         :param colors: List of colors equal in length to the number of nodes, used to color the nodes. If None,
-            colors are set based on the colormap.
+        colors are set based on the colormap.
         :param str title: Title for the plot
         :param pos: (Optional) representation of network position for each node, can be used to keep the network
-            layout exactly the same between plots. If pos is not given, network positions are generated using
-            layout function.
+        layout exactly the same between plots. If pos is not given, network positions are generated using
+        layout function.
         :param layout=networkx.spring_layout: Function to use to generate the network layout.
         """
 
@@ -107,10 +107,10 @@ class DynamicsPlot(dsPlot):
     Facilitates plotting the dynamics of opinion changes for a feature.
     Uses seaborn relplot behind the scenes.
     :param colors: List of colors, used to color the lines. If None,
-            colors are set based on the palette. Usually, the number of hues should equal the number of agents
-            (showing the opinions for each agent at each step). However, it is possible to specify another variable
-            (see 'hue' in DynamicsPlot.plot()) on which to color. Then, the list of colors should be equal in length
-            to the number of unique values of that variable.
+    colors are set based on the palette. Usually, the number of hues should equal the number of agents
+    (showing the opinions for each agent at each step). However, it is possible to specify another variable
+    (see 'hue' in DynamicsPlot.plot()) on which to color. Then, the list of colors should be equal in length
+    to the number of unique values of that variable.
     :param palette: Seaborn palette or matplotlib colormap to use.
     :param float linewidth=3: Width of lines drawn.
     :param ylim: Iterable with 2 values, which gives (ymin, ymax)
@@ -132,12 +132,12 @@ class DynamicsPlot(dsPlot):
         specific step.
         :param values: Pandas dataframe containing all variables to use in the plot.
         :param str y: The feature to plot, by name of the column in dataframe.
-            If the pandas DataFrame in which results of the simulation are stored is named 'results', and the tickwise
-            feature is named 'f01', the column name is 'Tickwise_f01'
+        If the pandas DataFrame in which results of the simulation are stored is named 'results', and the tickwise
+        feature is named 'f01', the column name is 'Tickwise_f01'
         :param hue: Variable on which to group by color. To show all agents separately, leave this set to None.
-            One line wil be drawn for each group.
-            To color agents based on a variable but show lines for all agents individually, use a list of colors
-            in DynamicsPlot.colors instead (equal in length to nr of agents).
+        One line wil be drawn for each group.
+        To color agents based on a variable but show lines for all agents individually, use a list of colors
+        in DynamicsPlot.colors instead (equal in length to nr of agents).
         :param str xlab: Label for x-axis
         :param str ylab: Label for y-axis
         :param ylim: Iterable with 2 values, which gives (ymin, ymax). Overrides self.ylim if present
@@ -193,11 +193,11 @@ class RelPlot(dsPlot):
     Has two variants (LinePlot and ScatterPlot) which can both be accessed through RelPlot by
     specifying kind. Alternatively, use dsPlots.LinePlot or dsPlots.ScatterPlot.
     :param colors: List of colors to use (if 'hue' is set on calling plot()).If None,
-            colors are set based on the palette.
+    colors are set based on the palette.
     :param palette: Seaborn palette or matplotlib colormap to use.
     :param bool palette_as_cmap=False: If True, the palette is used as a matplotlib colormap, suitable for continuous
-        variables. If False, the palette is used to generate distinct hues, equal in number to the number of unique
-        values in the hue parameter when calling plot(). This is suitable for categorical variables.
+    variables. If False, the palette is used to generate distinct hues, equal in number to the number of unique
+    values in the hue parameter when calling plot(). This is suitable for categorical variables.
     :param ylim: Iterable with 2 values, which gives (ymin, ymax)
     :param xlim: Iterable with 2 values, which gives (xmin, xmax)
     :param float linewidth=3: Width of lines drawn.
@@ -248,11 +248,11 @@ class LinePlot(RelPlot):
     """
     Shorthand for using RelPlot with kind='line'.
     :param colors: List of colors to use (if 'hue' is set on calling plot()).If None,
-            colors are set based on the palette.
+    colors are set based on the palette.
     :param palette: Seaborn palette or matplotlib colormap to use.
     :param bool palette_as_cmap=False: If True, the palette is used as a matplotlib colormap, suitable for continuous
-        variables. If False, the palette is used to generate distinct hues, equal in number to the number of unique
-        values in the hue parameter when calling plot(). This is suitable for categorical variables.
+    variables. If False, the palette is used to generate distinct hues, equal in number to the number of unique
+    values in the hue parameter when calling plot(). This is suitable for categorical variables.
     :param float linewidth=3: Width of lines drawn.
     """
     def __init__(self, colors=None, palette="rocket", palette_as_cmap=False, ylim=None, xlim=None, linewidth=3):
@@ -263,11 +263,11 @@ class ScatterPlot(RelPlot):
     """
     Shorthand for using RelPlot with kind='scatter'.
     :param colors: List of colors to use (if 'hue' is set on calling plot()).If None,
-            colors are set based on the palette.
+    colors are set based on the palette.
     :param palette: Seaborn palette or matplotlib colormap to use.
     :param bool palette_as_cmap=False: If True, the palette is used as a matplotlib colormap, suitable for continuous
-        variables. If False, the palette is used to generate distinct hues, equal in number to the number of unique
-        values in the hue parameter when calling plot(). This is suitable for categorical variables.
+    variables. If False, the palette is used to generate distinct hues, equal in number to the number of unique
+    values in the hue parameter when calling plot(). This is suitable for categorical variables.
     :param float linewidth=3: Width of lines drawn.
     """
     def __init__(self, colors=None, palette="rocket", palette_as_cmap=False, ylim=None, xlim=None, linewidth=3):
@@ -279,12 +279,12 @@ class HeatMap(dsPlot):
     Facilitates creation of a heatmap. X and Y are variables which determine the coordinates on the heatmap, while
     hue determines the 'heat' value.
     :param colors: List of colors to use (if 'hue' is set on calling plot()).If None,
-            colors are set based on the palette.
+    colors are set based on the palette.
     :param palette: Seaborn palette or matplotlib colormap to use.
     :param float vmin: Minimum value for hue.
     :param float vmax: Maximum value for hue.
     :param annot: True, False or dataset. If true, writes data value in each cell.  If array with same shape as data
-        then this is used to annotate the heatmap.
+    then this is used to annotate the heatmap.
     :param str fmt: String formatting code to use when adding annotations.
     :param annot_kws: Dictionary of keyword arguments for drawing annotation text
     :param float linewidths=3: Width of lines drawn.
@@ -340,10 +340,10 @@ class HeatMap(dsPlot):
         :param str hue: Name of the variable on which to color the cells ('heat')
         :param bool sort_y_ascending: Whether to sort Y ascending (True) or descending (False)
         :param str summary: Type of summary to prsent in the heatmap. Default is mean. The hue presented in each cell
-            is the result of the summary function applied to all cases with a particular combination of X and Y
+        is the result of the summary function applied to all cases with a particular combination of X and Y
         :param float center: Value at which to center the colormap
         :param bool robust: If True and vmin, vmax are None, colormap range is computed with robust quantiles instead
-            of extreme values.
+        of extreme values.
         :param xticklabels: Labels for ticks on X-axis
         :param yticklabels: Labels for tick on Y-axis
         :param mask: If set, data is not shown in cells where mask is True.
