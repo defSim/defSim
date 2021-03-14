@@ -193,7 +193,7 @@ values per parameter and also all optional parameters are passed in one combined
 <li><p><strong>communication_regime</strong> (<em>str = &quot;one-to-one&quot;</em>) – Options are “one-to-one”, “one-to-many” and “many-to-one”.</p></li>
 <li><p><strong>parameter_dict</strong> – A dictionary with all parameters that will be passed to the specific component implementations.</p></li>
 <li><p><strong>seed</strong> (<em>str = None</em>) – A seed for stable replication</p></li>
-<li><p><strong>output_realizations</strong> (<em>list =</em><em> [</em><em>str</em><em> or </em><a class="reference internal" href="defSim.tools.html#defSim.tools.CreateOutputTable.OutputTableCreator" title="defSim.tools.CreateOutputTable.OutputTableCreator"><em>CreateOutputTable.OutputTableCreator</em></a><em>]</em>) – This optional list should contain all output to generate at the end of each run, by name for defaults or as class inheriting from OutputTableCreator</p></li>
+<li><p><strong>output_realizations</strong> (<em>list =</em><em> [</em><em>str</em><em> or </em><a class="reference internal" href="defSim.tools.CreateOutputTable.html#defSim.tools.CreateOutputTable.OutputTableCreator" title="defSim.tools.CreateOutputTable.OutputTableCreator"><em>CreateOutputTable.OutputTableCreator</em></a><em>]</em>) – This optional list should contain all output to generate at the end of each run, by name for defaults or as class inheriting from OutputTableCreator</p></li>
 <li><p><strong>output_folder_path</strong> (<em>str</em><em> or </em><em>pathlib.Path</em>) – If not None, the output table is saved to file(s) in this location.</p></li>
 <li><p><strong>output_file_types</strong> (<em>List</em><em>[</em><em>str</em><em> or </em><em>DataFileCreator</em><em>]</em>) – Determines which types of output files will be saved at output_folder_path. See tools.CreateDataFiles for options.</p></li>
 <li><p><strong>tickwise</strong> (<em>List =</em><em> [</em><em>str</em><em>]</em>) – A list of strings with the names of agent attributes that need to be recorded at every timestep</p></li>
@@ -277,7 +277,7 @@ DataFrame. It contains the following columns:</p>
 <li><p>Topology: Which network topology was used.</p></li>
 <li><p>Ticks: For how many iterations the simulation ran (so far).</p></li>
 <li><p>SuccessfulInfluence: How often an agent was successfully influenced by another agent.</p></li>
-<li><p>All basic columns included in <a class="reference internal" href="defSim.tools.html#defSim.tools.CreateOutputTable.create_output_table" title="defSim.tools.CreateOutputTable.create_output_table"><code class="xref py py-meth docutils literal notranslate"><span class="pre">create_output_table()</span></code></a></p></li>
+<li><p>All basic columns included in <a class="reference internal" href="defSim.tools.CreateOutputTable.html#defSim.tools.CreateOutputTable.create_output_table" title="defSim.tools.CreateOutputTable.create_output_table"><code class="xref py py-meth docutils literal notranslate"><span class="pre">create_output_table()</span></code></a></p></li>
 </ul>
 </div></blockquote>
 <p>Saves the output table to file(s) indicated by self.output_file_types if self.output_folder_path is not None.</p>
@@ -388,7 +388,7 @@ otherwise the respective factory functions will be called.</p>
   <div role="contentinfo">
     <p>
         
-        &copy; Copyright 2019-2020, Laukemper, Keijzer &amp; Bakker
+        &copy; Copyright 2019-2021, Laukemper, Keijzer &amp; Bakker
 
     </p>
   </div>

@@ -212,7 +212,7 @@ can then be passed as a list and executed as an experiment.</p>
 <li><p><strong>stop_condition</strong> (<em>String = &quot;pragmatic_convergence&quot;</em>) – Determines at what point a simulation is supposed to stop. Options include “strict_convergence”, which means that it is theoretically not possible anymore for any agent to influence another, “pragmatic_convergence”, which means that it is assumed that little change is possible anymore, and “max_iteration” which just stops the simulation after a certain amount of time steps.</p></li>
 <li><p><strong>stop_condition_parameters</strong> (<em>dict = {}</em>) – This dictionary should contain all optional parameters that influence how convergence is determined.</p></li>
 <li><p><strong>max_iterations</strong> (<em>int = 100000</em>) – The maximum number of iterations a Simulation should run.</p></li>
-<li><p><strong>output_realizations</strong> (<em>list =</em><em> [</em><em>str</em><em> or </em><a class="reference internal" href="defSim.tools.html#defSim.tools.CreateOutputTable.OutputTableCreator" title="defSim.tools.CreateOutputTable.OutputTableCreator"><em>OutputTableCreator</em></a><em>]</em>) – This optional list should contain all output to generate at the end of each run, by name for defaults or as class inheriting from OutputTableCreator</p></li>
+<li><p><strong>output_realizations</strong> (<em>list =</em><em> [</em><em>str</em><em> or </em><a class="reference internal" href="defSim.tools.CreateOutputTable.html#defSim.tools.CreateOutputTable.OutputTableCreator" title="defSim.tools.CreateOutputTable.OutputTableCreator"><em>OutputTableCreator</em></a><em>]</em>) – This optional list should contain all output to generate at the end of each run, by name for defaults or as class inheriting from OutputTableCreator</p></li>
 <li><p><strong>output_folder_path</strong> (<em>str</em><em> or </em><em>pathlib.Path</em>) – If not None, the output table is saved to file(s) in this location.</p></li>
 <li><p><strong>output_file_types</strong> (<em>List</em><em>[</em><em>str</em><em> or </em><em>DataFileCreator</em><em>]</em>) – Determines which types of output files will be saved at output_folder_path. See tools.CreateDataFiles for options.</p></li>
 <li><p><strong>repetitions</strong> (<em>int = 1</em>) – How often each simulation should be repeated.</p></li>
@@ -327,7 +327,7 @@ To be able to use this method the script with the Experiment must be executed on
   <div role="contentinfo">
     <p>
         
-        &copy; Copyright 2019-2020, Laukemper, Keijzer &amp; Bakker
+        &copy; Copyright 2019-2021, Laukemper, Keijzer &amp; Bakker
 
     </p>
   </div>
