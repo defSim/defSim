@@ -167,12 +167,23 @@
             
   <div class="section" id="welcome-to-defsim-s-documentation">
 <h1>Welcome to defSim’s documentation!<a class="headerlink" href="#welcome-to-defsim-s-documentation" title="Permalink to this headline">¶</a></h1>
-<p>Here you can find the API documentation for the <em>discrete event framework for social influence models</em>. The package is freely <a class="reference external" href="https://github.com/marijnkeijzer/defSim">available on GitHub</a>.</p>
-<p>defSim is a package that aims to be the modular standard for social influence models. With defSim you can run a single <a class="reference internal" href="simulation.class.html#module-defSim.Simulation" title="defSim.Simulation"><code class="xref py py-class docutils literal notranslate"><span class="pre">Simulation</span></code></a>, execute a larger Simulation <a class="reference internal" href="experiment.class.html#module-defSim.Experiment" title="defSim.Experiment"><code class="xref py py-class docutils literal notranslate"><span class="pre">Experiment</span></code></a>, or use any number of pre-programmed modules for your own idea or variation of a traditional social influence model. By using defSim you save a lot of time programming functions that you will need in any social influence research project, but furthermore you make sure that your model remains strictly comparable with traditional models, and other models in the defSim-realm, while working completely <strong>open source by default</strong>.</p>
+<p>Here you can find the API documentation for the <em>discrete event framework for social influence models</em>.
+The package is freely <a class="reference external" href="https://github.com/defSim/defSim">available on GitHub</a>.</p>
+<p>defSim is a package that aims to be the modular standard for social influence models.
+With defSim you can run a single <a class="reference internal" href="simulation.class.html#module-defSim.Simulation" title="defSim.Simulation"><code class="xref py py-class docutils literal notranslate"><span class="pre">Simulation</span></code></a>, execute a larger Simulation <a class="reference internal" href="experiment.class.html#module-defSim.Experiment" title="defSim.Experiment"><code class="xref py py-class docutils literal notranslate"><span class="pre">Experiment</span></code></a>,
+or use any number of pre-programmed modules for your own idea or variation of a traditional social influence model.
+Using defSim is meant to save you time on programming functions that you will need in any social influence research
+project, but furthermore you make sure that your model remains strictly comparable (‘aligned’) with traditional models,
+and other models in the defSim-realm, while working completely open source by default.</p>
 <p>The flow of a single simulation run implemented by defSim looks like this:</p>
 <a class="reference internal image-reference" href="_images/defSim-flow.png"><img alt="defSim workflow" src="_images/defSim-flow.png" style="width: 400px;" /></a>
 <p>All elements on the left represent the separate modules.</p>
-<p>The <a class="reference internal" href="simulation.class.html#module-defSim.Simulation" title="defSim.Simulation"><code class="xref py py-class docutils literal notranslate"><span class="pre">Simulation</span></code></a> class handles the execution of all modules as depicted in the flow chart, and returns a single row of results as a Pandas dataframe. The <a class="reference internal" href="experiment.class.html#module-defSim.Experiment" title="defSim.Experiment"><code class="xref py py-class docutils literal notranslate"><span class="pre">Experiment</span></code></a> class handles multiple executions of the simulation class, calling the simulation class effectively a number of times (repetitions) for every user-given parameter combination. Alternatively, you might want to use just one of a couple of the pre-programmed modules, and use your own code to create a variation on the traditional social influence models.</p>
+<p>The <a class="reference internal" href="simulation.class.html#module-defSim.Simulation" title="defSim.Simulation"><code class="xref py py-class docutils literal notranslate"><span class="pre">Simulation</span></code></a> class handles the execution of all modules as depicted in the flow chart, and returns
+a single row of results as a Pandas dataframe.
+The <a class="reference internal" href="experiment.class.html#module-defSim.Experiment" title="defSim.Experiment"><code class="xref py py-class docutils literal notranslate"><span class="pre">Experiment</span></code></a> class handles multiple executions of the simulation class, calling the simulation class
+effectively a number of times (repetitions) for every user-given parameter combination.
+Alternatively, you might want to use just one of a couple of the pre-programmed modules, and use your own code to
+create a variation on the traditional social influence models.</p>
 <p><a class="reference internal" href="Introduction_to_defSim.html"><span class="doc">Learn the basics of defSim on our introduction page</span></a></p>
 </div>
 <hr class="docutils" />
@@ -181,9 +192,10 @@
 <div class="toctree-wrapper compound">
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="Introduction_to_defSim.html">Introduction</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="Introduction_to_defSim.html#the-unified-way">1. The Unified Way</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Introduction_to_defSim.html#the-modular-way">2. The Modular Way</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="Introduction_to_defSim.html#example-biased-media-influence">Example | Biased media influence</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Introduction_to_defSim.html#out-of-the-box-use">1. Out of the box use</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Introduction_to_defSim.html#modular-use">2. Modular use</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Introduction_to_defSim.html#example-writing-your-own-module-implementation-two-groups-attribute-initializer">Example | Writing your own module implementation | Two groups attribute initializer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Introduction_to_defSim.html#example-independent-use-of-modules-biased-media-influence">Example | Independent use of modules | Biased media influence</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="Introduction_to_defSim.html#some-useful-resources">Some useful resources</a></li>
