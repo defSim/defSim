@@ -57,7 +57,7 @@ from defSim.tools import OutputMeasures
 from defSim.tools.OutputMeasures import ClusterFinder
 from defSim.tools.OutputMeasures import AttributeReporter
 from defSim.tools.CreateOutputTable import create_output_table
-from defSim.tools.Plots import DynamicsPlot, RelPlot, LinePlot, ScatterPlot, HeatMap
+from defSim.tools.Plots import NetworkPlot, DynamicsPlot, RelPlot, LinePlot, ScatterPlot, HeatMap
 # some tools not yet imported
 
 from defSim.Experiment import Experiment
