@@ -88,7 +88,7 @@
             
             
               <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="Introduction_to_defSim.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Introduction_to_defSim.html">About defSim</a></li>
 <li class="toctree-l1"><a class="reference internal" href="experiment.class.html">Experiment class</a></li>
 <li class="toctree-l1"><a class="reference internal" href="simulation.class.html">Simulation class</a></li>
 <li class="toctree-l1"><a class="reference internal" href="defSim.network_init.html">Networks</a></li>
@@ -198,14 +198,17 @@ with categorical attributes in mind.</p>
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>regime</strong> – Either “one-to-one”, “one-to-many” or “many-to-one”</p></li>
-<li><p><strong>kwargs</strong> – Additional parameters specific to the implementation of the InfluenceOperator.
-Possible parameters are the following:</p></li>
-<li><p><strong>homophily</strong> (<em>float=0</em>) – A number <span class="math notranslate nohighlight">\(&gt;\)</span> 0 that controls the shape of the influence curve.
-At 1, homophily is linear, like in Axelrod (1997)
+<li><p><strong>kwargs</strong> – <p>Additional parameters specific to the implementation of the InfluenceOperator.
+Possible parameters are the following:
+* float=0 <strong>homophily</strong>: A number <span class="math notranslate nohighlight">\(&gt;\)</span> 0 that controls the shape of the influence curve.</p>
+<blockquote>
+<div><p>At 1, homophily is linear, like in <a class="reference internal" href="#axelrod1997" id="id2"><span>[Axelrod1997]</span></a>
 When the value for homophily <span class="math notranslate nohighlight">\(&gt;\)</span> 1, agents prefer similar agents more and more.
 When 0 <span class="math notranslate nohighlight">\(&lt;\)</span> homophily <span class="math notranslate nohighlight">\(&lt;\)</span> 1, agents have less of a preference for more similar neighbors.
 However, the values for the probability of successful influence will always be the same at 0, .5, and 1
-overlap. Respectively: 0, .5 and 1.</p></li>
+overlap. Respectively: 0, .5 and 1.</p>
+</div></blockquote>
+</p></li>
 </ul>
 </dd>
 </dl>
@@ -242,9 +245,9 @@ The influence function itself can still be a function of the “Sex” attribute
 
 <p><strong>References</strong></p>
 <dl class="citation">
-<dt class="label" id="axelrod1997"><span class="brackets"><a class="fn-backref" href="#id1">Axelrod1997</a></span></dt>
+<dt class="label" id="axelrod1997"><span class="brackets">Axelrod1997</span><span class="fn-backref">(<a href="#id1">1</a>,<a href="#id2">2</a>)</span></dt>
 <dd><p>Axelrod, R. (1997). The dissemination of culture: A model with local convergence and global
-polarization. <a href="#id2"><span class="problematic" id="id3">*</span></a>Journal of conflict resolution, 41*(2), 203-226.</p>
+polarization. <a href="#id3"><span class="problematic" id="id4">*</span></a>Journal of conflict resolution, 41*(2), 203-226.</p>
 </dd>
 </dl>
 </div>

@@ -88,7 +88,7 @@
             
             
               <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="Introduction_to_defSim.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Introduction_to_defSim.html">About defSim</a></li>
 <li class="toctree-l1"><a class="reference internal" href="experiment.class.html">Experiment class</a></li>
 <li class="toctree-l1"><a class="reference internal" href="simulation.class.html">Simulation class</a></li>
 <li class="toctree-l1"><a class="reference internal" href="defSim.network_init.html">Networks</a></li>
@@ -327,7 +327,10 @@ colors are set based on the colormap.
 :param pos: (Optional) representation of network position for each node, can be used to keep the network
 layout exactly the same between plots. If pos is not given, network positions are generated using
 layout function.
-:param layout=networkx.spring_layout: Function to use to generate the network layout.</p>
+:param layout=networkx.spring_layout: Function to use to generate the network layout. Can also be set to</p>
+<blockquote>
+<div><p>‘grid’ to plot grid networks accurately, as there is no standard networkx layout for this.</p>
+</div></blockquote>
 </dd></dl>
 
 </dd></dl>

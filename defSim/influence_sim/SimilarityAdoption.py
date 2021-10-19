@@ -26,12 +26,12 @@ class SimilarityAdoption(InfluenceOperator):
         :param regime: Either "one-to-one", "one-to-many" or "many-to-one"
         :param kwargs: Additional parameters specific to the implementation of the InfluenceOperator.
             Possible parameters are the following:
-        :param float=0 homophily: A number :math:`>` 0 that controls the shape of the influence curve.
-            At 1, homophily is linear, like in Axelrod (1997)
-            When the value for homophily :math:`>` 1, agents prefer similar agents more and more.
-            When 0 :math:`<` homophily :math:`<` 1, agents have less of a preference for more similar neighbors.
-            However, the values for the probability of successful influence will always be the same at 0, .5, and 1
-            overlap. Respectively: 0, .5 and 1.       
+            * float=0 **homophily**: A number :math:`>` 0 that controls the shape of the influence curve.
+                At 1, homophily is linear, like in [Axelrod1997]_
+                When the value for homophily :math:`>` 1, agents prefer similar agents more and more.
+                When 0 :math:`<` homophily :math:`<` 1, agents have less of a preference for more similar neighbors.
+                However, the values for the probability of successful influence will always be the same at 0, .5, and 1
+                overlap. Respectively: 0, .5 and 1.
         """
 
         self.regime = regime
