@@ -25,7 +25,8 @@ setup(name='defSim',
             'pandas',
             'scipy>=1.1.0',
             'tqdm>=4.58.0',
-            'matplotlib>=3.3.4',
+            'matplotlib>=3.1.3',  # previously 3.3.4 required, crashes upon calling plot functions with error:
+                                  # cannot import name '_png' from 'matplotlib'    (matplotlib error, not ours)
             'seaborn>=0.11.1'
       ],
       include_package_data=True,
