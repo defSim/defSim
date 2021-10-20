@@ -26,3 +26,13 @@ Install the current github version using :code:`pip install git+https://github.c
 Similarly, to update from a previously installed version use :code:`pip install git+https://github.com/defSim/defSim --upgrade`
 
 If you want to edit the code locally, clone the repository to a folder of your choice and execute :code:`pip install .` in that folder. If you change the package or pull changes run :code:`pip install --upgrade .` to update the changes.
+
+Changelog
+---------
+
+This project adheres to `Semantic Versioning <https://semver.org/spec/v2.0.0.html>`_.
+
+**v0.1.2**
+
+* the wrapper functions Experiment and Simulation accept subclasses of AttributesInitializer,
+  FocalAgentSelector, NeighborSelector and InfluenceOperator

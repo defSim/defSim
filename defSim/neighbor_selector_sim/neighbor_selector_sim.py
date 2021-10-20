@@ -58,7 +58,7 @@ def select_neighbors(network: nx.Graph, realization: str, focal_agent: int, regi
         return RandomNeighborSelector().select_neighbors(network, focal_agent, regime, **kwargs)
     elif realization == "similar":
         return SimilarNeighborSelector().select_neighbors(network, focal_agent, regime, **kwargs)
-    elif isinstance(realization, NeighborSelector):
+    elif issubclass(realization, NeighborSelector):
         return realization.select_neighbors(network, focal_agent, regime, **kwargs)
     else:
         raise ValueError("Can only select from the options ['random', 'similar']")
