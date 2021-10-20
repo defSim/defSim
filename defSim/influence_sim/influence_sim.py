@@ -48,7 +48,7 @@ class InfluenceOperator(ABC):
 
 
 def spread_influence(network: nx.Graph,
-                     realization: str,
+                     realization: str or InfluenceOperator,
                      agent_i: int,
                      agents_j: List[int] or int,
                      regime: str,
@@ -107,7 +107,7 @@ def spread_influence(network: nx.Graph,
                                            dissimilarity_measure,
                                            attributes,
                                            **kwargs)
-    elif isinstance(realization, InfluenceOperator):
+    elif issubclass(realization, InfluenceOperator):
         # if regime is set differently, raise warning
         # if regime is not set, set regime
         try:
@@ -115,11 +115,11 @@ def spread_influence(network: nx.Graph,
             warnings.warn("Regime for influence function is not equal to regime for simulation. Influence function: {}, simulation: {}".format(realization.regime, regime))
         except AttributeError:
           realization.regime = regime
-        return realization.spread_influence(network,
-                                            agent_i,
-                                            agents_j,
-                                            dissimilarity_measure,
-                                            attributes,
+        return realization(regime=regime, **kwargs).spread_influence(network=network,
+                                            agent_i=agent_i,
+                                            agents_j=agents_j,
+                                            dissimilarity_measure=dissimilarity_measure,
+                                            attributes=attributes,
                                             **kwargs)
 
     else:
