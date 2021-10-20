@@ -1,73 +1,32 @@
-
-
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8">
-  
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  
-  <title>Experiment class &mdash; defSim alpha documentation</title>
-  
-
-  
-  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-
-  
-  
-    <link rel="shortcut icon" href="_static/favicon.ico"/>
-  
-  
-  
-
-  
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Experiment class &mdash; defSim alpha documentation</title><link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" /><link rel="shortcut icon" href="_static/favicon.ico"/>
   <!--[if lt IE 9]>
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
-  
-    
-      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+  <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
         <script src="_static/jquery.js"></script>
         <script src="_static/underscore.js"></script>
         <script src="_static/doctools.js"></script>
         <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    
-    <script type="text/javascript" src="_static/js/theme.js"></script>
-
-    
+    <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Simulation class" href="simulation.class.html" />
     <link rel="prev" title="Introduction to defSim" href="Introduction_to_defSim.html" /> 
 </head>
 
-<body class="wy-body-for-nav">
-
-   
+<body class="wy-body-for-nav"> 
   <div class="wy-grid-for-nav">
-    
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search"  style="background: #343131" >
-          
-
-          
-            <a href="index.html">
-          
-
-          
-            
-            <img src="_static/defSim-logo.png" class="logo" alt="Logo"/>
-          
+            <a href="index.html"><img src="_static/defSim-logo.png" class="logo" alt="Logo"/>
           </a>
-
-          
-            
-            
-          
-
-          
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" />
@@ -75,18 +34,7 @@
     <input type="hidden" name="area" value="default" />
   </form>
 </div>
-
-          
-        </div>
-
-        
-        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
-          
-            
-            
-              
-            
-            
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="Introduction_to_defSim.html">About defSim</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Experiment class</a></li>
@@ -103,74 +51,35 @@
 <li class="toctree-l1"><a class="reference internal" href="credits.html">Credits</a></li>
 </ul>
 
-            
-          
         </div>
-        
       </div>
     </nav>
 
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
-
-      
-      <nav class="wy-nav-top" aria-label="top navigation">
-        
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #343131" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="index.html">defSim</a>
-        
       </nav>
 
-
       <div class="wy-nav-content">
-        
         <div class="rst-content">
-        
-          
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div role="navigation" aria-label="breadcrumbs navigation">
-
+          <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-    
       <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
-        
       <li>Experiment class</li>
-    
-    
       <li class="wy-breadcrumbs-aside">
-        
-            
             <a href="_sources/experiment.class.rst.txt" rel="nofollow"> View page source</a>
-          
-        
       </li>
-    
   </ul>
-
-  
   <hr/>
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
-            
+             
   <div class="section" id="module-defSim.Experiment">
-<span id="experiment-class"></span><h1>Experiment class<a class="headerlink" href="#module-defSim.Experiment" title="Permalink to this headline">¶</a></h1>
+<span id="experiment-class"></span><h1>Experiment class<a class="headerlink" href="#module-defSim.Experiment" title="Permalink to this headline"></a></h1>
 <dl class="py class">
 <dt id="defSim.Experiment.Experiment">
-<em class="property">class </em><code class="sig-prename descclassname">defSim.Experiment.</code><code class="sig-name descname">Experiment</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">simulations</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span>List<span class="p">[</span><a class="reference internal" href="simulation.class.html#defSim.Simulation.Simulation" title="defSim.Simulation.Simulation">defSim.Simulation.Simulation</a><span class="p">]</span><span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">network</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span>networkx.classes.graph.Graph<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">communication_regime</span><span class="p">:</span> <span class="n">List</span> <span class="o">=</span> <span class="default_value">'one-to-one'</span></em>, <em class="sig-param"><span class="n">topology</span><span class="p">:</span> <span class="n">str</span> <span class="o">=</span> <span class="default_value">'grid'</span></em>, <em class="sig-param"><span class="n">network_parameters</span><span class="p">:</span> <span class="n">dict</span> <span class="o">=</span> <span class="default_value">{}</span></em>, <em class="sig-param"><span class="n">attributes_initializer</span><span class="p">:</span> <span class="n">str</span> <span class="o">=</span> <span class="default_value">'random_categorical'</span></em>, <em class="sig-param"><span class="n">attribute_parameters</span><span class="p">:</span> <span class="n">dict</span> <span class="o">=</span> <span class="default_value">{}</span></em>, <em class="sig-param"><span class="n">focal_agent_selector</span><span class="p">:</span> <span class="n">str</span> <span class="o">=</span> <span class="default_value">'random'</span></em>, <em class="sig-param"><span class="n">focal_agent_parameters</span><span class="p">:</span> <span class="n">dict</span> <span class="o">=</span> <span class="default_value">{}</span></em>, <em class="sig-param"><span class="n">neighbor_selector</span><span class="p">:</span> <span class="n">str</span> <span class="o">=</span> <span class="default_value">'random'</span></em>, <em class="sig-param"><span class="n">neighbor_parameters</span><span class="p">:</span> <span class="n">dict</span> <span class="o">=</span> <span class="default_value">{}</span></em>, <em class="sig-param"><span class="n">influence_function</span><span class="p">:</span> <span class="n">str</span> <span class="o">=</span> <span class="default_value">'similarity_adoption'</span></em>, <em class="sig-param"><span class="n">influence_parameters</span><span class="p">:</span> <span class="n">dict</span> <span class="o">=</span> <span class="default_value">{}</span></em>, <em class="sig-param"><span class="n">influenceable_attributes</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span>list<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">network_modifiers</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span>List<span class="p">[</span><a class="reference internal" href="defSim.network_evolution_sim.html#defSim.network_evolution_sim.network_evolution_sim.NetworkModifier" title="defSim.network_evolution_sim.network_evolution_sim.NetworkModifier">defSim.network_evolution_sim.network_evolution_sim.NetworkModifier</a><span class="p">]</span><span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">network_modifier_parameters</span><span class="p">:</span> <span class="n">dict</span> <span class="o">=</span> <span class="default_value">{}</span></em>, <em class="sig-param"><span class="n">dissimilarity_measure</span><span class="p">:</span> <span class="n">str</span> <span class="o">=</span> <span class="default_value">'hamming'</span></em>, <em class="sig-param"><span class="n">tickwise</span><span class="p">:</span> <span class="n">list</span> <span class="o">=</span> <span class="default_value">[]</span></em>, <em class="sig-param"><span class="n">stop_condition</span><span class="p">:</span> <span class="n">str</span> <span class="o">=</span> <span class="default_value">'max_iteration'</span></em>, <em class="sig-param"><span class="n">stop_condition_parameters</span><span class="p">:</span> <span class="n">dict</span> <span class="o">=</span> <span class="default_value">{}</span></em>, <em class="sig-param"><span class="n">max_iterations</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">100000</span></em>, <em class="sig-param"><span class="n">output_realizations</span><span class="p">:</span> <span class="n">list</span> <span class="o">=</span> <span class="default_value">[]</span></em>, <em class="sig-param"><span class="n">output_folder_path</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span>str<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">output_file_types</span><span class="p">:</span> <span class="n">List<span class="p">[</span>str<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">[]</span></em>, <em class="sig-param"><span class="n">repetitions</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">1</span></em>, <em class="sig-param"><span class="n">seed</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span>int<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#defSim.Experiment.Experiment" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">defSim.Experiment.</code><code class="sig-name descname">Experiment</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">simulations</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span>List<span class="p">[</span><a class="reference internal" href="simulation.class.html#defSim.Simulation.Simulation" title="defSim.Simulation.Simulation">defSim.Simulation.Simulation</a><span class="p">]</span><span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">network</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span>networkx.classes.graph.Graph<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">communication_regime</span><span class="p">:</span> <span class="n">List</span> <span class="o">=</span> <span class="default_value">'one-to-one'</span></em>, <em class="sig-param"><span class="n">topology</span><span class="p">:</span> <span class="n">str</span> <span class="o">=</span> <span class="default_value">'grid'</span></em>, <em class="sig-param"><span class="n">network_parameters</span><span class="p">:</span> <span class="n">dict</span> <span class="o">=</span> <span class="default_value">{}</span></em>, <em class="sig-param"><span class="n">attributes_initializer</span><span class="p">:</span> <span class="n">str</span> <span class="o">=</span> <span class="default_value">'random_categorical'</span></em>, <em class="sig-param"><span class="n">attribute_parameters</span><span class="p">:</span> <span class="n">dict</span> <span class="o">=</span> <span class="default_value">{}</span></em>, <em class="sig-param"><span class="n">focal_agent_selector</span><span class="p">:</span> <span class="n">str</span> <span class="o">=</span> <span class="default_value">'random'</span></em>, <em class="sig-param"><span class="n">focal_agent_parameters</span><span class="p">:</span> <span class="n">dict</span> <span class="o">=</span> <span class="default_value">{}</span></em>, <em class="sig-param"><span class="n">neighbor_selector</span><span class="p">:</span> <span class="n">str</span> <span class="o">=</span> <span class="default_value">'random'</span></em>, <em class="sig-param"><span class="n">neighbor_parameters</span><span class="p">:</span> <span class="n">dict</span> <span class="o">=</span> <span class="default_value">{}</span></em>, <em class="sig-param"><span class="n">influence_function</span><span class="p">:</span> <span class="n">str</span> <span class="o">=</span> <span class="default_value">'similarity_adoption'</span></em>, <em class="sig-param"><span class="n">influence_parameters</span><span class="p">:</span> <span class="n">dict</span> <span class="o">=</span> <span class="default_value">{}</span></em>, <em class="sig-param"><span class="n">influenceable_attributes</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span>list<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">network_modifiers</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span>List<span class="p">[</span><a class="reference internal" href="defSim.network_evolution_sim.html#defSim.network_evolution_sim.network_evolution_sim.NetworkModifier" title="defSim.network_evolution_sim.network_evolution_sim.NetworkModifier">defSim.network_evolution_sim.network_evolution_sim.NetworkModifier</a><span class="p">]</span><span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">network_modifier_parameters</span><span class="p">:</span> <span class="n">dict</span> <span class="o">=</span> <span class="default_value">{}</span></em>, <em class="sig-param"><span class="n">dissimilarity_measure</span><span class="p">:</span> <span class="n">str</span> <span class="o">=</span> <span class="default_value">'hamming'</span></em>, <em class="sig-param"><span class="n">tickwise</span><span class="p">:</span> <span class="n">list</span> <span class="o">=</span> <span class="default_value">[]</span></em>, <em class="sig-param"><span class="n">stop_condition</span><span class="p">:</span> <span class="n">str</span> <span class="o">=</span> <span class="default_value">'max_iteration'</span></em>, <em class="sig-param"><span class="n">stop_condition_parameters</span><span class="p">:</span> <span class="n">dict</span> <span class="o">=</span> <span class="default_value">{}</span></em>, <em class="sig-param"><span class="n">max_iterations</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">100000</span></em>, <em class="sig-param"><span class="n">output_realizations</span><span class="p">:</span> <span class="n">list</span> <span class="o">=</span> <span class="default_value">[]</span></em>, <em class="sig-param"><span class="n">output_folder_path</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span>str<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">output_file_types</span><span class="p">:</span> <span class="n">List<span class="p">[</span>str<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">[]</span></em>, <em class="sig-param"><span class="n">repetitions</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">1</span></em>, <em class="sig-param"><span class="n">seed</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span>int<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#defSim.Experiment.Experiment" title="Permalink to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>The main class for creating and running experiments. Each simulation consists of 7 modular components, where
 each component is independent from the others and can thus be replaced by a different implementation of that
@@ -222,13 +131,13 @@ can then be passed as a list and executed as an experiment.</p>
 </dl>
 <dl class="py method">
 <dt id="defSim.Experiment.Experiment.__init__">
-<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">simulations</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span>List<span class="p">[</span><a class="reference internal" href="simulation.class.html#defSim.Simulation.Simulation" title="defSim.Simulation.Simulation">defSim.Simulation.Simulation</a><span class="p">]</span><span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">network</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span>networkx.classes.graph.Graph<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">communication_regime</span><span class="p">:</span> <span class="n">List</span> <span class="o">=</span> <span class="default_value">'one-to-one'</span></em>, <em class="sig-param"><span class="n">topology</span><span class="p">:</span> <span class="n">str</span> <span class="o">=</span> <span class="default_value">'grid'</span></em>, <em class="sig-param"><span class="n">network_parameters</span><span class="p">:</span> <span class="n">dict</span> <span class="o">=</span> <span class="default_value">{}</span></em>, <em class="sig-param"><span class="n">attributes_initializer</span><span class="p">:</span> <span class="n">str</span> <span class="o">=</span> <span class="default_value">'random_categorical'</span></em>, <em class="sig-param"><span class="n">attribute_parameters</span><span class="p">:</span> <span class="n">dict</span> <span class="o">=</span> <span class="default_value">{}</span></em>, <em class="sig-param"><span class="n">focal_agent_selector</span><span class="p">:</span> <span class="n">str</span> <span class="o">=</span> <span class="default_value">'random'</span></em>, <em class="sig-param"><span class="n">focal_agent_parameters</span><span class="p">:</span> <span class="n">dict</span> <span class="o">=</span> <span class="default_value">{}</span></em>, <em class="sig-param"><span class="n">neighbor_selector</span><span class="p">:</span> <span class="n">str</span> <span class="o">=</span> <span class="default_value">'random'</span></em>, <em class="sig-param"><span class="n">neighbor_parameters</span><span class="p">:</span> <span class="n">dict</span> <span class="o">=</span> <span class="default_value">{}</span></em>, <em class="sig-param"><span class="n">influence_function</span><span class="p">:</span> <span class="n">str</span> <span class="o">=</span> <span class="default_value">'similarity_adoption'</span></em>, <em class="sig-param"><span class="n">influence_parameters</span><span class="p">:</span> <span class="n">dict</span> <span class="o">=</span> <span class="default_value">{}</span></em>, <em class="sig-param"><span class="n">influenceable_attributes</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span>list<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">network_modifiers</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span>List<span class="p">[</span><a class="reference internal" href="defSim.network_evolution_sim.html#defSim.network_evolution_sim.network_evolution_sim.NetworkModifier" title="defSim.network_evolution_sim.network_evolution_sim.NetworkModifier">defSim.network_evolution_sim.network_evolution_sim.NetworkModifier</a><span class="p">]</span><span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">network_modifier_parameters</span><span class="p">:</span> <span class="n">dict</span> <span class="o">=</span> <span class="default_value">{}</span></em>, <em class="sig-param"><span class="n">dissimilarity_measure</span><span class="p">:</span> <span class="n">str</span> <span class="o">=</span> <span class="default_value">'hamming'</span></em>, <em class="sig-param"><span class="n">tickwise</span><span class="p">:</span> <span class="n">list</span> <span class="o">=</span> <span class="default_value">[]</span></em>, <em class="sig-param"><span class="n">stop_condition</span><span class="p">:</span> <span class="n">str</span> <span class="o">=</span> <span class="default_value">'max_iteration'</span></em>, <em class="sig-param"><span class="n">stop_condition_parameters</span><span class="p">:</span> <span class="n">dict</span> <span class="o">=</span> <span class="default_value">{}</span></em>, <em class="sig-param"><span class="n">max_iterations</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">100000</span></em>, <em class="sig-param"><span class="n">output_realizations</span><span class="p">:</span> <span class="n">list</span> <span class="o">=</span> <span class="default_value">[]</span></em>, <em class="sig-param"><span class="n">output_folder_path</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span>str<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">output_file_types</span><span class="p">:</span> <span class="n">List<span class="p">[</span>str<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">[]</span></em>, <em class="sig-param"><span class="n">repetitions</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">1</span></em>, <em class="sig-param"><span class="n">seed</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span>int<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#defSim.Experiment.Experiment.__init__" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">simulations</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span>List<span class="p">[</span><a class="reference internal" href="simulation.class.html#defSim.Simulation.Simulation" title="defSim.Simulation.Simulation">defSim.Simulation.Simulation</a><span class="p">]</span><span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">network</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span>networkx.classes.graph.Graph<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">communication_regime</span><span class="p">:</span> <span class="n">List</span> <span class="o">=</span> <span class="default_value">'one-to-one'</span></em>, <em class="sig-param"><span class="n">topology</span><span class="p">:</span> <span class="n">str</span> <span class="o">=</span> <span class="default_value">'grid'</span></em>, <em class="sig-param"><span class="n">network_parameters</span><span class="p">:</span> <span class="n">dict</span> <span class="o">=</span> <span class="default_value">{}</span></em>, <em class="sig-param"><span class="n">attributes_initializer</span><span class="p">:</span> <span class="n">str</span> <span class="o">=</span> <span class="default_value">'random_categorical'</span></em>, <em class="sig-param"><span class="n">attribute_parameters</span><span class="p">:</span> <span class="n">dict</span> <span class="o">=</span> <span class="default_value">{}</span></em>, <em class="sig-param"><span class="n">focal_agent_selector</span><span class="p">:</span> <span class="n">str</span> <span class="o">=</span> <span class="default_value">'random'</span></em>, <em class="sig-param"><span class="n">focal_agent_parameters</span><span class="p">:</span> <span class="n">dict</span> <span class="o">=</span> <span class="default_value">{}</span></em>, <em class="sig-param"><span class="n">neighbor_selector</span><span class="p">:</span> <span class="n">str</span> <span class="o">=</span> <span class="default_value">'random'</span></em>, <em class="sig-param"><span class="n">neighbor_parameters</span><span class="p">:</span> <span class="n">dict</span> <span class="o">=</span> <span class="default_value">{}</span></em>, <em class="sig-param"><span class="n">influence_function</span><span class="p">:</span> <span class="n">str</span> <span class="o">=</span> <span class="default_value">'similarity_adoption'</span></em>, <em class="sig-param"><span class="n">influence_parameters</span><span class="p">:</span> <span class="n">dict</span> <span class="o">=</span> <span class="default_value">{}</span></em>, <em class="sig-param"><span class="n">influenceable_attributes</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span>list<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">network_modifiers</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span>List<span class="p">[</span><a class="reference internal" href="defSim.network_evolution_sim.html#defSim.network_evolution_sim.network_evolution_sim.NetworkModifier" title="defSim.network_evolution_sim.network_evolution_sim.NetworkModifier">defSim.network_evolution_sim.network_evolution_sim.NetworkModifier</a><span class="p">]</span><span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">network_modifier_parameters</span><span class="p">:</span> <span class="n">dict</span> <span class="o">=</span> <span class="default_value">{}</span></em>, <em class="sig-param"><span class="n">dissimilarity_measure</span><span class="p">:</span> <span class="n">str</span> <span class="o">=</span> <span class="default_value">'hamming'</span></em>, <em class="sig-param"><span class="n">tickwise</span><span class="p">:</span> <span class="n">list</span> <span class="o">=</span> <span class="default_value">[]</span></em>, <em class="sig-param"><span class="n">stop_condition</span><span class="p">:</span> <span class="n">str</span> <span class="o">=</span> <span class="default_value">'max_iteration'</span></em>, <em class="sig-param"><span class="n">stop_condition_parameters</span><span class="p">:</span> <span class="n">dict</span> <span class="o">=</span> <span class="default_value">{}</span></em>, <em class="sig-param"><span class="n">max_iterations</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">100000</span></em>, <em class="sig-param"><span class="n">output_realizations</span><span class="p">:</span> <span class="n">list</span> <span class="o">=</span> <span class="default_value">[]</span></em>, <em class="sig-param"><span class="n">output_folder_path</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span>str<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">output_file_types</span><span class="p">:</span> <span class="n">List<span class="p">[</span>str<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">[]</span></em>, <em class="sig-param"><span class="n">repetitions</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">1</span></em>, <em class="sig-param"><span class="n">seed</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span>int<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#defSim.Experiment.Experiment.__init__" title="Permalink to this definition"></a></dt>
 <dd><p>Initialize self.  See help(type(self)) for accurate signature.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt id="defSim.Experiment.Experiment.estimate_runtime">
-<code class="sig-name descname">estimate_runtime</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">sample_runs</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span>int<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">sample_steps</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">10</span></em><span class="sig-paren">)</span><a class="headerlink" href="#defSim.Experiment.Experiment.estimate_runtime" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">estimate_runtime</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">sample_runs</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span>int<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">sample_steps</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">10</span></em><span class="sig-paren">)</span><a class="headerlink" href="#defSim.Experiment.Experiment.estimate_runtime" title="Permalink to this definition"></a></dt>
 <dd><blockquote>
 <div><p>If simulations are specified, this function infers the experiment runtime from sampled runs/steps.</p>
 </div></blockquote>
@@ -250,7 +159,7 @@ sampled runs the runtime of the whole experiment.</p>
 
 <dl class="py method">
 <dt id="defSim.Experiment.Experiment.return_values">
-<code class="sig-name descname">return_values</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#defSim.Experiment.Experiment.return_values" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">return_values</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#defSim.Experiment.Experiment.return_values" title="Permalink to this definition"></a></dt>
 <dd><p>This method returns the values stored in the Experiment object. Both default, and user-specified values are
 returned to the console to make the Experiment object more transparent.</p>
 <dl class="field-list simple">
@@ -262,7 +171,7 @@ returned to the console to make the Experiment object more transparent.</p>
 
 <dl class="py method">
 <dt id="defSim.Experiment.Experiment.run">
-<code class="sig-name descname">run</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">parallel</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">False</span></em>, <em class="sig-param"><span class="n">num_cores</span><span class="o">=</span><span class="default_value">8</span></em>, <em class="sig-param"><span class="n">show_progress</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">True</span></em><span class="sig-paren">)</span> &#x2192; pandas.core.frame.DataFrame<a class="headerlink" href="#defSim.Experiment.Experiment.run" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">run</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">parallel</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">False</span></em>, <em class="sig-param"><span class="n">num_cores</span><span class="o">=</span><span class="default_value">8</span></em>, <em class="sig-param"><span class="n">show_progress</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">True</span></em><span class="sig-paren">)</span> &#x2192; pandas.core.frame.DataFrame<a class="headerlink" href="#defSim.Experiment.Experiment.run" title="Permalink to this definition"></a></dt>
 <dd><p>If the experiment is defined by a list of simulations:
 Runs each simulation.</p>
 <p>If the experiment is defined by parameter combinations:
@@ -285,7 +194,7 @@ creates a simulation for each parameter combination in the parameter_dict_list.<
 
 <dl class="py method">
 <dt id="defSim.Experiment.Experiment.run_on_cluster">
-<code class="sig-name descname">run_on_cluster</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">chunk_size</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">2400</span></em>, <em class="sig-param"><span class="n">batch_path</span><span class="p">:</span> <span class="n">str</span> <span class="o">=</span> <span class="default_value">'batchscripts'</span></em>, <em class="sig-param"><span class="n">output_path</span><span class="p">:</span> <span class="n">str</span> <span class="o">=</span> <span class="default_value">'output'</span></em>, <em class="sig-param"><span class="n">walltime</span><span class="p">:</span> <span class="n">str</span> <span class="o">=</span> <span class="default_value">'30:00'</span></em>, <em class="sig-param"><span class="n">partition</span><span class="p">:</span> <span class="n">str</span> <span class="o">=</span> <span class="default_value">'short'</span></em><span class="sig-paren">)</span><a class="headerlink" href="#defSim.Experiment.Experiment.run_on_cluster" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">run_on_cluster</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">chunk_size</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">2400</span></em>, <em class="sig-param"><span class="n">batch_path</span><span class="p">:</span> <span class="n">str</span> <span class="o">=</span> <span class="default_value">'batchscripts'</span></em>, <em class="sig-param"><span class="n">output_path</span><span class="p">:</span> <span class="n">str</span> <span class="o">=</span> <span class="default_value">'output'</span></em>, <em class="sig-param"><span class="n">walltime</span><span class="p">:</span> <span class="n">str</span> <span class="o">=</span> <span class="default_value">'30:00'</span></em>, <em class="sig-param"><span class="n">partition</span><span class="p">:</span> <span class="n">str</span> <span class="o">=</span> <span class="default_value">'short'</span></em><span class="sig-paren">)</span><a class="headerlink" href="#defSim.Experiment.Experiment.run_on_cluster" title="Permalink to this definition"></a></dt>
 <dd><p>This method can be used to execute large Experiments on a SLURM cluster.
 It creates a number of sbatch scripts that are immediatly executed to send jobs to the SLURM job manager.
 To be able to use this method the script with the Experiment must be executed on a SLURM server.</p>
@@ -308,58 +217,33 @@ To be able to use this method the script with the Experiment must be executed on
 
 
            </div>
-           
           </div>
-          <footer>
-  
-    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-      
-        <a href="simulation.class.html" class="btn btn-neutral float-right" title="Simulation class" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
-      
-      
-        <a href="Introduction_to_defSim.html" class="btn btn-neutral float-left" title="Introduction to defSim" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
-      
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="Introduction_to_defSim.html" class="btn btn-neutral float-left" title="Introduction to defSim" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="simulation.class.html" class="btn btn-neutral float-right" title="Simulation class" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
-  
 
   <hr/>
 
   <div role="contentinfo">
-    <p>
-        
-        &copy; Copyright 2019-2021, Laukemper, Keijzer &amp; Bakker
-
-    </p>
+    <p>&#169; Copyright 2019-2021, Laukemper, Keijzer &amp; Bakker.</p>
   </div>
-    
-    
-    
-    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
-    
-    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
-    
-    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
 
 </footer>
-
         </div>
       </div>
-
     </section>
-
   </div>
-  
-
-  <script type="text/javascript">
+  <script>
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
-  </script>
-
-  
-  
-    
-   
+  </script> 
 
 </body>
 </html>

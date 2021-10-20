@@ -205,7 +205,7 @@ class Experiment:
                 simulations_to_run.append(
                     Simulation(network=self.network.copy() if self.network is not None else self.network,
                                topology=self.topology,
-			       network_modifiers=self.network_modifiers,
+			                   network_modifiers=self.network_modifiers,
                                attributes_initializer=self.attributes_initializer,
                                focal_agent_selector=self.focal_agent_selector,
                                neighbor_selector=self.neighbor_selector,

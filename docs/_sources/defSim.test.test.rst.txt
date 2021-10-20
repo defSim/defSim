@@ -1,4 +1,0 @@
-With content
-=========
-
-a monkey

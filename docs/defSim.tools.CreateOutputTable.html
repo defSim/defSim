@@ -1,71 +1,32 @@
-
-
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8">
-  
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  
-  <title>CreateOutputTable &mdash; defSim alpha documentation</title>
-  
-
-  
-  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-
-  
-  
-    <link rel="shortcut icon" href="_static/favicon.ico"/>
-  
-  
-  
-
-  
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CreateOutputTable &mdash; defSim alpha documentation</title><link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" /><link rel="shortcut icon" href="_static/favicon.ico"/>
   <!--[if lt IE 9]>
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
-  
-    
-      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+  <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
         <script src="_static/jquery.js"></script>
         <script src="_static/underscore.js"></script>
         <script src="_static/doctools.js"></script>
         <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    
-    <script type="text/javascript" src="_static/js/theme.js"></script>
-
-    
+    <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
-    <link rel="search" title="Search" href="search.html" /> 
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="OutputMeasures" href="defSim.tools.OutputMeasures.html" />
+    <link rel="prev" title="Tools" href="defSim.tools.html" /> 
 </head>
 
-<body class="wy-body-for-nav">
-
-   
+<body class="wy-body-for-nav"> 
   <div class="wy-grid-for-nav">
-    
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search"  style="background: #343131" >
-          
-
-          
-            <a href="index.html">
-          
-
-          
-            
-            <img src="_static/defSim-logo.png" class="logo" alt="Logo"/>
-          
+            <a href="index.html"><img src="_static/defSim-logo.png" class="logo" alt="Logo"/>
           </a>
-
-          
-            
-            
-          
-
-          
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" />
@@ -73,20 +34,9 @@
     <input type="hidden" name="area" value="default" />
   </form>
 </div>
-
-          
-        </div>
-
-        
-        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
-          
-            
-            
-              
-            
-            
-              <ul>
-<li class="toctree-l1"><a class="reference internal" href="Introduction_to_defSim.html">Introduction</a></li>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="Introduction_to_defSim.html">About defSim</a></li>
 <li class="toctree-l1"><a class="reference internal" href="experiment.class.html">Experiment class</a></li>
 <li class="toctree-l1"><a class="reference internal" href="simulation.class.html">Simulation class</a></li>
 <li class="toctree-l1"><a class="reference internal" href="defSim.network_init.html">Networks</a></li>
@@ -96,79 +46,49 @@
 <li class="toctree-l1"><a class="reference internal" href="defSim.influence_sim.html">Influence</a></li>
 <li class="toctree-l1"><a class="reference internal" href="defSim.network_evolution_sim.html">Network evolution</a></li>
 <li class="toctree-l1"><a class="reference internal" href="defSim.dissimilarity_component.html">Dissimilarity updaters</a></li>
-<li class="toctree-l1"><a class="reference internal" href="defSim.tools.html">Tools</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="defSim.tools.html">Tools</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">CreateOutputTable</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#abc-of-createoutputtable">ABC of CreateOutputTable</a></li>
+<li class="toctree-l2"><a class="reference internal" href="defSim.tools.OutputMeasures.html">Output Measures</a></li>
+<li class="toctree-l2"><a class="reference internal" href="defSim.tools.Plots.html">Plots</a></li>
+<li class="toctree-l2"><a class="reference internal" href="defSim.tools.NetworkDistanceUpdater.html">Network Distance Updater</a></li>
+<li class="toctree-l2"><a class="reference internal" href="defSim.tools.ClusterExecutionScript.html">Cluster Execution Script</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="defSim.extensions.html">Extensions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="credits.html">Credits</a></li>
 </ul>
 
-            
-          
         </div>
-        
       </div>
     </nav>
 
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
-
-      
-      <nav class="wy-nav-top" aria-label="top navigation">
-        
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #343131" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="index.html">defSim</a>
-        
       </nav>
 
-
       <div class="wy-nav-content">
-        
         <div class="rst-content">
-        
-          
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div role="navigation" aria-label="breadcrumbs navigation">
-
+          <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-    
       <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
-        
+          <li><a href="defSim.tools.html">Tools</a> &raquo;</li>
       <li>CreateOutputTable</li>
-    
-    
       <li class="wy-breadcrumbs-aside">
-        
-            
             <a href="_sources/defSim.tools.CreateOutputTable.rst.txt" rel="nofollow"> View page source</a>
-          
-        
       </li>
-    
   </ul>
-
-  
   <hr/>
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
-            
+             
   <div class="section" id="module-defSim.tools.CreateOutputTable">
-<span id="createoutputtable"></span><h1>CreateOutputTable<a class="headerlink" href="#module-defSim.tools.CreateOutputTable" title="Permalink to this headline">¶</a></h1>
+<span id="createoutputtable"></span><h1>CreateOutputTable<a class="headerlink" href="#module-defSim.tools.CreateOutputTable" title="Permalink to this headline"></a></h1>
 <dl class="py function">
 <dt id="defSim.tools.CreateOutputTable.create_output_table">
-<code class="sig-prename descclassname">defSim.tools.CreateOutputTable.</code><code class="sig-name descname">create_output_table</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">network</span><span class="p">:</span> <span class="n">networkx.classes.graph.Graph</span></em>, <em class="sig-param"><span class="n">realizations</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">colnames</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">agents</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">settings_dict</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">tickwise_output</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#defSim.tools.CreateOutputTable.create_output_table" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">defSim.tools.CreateOutputTable.</code><code class="sig-name descname">create_output_table</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">network</span><span class="p">:</span> <span class="n">networkx.classes.graph.Graph</span></em>, <em class="sig-param"><span class="n">realizations</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">colnames</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">agents</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">settings_dict</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">tickwise_output</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#defSim.tools.CreateOutputTable.create_output_table" title="Permalink to this definition"></a></dt>
 <dd><p>This function works as a factory method for the OutputTableCreator component.
 It calls the create_output function of a specific implementation of the OutputTableCreator and passes to it
 the kwargs dictionary.</p>
@@ -219,11 +139,11 @@ during the simulation run. This function will create a column for each key in th
 
 </div>
 <div class="section" id="abc-of-createoutputtable">
-<h1>ABC of CreateOutputTable<a class="headerlink" href="#abc-of-createoutputtable" title="Permalink to this headline">¶</a></h1>
+<h1>ABC of CreateOutputTable<a class="headerlink" href="#abc-of-createoutputtable" title="Permalink to this headline"></a></h1>
 <p>The Abstract Base Class of the CreateOutputTable method:</p>
 <span class="target" id="module-0"></span><dl class="py class">
 <dt id="defSim.tools.CreateOutputTable.OutputTableCreator">
-<em class="property">class </em><code class="sig-prename descclassname">defSim.tools.CreateOutputTable.</code><code class="sig-name descname">OutputTableCreator</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#defSim.tools.CreateOutputTable.OutputTableCreator" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">defSim.tools.CreateOutputTable.</code><code class="sig-name descname">OutputTableCreator</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#defSim.tools.CreateOutputTable.OutputTableCreator" title="Permalink to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">abc.ABC</span></code></p>
 <p>This class is responsible for creating output for the output table.
 Inherit from this class and implement the create_output method to generate the desired output cell for the output table.
@@ -231,13 +151,13 @@ If you want the output cell to have a descriptive column name, overwrite the cla
 column names are autogenerated.</p>
 <dl class="py method">
 <dt id="defSim.tools.CreateOutputTable.OutputTableCreator.__init__">
-<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#defSim.tools.CreateOutputTable.OutputTableCreator.__init__" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#defSim.tools.CreateOutputTable.OutputTableCreator.__init__" title="Permalink to this definition"></a></dt>
 <dd><p>Initialize self.  See help(type(self)) for accurate signature.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt id="defSim.tools.CreateOutputTable.OutputTableCreator.create_output">
-<em class="property">abstract </em><code class="sig-name descname">create_output</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">network</span><span class="p">:</span> <span class="n">networkx.classes.graph.Graph</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#defSim.tools.CreateOutputTable.OutputTableCreator.create_output" title="Permalink to this definition">¶</a></dt>
+<em class="property">abstract </em><code class="sig-name descname">create_output</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">network</span><span class="p">:</span> <span class="n">networkx.classes.graph.Graph</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#defSim.tools.CreateOutputTable.OutputTableCreator.create_output" title="Permalink to this definition"></a></dt>
 <dd><p>This method receives a NetworkX object, performs some calculation, and outputs a cell for the output table.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -251,7 +171,7 @@ column names are autogenerated.</p>
 
 <dl class="py attribute">
 <dt id="defSim.tools.CreateOutputTable.OutputTableCreator.label">
-<code class="sig-name descname">label</code><em class="property"> = ''</em><a class="headerlink" href="#defSim.tools.CreateOutputTable.OutputTableCreator.label" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">label</code><em class="property"> = ''</em><a class="headerlink" href="#defSim.tools.CreateOutputTable.OutputTableCreator.label" title="Permalink to this definition"></a></dt>
 <dd></dd></dl>
 
 </dd></dl>
@@ -260,49 +180,33 @@ column names are autogenerated.</p>
 
 
            </div>
-           
           </div>
-          <footer>
-  
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="defSim.tools.html" class="btn btn-neutral float-left" title="Tools" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="defSim.tools.OutputMeasures.html" class="btn btn-neutral float-right" title="OutputMeasures" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
 
   <hr/>
 
   <div role="contentinfo">
-    <p>
-        
-        &copy; Copyright 2019-2021, Laukemper, Keijzer &amp; Bakker
-
-    </p>
+    <p>&#169; Copyright 2019-2021, Laukemper, Keijzer &amp; Bakker.</p>
   </div>
-    
-    
-    
-    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
-    
-    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
-    
-    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
 
 </footer>
-
         </div>
       </div>
-
     </section>
-
   </div>
-  
-
-  <script type="text/javascript">
+  <script>
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
-  </script>
-
-  
-  
-    
-   
+  </script> 
 
 </body>
 </html>

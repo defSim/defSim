@@ -1,73 +1,32 @@
-
-
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8">
-  
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  
-  <title>CorrelatedContinuousInitializer &mdash; defSim alpha documentation</title>
-  
-
-  
-  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-
-  
-  
-    <link rel="shortcut icon" href="_static/favicon.ico"/>
-  
-  
-  
-
-  
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CorrelatedContinuousInitializer &mdash; defSim alpha documentation</title><link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" /><link rel="shortcut icon" href="_static/favicon.ico"/>
   <!--[if lt IE 9]>
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
-  
-    
-      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+  <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
         <script src="_static/jquery.js"></script>
         <script src="_static/underscore.js"></script>
         <script src="_static/doctools.js"></script>
         <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    
-    <script type="text/javascript" src="_static/js/theme.js"></script>
-
-    
+    <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Focal agent (simulation component)" href="defSim.focal_agent_sim.html" />
     <link rel="prev" title="RandomContinuousInitializer" href="defSim.agents_init.RandomContinuousInitializer.html" /> 
 </head>
 
-<body class="wy-body-for-nav">
-
-   
+<body class="wy-body-for-nav"> 
   <div class="wy-grid-for-nav">
-    
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search"  style="background: #343131" >
-          
-
-          
-            <a href="index.html">
-          
-
-          
-            
-            <img src="_static/defSim-logo.png" class="logo" alt="Logo"/>
-          
+            <a href="index.html"><img src="_static/defSim-logo.png" class="logo" alt="Logo"/>
           </a>
-
-          
-            
-            
-          
-
-          
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" />
@@ -75,20 +34,9 @@
     <input type="hidden" name="area" value="default" />
   </form>
 </div>
-
-          
-        </div>
-
-        
-        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
-          
-            
-            
-              
-            
-            
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="Introduction_to_defSim.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Introduction_to_defSim.html">About defSim</a></li>
 <li class="toctree-l1"><a class="reference internal" href="experiment.class.html">Experiment class</a></li>
 <li class="toctree-l1"><a class="reference internal" href="simulation.class.html">Simulation class</a></li>
 <li class="toctree-l1"><a class="reference internal" href="defSim.network_init.html">Networks</a></li>
@@ -112,81 +60,41 @@
 <li class="toctree-l1"><a class="reference internal" href="credits.html">Credits</a></li>
 </ul>
 
-            
-          
         </div>
-        
       </div>
     </nav>
 
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
-
-      
-      <nav class="wy-nav-top" aria-label="top navigation">
-        
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #343131" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="index.html">defSim</a>
-        
       </nav>
 
-
       <div class="wy-nav-content">
-        
         <div class="rst-content">
-        
-          
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div role="navigation" aria-label="breadcrumbs navigation">
-
+          <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-    
       <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
-        
           <li><a href="defSim.agents_init.html">Agent attributes (initialization component)</a> &raquo;</li>
-        
       <li>CorrelatedContinuousInitializer</li>
-    
-    
       <li class="wy-breadcrumbs-aside">
-        
-            
             <a href="_sources/defSim.agents_init.CorrelatedContinuousInitializer.rst.txt" rel="nofollow"> View page source</a>
-          
-        
       </li>
-    
   </ul>
-
-  
   <hr/>
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
-            
+             
   <div class="section" id="module-defSim.agents_init.CorrelatedContinuousInitializer">
-<span id="correlatedcontinuousinitializer"></span><h1>CorrelatedContinuousInitializer<a class="headerlink" href="#module-defSim.agents_init.CorrelatedContinuousInitializer" title="Permalink to this headline">¶</a></h1>
+<span id="correlatedcontinuousinitializer"></span><h1>CorrelatedContinuousInitializer<a class="headerlink" href="#module-defSim.agents_init.CorrelatedContinuousInitializer" title="Permalink to this headline"></a></h1>
 <dl class="py class">
 <dt id="defSim.agents_init.CorrelatedContinuousInitializer.CorrelatedContinuousInitializer">
-<em class="property">class </em><code class="sig-prename descclassname">defSim.agents_init.CorrelatedContinuousInitializer.</code><code class="sig-name descname">CorrelatedContinuousInitializer</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">distribution</span><span class="p">:</span> <span class="n">str</span> <span class="o">=</span> <span class="default_value">'uniform'</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#defSim.agents_init.CorrelatedContinuousInitializer.CorrelatedContinuousInitializer" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">defSim.agents_init.CorrelatedContinuousInitializer.</code><code class="sig-name descname">CorrelatedContinuousInitializer</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">distribution</span><span class="p">:</span> <span class="n">str</span> <span class="o">=</span> <span class="default_value">'uniform'</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#defSim.agents_init.CorrelatedContinuousInitializer.CorrelatedContinuousInitializer" title="Permalink to this definition"></a></dt>
 <dd><p>Bases: <a class="reference internal" href="defSim.agents_init.html#defSim.agents_init.agents_init.AttributesInitializer" title="defSim.agents_init.agents_init.AttributesInitializer"><code class="xref py py-class docutils literal notranslate"><span class="pre">defSim.agents_init.agents_init.AttributesInitializer</span></code></a></p>
 <p>Implements the AttributesInitializer as a random initialization of correlated random continuous features.</p>
 <dl class="py method">
 <dt id="defSim.agents_init.CorrelatedContinuousInitializer.CorrelatedContinuousInitializer.__init__">
-<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">distribution</span><span class="p">:</span> <span class="n">str</span> <span class="o">=</span> <span class="default_value">'uniform'</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#defSim.agents_init.CorrelatedContinuousInitializer.CorrelatedContinuousInitializer.__init__" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">distribution</span><span class="p">:</span> <span class="n">str</span> <span class="o">=</span> <span class="default_value">'uniform'</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#defSim.agents_init.CorrelatedContinuousInitializer.CorrelatedContinuousInitializer.__init__" title="Permalink to this definition"></a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
@@ -208,7 +116,7 @@
 
 <dl class="py method">
 <dt id="defSim.agents_init.CorrelatedContinuousInitializer.CorrelatedContinuousInitializer.initialize_attributes">
-<code class="sig-name descname">initialize_attributes</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">network</span><span class="p">:</span> <span class="n">networkx.classes.graph.Graph</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#defSim.agents_init.CorrelatedContinuousInitializer.CorrelatedContinuousInitializer.initialize_attributes" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">initialize_attributes</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">network</span><span class="p">:</span> <span class="n">networkx.classes.graph.Graph</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#defSim.agents_init.CorrelatedContinuousInitializer.CorrelatedContinuousInitializer.initialize_attributes" title="Permalink to this definition"></a></dt>
 <dd><p>Randomly initializes a number of continuous features between 0 and 1 for each node.
 Specify either a covariance matrix or a single correlation value (which is then applied to all pairs of attributes).
 Correlation values can  be used in the covariance matrix as the base data generated will always be N(0, 1) regardless of the
@@ -237,7 +145,7 @@ and postprocessing by setting the relevant parameters.</p>
 
 <dl class="py class">
 <dt id="defSim.agents_init.CorrelatedContinuousInitializer.SimilarityPostprocessor">
-<em class="property">class </em><code class="sig-prename descclassname">defSim.agents_init.CorrelatedContinuousInitializer.</code><code class="sig-name descname">SimilarityPostprocessor</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">network</span><span class="p">:</span> <span class="n">networkx.classes.graph.Graph</span></em>, <em class="sig-param"><span class="n">dissimilarity_criterion</span><span class="p">:</span> <span class="n">float</span></em>, <em class="sig-param"><span class="n">feature_names</span><span class="p">:</span> <span class="n">list</span></em>, <em class="sig-param"><span class="n">neighbor_similarity_feature</span><span class="p">:</span> <span class="n">str</span></em><span class="sig-paren">)</span><a class="headerlink" href="#defSim.agents_init.CorrelatedContinuousInitializer.SimilarityPostprocessor" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">defSim.agents_init.CorrelatedContinuousInitializer.</code><code class="sig-name descname">SimilarityPostprocessor</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">network</span><span class="p">:</span> <span class="n">networkx.classes.graph.Graph</span></em>, <em class="sig-param"><span class="n">dissimilarity_criterion</span><span class="p">:</span> <span class="n">float</span></em>, <em class="sig-param"><span class="n">feature_names</span><span class="p">:</span> <span class="n">list</span></em>, <em class="sig-param"><span class="n">neighbor_similarity_feature</span><span class="p">:</span> <span class="n">str</span></em><span class="sig-paren">)</span><a class="headerlink" href="#defSim.agents_init.CorrelatedContinuousInitializer.SimilarityPostprocessor" title="Permalink to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>This class holds functions to perform postprocessing on (correlated) features with the goal of
 enforcing a minimum level of similarity among neighbors. The main parameter to set here is the
@@ -245,7 +153,7 @@ dissimilarity criterion. The dissimilarity cirterion works by setting a limit on
 dissimilarity between neighbors on the neighbor_similarity_feature.</p>
 <dl class="py method">
 <dt id="defSim.agents_init.CorrelatedContinuousInitializer.SimilarityPostprocessor.__init__">
-<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">network</span><span class="p">:</span> <span class="n">networkx.classes.graph.Graph</span></em>, <em class="sig-param"><span class="n">dissimilarity_criterion</span><span class="p">:</span> <span class="n">float</span></em>, <em class="sig-param"><span class="n">feature_names</span><span class="p">:</span> <span class="n">list</span></em>, <em class="sig-param"><span class="n">neighbor_similarity_feature</span><span class="p">:</span> <span class="n">str</span></em><span class="sig-paren">)</span><a class="headerlink" href="#defSim.agents_init.CorrelatedContinuousInitializer.SimilarityPostprocessor.__init__" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">network</span><span class="p">:</span> <span class="n">networkx.classes.graph.Graph</span></em>, <em class="sig-param"><span class="n">dissimilarity_criterion</span><span class="p">:</span> <span class="n">float</span></em>, <em class="sig-param"><span class="n">feature_names</span><span class="p">:</span> <span class="n">list</span></em>, <em class="sig-param"><span class="n">neighbor_similarity_feature</span><span class="p">:</span> <span class="n">str</span></em><span class="sig-paren">)</span><a class="headerlink" href="#defSim.agents_init.CorrelatedContinuousInitializer.SimilarityPostprocessor.__init__" title="Permalink to this definition"></a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
@@ -260,7 +168,7 @@ dissimilarity between neighbors on the neighbor_similarity_feature.</p>
 
 <dl class="py method">
 <dt id="defSim.agents_init.CorrelatedContinuousInitializer.SimilarityPostprocessor.check_convergence">
-<code class="sig-name descname">check_convergence</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">swaps</span></em>, <em class="sig-param"><span class="n">current_dissimilar_nodes</span></em>, <em class="sig-param"><span class="n">nodes_involved_previous</span></em>, <em class="sig-param"><span class="n">num_dissimilar_previous</span></em><span class="sig-paren">)</span><a class="headerlink" href="#defSim.agents_init.CorrelatedContinuousInitializer.SimilarityPostprocessor.check_convergence" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">check_convergence</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">swaps</span></em>, <em class="sig-param"><span class="n">current_dissimilar_nodes</span></em>, <em class="sig-param"><span class="n">nodes_involved_previous</span></em>, <em class="sig-param"><span class="n">num_dissimilar_previous</span></em><span class="sig-paren">)</span><a class="headerlink" href="#defSim.agents_init.CorrelatedContinuousInitializer.SimilarityPostprocessor.check_convergence" title="Permalink to this definition"></a></dt>
 <dd><p>Checks whether the postprocessing procedure has converged. If convergence is detected but there are still agents
 who are too dissimilar from their neighbor according to the dissimilarity criterion, a warning is given.
 Convergence is detected when:
@@ -280,14 +188,14 @@ Convergence is detected when:
 
 <dl class="py method">
 <dt id="defSim.agents_init.CorrelatedContinuousInitializer.SimilarityPostprocessor.create_dissimilarity_data">
-<code class="sig-name descname">create_dissimilarity_data</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#defSim.agents_init.CorrelatedContinuousInitializer.SimilarityPostprocessor.create_dissimilarity_data" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">create_dissimilarity_data</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#defSim.agents_init.CorrelatedContinuousInitializer.SimilarityPostprocessor.create_dissimilarity_data" title="Permalink to this definition"></a></dt>
 <dd><p>Finds the dissimilarity data for each node in the network and stores data for all nodes
 as a numpy array.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt id="defSim.agents_init.CorrelatedContinuousInitializer.SimilarityPostprocessor.dissimilarity_data_for_node">
-<code class="sig-name descname">dissimilarity_data_for_node</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">node</span><span class="p">:</span> <span class="n">str</span></em><span class="sig-paren">)</span><a class="headerlink" href="#defSim.agents_init.CorrelatedContinuousInitializer.SimilarityPostprocessor.dissimilarity_data_for_node" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">dissimilarity_data_for_node</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">node</span><span class="p">:</span> <span class="n">str</span></em><span class="sig-paren">)</span><a class="headerlink" href="#defSim.agents_init.CorrelatedContinuousInitializer.SimilarityPostprocessor.dissimilarity_data_for_node" title="Permalink to this definition"></a></dt>
 <dd><p>Looks up the neighbors of a given node in the current network, and finds the maximum
 dissimilarity. Returns the node identifier, maximum dissimilarity, and the node’s own value
 on the similarity feature.
@@ -297,7 +205,7 @@ on the similarity feature.
 
 <dl class="py method">
 <dt id="defSim.agents_init.CorrelatedContinuousInitializer.SimilarityPostprocessor.improvement_if_swapped">
-<code class="sig-name descname">improvement_if_swapped</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">node1_data</span></em>, <em class="sig-param"><span class="n">node2_data</span></em><span class="sig-paren">)</span><a class="headerlink" href="#defSim.agents_init.CorrelatedContinuousInitializer.SimilarityPostprocessor.improvement_if_swapped" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">improvement_if_swapped</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">node1_data</span></em>, <em class="sig-param"><span class="n">node2_data</span></em><span class="sig-paren">)</span><a class="headerlink" href="#defSim.agents_init.CorrelatedContinuousInitializer.SimilarityPostprocessor.improvement_if_swapped" title="Permalink to this definition"></a></dt>
 <dd><p>Check whether dissimilarity in the network would be improved if two given nodes are swapped.
 First, attribute values for each node’s neighbors are gathered.
 Then, dissimilarity is calculated as if the two nodes swapped position.
@@ -322,7 +230,7 @@ attribute value for the second node</p></li>
 
 <dl class="py method">
 <dt id="defSim.agents_init.CorrelatedContinuousInitializer.SimilarityPostprocessor.process">
-<code class="sig-name descname">process</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">postprocessing_iterations</span><span class="p">:</span> <span class="n">str</span></em><span class="sig-paren">)</span><a class="headerlink" href="#defSim.agents_init.CorrelatedContinuousInitializer.SimilarityPostprocessor.process" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">process</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">postprocessing_iterations</span><span class="p">:</span> <span class="n">str</span></em><span class="sig-paren">)</span><a class="headerlink" href="#defSim.agents_init.CorrelatedContinuousInitializer.SimilarityPostprocessor.process" title="Permalink to this definition"></a></dt>
 <dd><p>Apply the postprocessing procedure to a network. Postprocessing can either run to convergence or to a maximum
 number of iterations. Even if a maximum number of iterations is set, convergence will still end postprocessing.</p>
 <dl class="field-list simple">
@@ -335,7 +243,7 @@ to run without limiting maximum number of iterations</p>
 
 <dl class="py method">
 <dt id="defSim.agents_init.CorrelatedContinuousInitializer.SimilarityPostprocessor.swap_dissimilar_nodes">
-<code class="sig-name descname">swap_dissimilar_nodes</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#defSim.agents_init.CorrelatedContinuousInitializer.SimilarityPostprocessor.swap_dissimilar_nodes" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">swap_dissimilar_nodes</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#defSim.agents_init.CorrelatedContinuousInitializer.SimilarityPostprocessor.swap_dissimilar_nodes" title="Permalink to this definition"></a></dt>
 <dd><p>Finds nodes in the network whose dissimilarity to neighbors on the neighbor similarity feature exceeds the
 dissimilarity criterion, and swaps these nodes if swapping would improve dissimilarity.
 Tracks the number of swaps made.
@@ -344,7 +252,7 @@ Tracks the number of swaps made.
 
 <dl class="py method">
 <dt id="defSim.agents_init.CorrelatedContinuousInitializer.SimilarityPostprocessor.swap_nodes">
-<code class="sig-name descname">swap_nodes</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">node1</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="n">node2</span><span class="p">:</span> <span class="n">str</span></em><span class="sig-paren">)</span><a class="headerlink" href="#defSim.agents_init.CorrelatedContinuousInitializer.SimilarityPostprocessor.swap_nodes" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">swap_nodes</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">node1</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="n">node2</span><span class="p">:</span> <span class="n">str</span></em><span class="sig-paren">)</span><a class="headerlink" href="#defSim.agents_init.CorrelatedContinuousInitializer.SimilarityPostprocessor.swap_nodes" title="Permalink to this definition"></a></dt>
 <dd><p>Swap attribute values for two network nodes. (Effectively swapping the network position of two agents.)
 :param str node1: Node identifier for first node
 :param str node2: Node identifier for second node</p>
@@ -352,7 +260,7 @@ Tracks the number of swaps made.
 
 <dl class="py method">
 <dt id="defSim.agents_init.CorrelatedContinuousInitializer.SimilarityPostprocessor.update_dissimilarity">
-<code class="sig-name descname">update_dissimilarity</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">node1</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="n">node2</span><span class="p">:</span> <span class="n">str</span></em><span class="sig-paren">)</span><a class="headerlink" href="#defSim.agents_init.CorrelatedContinuousInitializer.SimilarityPostprocessor.update_dissimilarity" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">update_dissimilarity</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">node1</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="n">node2</span><span class="p">:</span> <span class="n">str</span></em><span class="sig-paren">)</span><a class="headerlink" href="#defSim.agents_init.CorrelatedContinuousInitializer.SimilarityPostprocessor.update_dissimilarity" title="Permalink to this definition"></a></dt>
 <dd><p>For two given nodes, and all their neighbors, recalculate dissimilarity data. Use after swapping nodes to bring
 data up to date with new network position. The stored dissimilarity data is modified in place.
 :param str node1: Node identifier for first node
@@ -363,7 +271,7 @@ data up to date with new network position. The stored dissimilarity data is modi
 
 <dl class="py function">
 <dt id="defSim.agents_init.CorrelatedContinuousInitializer.apply_neighbor_similarity_beta_weights">
-<code class="sig-prename descclassname">defSim.agents_init.CorrelatedContinuousInitializer.</code><code class="sig-name descname">apply_neighbor_similarity_beta_weights</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">network</span></em>, <em class="sig-param"><span class="n">feature_values</span></em>, <em class="sig-param"><span class="n">feature_names</span></em>, <em class="sig-param"><span class="n">neighbor_similarity_feature</span></em>, <em class="sig-param"><span class="n">neighbor_similarity_concentration</span></em>, <em class="sig-param"><span class="n">neighbor_similarity_strength</span></em><span class="sig-paren">)</span><a class="headerlink" href="#defSim.agents_init.CorrelatedContinuousInitializer.apply_neighbor_similarity_beta_weights" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">defSim.agents_init.CorrelatedContinuousInitializer.</code><code class="sig-name descname">apply_neighbor_similarity_beta_weights</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">network</span></em>, <em class="sig-param"><span class="n">feature_values</span></em>, <em class="sig-param"><span class="n">feature_names</span></em>, <em class="sig-param"><span class="n">neighbor_similarity_feature</span></em>, <em class="sig-param"><span class="n">neighbor_similarity_concentration</span></em>, <em class="sig-param"><span class="n">neighbor_similarity_strength</span></em><span class="sig-paren">)</span><a class="headerlink" href="#defSim.agents_init.CorrelatedContinuousInitializer.apply_neighbor_similarity_beta_weights" title="Permalink to this definition"></a></dt>
 <dd><p>Distributes feature values across nodes in a network in a non-random way. The method starts by creating a random
 distribution and then redistributes semi-randomly by weighting the average attribute values of neighbors values.</p>
 </dd></dl>
@@ -372,58 +280,33 @@ distribution and then redistributes semi-randomly by weighting the average attri
 
 
            </div>
-           
           </div>
-          <footer>
-  
-    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-      
-        <a href="defSim.focal_agent_sim.html" class="btn btn-neutral float-right" title="Focal agent (simulation component)" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
-      
-      
-        <a href="defSim.agents_init.RandomContinuousInitializer.html" class="btn btn-neutral float-left" title="RandomContinuousInitializer" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
-      
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="defSim.agents_init.RandomContinuousInitializer.html" class="btn btn-neutral float-left" title="RandomContinuousInitializer" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="defSim.focal_agent_sim.html" class="btn btn-neutral float-right" title="Focal agent (simulation component)" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
-  
 
   <hr/>
 
   <div role="contentinfo">
-    <p>
-        
-        &copy; Copyright 2019-2021, Laukemper, Keijzer &amp; Bakker
-
-    </p>
+    <p>&#169; Copyright 2019-2021, Laukemper, Keijzer &amp; Bakker.</p>
   </div>
-    
-    
-    
-    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
-    
-    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
-    
-    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
 
 </footer>
-
         </div>
       </div>
-
     </section>
-
   </div>
-  
-
-  <script type="text/javascript">
+  <script>
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
-  </script>
-
-  
-  
-    
-   
+  </script> 
 
 </body>
 </html>
