@@ -46,5 +46,8 @@ def select_focal_agent(network: nx.Graph, realization: str or FocalAgentSelector
         return RandomSelector(**kwargs).select_agent(network, agents)
     elif issubclass(realization, FocalAgentSelector):
         return realization(**kwargs).select_agent(network, agents)
+    elif isinstance(realization, FocalAgentSelector):
+        return realization.select_agent(network, agents)
     else:
-        raise ValueError("Can only select from the options ['random'] or input an instance of a class which inherits from FocalAgentSelector")
+        raise ValueError("Can only select from the options ['random'] "
+                         "or input an instance of a class or a subclass which inherits from FocalAgentSelector")

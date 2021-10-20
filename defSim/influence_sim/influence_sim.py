@@ -108,6 +108,13 @@ def spread_influence(network: nx.Graph,
                                            attributes,
                                            **kwargs)
     elif issubclass(realization, InfluenceOperator):
+        return realization(regime=regime, **kwargs).spread_influence(network=network,
+                                                                     agent_i=agent_i,
+                                                                     agents_j=agents_j,
+                                                                     dissimilarity_measure=dissimilarity_measure,
+                                                                     attributes=attributes,
+                                                                     **kwargs)
+    elif isinstance(realization, InfluenceOperator):
         # if regime is set differently, raise warning
         # if regime is not set, set regime
         try:
@@ -115,7 +122,7 @@ def spread_influence(network: nx.Graph,
             warnings.warn("Regime for influence function is not equal to regime for simulation. Influence function: {}, simulation: {}".format(realization.regime, regime))
         except AttributeError:
           realization.regime = regime
-        return realization(regime=regime, **kwargs).spread_influence(network=network,
+        return realization.spread_influence(network=network,
                                             agent_i=agent_i,
                                             agents_j=agents_j,
                                             dissimilarity_measure=dissimilarity_measure,
@@ -123,5 +130,6 @@ def spread_influence(network: nx.Graph,
                                             **kwargs)
 
     else:
-        raise ValueError("Can only select from the options ['similarity_adoption', 'bounded_confidence', 'weighted_linear', "
-                         "'persuasion'], or supply an instance of a class which inherits from InfluenceOperator")
+        raise ValueError("Can only select from the options "
+                         "['similarity_adoption', 'bounded_confidence', 'weighted_linear', 'persuasion'], "
+                         "or supply an instance or subclass of a class which inherits from InfluenceOperator")

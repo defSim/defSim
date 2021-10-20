@@ -117,8 +117,12 @@ def initialize_attributes(network: nx.Graph, realization: str, **kwargs):
         CorrelatedContinuousInitializer.CorrelatedContinuousInitializer(**kwargs).initialize_attributes(network)  
     elif issubclass(realization, AttributesInitializer):
         realization(**kwargs).initialize_attributes(network, **kwargs)
+    elif isinstance(realization, AttributesInitializer):
+        realization.initialize_attributes(network, **kwargs)
     else:
-        raise ValueError("Can only select from the options ['random_categorical', 'random_continuous', 'correlated_continuous'] or supply an instance of a class which inherits from the ABC")
+        raise ValueError("Can only select from the options "
+                         "['random_categorical', 'random_continuous', 'correlated_continuous'] "
+                         "or supply an instance of a class or a subclass which inherits from AttributesInitializer")
 
 
 def set_categorical_attribute(network: nx.Graph, name: str, values: list, distribution: str = "uniform", **kwargs):
