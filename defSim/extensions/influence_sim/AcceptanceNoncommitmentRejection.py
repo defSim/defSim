@@ -6,6 +6,7 @@ from defSim.dissimilarity_component.dissimilarity_calculator import Dissimilarit
 
 from typing import List
 import warnings
+import random
 
 
 class AcceptanceNoncommitmentRejection(InfluenceOperator):
