@@ -130,7 +130,11 @@ class AcceptanceNoncommitmentRejection(InfluenceOperator):
                     # j_t+1 = j - convergence_rate * (i-j)
                     network.nodes[neighbor][influenced_feature] = network.nodes[neighbor][
                                                                       influenced_feature] - self.convergence_rate * feature_difference
-
+                
+                # bounding the opinions to the pre-supposed opinion scale [0, 1]
+                if network.nodes[neighbor][influenced_feature] > 1: network.nodes[neighbor][influenced_feature] = 1
+                if network.nodes[neighbor][influenced_feature] < 0: network.nodes[neighbor][influenced_feature] = 0         
+                    
                 if self.bi_directional == True and self.regime == "one-to-one":
                     # reverse of the above
                     if network.edges[agent_i, neighbor]['dist'] < self.acceptance_limit:
@@ -141,6 +145,9 @@ class AcceptanceNoncommitmentRejection(InfluenceOperator):
                         # i_t+1 = i + convergence_rate * (i-j)
                         network.nodes[agent_i][influenced_feature] = network.nodes[agent_i][
                                                                         influenced_feature] + self.convergence_rate * feature_difference
+                    # bounding the opinions to the pre-supposed opinion scale [0, 1]
+                    if network.nodes[agent_i][influenced_feature] > 1: network.nodes[agent_i][influenced_feature] = 1
+                    if network.nodes[agent_i][influenced_feature] < 0: network.nodes[agent_i][influenced_feature] = 0         
                     update_dissimilarity(network, [agent_i, neighbor], dissimilarity_measure, **kwargs)
                 else:
                     update_dissimilarity(network, [neighbor], dissimilarity_measure, **kwargs)
@@ -156,6 +163,9 @@ class AcceptanceNoncommitmentRejection(InfluenceOperator):
                 feature_difference = average_value - network.nodes[agent_i][influenced_feature]
                 network.nodes[agent_i][influenced_feature] = network.nodes[agent_i][
                                                                 influenced_feature] + self.convergence_rate * feature_difference
+                # bounding the opinions to the pre-supposed opinion scale [0, 1]
+                if network.nodes[agent_i][influenced_feature] > 1: network.nodes[agent_i][influenced_feature] = 1
+                if network.nodes[agent_i][influenced_feature] < 0: network.nodes[agent_i][influenced_feature] = 0         
                 update_dissimilarity(network, [agent_i], dissimilarity_measure)
 
             # negatively influenced by average of neighbors above rejection limit
@@ -167,6 +177,9 @@ class AcceptanceNoncommitmentRejection(InfluenceOperator):
                 feature_difference = average_value - network.nodes[agent_i][influenced_feature]
                 network.nodes[agent_i][influenced_feature] = network.nodes[agent_i][
                                                                 influenced_feature] - self.convergence_rate * feature_difference
+                # bounding the opinions to the pre-supposed opinion scale [0, 1]
+                if network.nodes[agent_i][influenced_feature] > 1: network.nodes[agent_i][influenced_feature] = 1
+                if network.nodes[agent_i][influenced_feature] < 0: network.nodes[agent_i][influenced_feature] = 0         
                 update_dissimilarity(network, [agent_i], dissimilarity_measure)                               
 
         return success
