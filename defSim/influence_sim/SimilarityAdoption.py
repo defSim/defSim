@@ -42,8 +42,11 @@ class SimilarityAdoption(InfluenceOperator):
             warnings.warn("homophily not specified, using default value 1")
             self.homophily = 1
     
-    def spread_influence(self, network: nx.Graph, agent_i: int, agents_j: List[int] or int,
-                         dissimilarity_measure: DissimilarityCalculator, attributes: List[str] = None, **kwargs) -> bool:
+    def spread_influence(self, network: nx.Graph,
+                         agent_i: int,
+                         agents_j: List[int] or int,
+                         attributes: List[str] = None,
+                         **kwargs) -> bool:
         """
         :param network: The network in which the agents exist.
         :param agent_i: the index of the focal agent that is either the source or the target of the influence
@@ -87,7 +90,6 @@ class SimilarityAdoption(InfluenceOperator):
                     if random.uniform(0, 1) < p_infl_success:
                         success = True
                         network.nodes[neighbor][influenced_feature] = network.nodes[agent_i][influenced_feature]
-                        update_dissimilarity(network, [neighbor], dissimilarity_measure, **kwargs)
         else:
             close_neighbors = []
             for neighbor in agents_j:

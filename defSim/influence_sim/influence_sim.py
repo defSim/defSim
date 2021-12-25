@@ -25,7 +25,6 @@ class InfluenceOperator(ABC):
                          network: nx.Graph,
                          agent_i: int,
                          agents_j: List[int] or int,
-                         dissimilarity_measure: DissimilarityCalculator,
                          attributes: List[str] = None,
                          **kwargs) -> bool:
         """
@@ -52,7 +51,6 @@ def spread_influence(network: nx.Graph,
                      agent_i: int,
                      agents_j: List[int] or int,
                      regime: str,
-                     dissimilarity_measure: DissimilarityCalculator,
                      attributes: List[str] = None,
                      **kwargs) -> bool:
     """
@@ -83,7 +81,6 @@ def spread_influence(network: nx.Graph,
         return SimilarityAdoption(regime = regime, **kwargs).spread_influence(network,
                                                                               agent_i,
                                                                               agents_j,
-                                                                              dissimilarity_measure,
                                                                               attributes,
                                                                               **kwargs)
     elif realization == "bounded_confidence":

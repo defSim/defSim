@@ -44,7 +44,9 @@ class Simulation:
         focal_agent_selector (str = "random" or :class:`FocalAgentSelector`): Either a custom FocalAgentSelector or a string that selects from the predefined options ["random", ...]
         neighbor_selector (str = "random" or :class:`NeighborSelector`): Either a custom NeighborSelector or a string that selects from the predefined options ["random", "similar" ...}
         influence_function (str = "similarity_adoption" or :class:`InfluenceOperator`): Either a custom influence function or a string that selects from the predefined options ["similarity_adoption", "bounded_confidence", "weighted_linear", ...}
-        influenceable_attributes (List = None): This is a list of the attribute names, that may be changed in the influence step
+        influenceable_attributes (List = None): [for backwards compatibility] This is a list of the attribute names, that may be changed in the influence step
+        exclude_attributes_from_influence (List = None): This is a list of the attribute names that will be excluded from exerting influence
+        exclude_attributes_from_dissimilarity (List = None): This is a list of the attribute names that will be excluded from dissimilarity calculation
         dissimilarity_measure (String = "hamming" or :class:`DissimilarityCalculator`): Either a custom DissimilarityCalculator or a string that selects from the predefined options ["hamming", "euclidean", ...}
         stop_condition (str = "max_iteration"): Determines at what point a simulation is supposed to stop. Options include "strict_convergence", which means that it is theoretically not possible anymore for any agent to influence another, "pragmatic_convergence", which means that it is assumed that little change is possible anymore, and "max_iteration" which just stops the simulation after a certain amount of time steps.
         communication_regime (str = "one-to-one"): Options are "one-to-one", "one-to-many" and "many-to-one".
@@ -65,6 +67,8 @@ class Simulation:
                  neighbor_selector: str = "random" or neighbor_selector_sim.NeighborSelector,
                  influence_function: str = "similarity_adoption" or influence_sim.InfluenceOperator,
                  influenceable_attributes: List = None,
+                 exclude_attributes_from_influence: List = None,
+                 exclude_attributes_from_dissimilarity: List = None,
                  dissimilarity_measure: str = "hamming" or DissimilarityCalculator,
                  stop_condition: str = "max_iteration" or ConvergenceCheck,
                  max_iterations: int = 100000,
@@ -83,11 +87,18 @@ class Simulation:
         self.focal_agent_selector = focal_agent_selector
         self.neighbor_selector = neighbor_selector
         self.influence_function = influence_function
-        self.influenceable_attributes = influenceable_attributes
+        self.exclude_attributes_from_influence = exclude_attributes_from_influence
+        self.exclude_attributes_from_dissimilarity = exclude_attributes_from_dissimilarity
+        if influenceable_attributes is not None:
+            # generate the attributes
+            # store them in influenceable_attributes
+            # send deprecation notice
+            # send warning that this will override exclude_attributes_from_influence
+            self.influenceable_attributes = influenceable_attributes
         self.communication_regime = communication_regime
         self.dissimilarity_calculator = dissimilarity_measure if isinstance(dissimilarity_measure,
                                                                             DissimilarityCalculator) else \
-            select_calculator(dissimilarity_measure)
+            select_calculator(dissimilarity_measure, self.exclude_attributes_from_dissimilarity)
         self.stop_condition = stop_condition
         self.max_iterations = max_iterations
         self.parameter_dict = parameter_dict
@@ -236,6 +247,10 @@ class Simulation:
         # initialize agent attributes (accepts string realizations and instances of AttributesInitializer classes)
         agents_init.initialize_attributes(self.network, self.attributes_initializer, **self.parameter_dict)
 
+        # store the attributes that we've just generated and exclude those we do not want to be influenced
+        if self.exclude_attributes_from_influence is not None:
+            self.influenceable_attributes = [x for x in list(self.network.nodes[0].keys()) if x not in self.exclude_attributes_from_influence]
+
         # initialization of distances between neighbors
         self.dissimilarity_calculator.calculate_dissimilarity_networkwide(self.network)
 
@@ -270,9 +285,12 @@ class Simulation:
                                                  selected_agent,
                                                  neighbors,
                                                  self.communication_regime,
-                                                 self.dissimilarity_calculator,
-                                                 self.influenceable_attributes,
+                                                 self.exclude_attributes_from_influence,
                                                  **self.parameter_dict)
+
+        if success:
+            NetworkDistanceUpdater.update_dissimilarity(self.network, neighbors, self.dissimilarity_calculator, **self.parameter_dict)
+
 
         if self.tickwise and self.time_steps % self.tickwise_output_step_size == 0:  # list is not empty
             defaults_selected = [i for i in self.tickwise if i in CreateOutputTable._implemented_output_realizations]

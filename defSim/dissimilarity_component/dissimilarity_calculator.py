@@ -1,5 +1,6 @@
 from abc import ABC, abstractmethod
 import networkx as nx
+from typing import List
 
 class DissimilarityCalculator(ABC):
     """
@@ -41,7 +42,7 @@ class DissimilarityCalculator(ABC):
         pass
 
 
-def select_calculator(realization: str) -> DissimilarityCalculator:
+def select_calculator(realization: str, exclude: List[str] = None) -> DissimilarityCalculator:
     """
     This function works as a factory method for the dissimilarity_component.
     It returns an instance of the Calculator that is asked for.
@@ -54,10 +55,10 @@ def select_calculator(realization: str) -> DissimilarityCalculator:
     from .ManhattanDistance import ManhattanDistance
 
     if realization == "hamming":
-        return HammingDistance()
+        return HammingDistance(exclude)
     elif realization == "euclidean":
-        return EuclideanDistance()
+        return EuclideanDistance(exclude)
     elif realization == "manhattan":
-        return ManhattanDistance() 
+        return ManhattanDistance(exclude)
     else:
         raise ValueError("Can only select from the options ['hamming', 'euclidean']")
