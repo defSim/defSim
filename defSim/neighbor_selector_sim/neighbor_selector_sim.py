@@ -1,7 +1,6 @@
 from abc import ABC, abstractmethod
 from typing import Iterable
 
-
 import networkx as nx
 
 
@@ -14,7 +13,7 @@ class NeighborSelector(ABC):
     """
 
     def __init__(self, **kwargs):
-        pass    
+        pass
 
     @abstractmethod
     def select_neighbors(self, network: nx.Graph, focal_agent: int, regime: str, **kwargs) -> Iterable[int]:
@@ -23,8 +22,6 @@ class NeighborSelector(ABC):
         influence process regarding the focal agent.
         This subset could be e.g. a single agent from the direct neighborhood, the whole neighborhood, or all
         agents, excluding the focal agent.
-
-
 
         :param network: the network from which the agent shall be selected.
         :param focal_agent: the index of the focal agent, who is either the source or target of influence.
@@ -38,7 +35,7 @@ class NeighborSelector(ABC):
         """
         pass
 
-def select_neighbors(network: nx.Graph, realization: str, focal_agent: int, regime: str, **kwargs) -> Iterable[int]:
+def select_neighbors(network: nx.Graph, realization: str or NeighborSelector, focal_agent: int, regime: str, **kwargs) -> Iterable[int]:
     """
     This function works as a factory method for the neighborSelector component.
     It calls the select_neighbors function of the specific neighborSelector and passes to it the index of the
