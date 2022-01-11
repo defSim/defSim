@@ -316,7 +316,6 @@ class Experiment:
 
             if len(self.parameter_dict_list) == 0:
                 self.parameter_dict_list = self._create_parameter_dictionaries()
-            print("%d different parameter combinations" % len(self.parameter_dict_list))
             if parallel:
                 pool = mp.Pool(processes=num_cores)
 
