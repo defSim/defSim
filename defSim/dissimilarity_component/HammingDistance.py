@@ -25,7 +25,7 @@ class HammingDistance(DissimilarityCalculator):
         :returns a float value, representing the distance between the two agents
         """
         # todo: implement in such a way that only categorical attributes are considered, and others are ignored
-        number_of_features = len(network.nodes[agent1_id])
+        number_of_features = len(network.nodes[agent1_id]) - len(self.exclude)
         return len([k for k in network.nodes[agent1_id] if
                     network.nodes[agent1_id][k] != network.nodes[agent2_id][k] and
                     k not in self.exclude]) / number_of_features
