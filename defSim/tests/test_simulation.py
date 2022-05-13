@@ -9,16 +9,17 @@ from defSim.Simulation import Simulation
 class TestSimulation(TestCase):
     def test_run_simulation(self):
         # test whether its possible to pass custom classes
-        attribute_component = RandomCategoricalInitializer.RandomCategoricalInitializer()
-        focal_agent_component = RandomSelector.RandomSelector()
-        neighbor_component = RandomNeighborSelector.RandomNeighborSelector()
-        influence_component = SimilarityAdoption.SimilarityAdoption(regime="one-to-many")
+        attribute_component = RandomCategoricalInitializer.RandomCategoricalInitializer
+        focal_agent_component = RandomSelector.RandomSelector
+        neighbor_component = RandomNeighborSelector.RandomNeighborSelector
+        influence_component = SimilarityAdoption.SimilarityAdoption
         dissimilarity_measure = dissimilarity_calculator.select_calculator("hamming")
         simulation = Simulation(attributes_initializer=attribute_component,
                                 focal_agent_selector=focal_agent_component,
                                 neighbor_selector=neighbor_component,
                                 influence_function=influence_component,
                                 dissimilarity_measure=dissimilarity_measure,
-                                communication_regime="one-to-many")
+                                communication_regime="one-to-many",
+                                max_iterations=10)
         pdf = simulation.run()
         print(pdf)

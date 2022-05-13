@@ -15,8 +15,8 @@ class test_find_clusters(TestCase):
     calculator.calculate_dissimilarity_networkwide(G)
 
     # the list of sizes of clusters of unique attribute profiles:
-    assert ds.OutputMeasures.ClusterFinder.create_output(G) == [2, 1, 1]
+    assert ds.OutputMeasures.ClusterFinder().create_output(G) == [2, 1, 1]
     # the list of sizes of clusters in which influence is still possible:
-    assert ds.OutputMeasures.ClusterFinder.create_output(G, strict_zones=True) == [4]
+    assert ds.OutputMeasures.ClusterFinder(strict_zones=True).create_output(G) == [4]
     # the list of sizes of clusters with reasonably similar attribute profiles
-    assert ds.OutputMeasures.ClusterFinder.create_output(G, cluster_dissimilarity_threshold=.5) == [2, 2]
+    assert ds.OutputMeasures.ClusterFinder(cluster_dissimilarity_threshold=.5).create_output(G) == [2, 2]
