@@ -20,6 +20,9 @@ class WeightedLinear(InfluenceOperator):
 
     Thereafter, opinions are bounded such that they never fall outside the range :math:`[0,1]`
 
+    Note that the focal agent in one-to-one and one-to-many interaction is the sending agent, indicated as agent j, and
+    refers to the receiving agent, indicated as agent i, under many-to-one interaction.
+
     Crucial is the ``homophily`` parameter. The higher its value, the smaller the shift of the receiving
     agent in the direction of the sending agent will be. With this parameter, we can integrate ideas of positive,
     moderated positive, and negative influence into one functional model.
