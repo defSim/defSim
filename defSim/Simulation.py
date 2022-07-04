@@ -7,6 +7,7 @@ import random
 from math import inf
 import warnings
 import time
+import pathlib
 import pandas as pd
 import numpy as np
 import networkx as nx
@@ -225,7 +226,7 @@ class Simulation:
             ## apply network modifiers
             if self.network_modifiers is not None:
                 for modifier in self.network_modifiers:
-                    modifier.rewire_network(network)
+                    modifier.rewire_network(self.network)
         else:
             self.network = network_init.generate_network(self.topology, network_modifiers=self.network_modifiers,
                                                          **self.parameter_dict)
