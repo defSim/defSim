@@ -107,13 +107,6 @@ def spread_influence(network: nx.Graph,
                                            dissimilarity_measure,
                                            attributes,
                                            **kwargs)
-    elif issubclass(realization, InfluenceOperator):
-        return realization(regime=regime, **kwargs).spread_influence(network=network,
-                                                                     agent_i=agent_i,
-                                                                     agents_j=agents_j,
-                                                                     dissimilarity_measure=dissimilarity_measure,
-                                                                     attributes=attributes,
-                                                                     **kwargs)
     elif isinstance(realization, InfluenceOperator):
         # if regime is set differently, raise warning
         # if regime is not set, set regime
@@ -128,7 +121,13 @@ def spread_influence(network: nx.Graph,
                                             dissimilarity_measure=dissimilarity_measure,
                                             attributes=attributes,
                                             **kwargs)
-
+    elif issubclass(realization, InfluenceOperator):
+        return realization(regime=regime, **kwargs).spread_influence(network=network,
+                                                                     agent_i=agent_i,
+                                                                     agents_j=agents_j,
+                                                                     dissimilarity_measure=dissimilarity_measure,
+                                                                     attributes=attributes,
+                                                                     **kwargs)
     else:
         raise ValueError("Can only select from the options "
                          "['similarity_adoption', 'bounded_confidence', 'weighted_linear', 'persuasion'], "
