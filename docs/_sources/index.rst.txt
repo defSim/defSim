@@ -31,6 +31,8 @@ effectively a number of times (repetitions) for every user-given parameter combi
 Alternatively, you might want to use just one of a couple of the pre-programmed modules, and use your own code to
 create a variation on the traditional social influence models.
 
+:doc:`Find out about the different modules and their relation to the interface on our modules overview page <modules>`
+
 :doc:`Learn the basics of defSim on our introduction page <Introduction_to_defSim>`
 
 ................................................................................
@@ -41,6 +43,7 @@ Contents of the documentation
 .. toctree::
       
    About defSim <Introduction_to_defSim>
+   Module overview <modules>
    Experiment class <experiment.class>
    Simulation class <simulation.class>
    Networks <defSim.network_init>
