@@ -75,7 +75,7 @@ class Simulation:
                  output_realizations=[],
                  output_folder_path: str or pathlib.Path = None,
                  output_file_types: List[str or DataFileCreator] = [],
-                 tickwise: List[str] = []
+                 tickwise: List[str] or List[CreateOutputTable.OutputTableCreator] = []
                  ):
         self.network = network
         self.topology = topology
@@ -114,9 +114,9 @@ class Simulation:
             if tickwise_realization in CreateOutputTable._implemented_output_realizations:
                 self.tickwise_output['defaults'] = []
             else:
-                if inspect.isclass(tickwise_realization) and issubclass(tickwise_realization,
-                                                                        CreateOutputTable.OutputTableCreator):
-                    tickwise_realization = tickwise_realization()
+                if inspect.isclass(tickwise_realization):
+                    if issubclass(tickwise_realization, CreateOutputTable.OutputTableCreator):
+                        tickwise_realization = tickwise_realization()
                 if isinstance(tickwise_realization, CreateOutputTable.OutputTableCreator):
                     if tickwise_realization.label != "":
                         self.tickwise_output[tickwise_realization.label] = []
