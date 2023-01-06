@@ -192,6 +192,6 @@ def set_continuous_attribute(network: nx.Graph, name: str, shape: tuple = (1), d
     elif distribution == "triangular":
         # with default value mode loc = 0.5, the mode of the triangular distribution
         # is at 0.5 and the distribution is symmetrical over the interval [0,1]
-        loc = kwags.get("loc", 0.5)
+        loc = kwargs.get("loc", 0.5)
         for i in network.nodes():
             network.nodes[i][name] = rng.triangular(left = 0, mode = loc, right = 1)        
