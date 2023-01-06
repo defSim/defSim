@@ -32,6 +32,13 @@ Changelog
 
 This project adheres to `Semantic Versioning <https://semver.org/spec/v2.0.0.html>`_.
 
+**v0.1.3**
+
+* some new output measures have been added: Dispersion, Spread and Coverage
+* the Experiment class takes a general parameter_dict dictionary. In the future, supplying the dictionaries
+  network_parameters, attribute_parameters, focal_agent_parameters, neighbor_parameters, influence_parameters and
+  stop_condition_parameters may be deprecated.
+
 **v0.1.2**
 
 * the wrapper functions Experiment and Simulation accept subclasses of AttributesInitializer,

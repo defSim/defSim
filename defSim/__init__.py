@@ -9,7 +9,7 @@ __all__ = ["agents_init",
            "tools"]
 
 # update this version number together with number in setup.py
-__version__ = "0.1.2"
+__version__ = "0.1.3"
 
 from defSim.agents_init import agents_init
 from defSim.agents_init.agents_init import initialize_attributes
