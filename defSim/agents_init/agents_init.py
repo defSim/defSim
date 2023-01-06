@@ -163,11 +163,7 @@ def set_continuous_attribute(network: nx.Graph, name: str, shape: tuple = (1), d
     if not distribution in ["uniform", "normal", "beta", "triangular"]:
         raise NotImplementedError("The selected distribution has not been implemented. Select from: [uniform, normal, beta, triangular].")
 
-    try:
-        rng = kwargs["np_random_generator"]
-    except KeyError:
-        warnings.warn("No Numpy Generator in parameter dictionary, creating default")
-        rng = np.random.default_rng()
+    rng = kwargs.get("np_random_generator", np.random.default_rng())
 
     # NOTE: it would probably be faster to let numpy draw all random values at once, and then assign them
     # that's something we can do if this ever becomes a performance issue (which it likely won't)
