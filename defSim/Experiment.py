@@ -95,6 +95,7 @@ class Experiment:
         output_file_types (List[str or DataFileCreator]): Determines which types of output files will be saved at output_folder_path. See tools.CreateDataFiles for options.
         repetitions (int = 1): How often each simulation should be repeated.
         seed (int = random.randint(10000, 99999)): Optionally set seed for replicability.
+        parameter_dict (dict = {}):  A dictionary with all parameters that will be passed to the specific component implementations.
     """
 
     def __init__(self,
@@ -123,7 +124,8 @@ class Experiment:
                  output_folder_path: str or pathlib.Path = None,
                  output_file_types: List[str or DataFileCreator] = [],                 
                  repetitions: int = 1,
-                 seed: int = None):
+                 seed: int = None,
+                 parameter_dict: dict = {}):
         self.simulations = simulations
         self.network = network
         self.communication_regime = {"communication_regime": communication_regime}
@@ -150,6 +152,7 @@ class Experiment:
         self.output_file_types = output_file_types        
         self.repetitions = repetitions
         self.seed = seed
+        self.parameter_dict = parameter_dict
         self.parameter_dict_list = []  # this is the internal dictionary that is created by permuting all parameters
 
     def estimate_runtime(self, sample_runs: int = None, sample_steps: int = 10):
@@ -441,7 +444,8 @@ class Experiment:
         If a seed is set for the experiment, this also creates an individual seed for each simulation.
 
         """
-        dictionaries = [self.network_parameters,
+        dictionaries = [self.parameter_dict,
+                        self.network_parameters,
                         self.attribute_parameters,
                         self.communication_regime,
                         self.stop_condition_parameters,
