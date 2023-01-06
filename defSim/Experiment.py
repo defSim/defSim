@@ -26,6 +26,7 @@ import pickle
 from defSim.tools import ClusterExecutionScript
 import shutil
 import copy
+import pathlib
 
 
 def call_simulation_run(simulation):
