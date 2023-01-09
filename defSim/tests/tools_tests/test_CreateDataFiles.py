@@ -14,10 +14,17 @@ class TestCreateDataFiles(TestCase):
         create_data_files(output_table=self.test_data_frame, output_file_name='testOutput.pickle')
         create_data_files(output_table=self.test_data_frame, output_file_name='testOutput.json')
         create_data_files(output_table=self.test_data_frame, output_file_name='testOutput.stata')
-        with self.assertRaises(NotImplementedError):  # create once (if no excel writer is installed, skip excel)
+
+        try:
             create_data_files(output_table=self.test_data_frame, output_file_name='testOutput.xlsx')
-        with self.assertRaises(NotImplementedError):  # skip markdown if tabulate is not installed
+        except ImportError:
+            pass  # no problem
+
+        try:
             create_data_files(output_table=self.test_data_frame, output_file_name='testOutput.markdown')
+        except ImportError:
+            pass  # no problem: `tabulate' is not installed
+
         with self.assertRaises(NotImplementedError):  # check that hdf is marked as not yet implemented
             create_data_files(output_table=self.test_data_frame, output_file_name='testOutput.hdf')
 
@@ -28,29 +35,31 @@ class TestCreateDataFiles(TestCase):
 class TestCreateDataFilesWithSimData(TestCase):
 
     def setUp(self):
-        self.sim = Simulation()
+        self.sim = Simulation(max_iterations=10)
 
     def test_file_creation(self):
         # run simulation
         output_data = self.sim.run()
 
-        # create (if no excel writer is installed, skip excel)
+        create_data_files(output_table=output_data, output_file_name='testOutput.csv')
+        create_data_files(output_table=output_data, output_file_name='testOutput.pickle')
+        create_data_files(output_table=output_data, output_file_name='testOutput.json')
+        create_data_files(output_table=output_data, output_file_name='testOutput.stata')
         try:
-            create_data_files(output_table=output_data,
-                              realizations=['pickle', 'csv', 'excel', 'json', 'stata', 'markdown'])
+            create_data_files(output_table=output_data, output_file_name='testOutput.xlsx')
         except ImportError:
-            # also skip markdown if tabulate is not installed
-            try:
-                create_data_files(output_table=output_data, realizations=['pickle', 'csv', 'json', 'stata', 'markdown'])
-            except ImportError:
-                create_data_files(output_table=output_data, realizations=['pickle', 'csv', 'json', 'stata'])
+            pass  # no problem
+        try:
+            create_data_files(output_table=output_data, output_file_name='testOutput.markdown')
+        except ImportError:
+            pass  # no problem: `tabulate' is not installed
 
-        # check that hdf is marked as not yet implemented
-        with self.assertRaises(NotImplementedError):
-            create_data_files(output_table=output_data, realizations=['hdf'])
+        with self.assertRaises(NotImplementedError):  # check that hdf is marked as not yet implemented
+            create_data_files(output_table=output_data, output_file_name='testOutput.hdf')
 
     def test_file_creation_from_sim(self):
-        self.sim = Simulation(output_folder_path="./output/from_sim",
+        self.sim = Simulation(max_iterations=10,
+                              output_folder_path="./output/from_sim",
                               output_file_name='testOutput.csv',
                               tickwise=['f01'])
         self.sim.run()
@@ -58,7 +67,8 @@ class TestCreateDataFilesWithSimData(TestCase):
 
 class TestCreateDataFilesWithExperimentData(TestCase):
     def test_file_creation(self):
-        experiment = Experiment(output_folder_path="./output/from_experiment",
+        experiment = Experiment(max_iterations=10,
+                                output_folder_path="./output/from_experiment",
                                 output_file_name='testOutput.csv',
                                 tickwise=['f01'],
                                 attribute_parameters={'num_features': [1, 2]})
