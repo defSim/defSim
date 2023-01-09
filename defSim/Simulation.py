@@ -1,31 +1,25 @@
 from tqdm import tqdm
-from typing import List, Union
+from typing import List
 import inspect
 import random
-# math.inf imported here rather than explicit references to math.inf because it will be called repeatedly
-# and having inf imported already is significantly faster
-from math import inf
+from math import inf  # having inf imported already is significantly faster than explicit references to math.inf
 import warnings
-import time
 import pathlib
 import pandas as pd
 import numpy as np
 import networkx as nx
-import networkx.algorithms.isomorphism as iso
 from defSim.network_init import network_init
 from defSim.agents_init import agents_init
 from defSim.focal_agent_sim import focal_agent_sim
 from defSim.neighbor_selector_sim import neighbor_selector_sim
 from defSim.influence_sim import influence_sim
-from defSim.network_evolution_sim import network_evolution_sim
 from defSim.network_evolution_sim.network_evolution_sim import NetworkModifier
 from defSim.network_evolution_sim.MaslovSneppenModifier import MaslovSneppenModifier
-from defSim.tools import NetworkDistanceUpdater
 from defSim.dissimilarity_component.dissimilarity_calculator import DissimilarityCalculator
 from defSim.dissimilarity_component.dissimilarity_calculator import select_calculator
 from defSim.tools import OutputMeasures
 from defSim.tools import CreateOutputTable
-from defSim.tools.CreateDataFiles import DataFileCreator, create_data_files
+from defSim.tools.CreateDataFiles import create_data_files
 from defSim.tools.ConvergenceChecks import ConvergenceCheck, PragmaticConvergenceCheck, OpinionDistanceConvergenceCheck
 
 
@@ -38,22 +32,38 @@ class Simulation:
     values per parameter and also all optional parameters are passed in one combined dictionary.
 
     Args:
-        network (str nx.Graph=None): A NetworkX object that was created (e.g. from empirical data) or "list". If "list", the network is read from the parameter dict under the 'network' parameter.
-        topology (String = "grid"): Options are "grid", "ring" and "spatial_random_graph", or you could give the name of one of the generators included in the `NetworkX package <https://networkx.github.io/documentation/stable/reference/generators.html>`__..
-        network_modifiers (NetworkModifier or List = None): A modifier or list of modifiers to apply to the network after initialization. Each modifier should be derived from the NetworkModifier base class.
-        attributes_initializer (String = "random_categorical" or :class:`AttributesInitializer`): Either be a custom AttributesInitializer or a string that selects from the predefined choices: ["random_categorical", "random_continuous"...]
-        focal_agent_selector (str = "random" or :class:`FocalAgentSelector`): Either a custom FocalAgentSelector or a string that selects from the predefined options ["random", ...]
-        neighbor_selector (str = "random" or :class:`NeighborSelector`): Either a custom NeighborSelector or a string that selects from the predefined options ["random", "similar" ...}
-        influence_function (str = "similarity_adoption" or :class:`InfluenceOperator`): Either a custom influence function or a string that selects from the predefined options ["similarity_adoption", "bounded_confidence", "weighted_linear", ...}
-        influenceable_attributes (List = None): This is a list of the attribute names, that may be changed in the influence step
-        dissimilarity_measure (String = "hamming" or :class:`DissimilarityCalculator`): Either a custom DissimilarityCalculator or a string that selects from the predefined options ["hamming", "euclidean", ...}
-        stop_condition (str = "max_iteration"): Determines at what point a simulation is supposed to stop. Options include "strict_convergence", which means that it is theoretically not possible anymore for any agent to influence another, "pragmatic_convergence", which means that it is assumed that little change is possible anymore, and "max_iteration" which just stops the simulation after a certain amount of time steps.
+        network (str nx.Graph=None): A NetworkX object that was created (e.g. from empirical data) or "list". If "list",
+            the network is read from the parameter dict under the 'network' parameter.
+        topology (String = "grid"): Options are "grid", "ring" and "spatial_random_graph", or you could give the name of
+            one of the generators included in the
+            `NetworkX package <https://networkx.github.io/documentation/stable/reference/generators.html>`__..
+        network_modifiers (NetworkModifier or List = None): A modifier or list of modifiers to apply to the network
+            after initialization. Each modifier should be derived from the NetworkModifier base class.
+        attributes_initializer (String = "random_categorical" or :class:`AttributesInitializer`): Either be a custom
+            AttributesInitializer or a string that selects from the predefined choices:
+            ["random_categorical", "random_continuous"...]
+        focal_agent_selector (str = "random" or :class:`FocalAgentSelector`): Either a custom FocalAgentSelector or a
+            string that selects from the predefined options ["random", ...]
+        neighbor_selector (str = "random" or :class:`NeighborSelector`): Either a custom NeighborSelector or a string
+            that selects from the predefined options ["random", "similar" ...}
+        influence_function (str = "similarity_adoption" or :class:`InfluenceOperator`): Either a custom influence
+            function or a string that selects from the predefined options
+            ["similarity_adoption", "bounded_confidence", "weighted_linear", ...]
+        influenceable_attributes (List = None): This is a list of the attribute names, that may be changed in the
+            influence step
+        dissimilarity_measure (String = "hamming" or :class:`DissimilarityCalculator`): Either a custom
+            DissimilarityCalculator or a string that selects from the predefined options ["hamming", "euclidean", ...]
+        stop_condition (str = "max_iteration"): Determines at what point a simulation is supposed to stop. Options
+            include "strict_convergence", which means that it is theoretically not possible anymore for any agent to
+            influence another, "pragmatic_convergence", which means that it is assumed that little change is possible
+            anymore, and "max_iteration" which just stops the simulation after a certain amount of time steps.
         communication_regime (str = "one-to-one"): Options are "one-to-one", "one-to-many" and "many-to-one".
         parameter_dict: A dictionary with all parameters that will be passed to the specific component implementations.
         seed (str = None): A seed for stable replication
         output_folder_path (str or pathlib.Path): If not None, the output table is saved to file(s) in this location.
         output_file_name (str): The name of the output file, with file type suffix.
-        tickwise (List = [str]):  A list of strings with the names of agent attributes that need to be recorded at every timestep
+        tickwise (List = [str]):  A list of strings with the names of agent attributes that need to be recorded at every
+            timestep
     """
 
     def __init__(self,
@@ -172,7 +182,8 @@ class Simulation:
             self._run_until_max_iteration(show_progress)
         else:
             raise ValueError(
-                "Can only select from the options ['pragmatic_convergence', 'strict_convergence', 'max_iteration'] or pass custom stop condition")
+                "Can only select from the options ['pragmatic_convergence', 'strict_convergence', 'max_iteration'] or "
+                "pass custom stop condition")
 
         return self.create_output_table()
 
@@ -183,14 +194,15 @@ class Simulation:
         """
 
         warnings.warn(
-            "Simulation.run_simulation() is replaced by Simulation.run() and will be deprecated at or before defSim v1.0.0",
+            "Simulation.run_simulation() is replaced by Simulation.run() and will be deprecated at or before defSim "
+            "v1.0.0",
             category=FutureWarning)
         return self.run(initialize=initialize)
 
     def initialize(self):
         """
-        This method initializes the network if none is given, applies network modifiers, initializes the attributes of the agents, 
-        and also computes and sets the distances between each neighbor.
+        This method initializes the network if none is given, applies network modifiers, initializes the attributes of
+        the agents, and also computes and sets the distances between each neighbor.
         """
 
         # reset steps
@@ -208,7 +220,8 @@ class Simulation:
         ## if deprecated ms_rewiring parameter is set in parameter dict, replace with network modifier
         if 'ms_rewiring' in list(self.parameter_dict.keys()):
             warnings.warn(
-                "Setting ms_rewiring in parameter dict is deprecated. Pass an instance of MaslovSneppenModifier in network_modifiers instead.",
+                "Setting ms_rewiring in parameter dict is deprecated. Pass an instance of MaslovSneppenModifier in "
+                "network_modifiers instead.",
                 DeprecationWarning)
             if self.network_modifiers is None:
                 self.network_modifiers = [MaslovSneppenModifier(rewiring_prop=self.parameter_dict['ms_rewiring'])]
@@ -246,7 +259,8 @@ class Simulation:
         """
 
         warnings.warn(
-            "Simulation.initialize_simulation() is replaced by Simulation.initialize() and will be deprecated at or before defSim v1.0.0",
+            "Simulation.initialize_simulation() is replaced by Simulation.initialize() and will be deprecated at or "
+            "before defSim v1.0.0",
             category=FutureWarning)
         return self.initialize()
 
@@ -298,7 +312,8 @@ class Simulation:
         """
 
         warnings.warn(
-            "Simulation.run_simulation_step() is replaced by Simulation.run_step() and will be deprecated at or before defSim v1.0.0",
+            "Simulation.run_simulation_step() is replaced by Simulation.run_step() and will be deprecated at or "
+            "before defSim v1.0.0",
             category=FutureWarning)
         return self.run_step()
 
@@ -348,7 +363,8 @@ class Simulation:
     def _run_until_pragmatic_convergence(self, show_progress: bool = False):
         """
         Pragmatic convergence means that each "step_size" time steps it is checked whether the structure of the network
-        and all attributes are still the same. If thats the case, it is assumed that the simulation converged and it stops.
+        and all attributes are still the same. If thats the case, it is assumed that the simulation converged and it
+        stops.
 
         :param int=100 step_size: determines how often it should be checked for a change in the network.
         :param bool show_progress: bool determines whether to show progress bar
@@ -380,8 +396,10 @@ class Simulation:
         in the network. Unless there is no single pair left that can theoretically influence each other, the simulation
         continues.
 
-        :param float=inf maximum: A value that determines above what maximum distance two agents can't influence each other anymore.
-        :param float=inf minimum: A value that determines below what minimum distance two agents can't influence each other anymore.
+        :param float=inf maximum: A value that determines above what maximum distance two agents can't influence each
+            other anymore.
+        :param float=inf minimum: A value that determines below what minimum distance two agents can't influence each
+            other anymore.
         :param int=100 step_size: determines how often it should be checked for a change in the network.
         :param bool show_progress: bool determines whether to show progress bar
         """
