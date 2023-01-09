@@ -91,9 +91,10 @@ class Experiment:
         stop_condition (String = "pragmatic_convergence"): Determines at what point a simulation is supposed to stop. Options include "strict_convergence", which means that it is theoretically not possible anymore for any agent to influence another, "pragmatic_convergence", which means that it is assumed that little change is possible anymore, and "max_iteration" which just stops the simulation after a certain amount of time steps.
         stop_condition_parameters (dict = {}): This dictionary should contain all optional parameters that influence how convergence is determined.
         max_iterations (int = 100000): The maximum number of iterations a Simulation should run.
-        output_realizations (list = [str or OutputTableCreator]): This optional list should contain all output to generate at the end of each run, by name for defaults or as class inheriting from OutputTableCreator
-        output_folder_path (str or pathlib.Path): If not None, the output table is saved to file(s) in this location. 
-        output_file_types (List[str or DataFileCreator]): Determines which types of output files will be saved at output_folder_path. See tools.CreateDataFiles for options.
+        output_realizations (list = [str or OutputTableCreator]): This optional list should contain all output to
+            generate at the end of each run, by name for defaults or as class inheriting from OutputTableCreator
+        output_folder_path (str or pathlib.Path): If not None, the output table is saved to file(s) in this location.
+        output_file_name (str): The name of the outputfile, with file type suffix.
         repetitions (int = 1): How often each simulation should be repeated.
         seed (int = random.randint(10000, 99999)): Optionally set seed for replicability.
         parameter_dict (dict = {}):  A dictionary with all parameters that will be passed to the specific component implementations.
@@ -123,7 +124,7 @@ class Experiment:
                  max_iterations: int = 100000,
                  output_realizations: list = [],
                  output_folder_path: str or pathlib.Path = None,
-                 output_file_types: List[str or DataFileCreator] = [],                 
+                 output_file_name: str = 'defSim_output.csv',
                  repetitions: int = 1,
                  seed: int = None,
                  parameter_dict: dict = {}):
@@ -150,7 +151,7 @@ class Experiment:
         self.max_iterations = max_iterations
         self.output_realizations = output_realizations
         self.output_folder_path = output_folder_path
-        self.output_file_types = output_file_types        
+        self.output_file_name = output_file_name
         self.repetitions = repetitions
         self.seed = seed
         self.parameter_dict = parameter_dict
@@ -330,7 +331,8 @@ class Experiment:
 
                 results_dataframe = pd.concat(results).reset_index()
                 if self.output_folder_path is not None:
-                    create_data_files(output_table=results_dataframe, realizations=self.output_file_types, output_folder_path=self.output_folder_path)
+                    create_data_files(output_table=results_dataframe, output_folder_path=self.output_folder_path,
+                                      output_file_name=self.output_file_name)
                 return results_dataframe
             else:  # if NOT parallel
                 if show_progress:
@@ -341,7 +343,8 @@ class Experiment:
                                self.parameter_dict_list]
                 results_dataframe = pd.concat(result_list).reset_index()
                 if self.output_folder_path is not None:
-                    create_data_files(output_table = results_dataframe, realizations = self.output_file_types, output_folder_path = self.output_folder_path)                
+                    create_data_files(output_table=results_dataframe, output_folder_path=self.output_folder_path,
+                                      output_file_name=self.output_file_name)
                 return results_dataframe
 
     def run_on_cluster(self,
