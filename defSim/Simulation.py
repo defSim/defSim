@@ -51,9 +51,8 @@ class Simulation:
         communication_regime (str = "one-to-one"): Options are "one-to-one", "one-to-many" and "many-to-one".
         parameter_dict: A dictionary with all parameters that will be passed to the specific component implementations.
         seed (str = None): A seed for stable replication
-        output_realizations (list = [str or CreateOutputTable.OutputTableCreator]): This optional list should contain all output to generate at the end of each run, by name for defaults or as class inheriting from OutputTableCreator
-        output_folder_path (str or pathlib.Path): If not None, the output table is saved to file(s) in this location. 
-        output_file_types (List[str or DataFileCreator]): Determines which types of output files will be saved at output_folder_path. See tools.CreateDataFiles for options.
+        output_folder_path (str or pathlib.Path): If not None, the output table is saved to file(s) in this location.
+        output_file_name (str): The name of the output file, with file type suffix.
         tickwise (List = [str]):  A list of strings with the names of agent attributes that need to be recorded at every timestep
     """
 
@@ -74,7 +73,7 @@ class Simulation:
                  seed=None,
                  output_realizations=[],
                  output_folder_path: str or pathlib.Path = None,
-                 output_file_types: List[str or DataFileCreator] = [],
+                 output_file_name: str = 'defSim_output.csv',
                  tickwise: List[str] or List[CreateOutputTable.OutputTableCreator] = []
                  ):
         self.network = network
@@ -99,7 +98,7 @@ class Simulation:
         self.influence_steps = 0  # counts the successful influence steps
         self.output_realizations = output_realizations
         self.output_folder_path = output_folder_path
-        self.output_file_types = output_file_types
+        self.output_file_name = output_file_name
         self.tickwise = tickwise
         self.initialize_tickwise_output()
 
@@ -314,7 +313,7 @@ class Simulation:
             * SuccessfulInfluence: How often an agent was successfully influenced by another agent.
             * All basic columns included in :meth:`~defSim.tools.CreateOutputTable.create_output_table`
 
-        Saves the output table to file(s) indicated by self.output_file_types if self.output_folder_path is not None.
+        Saves the output table to file(s) indicated by self.output_file_name if self.output_folder_path is not None.
 
         :returns: A Pandas DataFrame with one row.
         """
@@ -340,8 +339,9 @@ class Simulation:
         results_dataframe = pd.DataFrame.from_dict({k: [results[k]] for k in results.keys()})
 
         if self.output_folder_path is not None:
-            create_data_files(output_table=results_dataframe, realizations=self.output_file_types,
-                              output_folder_path=self.output_folder_path)
+            create_data_files(output_table=results_dataframe,
+                              output_folder_path=self.output_folder_path,
+                              output_file_name=self.output_file_name)
 
         return results_dataframe
 
