@@ -1,8 +1,8 @@
 import numpy as np
 import networkx as nx
-import random
 import warnings
 import defSim as ds
+import inspect
 from defSim.network_evolution_sim.MaslovSneppenModifier import MaslovSneppenModifier
 
 
@@ -270,9 +270,8 @@ def _produce_networkx_graph(name: str,**kwargs):
     """
     graph_generator = getattr(nx,name)
 
-    import inspect
-    graph_generator_arguments = inspect.getfullargspec(graph_generator)
-    intersection_dict = {k: kwargs[k] for k in kwargs if k in graph_generator_arguments.args}
+    graph_generator_arguments = inspect.signature(graph_generator)
+    intersection_dict = {k: kwargs[k] for k in kwargs if k in graph_generator_arguments.parameters.keys()}
 
     return graph_generator(**intersection_dict)
 
