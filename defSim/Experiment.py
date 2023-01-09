@@ -3,7 +3,6 @@ import numpy as np
 from typing import List
 import itertools as it
 
-from defSim.network_evolution_sim import network_evolution_sim
 from defSim.agents_init import agents_init
 from defSim.influence_sim import influence_sim
 from defSim.neighbor_selector_sim import neighbor_selector_sim
@@ -12,19 +11,16 @@ from defSim.dissimilarity_component import dissimilarity_calculator
 from defSim.network_init import network_init
 from defSim.network_evolution_sim.network_evolution_sim import NetworkModifier
 from defSim.Simulation import Simulation
-from defSim.tools.CreateOutputTable import OutputTableCreator
-from defSim.tools.CreateDataFiles import DataFileCreator, create_data_files
+from defSim.tools.CreateDataFiles import create_data_files
 import multiprocessing as mp
 from tqdm import tqdm
 import random
 import timeit
 import warnings
 import pandas as pd
-import time
 import os
 import pickle
 from defSim.tools import ClusterExecutionScript
-import shutil
 import copy
 import pathlib
 
@@ -35,6 +31,7 @@ def call_simulation_run(simulation):
     using multiprocessing.
     """
     return simulation.run(show_progress=False)
+
 
 def yield_parallel_with_progress_bar(function, iterable, pool):
     for item in tqdm(pool.imap(function, iterable), total=len(iterable), mininterval=1):
@@ -50,11 +47,14 @@ class Experiment:
 
     The network structure - Can either be loaded from empirical data or initialized with the NetworkGenerator.
 
-    The AttributesInitializer - This component initializes the attributes of each agent in the network and can also be used to add attributes during the simulation.
+    The AttributesInitializer - This component initializes the attributes of each agent in the network and can also be
+    used to add attributes during the simulation.
 
-    The FocalAgentSelector - Each simulation step, this component picks an agent from the network, either randomly or based on their characteristics.
+    The FocalAgentSelector - Each simulation step, this component picks an agent from the network, either randomly or
+    based on their characteristics.
 
-    The neighborhoodSelector - Selects a subset of the agents in the network based on the focal agent given by the FocalAgentSelector
+    The neighborhoodSelector - Selects a subset of the agents in the network based on the focal agent given by the
+    FocalAgentSelector
 
     The InfluenceFunction - Determines how the selected agent and the selected neighborhood influence each other.
 
@@ -64,32 +64,53 @@ class Experiment:
 
     These components have different concrete implementations that might take specific parameters that are passed as a
     dictionary. In these dictionaries, the keys are the names of the parameters and the values their respective value.
-    It is also possible to pass a list of values as the dictionary value, which then creates a simulation for each value,
-    making it possible to easily compare simulation runs with e.g. different number of agents.
+    It is also possible to pass a list of values as the dictionary value, which then creates a simulation for each
+    value, making it possible to easily compare simulation runs with e.g. different number of agents.
 
-    Alternatively, customizations outside of these parameters can be applied to individual simulations. These simulations
-    can then be passed as a list and executed as an experiment.
+    Alternatively, customizations outside of these parameters can be applied to individual simulations. These
+    simulations can then be passed as a list and executed as an experiment.
 
     Args:
-        simulations(List[Simulation] or None): This is a list of simulations to run. If simulations is not None, no new simulations are generated regardless of parameters specified.
-        network(nx.Graph, np.array or String): This is either a preloaded networkx graph, an adjacency matrix as a numpy array, the full path to a file with and edge list, or "list". If "list", a list of networks can be passed to one of the parameter dicts (suggested: network_parameters) which will be iterated over in the simulations of the experiment.
-        communication_regime (List or String = "one-to-one"): Options are "one-to-one", "one-to-many" and "many-to-one". For this parameter, it is possible to pass a list of multiple of these options.
+        simulations(List[Simulation] or None): This is a list of simulations to run. If simulations is not None, no new
+            simulations are generated regardless of parameters specified.
+        network(nx.Graph, np.array or String): This is either a preloaded networkx graph, an adjacency matrix as a numpy
+            array, the full path to a file with and edge list, or "list". If "list", a list of networks can be passed to
+            one of the parameter dicts (suggested: network_parameters) which will be iterated over in the simulations of
+            the experiment.
+        communication_regime (List or String = "one-to-one"): Options are "one-to-one", "one-to-many" and "many-to-one".
+            For this parameter, it is possible to pass a list of multiple of these options.
         topology (String = "grid"): Options are "grid", "ring" and "spatial_random_graph".
-        network_parameters (dict = {}): This dictionary should contain all optional parameters for creating the network structure. Refer to the specific documentation of the network types to see what can be modified.
-        attributes_initializer (String = "random_categorical" or :class:`AttributesInitializer`): Either be a custom AttributesInitializer or a string that selects from the predefined choices: ["random_categorical", "random_continuous"...]
-        attribute_parameters (dict = {}): Optional dictionary that includes the name of attributes you want to set and a list of possible values for each.
-        focal_agent_selector (str = "random" or :class:`FocalAgentSelector`): Either a custom FocalAgentSelector or a string that selects from the predefined options ["random", ...]
+        network_parameters (dict = {}): This dictionary should contain all optional parameters for creating the network
+            structure. Refer to the specific documentation of the network types to see what can be modified.
+        attributes_initializer (String = "random_categorical" or :class:`AttributesInitializer`): Either be a custom
+            AttributesInitializer or a string that selects from the predefined choices:
+            ["random_categorical", "random_continuous"...]
+        attribute_parameters (dict = {}): Optional dictionary that includes the name of attributes you want to set and a
+            list of possible values for each.
+        focal_agent_selector (str = "random" or :class:`FocalAgentSelector`): Either a custom FocalAgentSelector or a
+            string that selects from the predefined options ["random", ...]
         focal_agent_parameters (dict = {}): Optional dictionary that includes the parameters for the FocalAgentSelector.
-        neighbor_selector (str = "random" or :class:`NeighborSelector`): Either a custom NeighborSelector or a string that selects from the predefined options ["random", "similar", ...}
+        neighbor_selector (str = "random" or :class:`NeighborSelector`): Either a custom NeighborSelector or a string
+            that selects from the predefined options ["random", "similar", ...]
         neighbor_parameters (dict = {}): Optional dictionary that includes the parameters for the NeighborSelector.
-        influence_function (str = "similarity_adoption" or :class:`InfluenceOperator`): Either a custom influence function or a string that selects from the predefined options ["similarity_adoption", "bounded_confidence", "weighted_linear", ...}
+        influence_function (str = "similarity_adoption" or :class:`InfluenceOperator`): Either a custom influence
+            function or a string that selects from the predefined options
+            ["similarity_adoption", "bounded_confidence", "weighted_linear", ...]
         influence_parameters (dict = {}): Optional dictionary that includes the parameters for the InfluenceFunction.
-        influenceable_attributes (list = []): With this list you select all attributes that are allowed to be changed by the influence function. If the list is empty, all attributes are affected by influence.
-        network_modifiers (NetworkModifier or List = None): A modifier or list of modifiers to apply to the network after initialization. Each modifier should be derived from the NetworkModifier base class.
-        dissimilarity_measure (String = "hamming" or :class:`DissimilarityCalculator`): Either a custom DissimilarityCalculator or a string that selects from the predefined options ["hamming", "euclidean", ...}
-        tickwise (List = []): A list containing the names of all agent attributes that should be recorded at every timestep.
-        stop_condition (String = "pragmatic_convergence"): Determines at what point a simulation is supposed to stop. Options include "strict_convergence", which means that it is theoretically not possible anymore for any agent to influence another, "pragmatic_convergence", which means that it is assumed that little change is possible anymore, and "max_iteration" which just stops the simulation after a certain amount of time steps.
-        stop_condition_parameters (dict = {}): This dictionary should contain all optional parameters that influence how convergence is determined.
+        influenceable_attributes (list = []): With this list you select all attributes that are allowed to be changed by
+            the influence function. If the list is empty, all attributes are affected by influence.
+        network_modifiers (NetworkModifier or List = None): A modifier or list of modifiers to apply to the network
+            after initialization. Each modifier should be derived from the NetworkModifier base class.
+        dissimilarity_measure (String = "hamming" or :class:`DissimilarityCalculator`): Either a custom
+            DissimilarityCalculator or a string that selects from the predefined options ["hamming", "euclidean", ...]
+        tickwise (List = []): A list containing the names of all agent attributes that should be recorded at every
+            timestep.
+        stop_condition (String = "pragmatic_convergence"): Determines at what point a simulation is supposed to stop.
+            Options include "strict_convergence", which means that it is theoretically not possible anymore for any
+            agent to influence another, "pragmatic_convergence", which means that it is assumed that little change is
+            possible anymore, and "max_iteration" which just stops the simulation after a certain amount of time steps.
+        stop_condition_parameters (dict = {}): This dictionary should contain all optional parameters that influence
+            how convergence is determined.
         max_iterations (int = 100000): The maximum number of iterations a Simulation should run.
         output_realizations (list = [str or OutputTableCreator]): This optional list should contain all output to
             generate at the end of each run, by name for defaults or as class inheriting from OutputTableCreator
@@ -97,7 +118,8 @@ class Experiment:
         output_file_name (str): The name of the outputfile, with file type suffix.
         repetitions (int = 1): How often each simulation should be repeated.
         seed (int = random.randint(10000, 99999)): Optionally set seed for replicability.
-        parameter_dict (dict = {}):  A dictionary with all parameters that will be passed to the specific component implementations.
+        parameter_dict (dict = {}):  A dictionary with all parameters that will be passed to the specific component
+            implementations.
     """
 
     def __init__(self,
@@ -159,15 +181,17 @@ class Experiment:
 
     def estimate_runtime(self, sample_runs: int = None, sample_steps: int = 10):
         """
-		If simulations are specified, this function infers the experiment runtime from sampled runs/steps.
+        If simulations are specified, this function infers the experiment runtime from sampled runs/steps.
 
-        If no simulations are specified, function creates the parameterDictList if that hasn't happened already and then infers from
-        sampled runs the runtime of the whole experiment.
+        If no simulations are specified, function creates the parameterDictList if that hasn't happened already
+        and then infers from sampled runs the runtime of the whole experiment.
 
         Runtime estimates are for running on a single core.
 
-        :param int=None sample_runs: The number of entries in the parameterDictList to sample in order to estimate the runtime.
-        :param int=10 sample_steps: The number of iterations executed in each simulation run to base the estimated runtime on.
+        :param int=None sample_runs: The number of entries in the parameterDictList to sample in order to estimate the
+            runtime.
+        :param int=10 sample_steps: The number of iterations executed in each simulation run to base the estimated
+            runtime on.
         :returns: estimated time of simulation in seconds
         """
 
@@ -186,7 +210,8 @@ class Experiment:
         else:
             if self.stop_condition != "max_iteration":
                 warnings.warn(
-                    "Runtime estimates are based on max number of iterations. Runtime estimates for simulations with different stop conditions are highly unreliable.")
+                    "Runtime estimates are based on max number of iterations. Runtime estimates for simulations with "
+                    "different stop conditions are highly unreliable.")
 
             if sample_steps > self.max_iterations:
                 warnings.warn("Number of sample steps greater than max iterations of the simulations.")
@@ -210,7 +235,7 @@ class Experiment:
                 simulations_to_run.append(
                     Simulation(network=self.network.copy() if self.network is not None else self.network,
                                topology=self.topology,
-			                   network_modifiers=self.network_modifiers,
+                               network_modifiers=self.network_modifiers,
                                attributes_initializer=self.attributes_initializer,
                                focal_agent_selector=self.focal_agent_selector,
                                neighbor_selector=self.neighbor_selector,
@@ -239,7 +264,8 @@ class Experiment:
         if self.simulations is not None:
             num_simulations = len(self.simulations)
             warnings.warn(
-                "Runtime estimates are based on {} iterations because true maximum iterations for user-defined simulations are unknown.".format(
+                "Runtime estimates are based on {} iterations because true maximum iterations for user-defined "
+                "simulations are unknown.".format(
                     self.max_iterations))
         else:
             num_simulations = len(self.parameter_dict_list)
@@ -280,7 +306,8 @@ class Experiment:
         Starts the experiment by first creating the parameter_dict_list if that hasn't happened already and then
         creates a simulation for each parameter combination in the parameter_dict_list.
 
-        If parallel is true, the simulations are run on multiple cores on the machine, their number determined by num_cores.
+        If parallel is true, the simulations are run on multiple cores on the machine, their number determined by
+        num_cores.
 
         :param parallel: Boolean that determines in which mode the simulations will run.
         :param num_cores: Determines the number of cores in the machine that will be utilized for the execution.
@@ -296,23 +323,29 @@ class Experiment:
                 pool = mp.Pool(processes=num_cores)
 
                 if show_progress:
-                    results = list(yield_parallel_with_progress_bar(function=call_simulation_run, iterable=self.simulations, pool=pool))
+                    results = list(
+                        yield_parallel_with_progress_bar(function=call_simulation_run, iterable=self.simulations,
+                                                         pool=pool))
                 else:
                     results = pool.imap(call_simulation_run, self.simulations)
                 pool.close()
 
                 results_dataframe = pd.concat(results).reset_index()
                 if self.output_folder_path is not None:
-                    create_data_files(output_table=results_dataframe, realizations=self.output_file_types, output_folder_path=self.output_folder_path)
+                    create_data_files(output_table=results_dataframe, output_folder_path=self.output_folder_path,
+                                      output_file_name=self.output_file_name)
                 return results_dataframe
             else:  # if NOT parallel
-                result_list = [sim.run(show_progress=False) for sim in tqdm(self.simulations, mininterval=1)] if show_progress else [sim.run(show_progress=False) for sim in self.simulations]
+                result_list = [sim.run(show_progress=False) for sim in
+                               tqdm(self.simulations, mininterval=1)] if show_progress else [
+                    sim.run(show_progress=False) for sim in self.simulations]
                 results_dataframe = pd.concat(result_list).reset_index()
                 if self.output_folder_path is not None:
-                    create_data_files(output_table=results_dataframe, realizations=self.output_file_types, output_folder_path=self.output_folder_path)
+                    create_data_files(output_table=results_dataframe, output_folder_path=self.output_folder_path,
+                                      output_file_name=self.output_file_name)
                 return results_dataframe
         # if simulations are to be created based on parameter combinations
-        else:              
+        else:
             # since the creation of the grid network takes awfully long, we don't want to create that in each
             # simulation
             # todo: refactor, cause this won't work if the parameters of the network are variables
@@ -325,7 +358,8 @@ class Experiment:
                 pool = mp.Pool(processes=num_cores)
 
                 if show_progress:
-                    results = list(yield_parallel_with_progress_bar(function=self._create_and_run_simulation, iterable=self.parameter_dict_list, pool=pool))
+                    results = list(yield_parallel_with_progress_bar(function=self._create_and_run_simulation,
+                                                                    iterable=self.parameter_dict_list, pool=pool))
                 else:
                     results = pool.map(self._create_and_run_simulation, self.parameter_dict_list)
 
@@ -337,10 +371,10 @@ class Experiment:
             else:  # if NOT parallel
                 if show_progress:
                     result_list = [self._create_and_run_simulation(parameter_dict) for parameter_dict in
-                               tqdm(self.parameter_dict_list, mininterval=1)]
+                                   tqdm(self.parameter_dict_list, mininterval=1)]
                 else:
                     result_list = [self._create_and_run_simulation(parameter_dict) for parameter_dict in
-                               self.parameter_dict_list]
+                                   self.parameter_dict_list]
                 results_dataframe = pd.concat(result_list).reset_index()
                 if self.output_folder_path is not None:
                     create_data_files(output_table=results_dataframe, output_folder_path=self.output_folder_path,
@@ -359,13 +393,16 @@ class Experiment:
         To be able to use this method the script with the Experiment must be executed on a SLURM server.
 
         :param chunk_size: Determines how many Simulations should run per node in the cluster.
-        :param batch_path: The path to the folder where the batchscripts will be created. If the folder not exists yet, it will be created.
-        :param output_path: The path to the folder where the output will be saved. If the folder not exists yet, it will be created.
+        :param batch_path: The path to the folder where the batchscripts will be created. If the folder not exists yet,
+            it will be created.
+        :param output_path: The path to the folder where the output will be saved. If the folder not exists yet, it will
+            be created.
         :param walltime: The expected time one node maximally needs for computing its chunk of simulations.
-        :param partition: If the SLURM cluster has multiple partitions, it can be decided where to run the jobs with this parameter.
+        :param partition: If the SLURM cluster has multiple partitions, it can be decided where to run the jobs with
+            this parameter.
         """
 
-        ##TODO: check problems with cluster work and update to accomodate recent changes such as seed and simulation lists
+        # todo: check problems with cluster work and update to match recent changes such as seed and simulation lists
         if not isinstance(self.network, nx.Graph) and self.network is not None:
             self.network = network_init.read_network(self.network)
             # not implemented yet
@@ -417,13 +454,13 @@ class Experiment:
             os.system("sbatch %s" % os.path.abspath(batchfile_path))
             print("script created at %s" % os.path.abspath(batchfile_path))
         # todo: this cannot work, can it? Only when the simulations are actually executed, they need access to the files
-        # time.sleep(1)  # probably unncessary, but I don't want to delete the folder to quickly
+        # time.sleep(1)  # probably unnecessary, but I don't want to delete the folder to quickly
         # shutil.rmtree("pickles")
 
     def _create_and_run_simulation(self, parameter_dict):
         simulation = Simulation(network=self.network.copy() if isinstance(self.network, nx.Graph) else self.network,
                                 topology=self.topology,
-				                network_modifiers=self.network_modifiers,
+                                network_modifiers=self.network_modifiers,
                                 attributes_initializer=self.attributes_initializer,
                                 focal_agent_selector=self.focal_agent_selector,
                                 neighbor_selector=self.neighbor_selector,
@@ -459,8 +496,8 @@ class Experiment:
                         self.influence_parameters]
 
         combined_dict = {}
-        for dict in dictionaries:
-            combined_dict.update(dict)  # first merge all dictionaries
+        for dictio in dictionaries:
+            combined_dict.update(dictio)  # first merge all dictionaries
         # then single parameters that are not submitted as a list have to be wrapped in a list
         wrapped_dict_values = [[value] if type(value) is not list else value for value in combined_dict.values()]
         # get the cartesian product (all permutations) of all values
