@@ -35,7 +35,9 @@ class NeighborSelector(ABC):
         """
         pass
 
-def select_neighbors(network: nx.Graph, realization: str or NeighborSelector, focal_agent: int, regime: str, **kwargs) -> Iterable[int]:
+
+def select_neighbors(network: nx.Graph, realization: str or NeighborSelector, focal_agent: int,
+                     regime: str, **kwargs) -> Iterable[int]:
     """
     This function works as a factory method for the neighborSelector component.
     It calls the select_neighbors function of the specific neighborSelector and passes to it the index of the

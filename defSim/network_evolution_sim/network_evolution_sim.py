@@ -14,7 +14,7 @@ class NetworkModifier(ABC):
     @abstractmethod
     def rewire_network(self, network: nx.Graph, **kwargs):
         """
-        Creates new connections or deletes existing ones. Can be used to implement coevolution of networks and model
+        Creates new connections or deletes existing ones. Can be used to implement co-evolution of networks and model
         selection processes.
 
         :param network: The network that will be modified.
@@ -30,7 +30,8 @@ def rewire_network(network: nx.Graph, realization: str, **kwargs):
     the kwargs dictionary.
 
     :param network: The network that will be modified.
-    :param realization: The specific NetworkModifier that shall be used to initialize the attributes. Options are "maslov_sneppen", ..
+    :param realization: The specific NetworkModifier that shall be used to initialize the attributes. Options are
+        ["maslov_sneppen", ...]
     :param kwargs: The parameter dictionary with all optional parameters.
     """
     from .MaslovSneppenModifier import MaslovSneppenModifier
@@ -45,4 +46,6 @@ def rewire_network(network: nx.Graph, realization: str, **kwargs):
     elif isinstance(realization, NetworkModifier):
         realization.rewire_network(network)
     else:
-        raise ValueError("Can only select from the options ['maslov_sneppen', 'new_ties'] or provide an instance of NetworkModifier")
+        raise ValueError(
+            "Can only select from the options ['maslov_sneppen', 'new_ties'] or provide an instance of NetworkModifier"
+        )

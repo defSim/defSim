@@ -2,7 +2,6 @@ from abc import ABC, abstractmethod
 import networkx as nx
 from defSim.dissimilarity_component.dissimilarity_calculator import DissimilarityCalculator
 from typing import List
-import inspect
 
 
 class InfluenceOperator(ABC):
@@ -41,7 +40,8 @@ class InfluenceOperator(ABC):
                 parameter for this function. The influence function itself can still be a function of the "Sex"
                 attribute.
 
-        :param dissimilarity_measure: An instance of a :class:`~defSim.dissimilarity_component.DissimilarityCalculator.DissimilarityCalculator`.
+        :param dissimilarity_measure: An instance of a
+            :class:`~defSim.dissimilarity_component.DissimilarityCalculator.DissimilarityCalculator`.
         :returns: true if agent(s) were successfully influenced
         """
         pass
@@ -70,7 +70,8 @@ def spread_influence(network: nx.Graph,
         e.g. the attributes "Sex" and "Music taste", only supply ["Music taste"] as a parameter for this function.
         The influence function itself can still be a function of the "Sex" attribute.
     :param regime: Either "many_to_one", "one_to_many" or "one_to_one".
-    :param dissimilarity_measure: An instance of a :class:`~defSim.dissimilarity_component.DissimilarityCalculator.DissimilarityCalculator`.
+    :param dissimilarity_measure: An instance of a
+        :class:`~defSim.dissimilarity_component.DissimilarityCalculator.DissimilarityCalculator`.
     :returns: true if agent(s) were successfully influenced
     """
     from .SimilarityAdoption import SimilarityAdoption
@@ -112,9 +113,10 @@ def spread_influence(network: nx.Graph,
         # if regime is not set, set regime
         try:
           if realization.regime != regime:
-            warnings.warn("Regime for influence function is not equal to regime for simulation. Influence function: {}, simulation: {}".format(realization.regime, regime))
+            warnings.warn("Regime for influence function is not equal to regime for simulation. "
+            "Influence function: {}, simulation: {}".format(realization.regime, regime))
         except AttributeError:
-          realization.regime = regime
+            realization.regime = regime
         return realization.spread_influence(network=network,
                                             agent_i=agent_i,
                                             agents_j=agents_j,

@@ -6,7 +6,7 @@ import inspect
 from defSim.network_evolution_sim.MaslovSneppenModifier import MaslovSneppenModifier
 
 
-def generate_network(name: str, network_modifiers = None, **kwargs) -> nx.Graph:
+def generate_network(name: str, network_modifiers=None, **kwargs) -> nx.Graph:
     """
     This factory method calls the graph generator and returns the desired network. It takes as arguments the name of the
     required network and a dictionary containing all the arguments that are required by the desired graph generator.
@@ -26,11 +26,12 @@ def generate_network(name: str, network_modifiers = None, **kwargs) -> nx.Graph:
     ms_rewiring = kwargs.get('ms_rewiring', None)
     if ms_rewiring is not None:
         # if deprecated ms_rewiring parameter is set, replace with network modifier
-        warnings.warn("The ms_rewiring parameter is deprecated. Pass an instance of MaslovSneppenModifier in network_modifiers instead.", DeprecationWarning)
+        warnings.warn("The ms_rewiring parameter is deprecated. Pass an instance of MaslovSneppenModifier in "
+                      "network_modifiers instead.", DeprecationWarning)
         if network_modifiers is None:
-            network_modifiers = [MaslovSneppenModifier(rewiring_prop = ms_rewiring)]
+            network_modifiers = [MaslovSneppenModifier(rewiring_prop=ms_rewiring)]
         else:
-            network_modifiers.append(MaslovSneppenModifier(rewiring_prop = ms_rewiring))        
+            network_modifiers.append(MaslovSneppenModifier(rewiring_prop=ms_rewiring))
 
     if name == "grid":
         network = _produce_grid_network(**kwargs)
@@ -39,8 +40,8 @@ def generate_network(name: str, network_modifiers = None, **kwargs) -> nx.Graph:
     elif name == "ring":
         network = _produce_ring_network(**kwargs)
     else:
-        network = _produce_networkx_graph(name,**kwargs)
-    #else:
+        network = _produce_networkx_graph(name, **kwargs)
+    # else:
     #    raise ValueError("Can only select from the options ['grid', 'spatial_random_graph', 'ring']")
 
     if network_modifiers is not None:
@@ -72,9 +73,10 @@ def _produce_grid_network(**kwargs) -> nx.Graph:
     connected to its neighborhood depending on the parameters "neighborhood" and "radius".
 
     :param int=49 num_agents: How many agents the network contains.
-    :param String=moore neighborhood: Either "von_neumann" or "moore". Von Neumann connects each agent to its 4 neighbors
-        in each cardinal direction. In a Moore neighborhood, each agent is connected to their 8 immediate neighbors.
-    :param int=1 radius: Increases the number of connections further than the immediate neigbourhood.
+    :param String=moore neighborhood: Either "von_neumann" or "moore". Von Neumann connects each agent to its 4
+        neighbors in each cardinal direction. In a Moore neighborhood, each agent is connected to their 8 immediate
+        neighbors.
+    :param int=1 radius: Increases the number of connections further than the immediate neigborhood.
         An agent in a Moore neighborhood with radius 2 has 24 connections.
     :returns: A NetworkX Graph object.
     """
@@ -195,7 +197,7 @@ def _produce_spatial_random_graph(**kwargs) -> nx.Graph:
     :param float=1 proximity_weight: Determines how much spatial distance in the grid matters in the rewiring process.
     :returns: A networkx Graph object.
     """
-    #todo: description
+    # todo: description
 
     # check the parameters or initialize default values
     num_agents = kwargs.get("num_agents", 49)
@@ -221,7 +223,7 @@ def _produce_spatial_random_graph(**kwargs) -> nx.Graph:
             if i == j:
                 distmatrix[i, j] = 0  # later turned to 0!
             else:
-                distmatrix[i, j] = dist(xypos[i], xypos[j],proximity_weight)
+                distmatrix[i, j] = dist(xypos[i], xypos[j], proximity_weight)
 
     # pick min_neighbors neighbors with a probability equal to their relative euclidean distance
     edgelist = []
@@ -243,8 +245,8 @@ def _produce_spatial_random_graph(**kwargs) -> nx.Graph:
                     degreelist.append(i)
                     degreelist.append(j)
             except(ValueError):
-                print(
-                    "Please pick a lower value for the proximity weight. This value creates too many probability values of 0")
+                print("Please pick a lower value for the proximity weight. "
+                      "This value creates too many probability values of 0")
 
     G = nx.Graph()
     G.add_nodes_from([i for i in range(num_agents)])
@@ -256,7 +258,7 @@ def _produce_spatial_random_graph(**kwargs) -> nx.Graph:
         return G
 
 
-def _produce_networkx_graph(name: str,**kwargs):
+def _produce_networkx_graph(name: str, **kwargs):
     """
     This method allows for passing on the graph generation to one of the generators included in the
     `NetworkX package <https://networkx.github.io/documentation/stable/reference/generators.html>`__. Provide the name
@@ -268,7 +270,7 @@ def _produce_networkx_graph(name: str,**kwargs):
         passed to the function that produces the network.
     :return: A NetworkX Graph object.
     """
-    graph_generator = getattr(nx,name)
+    graph_generator = getattr(nx, name)
 
     graph_generator_arguments = inspect.signature(graph_generator)
     intersection_dict = {k: kwargs[k] for k in kwargs if k in graph_generator_arguments.parameters.keys()}
@@ -282,5 +284,7 @@ def execute_ms_rewiring(network: nx.Graph, rewiring_prop: float):
     """
     from defSim.network_evolution_sim.MaslovSneppenModifier import MaslovSneppenModifier
 
-    warnings.warn("Function execute_ms_rewiring is deprecated, use network_evolution_sim/MaslovSneppenModifier instead.", DeprecationWarning)
-    MaslovSneppenModifier().rewire_network(network = network, rewiring_prop = rewiring_prop)
+    warnings.warn(
+        "Function execute_ms_rewiring is deprecated, use network_evolution_sim/MaslovSneppenModifier instead.",
+        DeprecationWarning)
+    MaslovSneppenModifier().rewire_network(network=network, rewiring_prop=rewiring_prop)
