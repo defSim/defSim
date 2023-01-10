@@ -529,4 +529,7 @@ class Experiment:
         for index in range(len(full_repetitions_list)):
             full_repetitions_list[index]['seed'] = seeds[index]
 
+        # shuffle the order at which the simulations will be run
+        random.shuffle(full_repetitions_list)
+
         return full_repetitions_list
