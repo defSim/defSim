@@ -1,0 +1,2 @@
+,Seed,Ticks,SuccessfulInfluence,Topology,np_random_generator,Regions,Zones,Homogeneity,AverageDistance,AverageOpinionf01
+0,99962,10,3,grid,Generator(PCG64),48,1,0.04081632653061224,0.6520408163265299,1.0204081632653061
