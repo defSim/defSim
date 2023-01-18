@@ -13,7 +13,8 @@ import numpy as np
 import pandas as pd
 import itertools
 
-class dsPlot():
+
+class dsPlot:
     """
     This class is responsible for generating plots.
     Inherit from this class and implement at least the plot method for each type of plot.
@@ -59,7 +60,7 @@ class NetworkPlot(dsPlot):
         :param pos: (Optional) representation of network position for each node, can be used to keep the network
             layout exactly the same between plots. If pos is not given, network positions are generated using
             layout function.
-        :param layout=networkx.spring_layout: Function to use to generate the network layout. Can also be set to
+        :param networkx.spring_layout layout: Function to use to generate the network layout. Can also be set to
             'grid' to plot grid networks accurately, as there is no standard networkx layout for this.
         """
 
@@ -74,7 +75,7 @@ class NetworkPlot(dsPlot):
                 vmax = max([network.nodes[n][feature] for n in nodes])
                 colors = [network.nodes[n][feature] for n in nodes]
             else:
-                vmin, vmax = 1,1
+                vmin, vmax = 1, 1
 
         # Determine network layout if pos is not set
         if pos is None:
@@ -91,10 +92,8 @@ class NetworkPlot(dsPlot):
 
         # Draw nodes
         if feature is not None:
-            nc = nx.draw_networkx_nodes(network, pos, nodelist=nodes, node_color=colors,
-                                node_size=self.node_size, cmap=self.cmap,
-                                vmin=vmin, vmax=vmax
-                                )
+            nc = nx.draw_networkx_nodes(network, pos, nodelist=nodes, node_color=colors, node_size=self.node_size,
+                                        cmap=self.cmap, vmin=vmin, vmax=vmax)
         else:
             nc = nx.draw_networkx_nodes(network, pos, nodelist=nodes,
                                         node_size=self.node_size, cmap=self.cmap,
@@ -113,19 +112,22 @@ class DynamicsPlot(dsPlot):
     """
     Facilitates plotting the dynamics of opinion changes for a feature.
     Uses seaborn relplot behind the scenes.
-
-    :param colors: List of colors, used to color the lines. If None,
-        colors are set based on the palette. Usually, the number of hues should equal the number of agents
-        (showing the opinions for each agent at each step). However, it is possible to specify another variable
-        (see 'hue' in DynamicsPlot.plot()) on which to color. Then, the list of colors should be equal in length
-        to the number of unique values of that variable.
-    :param palette: Seaborn palette or matplotlib colormap to use.
-    :param float linewidth=3: Width of lines drawn.
-    :param ylim: Iterable with 2 values, which gives (ymin, ymax)
-    :param xlim: Iterable with 2 values, which gives (xmin, xmax)
-    :param bool fast=False: If True, show plain (but fast) plot. If False, show plot with customizable markup (slow).
     """
+
     def __init__(self, colors=None, palette="deep", linewidth=3, ylim=None, xlim=None, fast: bool = False):
+        """
+            :param colors: List of colors, used to color the lines. If None,
+                colors are set based on the palette. Usually, the number of hues should equal the number of agents
+                (showing the opinions for each agent at each step). However, it is possible to specify another variable
+                (see 'hue' in DynamicsPlot.plot()) on which to color. Then, the list of colors should be equal in length
+                to the number of unique values of that variable.
+            :param palette: Seaborn palette or matplotlib colormap to use.
+            :param float linewidth=3: Width of lines drawn.
+            :param ylim: Iterable with 2 values, which gives (ymin, ymax)
+            :param xlim: Iterable with 2 values, which gives (xmin, xmax)
+            :param bool fast=False: If True, show plain (but fast) plot. If False, show plot with customizable markup
+                (slow).
+            """
         super().__init__()
         self.colors = colors
         self.palette = palette
@@ -196,32 +198,36 @@ class DynamicsPlot(dsPlot):
 
             ax.set(ylim=ylim, xlim=xlim, xlabel=xlab, ylabel=ylab)
 
+
 class RelPlot(dsPlot):
     """
     Facilitates plotting the relationship between two variables, most commonly from an experiment.
     Has two variants (LinePlot and ScatterPlot) which can both be accessed through RelPlot by
     specifying kind. Alternatively, use dsPlots.LinePlot or dsPlots.ScatterPlot.
-
-    :param colors: List of colors to use (if 'hue' is set on calling plot()).If None,
-        colors are set based on the palette.
-    :param palette: Seaborn palette or matplotlib colormap to use.
-    :param bool palette_as_cmap=False: If True, the palette is used as a matplotlib colormap, suitable for continuous
-        variables. If False, the palette is used to generate distinct hues, equal in number to the number of unique
-        values in the hue parameter when calling plot(). This is suitable for categorical variables.
-    :param ylim: Iterable with 2 values, which gives (ymin, ymax)
-    :param xlim: Iterable with 2 values, which gives (xmin, xmax)
-    :param float linewidth=3: Width of lines drawn.
-    :param kind: Determines type of plot. Select from 'line' or 'scatter'.
     """
-    def __init__(self, colors=None, palette="rocket", palette_as_cmap: bool = False, ylim=None, xlim=None, linewidth=3, kind='line'):
+
+    def __init__(self, colors=None, palette="rocket", palette_as_cmap: bool = False,
+                 ylim=None, xlim=None, linewidth=3, kind='line'):
         super().__init__()
-        self.colors=colors
+        self.colors = colors
         self.palette = palette
         self.palette_as_cmap = palette_as_cmap
         self.ylim = ylim
         self.xlim = xlim
         self.linewidth = linewidth
         self.kind = kind
+        """
+        :param colors: List of colors to use (if 'hue' is set on calling plot()).If None,
+            colors are set based on the palette.
+        :param palette: Seaborn palette or matplotlib colormap to use.
+        :param bool palette_as_cmap=False: If True, the palette is used as a matplotlib colormap, suitable for 
+            continuous variables. If False, the palette is used to generate distinct hues, equal in number to the number 
+            of unique values in the hue parameter when calling plot(). This is suitable for categorical variables.
+        :param ylim: Iterable with 2 values, which gives (ymin, ymax)
+        :param xlim: Iterable with 2 values, which gives (xmin, xmax)
+        :param float linewidth=3: Width of lines drawn.
+        :param kind: Determines type of plot. Select from 'line' or 'scatter'.
+        """
 
     def plot(self, data, x: str, y: str, hue: str = None, xlab: str = None, ylab: str = None):
         """
@@ -243,9 +249,7 @@ class RelPlot(dsPlot):
             n_unique_hues = len(set(data[hue])) if hue is not None else 1
             palette = sns.color_palette(self.palette, n_colors=n_unique_hues)
 
-        ax = sns.relplot(x=x, y=y,
-                     data=data, hue=hue, palette=palette, kind=self.kind,
-                     linewidth=self.linewidth)
+        ax = sns.relplot(x=x, y=y, data=data, hue=hue, palette=palette, kind=self.kind, linewidth=self.linewidth)
 
         if xlab is None:
             xlab = x
@@ -258,7 +262,11 @@ class RelPlot(dsPlot):
 class LinePlot(RelPlot):
     """
     Shorthand for using RelPlot with kind='line'.
-
+    """
+    def __init__(self, colors=None, palette="rocket", palette_as_cmap=False, ylim=None, xlim=None, linewidth=3):
+        super().__init__(colors=colors, palette=palette, palette_as_cmap=palette_as_cmap,
+                         ylim=ylim, xlim=xlim, linewidth=linewidth, kind='line')
+    """
     :param colors: List of colors to use (if 'hue' is set on calling plot()).If None,
         colors are set based on the palette.
     :param palette: Seaborn palette or matplotlib colormap to use.
@@ -267,45 +275,31 @@ class LinePlot(RelPlot):
         values in the hue parameter when calling plot(). This is suitable for categorical variables.
     :param float linewidth=3: Width of lines drawn.
     """
-    def __init__(self, colors=None, palette="rocket", palette_as_cmap=False, ylim=None, xlim=None, linewidth=3):
-        super().__init__(colors=colors, palette=palette, palette_as_cmap=palette_as_cmap, ylim=ylim, xlim=xlim, linewidth=linewidth, kind='line')
 
 
 class ScatterPlot(RelPlot):
     """
     Shorthand for using RelPlot with kind='scatter'.
-
-    :param colors: List of colors to use (if 'hue' is set on calling plot()).If None,
-        colors are set based on the palette.
-    :param palette: Seaborn palette or matplotlib colormap to use.
-    :param bool palette_as_cmap=False: If True, the palette is used as a matplotlib colormap, suitable for continuous
-        variables. If False, the palette is used to generate distinct hues, equal in number to the number of unique
-        values in the hue parameter when calling plot(). This is suitable for categorical variables.
-    :param float linewidth=3: Width of lines drawn.
     """
+
     def __init__(self, colors=None, palette="rocket", palette_as_cmap=False, ylim=None, xlim=None, linewidth=3):
-        super().__init__(colors=colors, palette=palette, palette_as_cmap=palette_as_cmap, ylim=ylim, xlim=xlim, linewidth=linewidth, kind='scatter')
+        """
+        :param colors: List of colors to use (if 'hue' is set on calling plot()).If None,
+            colors are set based on the palette.
+        :param palette: Seaborn palette or matplotlib colormap to use.
+        :param bool palette_as_cmap=False: If True, the palette is used as a matplotlib colormap, suitable for
+            continuous variables. If False, the palette is used to generate distinct hues, equal in number to the number
+            of unique values in the hue parameter when calling plot(). This is suitable for categorical variables.
+        :param float linewidth=3: Width of lines drawn.
+        """
+        super().__init__(colors=colors, palette=palette, palette_as_cmap=palette_as_cmap,
+                         ylim=ylim, xlim=xlim, linewidth=linewidth, kind='scatter')
 
 
 class HeatMap(dsPlot):
     """
     Facilitates creation of a heatmap. X and Y are variables which determine the coordinates on the heatmap, while
     hue determines the 'heat' value.
-
-    :param colors: List of colors to use (if 'hue' is set on calling plot()).If None,
-        colors are set based on the palette.
-    :param palette: Seaborn palette or matplotlib colormap to use.
-    :param float vmin: Minimum value for hue.
-    :param float vmax: Maximum value for hue.
-    :param annot: True, False or dataset. If true, writes data value in each cell.  If array with same shape as data
-        then this is used to annotate the heatmap.
-    :param str fmt: String formatting code to use when adding annotations.
-    :param annot_kws: Dictionary of keyword arguments for drawing annotation text
-    :param float linewidths=3: Width of lines drawn.
-    :param linecolor: Color to use for lines between cells.
-    :param bool square: If True, axes are adjusted so that each cell is square.
-    :param bool cbar: Whether to draw a color bar.
-    :param cbar_kws: Dictionary of keyword arguments to draw colorbar.
     """
     def __init__(self,
                  colors=None,
@@ -319,7 +313,22 @@ class HeatMap(dsPlot):
                  square=False,
                  cbar=True,
                  cbar_kws=None):
-
+        """
+        :param colors: List of colors to use (if 'hue' is set on calling plot()).If None,
+            colors are set based on the palette.
+        :param palette: Seaborn palette or matplotlib colormap to use.
+        :param float vmin: Minimum value for hue.
+        :param float vmax: Maximum value for hue.
+        :param annot: True, False or dataset. If true, writes data value in each cell.  If array with same shape as data
+            then this is used to annotate the heatmap.
+        :param str fmt: String formatting code to use when adding annotations.
+        :param annot_kws: Dictionary of keyword arguments for drawing annotation text
+        :param float linewidths=3: Width of lines drawn.
+        :param linecolor: Color to use for lines between cells.
+        :param bool square: If True, axes are adjusted so that each cell is square.
+        :param bool cbar: Whether to draw a color bar.
+        :param cbar_kws: Dictionary of keyword arguments to draw colorbar.
+        """
         self.colors = colors
         self.palette = palette
         self.vmin = vmin
@@ -332,7 +341,6 @@ class HeatMap(dsPlot):
         self.square = square
         self.cbar = cbar
         self.cbar_kws = cbar_kws
-
 
     def plot(self, data, x, y, hue,
              sort_y_ascending=False,
