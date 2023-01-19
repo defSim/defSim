@@ -41,7 +41,7 @@ class Simulation:
             after initialization. Each modifier should be derived from the NetworkModifier base class.
         attributes_initializer (String = "random_categorical" or :class:`AttributesInitializer`): Either be a custom
             AttributesInitializer or a string that selects from the predefined choices:
-            ["random_categorical", "random_continuous"...]
+            ["random_categorical", "random_continuous", "random_beta", ...]
         focal_agent_selector (str = "random" or :class:`FocalAgentSelector`): Either a custom FocalAgentSelector or a
             string that selects from the predefined options ["random", ...]
         neighbor_selector (str = "random" or :class:`NeighborSelector`): Either a custom NeighborSelector or a string

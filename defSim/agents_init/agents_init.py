@@ -120,6 +120,8 @@ def initialize_attributes(network: nx.Graph, realization: str, **kwargs):
         RandomContinuousInitializer.RandomContinuousInitializer(**kwargs).initialize_attributes(network)
     elif realization == 'correlated_continuous':
         CorrelatedContinuousInitializer.CorrelatedContinuousInitializer(**kwargs).initialize_attributes(network)
+    elif realization == "random_beta":
+        RandomContinuousInitializer.RandomContinuousInitializer(distribution="beta", **kwargs).initialize_attributes(network, **kwargs)
     elif isinstance(realization, AttributesInitializer):
         realization.initialize_attributes(network, **kwargs)
     elif issubclass(realization, AttributesInitializer):
@@ -159,9 +161,9 @@ def set_continuous_attribute(network: nx.Graph, name: str, shape: tuple = (1), d
     :param shape: sets the output shape of the attribute value. Allows e.g. for multidimensional opinion vectors
     :param name: the name of the attribute. This is used as a key to call the attribute value in other functions
     :param distribution: "normal", "uniform", "beta", "triangular" are possible distributions to choose from
-    :param kwargs: a dictionary containing the parameter name and value for each distribution, these are: \n
+    :param kwargs: a dictionary containing the parameter name and value for each distribution, these are:
         loc, scale to set center and spread for the normal distribution (truncated at [0,1]) \n
-        a, b to set center and shape for the beta distribution for the beta distribution \n
+        beta_a, beta_b to set center and shape for the beta distribution for the beta distribution \n
         loc to set center for the triangular distribution
     """
 
@@ -190,8 +192,8 @@ def set_continuous_attribute(network: nx.Graph, name: str, shape: tuple = (1), d
         # with default values a = 3, b = 3, the center of the distribution is at 0.5
         # the distribution is symmetrical, and approximately 50% of all values fall
         # between 0.36 and 0.64
-        a = kwargs.get("a", 3)
-        b = kwargs.get("b", 3)
+        a = kwargs.get("beta_a", 3)
+        b = kwargs.get("beta_b", 3)
         for i in network.nodes():
             network.nodes[i][name] = rng.beta(a=a, b=b)
 

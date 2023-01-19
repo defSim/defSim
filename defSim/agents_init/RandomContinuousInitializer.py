@@ -7,17 +7,18 @@ from .agents_init import AttributesInitializer
 class RandomContinuousInitializer(AttributesInitializer):
     """
     Implements the AttributesInitializer as a random initialization of arbitrary continuous features.
-
     """
 
     def __init__(self, distribution: str = 'uniform', **kwargs):
         """
-        :param str='uniform' distribution: Type of continuous distribution to draw feature values from.
+        :param str='uniform' distribution: Type of continuous distribution to draw feature values from. Must be one
+            of ['uniform', 'normal', 'beta', 'triangular']
         :param int=1 num_features: How many different attributes each node has.
         """
 
         if not distribution in ["uniform", "normal", "beta", "triangular"]:
-            raise NotImplementedError("The selected distribution has not been implemented. Select from: [uniform, normal, beta, triangular].")
+            raise NotImplementedError("The selected distribution has not been implemented. Select from: ['uniform', "
+                                      "'normal', 'beta', 'triangular'].")
         self.distribution = distribution
 
         try:
@@ -26,10 +27,8 @@ class RandomContinuousInitializer(AttributesInitializer):
             warnings.warn("Number of features not specified, using 1 as default")
             self.num_features = 1     
 
-
     def initialize_attributes(self, network: nx.Graph, **kwargs):
         """
-
         Randomly initializes a number of continuous features between 0 and 1 for each node.
         Bounds default to min = 0, max = 1
 
@@ -37,4 +36,4 @@ class RandomContinuousInitializer(AttributesInitializer):
         """    
 
         for i in range(self.num_features):
-            set_continuous_attribute(network, 'f' + str("%02d" % (i + 1)), distribution = self.distribution)
+            set_continuous_attribute(network, 'f' + str("%02d" % (i + 1)), distribution=self.distribution, **kwargs)
