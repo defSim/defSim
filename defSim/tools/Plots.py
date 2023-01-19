@@ -20,13 +20,13 @@ class dsPlot:
     Inherit from this class and implement at least the plot method for each type of plot.
     """
 
-    def __init__(self):
+    def __init__(self, *args):
         pass
 
-    def plot(self):
+    def plot(self, *args):
         raise NotImplementedError
 
-    def show(self):
+    def show(self, *args):
         # required when not in interactive session
         plt.show()
 
