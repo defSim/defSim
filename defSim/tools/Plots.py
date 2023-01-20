@@ -114,7 +114,7 @@ class DynamicsPlot(dsPlot):
     Uses seaborn relplot behind the scenes.
     """
 
-    def __init__(self, colors=None, palette="deep", linewidth=3, ylim=None, xlim=None, fast: bool = False):
+    def __init__(self, colors='blue', palette="deep", linewidth=.8, ylim=None, xlim=None, fast: bool = False):
         """
             :param colors: List of colors, used to color the lines. If None,
                 colors are set based on the palette. Usually, the number of hues should equal the number of agents
@@ -136,7 +136,7 @@ class DynamicsPlot(dsPlot):
         self.xlim = xlim
         self.fast = fast
 
-    def plot(self, data, y: str, hue=None, xlab: str = None, ylab: str = None, ylim=None, xlim=None):
+    def plot(self, data, y: str = "Tickwise_f01", hue=None, xlab: str = None, ylab: str = None, ylim=None, xlim=None):
         """
         Creates a plot showing one line for each agent, indicating their value on a chosen feature at a
         specific step.
@@ -161,7 +161,7 @@ class DynamicsPlot(dsPlot):
             xlim = self.xlim
 
         if self.fast:
-            plt.plot(data[y][0])
+            plt.plot(data[y][0], color=self.colors, linewidth=self.linewidth)
         else:
             listvals = data[y][0]
             n_steps = len(listvals)
