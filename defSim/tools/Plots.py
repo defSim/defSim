@@ -12,6 +12,7 @@ import networkx as nx
 import numpy as np
 import pandas as pd
 import itertools
+import copy
 
 
 class dsPlot:
@@ -393,3 +394,83 @@ class HeatMap(dsPlot):
                     mask=mask,
                     ax=ax,
                     **kwargs)
+
+
+class TrajectoryHeatPlot(dsPlot):
+    """
+    This class creates a 2D heatmap of continuous features by time. It is used to plot opinion trajectories much like
+    'DynamicsPlot', but conveys agent density in each position.
+    """
+
+    def __init__(self, data=None, y: str = "Tickwise_f01", bins=20):
+        """
+        :param data: A Pandas dataframe that contains the variable with name 'y'. This dataframe is used to extract the
+            tickwise lists of opinions and converted to a time by bins array of opinion frequencies.
+        :param str y: The name of the y-column to be extracted from the dataframe. The column should contain a list of
+            lists.
+        :param int bins: The number of bins used for the frequency table.
+        :param ylim:
+        """
+        super().__init__()
+        self.data = data
+        self.y = y
+        self.bins = bins
+
+    def prep_data(self):
+        """
+        Preparing the data can take quite a while, this function can be run separately to create the appropriate data. It is only called by the `plot' function if no `z' data is provided.
+        """
+        df = self.data[self.y][0]
+        max_iter = len(df)
+
+        z = []
+        bins = [i / self.bins for i in range(self.bins + 1)]
+        for i in range(max_iter):
+            z.append(pd.cut(df[i], bins).value_counts().to_list())
+        z = np.array(z)
+        return z
+
+    def plot(self, z=None, fig=None, ax=None, palette="rainbow", facecolor='lightgrey',
+             xlab: str = "Time", ylab: str = "Opinion"):
+        """
+        :param z: An array-like or PIL image. This is the image data. If supplied, the arguments 'data' and 'y' are
+            ignored. Supported array shapes are:\n
+            - (M, N): an image with scalar data. The values are mapped to colors using normalization and a colormap. See
+                parameters norm, cmap, vmin, vmax.\n
+            - (M, N, 3): an image with RGB values (0-1 float or 0-255 int).\n
+            - (M, N, 4): an image with RGBA values (0-1 float or 0-255 int), i.e. including transparency.\n
+            The first two dimensions (M, N) define the rows and columns of the image. Out-of-range RGB(A) values are
+                clipped.
+        :param fig: A matplotlib.figure object. Created if not supplied.
+        :param ax: A matplotlib.axes object in 'fig'.
+        :param str palette: Name of a matplotlib colormap.
+        :param str facecolor: color of the panel background. Used instead of palette's color when there are no agents
+            in the cell, for clarity.
+        :param str xlab: Label of the x-axis.
+        :param str ylab: Label of the y-axis.
+        """
+        if z is None:
+            z = self.prep_data()
+
+        if fig is None:
+            fig = plt.figure(figsize=(10, 4))
+
+        if ax is None:
+            ax = plt.gca()
+
+        cmap = copy.copy(plt.get_cmap(palette))
+
+        ax.set_facecolor(facecolor)
+        cmap.set_under(facecolor)  # Color for values less than vmin
+        eps = 0.5
+
+        im = ax.imshow(np.transpose(z), interpolation='nearest', vmin=eps, cmap=cmap, aspect='auto')
+
+        fig.colorbar(im, extend='min', label='Freq', pad=0.02)
+
+        ax.set(xlabel=xlab, ylabel=ylab, yticks=[0 - 0.5, self.bins - 0.5], yticklabels=['0', '1'])
+        ax.invert_yaxis()
+
+        plt.tight_layout()
+
+        return im
