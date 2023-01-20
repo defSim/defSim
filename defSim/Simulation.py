@@ -341,6 +341,7 @@ class Simulation:
         else:
             parameter_settings['Topology'] = self.topology
         parameter_settings = {**parameter_settings, **self.parameter_dict}
+        parameter_settings['communication_regime'] = self.communication_regime
 
         if self.output_realizations == []:
             self.output_realizations = ["Basic"]
